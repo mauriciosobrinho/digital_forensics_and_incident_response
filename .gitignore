@@ -9,3 +9,26 @@ data/processed/*.parquet
 data/evidence/*.json
 
 temp_test.txt
+
+# Data
+data/raw/
+data/raw/*.csv
+
+# Large datasets
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environment
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
