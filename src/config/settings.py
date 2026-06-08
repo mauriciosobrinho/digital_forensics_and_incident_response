@@ -35,3 +35,12 @@ IDOR_FINDINGS_FILE = (
 RISK_SCORES_FILE = (
     PROCESSED_DIR / "risk_scores.parquet"
 )
+
+# Sprint 2.2
+ANOMALY_SCORES_FILE = (
+    PROCESSED_DIR / "anomaly_scores.parquet"
+)
+
+ANOMALOUS_IPS_FILE = (
+    PROCESSED_DIR / "anomalous_ips.parquet"
+)

@@ -6,6 +6,8 @@ from src.config.settings import (
     SUSPICIOUS_IPS_FILE,
     IDOR_FINDINGS_FILE,
     RISK_SCORES_FILE,
+    ANOMALY_SCORES_FILE,
+    ANOMALOUS_IPS_FILE,
 )
 
 from src.utils.filesystem import (
@@ -46,52 +48,59 @@ from src.detection.risk_scoring import (
     save_suspicious_ips,
 )
 
+from src.detection.anomaly_detector import (
+    detect_anomalies,
+    build_anomalous_ips,
+    save_anomaly_scores,
+    save_anomalous_ips,
+)
+
 
 def run_pipeline() -> None:
 
-    print("\n[1/11] Creating directories...")
+    print("\n[1/13] Creating directories...")
     ensure_project_directories()
 
-    print("[2/11] Generating chain of custody...")
+    print("[2/13] Generating chain of custody...")
     generate_chain_of_custody(
         INPUT_CSV,
         CHAIN_OF_CUSTODY_FILE,
     )
 
-    print("[3/11] Loading CSV...")
+    print("[3/13] Loading CSV...")
     logs = load_logs(INPUT_CSV)
 
-    print("[4/11] Parsing events...")
+    print("[4/13] Parsing events...")
     parsed_events = extract_uri_fields(logs)
 
-    print("[5/11] Persisting parsed_events.parquet...")
+    print("[5/13] Persisting parsed_events.parquet...")
     persist_parsed_events(
         parsed_events,
         PARSED_EVENTS_FILE,
     )
 
-    print("[6/11] Building IP features...")
+    print("[6/13] Building IP features...")
     ip_features = build_ip_features(
         parsed_events
     )
 
-    print("[7/11] Persisting ip_features.parquet...")
+    print("[7/13] Persisting ip_features.parquet...")
     save_ip_features(
         ip_features,
         IP_FEATURES_FILE,
     )
 
-    print("[8/11] Detecting IDOR findings...")
+    print("[8/13] Detecting IDOR findings...")
     idor_findings = detect_idor_findings(
         ip_features
     )
 
-    print("[9/11] Detecting bot signals...")
+    print("[9/13] Detecting bot signals...")
     bot_signals = detect_bot_signals(
         ip_features
     )
 
-    print("[10/11] Building risk scores...")
+    print("[10/13] Building risk scores...")
     risk_scores = build_risk_scores(
         ip_features=ip_features,
         bot_signals=bot_signals,
@@ -102,7 +111,7 @@ def run_pipeline() -> None:
         risk_scores
     )
 
-    print("[11/11] Persisting detection outputs...")
+    print("[11/13] Persisting detection outputs...")
     save_idor_findings(
         idor_findings,
         IDOR_FINDINGS_FILE,
@@ -118,6 +127,26 @@ def run_pipeline() -> None:
         SUSPICIOUS_IPS_FILE,
     )
 
+    print("[12/13] Detecting anomalies...")
+    anomaly_scores = detect_anomalies(
+        risk_scores
+    )
+
+    anomalous_ips = build_anomalous_ips(
+        anomaly_scores
+    )
+
+    print("[13/13] Persisting anomaly outputs...")
+    save_anomaly_scores(
+        anomaly_scores,
+        ANOMALY_SCORES_FILE,
+    )
+
+    save_anomalous_ips(
+        anomalous_ips,
+        ANOMALOUS_IPS_FILE,
+    )
+
     print("\nPipeline completed successfully.")
     print(f"Parsed events   : {PARSED_EVENTS_FILE}")
     print(f"IP features     : {IP_FEATURES_FILE}")
@@ -125,6 +154,8 @@ def run_pipeline() -> None:
     print(f"Risk scores     : {RISK_SCORES_FILE}")
     print(f"Suspicious IPs  : {SUSPICIOUS_IPS_FILE}")
     print(f"Evidence file   : {CHAIN_OF_CUSTODY_FILE}")
+    print(f"Anomaly scores : {ANOMALY_SCORES_FILE}")
+    print(f"Anomalous IPs  : {ANOMALOUS_IPS_FILE}")
 
 
 if __name__ == "__main__":
