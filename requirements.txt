@@ -27,3 +27,7 @@ python-dotenv
 langgraph
 
 langchain-openai
+
+mcp
+
+streamlit

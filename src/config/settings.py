@@ -93,3 +93,24 @@ MEMORY_DIR = DATA_DIR / "memory"
 INVESTIGATION_MEMORY_FILE = (
     MEMORY_DIR / "investigation_memory.json"
 )
+
+# Sprint 3.3
+KNOWLEDGE_DIR = (
+    DATA_DIR / "knowledge"
+)
+
+RAG_CONTEXT_FILE = (
+    EVIDENCE_DIR / "rag_context.json"
+)
+
+MCP_TOOL_REGISTRY_FILE = (
+    EVIDENCE_DIR / "mcp_tool_registry.json"
+)
+
+MCP_TOOL_EXECUTION_LOG_FILE = (
+    EVIDENCE_DIR / "mcp_tool_execution_log.json"
+)
+
+INTERACTIVE_SESSION_LOG_FILE = (
+    EVIDENCE_DIR / "interactive_session_log.json"
+)
