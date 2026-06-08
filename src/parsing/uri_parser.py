@@ -122,8 +122,11 @@ def persist_parsed_events(
     output_file: Path,
 ) -> None:
 
-    (
-        events
-        .collect()
-        .write_parquet(output_file)
+    output_file.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    events.sink_parquet(
+        output_file
     )

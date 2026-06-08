@@ -44,3 +44,16 @@ ANOMALY_SCORES_FILE = (
 ANOMALOUS_IPS_FILE = (
     PROCESSED_DIR / "anomalous_ips.parquet"
 )
+
+# Sprint 2.3
+ATTACK_TIMELINE_FILE = (
+    EVIDENCE_DIR / "attack_timeline.json"
+)
+
+IOCS_FILE = (
+    EVIDENCE_DIR / "iocs.json"
+)
+
+FORENSIC_EVIDENCE_FILE = (
+    EVIDENCE_DIR / "forensic_evidence.json"
+)
