@@ -57,3 +57,16 @@ IOCS_FILE = (
 FORENSIC_EVIDENCE_FILE = (
     EVIDENCE_DIR / "forensic_evidence.json"
 )
+
+# Sprint 3.1
+AGENT_INVESTIGATION_FILE = (
+    EVIDENCE_DIR / "agent_investigation.json"
+)
+
+AGENT_DECISION_LOG_FILE = (
+    EVIDENCE_DIR / "agent_decision_log.json"
+)
+
+AGENT_RESPONSE_PLAYBOOK_FILE = (
+    EVIDENCE_DIR / "agent_response_playbook.json"
+)
