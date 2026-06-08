@@ -70,3 +70,26 @@ AGENT_DECISION_LOG_FILE = (
 AGENT_RESPONSE_PLAYBOOK_FILE = (
     EVIDENCE_DIR / "agent_response_playbook.json"
 )
+
+# Sprint 3.2
+HUMAN_APPROVAL_REQUEST_FILE = (
+    EVIDENCE_DIR / "human_approval_request.json"
+)
+
+HUMAN_APPROVAL_DECISION_FILE = (
+    EVIDENCE_DIR / "human_approval_decision.json"
+)
+
+LLM_AGENT_REASONING_FILE = (
+    EVIDENCE_DIR / "llm_agent_reasoning.json"
+)
+
+TOOL_EXECUTION_LOG_FILE = (
+    EVIDENCE_DIR / "tool_execution_log.json"
+)
+
+MEMORY_DIR = DATA_DIR / "memory"
+
+INVESTIGATION_MEMORY_FILE = (
+    MEMORY_DIR / "investigation_memory.json"
+)

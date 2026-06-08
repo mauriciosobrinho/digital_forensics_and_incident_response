@@ -22,4 +22,8 @@ seaborn
 
 pyarrow
 
+python-dotenv
+
 langgraph
+
+langchain-openai

@@ -161,4 +161,7 @@ def test_langgraph_investigation_graph():
     assert "triage_result" in result
     assert "forensic_analysis" in result
     assert "response_recommendation" in result
-    assert len(result["decision_log"]) == 3
+    assert "human_approval_request" in result
+    assert "human_approval_response" in result
+    assert result["human_approval_status"] == "approved_for_dry_run_only"
+    assert len(result["decision_log"]) == 4

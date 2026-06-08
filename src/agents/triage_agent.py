@@ -2,6 +2,10 @@ from datetime import datetime, timezone
 
 from src.agents.state import InvestigationState
 
+from src.agents.llm_client import build_llm_client
+from src.agents.prompt_loader import load_prompt
+from src.config.llm_settings import load_agent_runtime_settings
+
 
 def triage_agent(
     state: InvestigationState,
@@ -78,11 +82,33 @@ def triage_agent(
         "reason": "Severity derived from top risk score, IOC count and anomaly convergence.",
     }
 
+    
+    settings = load_agent_runtime_settings()
+    llm_client = build_llm_client(settings)
+    prompt = load_prompt("triage_prompt.md")
+
+    reasoning = llm_client.generate_json(
+        agent_name="triage_agent",
+        prompt=prompt,
+        context={
+            "risk_summary": risk_summary,
+            "anomaly_summary": anomaly_summary,
+            "iocs_summary": iocs.get("summary", {}),
+            "triage_result": result,
+        },
+    )
+
     return {
         **state,
         "triage_result": result,
+
         "decision_log": [
             *state.get("decision_log", []),
             decision,
+        ],
+
+        "llm_agent_reasoning": [
+            *state.get("llm_agent_reasoning", []),
+            reasoning,
         ],
     }

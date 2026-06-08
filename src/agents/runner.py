@@ -23,6 +23,24 @@ from src.config.settings import (
     RISK_SCORES_FILE,
 )
 
+from src.config.llm_settings import (
+    load_agent_runtime_settings,
+)
+
+from src.agents.memory import (
+    load_investigation_memory,
+    save_investigation_memory,
+    update_investigation_memory,
+)
+
+from src.config.settings import (
+    HUMAN_APPROVAL_REQUEST_FILE,
+    HUMAN_APPROVAL_DECISION_FILE,
+    INVESTIGATION_MEMORY_FILE,
+    LLM_AGENT_REASONING_FILE,
+    TOOL_EXECUTION_LOG_FILE,
+)
+
 
 def save_json(
     payload: dict[str, Any] | list[dict[str, Any]],
@@ -49,6 +67,12 @@ def run_agent_investigation(
     dry_run: bool = True,
     human_approval_status: str = "pending",
 ) -> dict[str, Any]:
+    
+    settings = load_agent_runtime_settings()
+    memory = load_investigation_memory(
+        INVESTIGATION_MEMORY_FILE
+    )
+
     forensic_evidence = load_json_file(
         FORENSIC_EVIDENCE_FILE
     )
@@ -80,6 +104,11 @@ def run_agent_investigation(
         "dry_run": dry_run,
         "human_approval_status": human_approval_status,
         "decision_log": [],
+        "human_approval_mode": settings.human_approval_mode,
+        "agents_use_llm": settings.agents_use_llm,
+        "memory": memory,
+        "tool_execution_log": [],
+        "llm_agent_reasoning": [],
     }
 
     final_state = graph.invoke(
@@ -95,6 +124,16 @@ def run_agent_investigation(
             True,
         ),
         "dry_run": dry_run,
+        "human_approval_request": final_state["human_approval_request"],
+        "human_approval_response": final_state["human_approval_response"],
+        "approved_actions": final_state.get(
+            "approved_actions",
+            [],
+        ),
+        "rejected_actions": final_state.get(
+            "rejected_actions",
+            [],
+        ),
     }
 
     save_json(
@@ -113,6 +152,42 @@ def run_agent_investigation(
     save_json(
         final_state["response_recommendation"],
         AGENT_RESPONSE_PLAYBOOK_FILE,
+    )
+
+    save_json(
+        final_state["human_approval_request"],
+        HUMAN_APPROVAL_REQUEST_FILE,
+    )
+
+    save_json(
+        final_state["human_approval_response"],
+        HUMAN_APPROVAL_DECISION_FILE,
+    )
+
+    save_json(
+        final_state.get(
+            "llm_agent_reasoning",
+            [],
+        ),
+        LLM_AGENT_REASONING_FILE,
+    )
+
+    save_json(
+        final_state.get(
+            "tool_execution_log",
+            [],
+        ),
+        TOOL_EXECUTION_LOG_FILE,
+    )
+
+    updated_memory = update_investigation_memory(
+        memory=memory,
+        investigation_summary=investigation,
+    )
+
+    save_investigation_memory(
+        updated_memory,
+        INVESTIGATION_MEMORY_FILE,
     )
 
     return investigation

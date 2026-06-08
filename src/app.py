@@ -16,6 +16,11 @@ from src.config.settings import (
     AGENT_INVESTIGATION_FILE,
     AGENT_DECISION_LOG_FILE,
     AGENT_RESPONSE_PLAYBOOK_FILE,
+    HUMAN_APPROVAL_REQUEST_FILE,
+    HUMAN_APPROVAL_DECISION_FILE,
+    LLM_AGENT_REASONING_FILE,
+    TOOL_EXECUTION_LOG_FILE,
+    INVESTIGATION_MEMORY_FILE,
 )
 
 from src.utils.filesystem import (
@@ -314,6 +319,11 @@ def run_pipeline() -> None:
     print(f"Agent investigation : {AGENT_INVESTIGATION_FILE}")
     print(f"Agent decision log  : {AGENT_DECISION_LOG_FILE}")
     print(f"Agent playbook      : {AGENT_RESPONSE_PLAYBOOK_FILE}")
+    print(f"Human approval request : {HUMAN_APPROVAL_REQUEST_FILE}")
+    print(f"Human approval decision: {HUMAN_APPROVAL_DECISION_FILE}")
+    print(f"LLM reasoning          : {LLM_AGENT_REASONING_FILE}")
+    print(f"Tool execution log     : {TOOL_EXECUTION_LOG_FILE}")
+    print(f"Investigation memory   : {INVESTIGATION_MEMORY_FILE}")
 
 
 if __name__ == "__main__":

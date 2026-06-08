@@ -14,6 +14,10 @@ from src.agents.response_agent import (
     response_advisor_agent,
 )
 
+from src.agents.human_approval_agent import (
+    human_approval_agent,
+)
+
 
 def build_investigation_graph():
     graph = StateGraph(
@@ -35,6 +39,11 @@ def build_investigation_graph():
         response_advisor_agent,
     )
 
+    graph.add_node(
+        "human_approval",
+        human_approval_agent,
+    )
+
     graph.add_edge(
         START,
         "triage",
@@ -52,7 +61,13 @@ def build_investigation_graph():
 
     graph.add_edge(
         "response_advice",
+        "human_approval",
+    )
+
+    graph.add_edge(
+        "human_approval",
         END,
     )
 
+    
     return graph.compile()
