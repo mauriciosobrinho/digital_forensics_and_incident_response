@@ -15,3 +15,8 @@ PARSED_EVENTS_FILE = PROCESSED_DIR / "parsed_events.parquet"
 CHAIN_OF_CUSTODY_FILE = (
     EVIDENCE_DIR / "chain_of_custody.json"
 )
+
+# Sprint 1.2: IP features output
+IP_FEATURES_FILE = (
+    PROCESSED_DIR / "ip_features.parquet"
+)
