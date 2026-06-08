@@ -26,8 +26,9 @@ def _as_bool(
 @dataclass(frozen=True)
 class AgentRuntimeSettings:
     llm_provider: str
-    openai_api_key: str | None
-    openai_model: str
+    llm_api_key: str | None
+    llm_model: str
+    llm_base_url: str | None
     agents_use_llm: bool
     agents_dry_run: bool
     human_approval_mode: str
@@ -38,14 +39,17 @@ def load_agent_runtime_settings() -> AgentRuntimeSettings:
     return AgentRuntimeSettings(
         llm_provider=os.getenv(
             "LLM_PROVIDER",
-            "openai",
+            "openrouter",
         ),
-        openai_api_key=os.getenv(
-            "OPENAI_API_KEY",
+        llm_api_key=os.getenv(
+            "LLM_API_KEY",
         ),
-        openai_model=os.getenv(
-            "OPENAI_MODEL",
-            "gpt-4.1-mini",
+        llm_model=os.getenv(
+            "LLM_MODEL",
+            "openai/gpt-4.1-mini",
+        ),
+        llm_base_url=os.getenv(
+            "LLM_BASE_URL",
         ),
         agents_use_llm=_as_bool(
             os.getenv("AGENTS_USE_LLM"),

@@ -105,42 +105,14 @@ def render_chat():
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        response = answer_soc_question(prompt)
+        response = answer_soc_question(
+            prompt
+        )
 
         answer = response.get(
             "answer",
             "Não consegui gerar uma resposta.",
         )
-
-        tool_result = response.get("tool_result")
-
-        if tool_result and tool_result.get("status") == "ok":
-            result = tool_result.get("result")
-
-            if isinstance(result, list):
-                answer += "\n\n### Evidências principais\n"
-                for index, item in enumerate(result[:5], start=1):
-                    answer += (
-                        f"\n{index}. `{item.get('ip')}` · "
-                        f"risk={item.get('risk_score'):.2f} · "
-                        f"level={item.get('risk_level')} · "
-                        f"requests={item.get('total_requests')} · "
-                        f"invoices={item.get('unique_invoice_ids')}"
-                    )
-
-            elif isinstance(result, dict):
-                answer += "\n\n### Evidência consultada\n"
-                for key, value in result.items():
-                    answer += f"\n- **{key}**: `{value}`"
-
-        elif tool_result:
-            answer += (
-                "\n\nA tool retornou status: "
-                f"`{tool_result.get('status')}`. "
-                "Nenhuma ação real foi executada."
-            )
-
-        answer += "\n\n_Dry-run ativo. Nenhuma ação externa foi executada._"
 
         st.session_state.messages.append(
             {
