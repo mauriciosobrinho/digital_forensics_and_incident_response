@@ -32,7 +32,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.918160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.874647+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -78,7 +78,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.918160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.874647+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -119,7 +119,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.918160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.874647+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -165,7 +165,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.918160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.874647+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -206,7 +206,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.920160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -414,7 +414,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.920160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -622,7 +622,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.920160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -825,7 +825,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.920160+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -1033,7 +1033,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "response_advisor_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.921162+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
         "dry_run": true,
         "human_approval_required": true,
         "human_approval_status": "pending",
@@ -1126,7 +1126,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "response_advisor_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.921162+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
         "dry_run": true,
         "human_approval_required": true,
         "human_approval_status": "pending",
@@ -1214,7 +1214,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "response_advisor_agent",
-        "generated_at_utc": "2026-06-09T19:12:08.921162+00:00",
+        "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
         "dry_run": true,
         "human_approval_required": true,
         "human_approval_status": "pending",
@@ -1313,7 +1313,7 @@
       "evidence_payload_preview": {
         "human_approval_request": {
           "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T19:12:08.921162+00:00",
+          "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
           "approval_required": true,
           "dry_run": true,
           "workflow_stage": "awaiting_human_approval",
@@ -1341,7 +1341,7 @@
         },
         "human_approval_response": {
           "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T19:12:08.922160+00:00",
+          "generated_at_utc": "2026-06-09T22:15:28.876646+00:00",
           "decision": "approved_for_dry_run_only",
           "dry_run": true,
           "approved_actions_count": 6,
@@ -1357,7 +1357,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00"
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00"
           },
           {
             "action": "block_ip",
@@ -1365,7 +1365,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00"
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00"
           },
           {
             "action": "block_ip",
@@ -1373,7 +1373,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00"
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00"
           },
           {
             "action": "block_ip",
@@ -1381,7 +1381,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00"
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00"
           },
           {
             "action": "block_ip",
@@ -1389,7 +1389,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00"
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00"
           },
           {
             "action": "rate_limit_endpoint",
@@ -1397,7 +1397,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00"
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00"
           }
         ],
         "rejected_actions": [],
@@ -1436,7 +1436,7 @@
         "workflow_stage": "approved",
         "workflow_timeline": [
           {
-            "timestamp_utc": "2026-06-09T19:12:08.919160+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.875647+00:00",
             "stage": "triage",
             "decision": "critical",
             "details": {
@@ -1445,7 +1445,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-09T19:12:08.920160+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00",
             "stage": "forensic_analysis",
             "decision": "idor_pattern_analyzed",
             "details": {
@@ -1455,7 +1455,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-09T19:12:08.921162+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00",
             "stage": "response_planning",
             "decision": "containment_plan_generated",
             "details": {
@@ -1464,7 +1464,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00",
             "stage": "human_approval",
             "decision": "approved_for_dry_run_only",
             "details": {
@@ -1539,7 +1539,7 @@
         "workflow_stage": "approved",
         "workflow_timeline": [
           {
-            "timestamp_utc": "2026-06-09T19:12:08.919160+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.875647+00:00",
             "stage": "triage",
             "decision": "critical",
             "details": {
@@ -1548,7 +1548,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-09T19:12:08.920160+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00",
             "stage": "forensic_analysis",
             "decision": "idor_pattern_analyzed",
             "details": {
@@ -1558,7 +1558,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-09T19:12:08.921162+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00",
             "stage": "response_planning",
             "decision": "containment_plan_generated",
             "details": {
@@ -1567,7 +1567,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-09T19:12:08.922160+00:00",
+            "timestamp_utc": "2026-06-09T22:15:28.876646+00:00",
             "stage": "human_approval",
             "decision": "approved_for_dry_run_only",
             "details": {

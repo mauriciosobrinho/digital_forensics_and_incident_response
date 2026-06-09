@@ -1,43 +1,34 @@
-# IDOR Response Platform
-
-## Digital Forensics & Incident Response Platform
-
-Technical Challenge — Technical Leader, Digital Forensics and Incident Response
-Mercado Livre / Mercado Libre Cybersecurity Case
-
----
-
-## Overview
-
-The **IDOR Response Platform** is an end-to-end Digital Forensics and Incident Response platform designed to investigate, explain, validate and safely respond to **IDOR — Insecure Direct Object Reference** incidents.
-
-The project was built as a complete DFIR/SOC investigation platform, combining:
-
-* Forensic ingestion
-* Chain of custody
-* URI parsing
-* Feature engineering
-* IDOR detection
-* Risk scoring
-* Anomaly detection
-* IOC generation
-* Forensic evidence packaging
-* LangGraph multi-agent orchestration
-* Human-in-the-loop approval
-* Dry-run containment simulation
-* RAG-based SOC Copilot
-* MCP-safe tool execution
-* NIST incident response metrics
-* Observability and SOC monitoring
-* Automated reporting
-
-All containment actions are executed in **dry-run mode**, ensuring safety, auditability and human oversight.
-
----
-
-## Challenge Objectives Covered
-
-| Challenge Requirement        | Platform Capability                    | Status |
+<h1>IDOR Response Platform</h1>
+<h2>Digital Forensics &amp; Incident Response Platform</h2>
+<p>Technical Challenge — Technical Leader, Digital Forensics and Incident Response
+Mercado Livre / Mercado Libre Cybersecurity Case</p>
+<hr />
+<h2>Overview</h2>
+<p>The <strong>IDOR Response Platform</strong> is an end-to-end Digital Forensics and Incident Response platform designed to investigate, explain, validate and safely respond to <strong>IDOR — Insecure Direct Object Reference</strong> incidents.</p>
+<p>The project was built as a complete DFIR/SOC investigation platform, combining:</p>
+<ul>
+<li>Forensic ingestion</li>
+<li>Chain of custody</li>
+<li>URI parsing</li>
+<li>Feature engineering</li>
+<li>IDOR detection</li>
+<li>Risk scoring</li>
+<li>Anomaly detection</li>
+<li>IOC generation</li>
+<li>Forensic evidence packaging</li>
+<li>LangGraph multi-agent orchestration</li>
+<li>Human-in-the-loop approval</li>
+<li>Dry-run containment simulation</li>
+<li>RAG-based SOC Copilot</li>
+<li>MCP-safe tool execution</li>
+<li>NIST incident response metrics</li>
+<li>Observability and SOC monitoring</li>
+<li>Automated reporting</li>
+</ul>
+<p>All containment actions are executed in <strong>dry-run mode</strong>, ensuring safety, auditability and human oversight.</p>
+<hr />
+<h2>Challenge Objectives Covered</h2>
+<p>| Challenge Requirement        | Platform Capability                    | Status |
 | ---------------------------- | -------------------------------------- | ------ |
 | Incident classification      | Triage Agent                           | ✅      |
 | Severity classification      | Risk scoring + Triage Agent            | ✅      |
@@ -47,7 +38,7 @@ All containment actions are executed in **dry-run mode**, ensuring safety, audit
 | Patient zero identification  | Forensic evidence package              | ✅      |
 | Initial exploitation window  | Attack timeline                        | ✅      |
 | Automation assessment        | Bot/anomaly/sequential access analysis | ✅      |
-| MITRE ATT&CK mapping         | Forensic Analyst Agent                 | ✅      |
+| MITRE ATT&amp;CK mapping         | Forensic Analyst Agent                 | ✅      |
 | Immediate containment        | Response Advisor Agent                 | ✅      |
 | Strategic containment        | NIST IR layer                          | ✅      |
 | Human approval               | Human Approval Agent                   | ✅      |
@@ -57,13 +48,10 @@ All containment actions are executed in **dry-run mode**, ensuring safety, audit
 | Workflow re-entry            | Request more evidence scenario         | ✅      |
 | Response metrics             | TTD / TTR / TTC                        | ✅      |
 | Dashboards / metrics         | Streamlit + observability artifacts    | ✅      |
-| Final reports                | Technical report + executive summary   | ✅      |
-
----
-
-## High-Level Architecture
-
-```text
+| Final reports                | Technical report + executive summary   | ✅      |</p>
+<hr />
+<h2>High-Level Architecture</h2>
+<p><code>text
 Raw Web Logs
     │
     ▼
@@ -102,20 +90,16 @@ Human-in-the-loop Workflow
 NIST Incident Response Metrics
     │
     ▼
-Observability & SOC Monitoring
+Observability &amp; SOC Monitoring
     │
     ▼
 SOC Copilot / Streamlit UI
     │
     ▼
-Technical Reports & Executive Summary
-```
-
----
-
-## Technology Stack
-
-| Layer                  | Technology                          |
+Technical Reports &amp; Executive Summary</code></p>
+<hr />
+<h2>Technology Stack</h2>
+<p>| Layer                  | Technology                          |
 | ---------------------- | ----------------------------------- |
 | Language               | Python 3.12                         |
 | Data processing        | Polars                              |
@@ -128,57 +112,42 @@ Technical Reports & Executive Summary
 | Testing                | Pytest                              |
 | Reporting              | Markdown + Matplotlib figures       |
 | Evidence format        | JSON                                |
-| Workflow visualization | Mermaid / PNG                       |
-
----
-
-## Dataset
-
-Input file:
-
-```text
-data/raw/three_months.csv
-```
-
-Observed dataset size:
-
-| Metric         |     Value |
+| Workflow visualization | Mermaid / PNG                       |</p>
+<hr />
+<h2>Dataset</h2>
+<p>Input file:</p>
+<p><code>text
+data/raw/three_months.csv</code></p>
+<p>Observed dataset size:</p>
+<p>| Metric         |     Value |
 | -------------- | --------: |
 | Raw events     | 4,478,619 |
 | Columns        |         8 |
 | Analyzed IPs   |     5,726 |
 | IDOR findings  |       182 |
 | Anomalous IPs  |       172 |
-| Generated IOCs |       586 |
-
----
-
-## Input Schema
-
-| Original Column   | Normalized Column |
+| Generated IOCs |       586 |</p>
+<hr />
+<h2>Input Schema</h2>
+<p>| Original Column   | Normalized Column |
 | ----------------- | ----------------- |
-| `timestamp`       | `timestamp`       |
-| `http_staus`      | `status_code`     |
-| `http_host`       | `host`            |
-| `http_uri`        | `uri`             |
-| `http_method`     | `method`          |
-| `http_referer`    | `referer`         |
-| `http_user_agent` | `user_agent`      |
-| `source_ip`       | `source_ip`       |
-
-Extracted URI fields:
-
-| Field        | Description                                               |
+| <code>timestamp</code>       | <code>timestamp</code>       |
+| <code>http_staus</code>      | <code>status_code</code>     |
+| <code>http_host</code>       | <code>host</code>            |
+| <code>http_uri</code>        | <code>uri</code>             |
+| <code>http_method</code>     | <code>method</code>          |
+| <code>http_referer</code>    | <code>referer</code>         |
+| <code>http_user_agent</code> | <code>user_agent</code>      |
+| <code>source_ip</code>       | <code>source_ip</code>       |</p>
+<p>Extracted URI fields:</p>
+<p>| Field        | Description                                               |
 | ------------ | --------------------------------------------------------- |
-| `invoice_id` | Direct object identifier used for invoice access analysis |
-| `site_id`    | Site/country/business context identifier                  |
-| `auth_token` | Token-like value observed in request URI                  |
-
----
-
-## Project Structure
-
-```text
+| <code>invoice_id</code> | Direct object identifier used for invoice access analysis |
+| <code>site_id</code>    | Site/country/business context identifier                  |
+| <code>auth_token</code> | Token-like value observed in request URI                  |</p>
+<hr />
+<h2>Project Structure</h2>
+<p>```text
 src/
 ├── agents/
 │   ├── conversation_agent.py
@@ -274,18 +243,16 @@ src/
 ├── utils/
 │   └── filesystem.py
 │
-└── app.py
-
-data/
+└── app.py</p>
+<p>data/
 ├── raw/
 ├── processed/
 ├── evidence/
 ├── evaluation/
 ├── observability/
 ├── memory/
-└── knowledge/
-
-reports/
+└── knowledge/</p>
+<p>reports/
 ├── technical_report.md
 ├── executive_summary.md
 ├── architecture.md
@@ -295,9 +262,8 @@ reports/
     ├── agent_coverage.png
     ├── agent_metrics.png
     ├── pipeline_metrics.png
-    └── streamlit_ui.png
-
-tests/
+    └── streamlit_ui.png</p>
+<p>tests/
 ├── test_agent_evaluation.py
 ├── test_agents.py
 ├── test_anomaly_detection.py
@@ -311,215 +277,138 @@ tests/
 ├── test_observability.py
 ├── test_reporting.py
 └── test_uri_parser.py
-```
-
----
-
-## Installation
-
-### Create virtual environment
-
-Windows:
-
-```bash
+```</p>
+<hr />
+<h2>Installation</h2>
+<h3>Create virtual environment</h3>
+<p>Windows:</p>
+<p><code>bash
 python -m venv .venv
-.venv\Scripts\activate
-```
-
-Linux / macOS:
-
-```bash
+.venv\Scripts\activate</code></p>
+<p>Linux / macOS:</p>
+<p><code>bash
 python -m venv .venv
-source .venv/bin/activate
-```
-
-### Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Environment Configuration
-
-Create a `.env` file at the project root.
-
-### Deterministic mode for tests and final validation
-
-Recommended for `pytest` and reproducible pipeline runs:
-
-```env
+source .venv/bin/activate</code></p>
+<h3>Install dependencies</h3>
+<p><code>bash
+pip install -r requirements.txt</code></p>
+<hr />
+<h2>Environment Configuration</h2>
+<p>Create a <code>.env</code> file at the project root.</p>
+<h3>Deterministic mode for tests and final validation</h3>
+<p>Recommended for <code>pytest</code> and reproducible pipeline runs:</p>
+<p><code>env
 AGENTS_USE_LLM=false
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
-LANGGRAPH_CHECKPOINT_BACKEND=memory
-```
-
-### LLM-enabled mode
-
-Used for SOC Copilot and agent reasoning experiments:
-
-```env
+LANGGRAPH_CHECKPOINT_BACKEND=memory</code></p>
+<h3>LLM-enabled mode</h3>
+<p>Used for SOC Copilot and agent reasoning experiments:</p>
+<p>```env
 AGENTS_USE_LLM=true
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
-LANGGRAPH_CHECKPOINT_BACKEND=memory
-
-LLM_PROVIDER=groq
+LANGGRAPH_CHECKPOINT_BACKEND=memory</p>
+<p>LLM_PROVIDER=groq
 LLM_MODEL=llama-3.3-70b-versatile
 LLM_API_KEY=your_api_key_here
 LLM_BASE_URL=https://api.groq.com/openai/v1
-```
-
----
-
-## Human Decision Scenarios
-
-| Scenario                | Behavior                                    |
+```</p>
+<hr />
+<h2>Human Decision Scenarios</h2>
+<p>| Scenario                | Behavior                                    |
 | ----------------------- | ------------------------------------------- |
-| `approve`               | Human reviewer approves dry-run containment |
-| `reject`                | Human reviewer rejects containment          |
-| `modify`                | Human reviewer modifies the response plan   |
-| `request_more_evidence` | Workflow re-enters forensic analysis        |
-
-Example:
-
-```env
-HUMAN_DECISION_SCENARIO=request_more_evidence
-```
-
-Expected result:
-
-```text
+| <code>approve</code>               | Human reviewer approves dry-run containment |
+| <code>reject</code>                | Human reviewer rejects containment          |
+| <code>modify</code>                | Human reviewer modifies the response plan   |
+| <code>request_more_evidence</code> | Workflow re-enters forensic analysis        |</p>
+<p>Example:</p>
+<p><code>env
+HUMAN_DECISION_SCENARIO=request_more_evidence</code></p>
+<p>Expected result:</p>
+<p><code>text
 human_loop_count = 1
-decision_log = 7
-```
-
----
-
-## LLM Provider Examples
-
-The platform uses an OpenAI-compatible client interface. Change only `LLM_PROVIDER`, `LLM_MODEL`, `LLM_API_KEY` and `LLM_BASE_URL`.
-
-### Groq
-
-```env
+decision_log = 7</code></p>
+<hr />
+<h2>LLM Provider Examples</h2>
+<p>The platform uses an OpenAI-compatible client interface. Change only <code>LLM_PROVIDER</code>, <code>LLM_MODEL</code>, <code>LLM_API_KEY</code> and <code>LLM_BASE_URL</code>.</p>
+<h3>Groq</h3>
+<p><code>env
 AGENTS_USE_LLM=true
 LLM_PROVIDER=groq
 LLM_MODEL=llama-3.3-70b-versatile
 LLM_API_KEY=your_groq_key
-LLM_BASE_URL=https://api.groq.com/openai/v1
-```
-
-### OpenAI
-
-```env
+LLM_BASE_URL=https://api.groq.com/openai/v1</code></p>
+<h3>OpenAI</h3>
+<p><code>env
 AGENTS_USE_LLM=true
 LLM_PROVIDER=openai
 LLM_MODEL=gpt-4.1-mini
 LLM_API_KEY=your_openai_key
-LLM_BASE_URL=
-```
-
-### OpenRouter
-
-```env
+LLM_BASE_URL=</code></p>
+<h3>OpenRouter</h3>
+<p><code>env
 AGENTS_USE_LLM=true
 LLM_PROVIDER=openrouter
 LLM_MODEL=openai/gpt-4.1-mini
 LLM_API_KEY=your_openrouter_key
-LLM_BASE_URL=https://openrouter.ai/api/v1
-```
-
-### Google Gemini OpenAI-compatible endpoint
-
-```env
+LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
+<h3>Google Gemini OpenAI-compatible endpoint</h3>
+<p><code>env
 AGENTS_USE_LLM=true
 LLM_PROVIDER=gemini
 LLM_MODEL=gemini-2.5-flash
 LLM_API_KEY=your_gemini_key
-LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
-```
-
-### Local OpenAI-compatible server
-
-Example for local gateways such as LM Studio, Ollama-compatible proxies or local OpenAI-compatible endpoints:
-
-```env
+LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/</code></p>
+<h3>Local OpenAI-compatible server</h3>
+<p>Example for local gateways such as LM Studio, Ollama-compatible proxies or local OpenAI-compatible endpoints:</p>
+<p><code>env
 AGENTS_USE_LLM=true
 LLM_PROVIDER=local
 LLM_MODEL=local-model-name
 LLM_API_KEY=local_or_dummy_key
-LLM_BASE_URL=http://localhost:1234/v1
-```
-
----
-
-## Running the Full Pipeline
-
-```bash
-python -m src.app
-```
-
-The pipeline generates:
-
-* processed Parquet datasets
-* forensic evidence
-* agent investigation outputs
-* human approval artifacts
-* LangGraph workflow visualization
-* evaluation reports
-* NIST incident response metrics
-* observability artifacts
-* final technical reports
-
----
-
-## Validation Commands
-
-### Compile critical files
-
-```bash
+LLM_BASE_URL=http://localhost:1234/v1</code></p>
+<hr />
+<h2>Running the Full Pipeline</h2>
+<p><code>bash
+python -m src.app</code></p>
+<p>The pipeline generates:</p>
+<ul>
+<li>processed Parquet datasets</li>
+<li>forensic evidence</li>
+<li>agent investigation outputs</li>
+<li>human approval artifacts</li>
+<li>LangGraph workflow visualization</li>
+<li>evaluation reports</li>
+<li>NIST incident response metrics</li>
+<li>observability artifacts</li>
+<li>final technical reports</li>
+</ul>
+<hr />
+<h2>Validation Commands</h2>
+<h3>Compile critical files</h3>
+<p><code>bash
 python -m py_compile src/app.py
-python -m py_compile src/ui/streamlit_app.py
-```
-
-### Run tests
-
-```bash
-pytest -v
-```
-
-### Run pipeline
-
-```bash
-python -m src.app
-```
-
-### Run Streamlit UI
-
-```bash
-streamlit run src/ui/streamlit_app.py
-```
-
----
-
-## SOC Copilot Consoles
-
-### Analyst console
-
-Natural language interface for investigation:
-
-```bash
-python -m src.agents.interactive_console
-```
-
-Example questions:
-
-```text
+python -m py_compile src/ui/streamlit_app.py</code></p>
+<h3>Run tests</h3>
+<p><code>bash
+pytest -v</code></p>
+<h3>Run pipeline</h3>
+<p><code>bash
+python -m src.app</code></p>
+<h3>Run Streamlit UI</h3>
+<p><code>bash
+streamlit run src/ui/streamlit_app.py</code></p>
+<hr />
+<h2>SOC Copilot Consoles</h2>
+<h3>Analyst console</h3>
+<p>Natural language interface for investigation:</p>
+<p><code>bash
+python -m src.agents.interactive_console</code></p>
+<p>Example questions:</p>
+<p><code>text
 Quais são os top IPs atacantes?
 Qual foi a janela do ataque?
 Explique IDOR e Broken Access Control.
@@ -529,59 +418,42 @@ Quais ações de contenção são recomendadas?
 Qual foi o resultado da intervenção humana?
 Mostre a timeline do workflow.
 Houve reentrada no agente forense?
-Quais são as métricas TTD, TTR e TTC?
-```
-
-### Debug console
-
-Shows raw JSON payloads for inspection:
-
-```bash
-python -m src.agents.interactive_console --json
-```
-
-Use this mode to validate:
-
-* selected intent
-* tool result
-* RAG context
-* raw structured payload
-* generated answer
-* evidence references
-
----
-
-## Streamlit UI
-
-![Streamlit UI](reports/figures/streamlit_ui.png)
-
-Launch:
-
-```bash
-streamlit run src/ui/streamlit_app.py
-```
-
-### Available Tabs
-
-| Tab                 | Purpose                      | What to Expect                                                    |
+Quais são as métricas TTD, TTR e TTC?</code></p>
+<h3>Debug console</h3>
+<p>Shows raw JSON payloads for inspection:</p>
+<p><code>bash
+python -m src.agents.interactive_console --json</code></p>
+<p>Use this mode to validate:</p>
+<ul>
+<li>selected intent</li>
+<li>tool result</li>
+<li>RAG context</li>
+<li>raw structured payload</li>
+<li>generated answer</li>
+<li>evidence references</li>
+</ul>
+<hr />
+<h2>Streamlit UI</h2>
+<p><img alt="Streamlit UI" src="reports/figures/streamlit_ui.png" /></p>
+<p>Launch:</p>
+<p><code>bash
+streamlit run src/ui/streamlit_app.py</code></p>
+<h3>Available Tabs</h3>
+<p>| Tab                 | Purpose                      | What to Expect                                                    |
 | ------------------- | ---------------------------- | ----------------------------------------------------------------- |
-| `SOC Chat`          | Natural language SOC Copilot | Ask investigation questions in Portuguese or English              |
-| `Investigation`     | Agent investigation output   | Triage, forensic analysis and response advisor JSON               |
-| `Human Approval`    | Human-in-the-loop governance | Approval request, approval decision and dry-run status            |
-| `Forensic Evidence` | Evidence package             | Chain of custody, summary, attack indicators and forensic context |
-| `RAG / MCP Logs`    | Retrieval and safe tool logs | RAG context and MCP-safe tool execution history                   |
-| `Agent Workflow`    | LangGraph execution trace    | Workflow timeline, current state and decision transitions         |
-| `Agent Evaluation`  | Validation suite             | Overall coverage, passed/partial/failed checks and question bank  |
-| `NIST IR Metrics`   | Incident response metrics    | TTD, TTR, TTC, containment strategy and root cause analysis       |
-| `Observability`     | SOC monitoring               | Health, pipeline metrics, agent metrics and evidence completeness |
-
----
-
-## Generated Artifacts
-
-### Processed Data
-
-```text
+| <code>SOC Chat</code>          | Natural language SOC Copilot | Ask investigation questions in Portuguese or English              |
+| <code>Investigation</code>     | Agent investigation output   | Triage, forensic analysis and response advisor JSON               |
+| <code>Human Approval</code>    | Human-in-the-loop governance | Approval request, approval decision and dry-run status            |
+| <code>Forensic Evidence</code> | Evidence package             | Chain of custody, summary, attack indicators and forensic context |
+| <code>RAG / MCP Logs</code>    | Retrieval and safe tool logs | RAG context and MCP-safe tool execution history                   |
+| <code>Agent Workflow</code>    | LangGraph execution trace    | Workflow timeline, current state and decision transitions         |
+| <code>Agent Evaluation</code>  | Validation suite             | Overall coverage, passed/partial/failed checks and question bank  |
+| <code>NIST IR Metrics</code>   | Incident response metrics    | TTD, TTR, TTC, containment strategy and root cause analysis       |
+| <code>Observability</code>     | SOC monitoring               | Health, pipeline metrics, agent metrics and evidence completeness |</p>
+<hr />
+<h2>Generated Artifacts</h2>
+<h3>Processed Data</h3>
+<p><code>text
 data/processed/
 ├── parsed_events.parquet
 ├── ip_features.parquet
@@ -589,12 +461,9 @@ data/processed/
 ├── risk_scores.parquet
 ├── suspicious_ips.parquet
 ├── anomaly_scores.parquet
-└── anomalous_ips.parquet
-```
-
-### Forensic Evidence
-
-```text
+└── anomalous_ips.parquet</code></p>
+<h3>Forensic Evidence</h3>
+<p><code>text
 data/evidence/
 ├── chain_of_custody.json
 ├── attack_timeline.json
@@ -611,53 +480,39 @@ data/evidence/
 ├── nist_incident_report.json
 ├── response_metrics.json
 ├── containment_strategy.json
-└── root_cause_analysis.json
-```
-
-### Evaluation
-
-```text
+└── root_cause_analysis.json</code></p>
+<h3>Evaluation</h3>
+<p><code>text
 data/evaluation/
 ├── agent_question_bank.json
 ├── agent_eval_results.json
 ├── agent_eval_report.json
-└── agent_eval_summary.csv
-```
-
-Latest validation:
-
-| Metric           | Value |
+└── agent_eval_summary.csv</code></p>
+<p>Latest validation:</p>
+<p>| Metric           | Value |
 | ---------------- | ----: |
 | Overall coverage |  100% |
 | Passed           |    15 |
 | Partial          |     0 |
-| Failed           |     0 |
-
-### Observability
-
-```text
+| Failed           |     0 |</p>
+<h3>Observability</h3>
+<p><code>text
 data/observability/
 ├── platform_metrics.json
 ├── agent_metrics.json
 ├── healthcheck.json
-└── soc_dashboard_data.json
-```
-
-Example topline:
-
-```json
+└── soc_dashboard_data.json</code></p>
+<p>Example topline:</p>
+<p><code>json
 {
   "health": "healthy",
   "severity": "critical",
   "priority": "P1",
   "dry_run": true,
   "agent_evaluation_coverage": 100.0
-}
-```
-
-### Reports
-
-```text
+}</code></p>
+<h3>Reports</h3>
+<p><code>text
 reports/
 ├── technical_report.md
 ├── executive_summary.md
@@ -667,14 +522,10 @@ reports/
 └── figures/
     ├── agent_coverage.png
     ├── agent_metrics.png
-    └── pipeline_metrics.png
-```
-
----
-
-## Key Results
-
-| Metric                    |     Value |
+    └── pipeline_metrics.png</code></p>
+<hr />
+<h2>Key Results</h2>
+<p>| Metric                    |     Value |
 | ------------------------- | --------: |
 | Logs processed            | 4,478,619 |
 | IPs analyzed              |     5,726 |
@@ -684,29 +535,23 @@ reports/
 | Agent evaluation coverage |      100% |
 | Severity                  |  critical |
 | Priority                  |        P1 |
-| Dry-run                   |      true |
-
----
-
-## NIST Incident Response Metrics
-
-| Metric | Meaning         |                  Current Result |
+| Dry-run                   |      true |</p>
+<hr />
+<h2>NIST Incident Response Metrics</h2>
+<p>| Metric | Meaning         |                  Current Result |
 | ------ | --------------- | ------------------------------: |
 | TTD    | Time to Detect  | Historical retrospective metric |
 | TTR    | Time to Respond |                            0.0h |
-| TTC    | Time to Contain |                    0.0h dry-run |
-
-Interpretation:
-
-* TTD is high because the dataset is historical.
-* TTR is zero because response recommendations are generated in the same automated pipeline cycle.
-* TTC is zero because containment approval is simulated in dry-run during the same execution cycle.
-
----
-
-## Roadmap
-
-| Sprint     | Description                                          | Status |
+| TTC    | Time to Contain |                    0.0h dry-run |</p>
+<p>Interpretation:</p>
+<ul>
+<li>TTD is high because the dataset is historical.</li>
+<li>TTR is zero because response recommendations are generated in the same automated pipeline cycle.</li>
+<li>TTC is zero because containment approval is simulated in dry-run during the same execution cycle.</li>
+</ul>
+<hr />
+<h2>Roadmap</h2>
+<p>| Sprint     | Description                                          | Status |
 | ---------- | ---------------------------------------------------- | ------ |
 | Sprint 0   | Architecture and planning                            | ✅      |
 | Sprint 1.1 | Evidence ingestion, chain of custody and URI parsing | ✅      |
@@ -722,59 +567,44 @@ Interpretation:
 | Sprint 3.7 | NIST incident response metrics                       | ✅      |
 | Sprint 3.8 | Observability and SOC monitoring                     | ✅      |
 | Sprint 3.9 | Final technical report and executive summary         | ✅      |
-| Sprint 4.0 | Demo package and presentation                        | 🚧     |
-
----
-
-## Production Hardening Backlog
-
-The MVP intentionally prioritizes investigation, evidence, agents, explainability, human approval, dry-run safety and incident response.
-
-Production hardening items:
-
-* Docker Compose
-* Prometheus
-* Grafana
-* CI/CD
-* Secrets management
-* RBAC
-* Authentication
-* Cloud deployment
-* Persistent vector database
-* External MCP servers
-* Production WAF integration
-* SIEM integration
-* Case management integration
-
----
-
-## Recommended Final Validation
-
-Before submitting or presenting:
-
-```bash
+| Sprint 4.0 | Demo package and presentation                        | 🚧     |</p>
+<hr />
+<h2>Production Hardening Backlog</h2>
+<p>The MVP intentionally prioritizes investigation, evidence, agents, explainability, human approval, dry-run safety and incident response.</p>
+<p>Production hardening items:</p>
+<ul>
+<li>Docker Compose</li>
+<li>Prometheus</li>
+<li>Grafana</li>
+<li>CI/CD</li>
+<li>Secrets management</li>
+<li>RBAC</li>
+<li>Authentication</li>
+<li>Cloud deployment</li>
+<li>Persistent vector database</li>
+<li>External MCP servers</li>
+<li>Production WAF integration</li>
+<li>SIEM integration</li>
+<li>Case management integration</li>
+</ul>
+<hr />
+<h2>Recommended Final Validation</h2>
+<p>Before submitting or presenting:</p>
+<p><code>bash
 python -m py_compile src/app.py
 python -m py_compile src/ui/streamlit_app.py
 pytest -v
 python -m src.app
-streamlit run src/ui/streamlit_app.py
-```
-
-Recommended deterministic `.env`:
-
-```env
+streamlit run src/ui/streamlit_app.py</code></p>
+<p>Recommended deterministic <code>.env</code>:</p>
+<p><code>env
 AGENTS_USE_LLM=false
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
-LANGGRAPH_CHECKPOINT_BACKEND=memory
-```
-
----
-
-## Author
-
-Maurício Luiz Sobrinho
-
-Technical Challenge — Digital Forensics and Incident Response
-Mercado Livre / Mercado Libre
+LANGGRAPH_CHECKPOINT_BACKEND=memory</code></p>
+<hr />
+<h2>Author</h2>
+<p>Maurício Luiz Sobrinho</p>
+<p>Technical Challenge — Digital Forensics and Incident Response
+Mercado Livre / Mercado Libre</p>

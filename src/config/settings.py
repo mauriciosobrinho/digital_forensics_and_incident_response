@@ -182,3 +182,17 @@ HEALTHCHECK_FILE = (
 SOC_DASHBOARD_DATA_FILE = (
     OBSERVABILITY_DIR / "soc_dashboard_data.json"
 )
+
+# Sprint 3.9
+REPORTS_DIR = PROJECT_ROOT / "reports"
+REPORT_FIGURES_DIR = REPORTS_DIR / "figures"
+
+TECHNICAL_REPORT_MD_FILE = REPORTS_DIR / "technical_report.md"
+TECHNICAL_REPORT_PDF_FILE = REPORTS_DIR / "technical_report.pdf"
+
+EXECUTIVE_SUMMARY_MD_FILE = REPORTS_DIR / "executive_summary.md"
+EXECUTIVE_SUMMARY_PDF_FILE = REPORTS_DIR / "executive_summary.pdf"
+
+ARCHITECTURE_MD_FILE = REPORTS_DIR / "architecture.md"
+METHODOLOGY_MD_FILE = REPORTS_DIR / "methodology.md"
+EVIDENCE_APPENDIX_MD_FILE = REPORTS_DIR / "evidence_appendix.md"

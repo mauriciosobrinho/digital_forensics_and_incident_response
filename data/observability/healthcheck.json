@@ -1,6 +1,6 @@
 {
   "healthcheck_type": "platform_healthcheck",
-  "generated_at_utc": "2026-06-09T19:12:09.693512+00:00",
+  "generated_at_utc": "2026-06-09T22:15:31.879600+00:00",
   "overall_status": "healthy",
   "missing_artifacts": [],
   "degraded_components": [],
@@ -33,7 +33,7 @@
     "nist_incident_report": {
       "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\nist_incident_report.json",
       "exists": true,
-      "size_bytes": 13719
+      "size_bytes": 13718
     },
     "agent_eval_report": {
       "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evaluation\\agent_eval_report.json",

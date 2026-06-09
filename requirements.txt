@@ -20,6 +20,10 @@ matplotlib
 
 seaborn
 
+markdown
+
+weasyprint
+
 pyarrow
 
 python-dotenv
