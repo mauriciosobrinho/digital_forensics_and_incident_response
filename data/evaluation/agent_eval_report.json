@@ -1,0 +1,63 @@
+{
+  "report_type": "agent_evaluation_report",
+  "generated_at_utc": "2026-06-09T15:20:11.283018+00:00",
+  "summary": {
+    "total_questions": 15,
+    "overall_score": 1.0,
+    "overall_coverage_percent": 100.0,
+    "passed": 15,
+    "partial": 0,
+    "failed": 0
+  },
+  "agent_scores": {
+    "triage_agent": {
+      "questions": 4,
+      "average_score": 1.0,
+      "coverage_percent": 100.0,
+      "passed": 4,
+      "partial": 0,
+      "failed": 0
+    },
+    "forensic_analyst_agent": {
+      "questions": 4,
+      "average_score": 1.0,
+      "coverage_percent": 100.0,
+      "passed": 4,
+      "partial": 0,
+      "failed": 0
+    },
+    "response_advisor_agent": {
+      "questions": 3,
+      "average_score": 1.0,
+      "coverage_percent": 100.0,
+      "passed": 3,
+      "partial": 0,
+      "failed": 0
+    },
+    "human_approval_agent": {
+      "questions": 1,
+      "average_score": 1.0,
+      "coverage_percent": 100.0,
+      "passed": 1,
+      "partial": 0,
+      "failed": 0
+    },
+    "langgraph_workflow": {
+      "questions": 2,
+      "average_score": 1.0,
+      "coverage_percent": 100.0,
+      "passed": 2,
+      "partial": 0,
+      "failed": 0
+    },
+    "soc_copilot": {
+      "questions": 1,
+      "average_score": 1.0,
+      "coverage_percent": 100.0,
+      "passed": 1,
+      "partial": 0,
+      "failed": 0
+    }
+  },
+  "coverage_statement": "This evaluation validates whether each agent output contains the minimum evidence required by the technical challenge."
+}

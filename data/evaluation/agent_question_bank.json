@@ -1,0 +1,153 @@
+[
+  {
+    "id": "triage_001",
+    "agent": "triage_agent",
+    "question": "Qual é a severidade do incidente?",
+    "required_evidence": [
+      "severity",
+      "priority",
+      "incident_classification"
+    ],
+    "challenge_requirement": "Clasificar severidad"
+  },
+  {
+    "id": "triage_002",
+    "agent": "triage_agent",
+    "question": "Qual tipo de ataque foi identificado?",
+    "required_evidence": [
+      "incident_classification",
+      "initial_hypotheses"
+    ],
+    "challenge_requirement": "Identificar tipo de ataque"
+  },
+  {
+    "id": "triage_003",
+    "agent": "triage_agent",
+    "question": "Quais hipóteses iniciais foram geradas?",
+    "required_evidence": [
+      "initial_hypotheses"
+    ],
+    "challenge_requirement": "Generar hipótesis iniciales"
+  },
+  {
+    "id": "triage_004",
+    "agent": "triage_agent",
+    "question": "Qual é a prioridade da investigação?",
+    "required_evidence": [
+      "priority",
+      "investigation_plan"
+    ],
+    "challenge_requirement": "Priorizar investigación"
+  },
+  {
+    "id": "forensic_001",
+    "agent": "forensic_analyst_agent",
+    "question": "Qual é o patient zero provável?",
+    "required_evidence": [
+      "patient_zero_candidate"
+    ],
+    "challenge_requirement": "Identificar patient zero"
+  },
+  {
+    "id": "forensic_002",
+    "agent": "forensic_analyst_agent",
+    "question": "Quando começou a exploração?",
+    "required_evidence": [
+      "first_seen",
+      "attack_window"
+    ],
+    "challenge_requirement": "Identificar inicio de explotación"
+  },
+  {
+    "id": "forensic_003",
+    "agent": "forensic_analyst_agent",
+    "question": "O ataque apresenta automação?",
+    "required_evidence": [
+      "automation_assessment",
+      "attack_pattern"
+    ],
+    "challenge_requirement": "Identificar tipo de automatización"
+  },
+  {
+    "id": "forensic_004",
+    "agent": "forensic_analyst_agent",
+    "question": "Há mapeamento MITRE ATT&CK em alto nível?",
+    "required_evidence": [
+      "mitre_attack_mapping"
+    ],
+    "challenge_requirement": "Mapear TTPs contra MITRE ATT&CK"
+  },
+  {
+    "id": "response_001",
+    "agent": "response_advisor_agent",
+    "question": "Quais ações de contenção imediata são recomendadas?",
+    "required_evidence": [
+      "recommended_containment",
+      "immediate"
+    ],
+    "challenge_requirement": "Recomendar acciones de contención"
+  },
+  {
+    "id": "response_002",
+    "agent": "response_advisor_agent",
+    "question": "Quais ações exigem aprovação humana?",
+    "required_evidence": [
+      "requires_human_approval",
+      "human_approval_required"
+    ],
+    "challenge_requirement": "Indicar aprobación humana"
+  },
+  {
+    "id": "response_003",
+    "agent": "response_advisor_agent",
+    "question": "Existe mini-playbook automático?",
+    "required_evidence": [
+      "mini_playbook"
+    ],
+    "challenge_requirement": "Generar mini-playbook automático"
+  },
+  {
+    "id": "human_001",
+    "agent": "human_approval_agent",
+    "question": "A intervenção humana foi registrada?",
+    "required_evidence": [
+      "human_approval_request",
+      "human_approval_response",
+      "human_approval_status"
+    ],
+    "challenge_requirement": "Capacidad de intervención humana simulada"
+  },
+  {
+    "id": "workflow_001",
+    "agent": "langgraph_workflow",
+    "question": "O fluxo possui estados claros e decision log?",
+    "required_evidence": [
+      "workflow_timeline",
+      "decision_log",
+      "workflow_stage"
+    ],
+    "challenge_requirement": "Flujo claro de estados y logging de decisiones"
+  },
+  {
+    "id": "workflow_002",
+    "agent": "langgraph_workflow",
+    "question": "O fluxo suporta reentrada para mais evidência?",
+    "required_evidence": [
+      "human_loop_count",
+      "decision_log",
+      "workflow_timeline"
+    ],
+    "challenge_requirement": "Human-in-the-loop re-entry"
+  },
+  {
+    "id": "soc_001",
+    "agent": "soc_copilot",
+    "question": "O SOC Copilot responde perguntas em linguagem natural?",
+    "required_evidence": [
+      "answer",
+      "tool_result",
+      "safety"
+    ],
+    "challenge_requirement": "Support investigation through agentic interaction"
+  }
+]

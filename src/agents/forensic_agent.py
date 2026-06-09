@@ -80,17 +80,32 @@ def forensic_analyst_agent(
             "first_seen": first_seen,
             "last_seen": last_seen,
         },
+        "first_seen": first_seen,
+        "last_seen": last_seen,
+        "attack_pattern": (
+            "Automated sequential invoice enumeration through exposed "
+            "application object identifiers."
+        ),
         "attack_pattern_explanation": (
             "The evidence shows high-volume invoice access, high invoice diversity "
             "and elevated sequential access ratio. This combination is consistent "
             "with automated enumeration of direct object identifiers."
         ),
         "automation_assessment": {
+            "is_likely_automated": True,
             "likely_automated": True,
+            "automation_type": "bot-driven invoice enumeration",
             "rationale": (
                 "Top IPs converge across risk scoring, bot likelihood and Isolation "
                 "Forest anomaly detection."
             ),
+            "supporting_signals": [
+                "high request volume",
+                "high unique invoice diversity",
+                "high sequential access ratio",
+                "bot detection convergence",
+                "anomaly detection convergence",
+            ],
             "total_anomalous_ips": anomaly_summary.get(
                 "total_anomalous_ips"
             ),
@@ -131,19 +146,38 @@ def forensic_analyst_agent(
                 "note": "Multiple suspicious IPs may indicate campaign distribution.",
             },
         ],
+        "mitre_attack_mapping": [
+            {
+                "tactic": "Discovery",
+                "technique": (
+                    "Application endpoint and object identifier enumeration"
+                ),
+                "rationale": (
+                    "The attacker enumerates invoice-like objects through exposed "
+                    "application endpoints."
+                ),
+            },
+            {
+                "tactic": "Collection",
+                "technique": "Data from Information Repositories",
+                "rationale": (
+                    "The observed behavior indicates large-scale access to invoice objects."
+                ),
+            },
+            {
+                "tactic": "Credential Access / Defense Evasion",
+                "technique": "Valid Accounts or Token Misuse",
+                "rationale": (
+                    "The investigation observed suspicious token reuse across invoice "
+                    "access patterns."
+                ),
+            },
+        ],
         "top_attackers_reviewed": risk_summary.get(
             "top_risk_ips",
             [],
         )[:10],
-
-        # "analysis_iteration": (
-        #     "additional_evidence_review"
-        #     if is_reentry
-        #     else "initial_forensic_review"
-        # ),
-
         "analysis_iteration": analysis_type,
-
         "human_requested_more_evidence": is_reentry,
     }
 

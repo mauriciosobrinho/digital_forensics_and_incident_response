@@ -23,6 +23,10 @@ from src.config.settings import (
     HUMAN_APPROVAL_REQUEST_FILE,
     MCP_TOOL_EXECUTION_LOG_FILE,
     RAG_CONTEXT_FILE,
+    AGENT_QUESTION_BANK_FILE,
+    AGENT_EVAL_RESULTS_FILE,
+    AGENT_EVAL_REPORT_FILE,
+    AGENT_EVAL_SUMMARY_FILE,
 )
 
 
@@ -203,6 +207,7 @@ def main():
             "Forensic Evidence",
             "RAG / MCP Logs",
             "Agent Workflow",
+            "Agent Evaluation",
         ]
     )
 
@@ -289,7 +294,71 @@ def main():
         else:
             st.warning(
                 "Workflow timeline not generated yet."
-            )    
+            )
+
+    with tabs[6]:
+        st.subheader("Agent Evaluation & Validation Suite")
+
+        report = load_json(
+            AGENT_EVAL_REPORT_FILE
+        )
+
+        results = load_json(
+            AGENT_EVAL_RESULTS_FILE
+        )
+
+        question_bank = load_json(
+            AGENT_QUESTION_BANK_FILE
+        )
+
+        if report:
+            summary = report.get(
+                "summary",
+                {},
+            )
+
+            col1, col2, col3, col4 = st.columns(4)
+
+            col1.metric(
+                "Overall Coverage",
+                f"{summary.get('overall_coverage_percent', 0)}%",
+            )
+
+            col2.metric(
+                "Passed",
+                summary.get("passed", 0),
+            )
+
+            col3.metric(
+                "Partial",
+                summary.get("partial", 0),
+            )
+
+            col4.metric(
+                "Failed",
+                summary.get("failed", 0),
+            )
+
+            st.subheader("Agent Coverage")
+            st.json(
+                report.get(
+                    "agent_scores",
+                    {},
+                )
+            )
+
+        else:
+            st.warning(
+                "Agent evaluation report not generated yet."
+            )
+
+        if results:
+            st.subheader("Evaluation Results")
+            st.json(results)
+
+        if question_bank:
+            st.subheader("Question Bank")
+            st.json(question_bank)    
 
 
 if __name__ == "__main__":

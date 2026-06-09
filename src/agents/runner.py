@@ -152,6 +152,8 @@ def run_agent_investigation(
 
         "workflow_stage": final_state.get("workflow_stage"),
         "workflow_timeline": final_state.get("workflow_timeline", []),
+        "human_loop_count": final_state.get("human_loop_count", 0),
+        "decision_log": final_state.get("decision_log", []),
         "modified_action_plan": final_state.get("modified_action_plan", {}),
     }
 

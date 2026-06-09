@@ -127,3 +127,22 @@ LANGGRAPH_WORKFLOW_FILE = (
 LANGGRAPH_WORKFLOW_MERMAID_FILE = (
     EVIDENCE_DIR / "langgraph_workflow.mmd"
 )
+
+# Sprint 3.6
+EVALUATION_DIR = DATA_DIR / "evaluation"
+
+AGENT_QUESTION_BANK_FILE = (
+    EVALUATION_DIR / "agent_question_bank.json"
+)
+
+AGENT_EVAL_RESULTS_FILE = (
+    EVALUATION_DIR / "agent_eval_results.json"
+)
+
+AGENT_EVAL_REPORT_FILE = (
+    EVALUATION_DIR / "agent_eval_report.json"
+)
+
+AGENT_EVAL_SUMMARY_FILE = (
+    EVALUATION_DIR / "agent_eval_summary.csv"
+)
