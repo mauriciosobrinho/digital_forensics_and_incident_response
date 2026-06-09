@@ -27,6 +27,10 @@ from src.config.settings import (
     AGENT_EVAL_RESULTS_FILE,
     AGENT_EVAL_REPORT_FILE,
     AGENT_EVAL_SUMMARY_FILE,
+    NIST_INCIDENT_REPORT_FILE,
+    RESPONSE_METRICS_FILE,
+    CONTAINMENT_STRATEGY_FILE,
+    ROOT_CAUSE_ANALYSIS_FILE,
 )
 
 
@@ -208,6 +212,7 @@ def main():
             "RAG / MCP Logs",
             "Agent Workflow",
             "Agent Evaluation",
+            "NIST IR Metrics",
         ]
     )
 
@@ -358,7 +363,100 @@ def main():
 
         if question_bank:
             st.subheader("Question Bank")
-            st.json(question_bank)    
+            st.json(question_bank)
+
+    with tabs[7]:
+        st.subheader("NIST Incident Response Metrics")
+
+        nist_report = load_json(
+            NIST_INCIDENT_REPORT_FILE
+        )
+
+        response_metrics = load_json(
+            RESPONSE_METRICS_FILE
+        )
+
+        containment_strategy = load_json(
+            CONTAINMENT_STRATEGY_FILE
+        )
+
+        root_cause = load_json(
+            ROOT_CAUSE_ANALYSIS_FILE
+        )
+
+        if nist_report:
+            summary = nist_report.get(
+                "incident_summary",
+                {},
+            )
+
+            col1, col2, col3, col4 = st.columns(4)
+
+            col1.metric(
+                "Severity",
+                summary.get("severity", "N/A"),
+            )
+
+            col2.metric(
+                "Priority",
+                summary.get("priority", "N/A"),
+            )
+
+            col3.metric(
+                "Incident Type",
+                summary.get("incident_type", "N/A"),
+            )
+
+            col4.metric(
+                "Dry-run",
+                str(summary.get("dry_run", True)),
+            )
+
+            questions = nist_report.get(
+                "questions_answered",
+                {},
+            )
+
+            st.subheader("Questions Answered")
+            st.json(questions)
+
+        if response_metrics:
+            st.subheader("TTD / TTR / TTC")
+            col1, col2, col3 = st.columns(3)
+
+            col1.metric(
+                "TTD hours",
+                response_metrics.get(
+                    "time_to_detect",
+                    {},
+                ).get("value_hours"),
+            )
+
+            col2.metric(
+                "TTR hours",
+                response_metrics.get(
+                    "time_to_respond",
+                    {},
+                ).get("value_hours"),
+            )
+
+            col3.metric(
+                "TTC hours",
+                response_metrics.get(
+                    "time_to_contain",
+                    {},
+                ).get("value_hours"),
+            )
+
+            st.json(response_metrics)
+
+        if containment_strategy:
+            st.subheader("Containment Strategy")
+            st.json(containment_strategy)
+
+        if root_cause:
+            st.subheader("Root Cause Analysis")
+            st.json(root_cause)    
 
 
 if __name__ == "__main__":

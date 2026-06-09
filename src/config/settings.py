@@ -146,3 +146,20 @@ AGENT_EVAL_REPORT_FILE = (
 AGENT_EVAL_SUMMARY_FILE = (
     EVALUATION_DIR / "agent_eval_summary.csv"
 )
+
+# Sprint 3.7
+NIST_INCIDENT_REPORT_FILE = (
+    EVIDENCE_DIR / "nist_incident_report.json"
+)
+
+RESPONSE_METRICS_FILE = (
+    EVIDENCE_DIR / "response_metrics.json"
+)
+
+CONTAINMENT_STRATEGY_FILE = (
+    EVIDENCE_DIR / "containment_strategy.json"
+)
+
+ROOT_CAUSE_ANALYSIS_FILE = (
+    EVIDENCE_DIR / "root_cause_analysis.json"
+)

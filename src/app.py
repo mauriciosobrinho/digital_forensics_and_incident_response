@@ -27,6 +27,10 @@ from src.config.settings import (
     AGENT_EVAL_RESULTS_FILE,
     AGENT_EVAL_REPORT_FILE,
     AGENT_EVAL_SUMMARY_FILE,
+    NIST_INCIDENT_REPORT_FILE,
+    RESPONSE_METRICS_FILE,
+    CONTAINMENT_STRATEGY_FILE,
+    ROOT_CAUSE_ANALYSIS_FILE,
 )
 
 from src.agents.export_graph import (
@@ -102,22 +106,26 @@ from src.evaluation.runner import (
     run_agent_evaluation,
 )
 
+from src.ir.runner import (
+    run_nist_incident_response,
+)
+
 
 def run_pipeline() -> None:
 
-    print("\n[1/21] Creating directories...")
+    print("\n[1/22] Creating directories...")
     ensure_project_directories()
 
-    print("[2/21] Generating chain of custody...")
+    print("[2/22] Generating chain of custody...")
     generate_chain_of_custody(
         INPUT_CSV,
         CHAIN_OF_CUSTODY_FILE,
     )
 
-    print("[3/21] Loading CSV...")
+    print("[3/22] Loading CSV...")
     logs = load_logs(INPUT_CSV)
 
-    print("[4/21] Parsing events...")
+    print("[4/22] Parsing events...")
 
     if PARSED_EVENTS_FILE.exists():
 
@@ -127,13 +135,13 @@ def run_pipeline() -> None:
 
         parsed_events = extract_uri_fields(logs)
 
-        print("[5/21] Persisting parsed_events.parquet...")
+        print("[5/22] Persisting parsed_events.parquet...")
         persist_parsed_events(
             parsed_events,
             PARSED_EVENTS_FILE,
         )
 
-    print("[6/21] Building IP features...")
+    print("[6/22] Building IP features...")
 
     if IP_FEATURES_FILE.exists():
 
@@ -152,7 +160,7 @@ def run_pipeline() -> None:
             parsed_events_for_features
         )
 
-        print("[7/21] Persisting ip_features.parquet...")
+        print("[7/22] Persisting ip_features.parquet...")
         save_ip_features(
             ip_features,
             IP_FEATURES_FILE,
@@ -178,17 +186,17 @@ def run_pipeline() -> None:
 
     else:
 
-        print("[8/21] Detecting IDOR findings...")
+        print("[8/22] Detecting IDOR findings...")
         idor_findings = detect_idor_findings(
             ip_features
         )
 
-        print("[9/21] Detecting bot signals...")
+        print("[9/22] Detecting bot signals...")
         bot_signals = detect_bot_signals(
             ip_features
         )
 
-        print("[10/21] Building risk scores...")
+        print("[10/22] Building risk scores...")
         risk_scores = build_risk_scores(
             ip_features=ip_features,
             bot_signals=bot_signals,
@@ -199,7 +207,7 @@ def run_pipeline() -> None:
             risk_scores
         )
 
-        print("[11/21] Persisting detection outputs...")
+        print("[11/22] Persisting detection outputs...")
         save_idor_findings(
             idor_findings,
             IDOR_FINDINGS_FILE,
@@ -231,7 +239,7 @@ def run_pipeline() -> None:
 
     else:
 
-        print("[12/21] Detecting anomalies...")
+        print("[12/22] Detecting anomalies...")
         anomaly_scores = detect_anomalies(
             risk_scores
         )
@@ -240,7 +248,7 @@ def run_pipeline() -> None:
             anomaly_scores
         )
 
-        print("[13/21] Persisting anomaly outputs...")
+        print("[13/22] Persisting anomaly outputs...")
         save_anomaly_scores(
             anomaly_scores,
             ANOMALY_SCORES_FILE,
@@ -262,7 +270,7 @@ def run_pipeline() -> None:
 
     else:
 
-        print("[14/21] Building attack timeline...")
+        print("[14/22] Building attack timeline...")
         parsed_events_df = pl.read_parquet(
             PARSED_EVENTS_FILE
         )
@@ -277,7 +285,7 @@ def run_pipeline() -> None:
             ATTACK_TIMELINE_FILE,
         )
 
-        print("[15/21] Generating IOCs...")
+        print("[15/22] Generating IOCs...")
         iocs = generate_iocs(
             parsed_events=parsed_events_df,
             suspicious_ips=suspicious_ips,
@@ -290,7 +298,7 @@ def run_pipeline() -> None:
             IOCS_FILE,
         )
 
-        print("[16/21] Building forensic evidence package...")
+        print("[16/22] Building forensic evidence package...")
         chain_of_custody = load_chain_of_custody(
             CHAIN_OF_CUSTODY_FILE
         )
@@ -304,21 +312,21 @@ def run_pipeline() -> None:
             anomaly_scores=anomaly_scores,
         )
 
-        print("[17/21] Persisting forensic evidence package...")
+        print("[17/22] Persisting forensic evidence package...")
         save_forensic_evidence(
             forensic_evidence,
             FORENSIC_EVIDENCE_FILE,
         )
 
-    print("[18/21] Running LangGraph investigation agents...")
+    print("[18/22] Running LangGraph investigation agents...")
     run_agent_investigation(
         dry_run=True,
         human_approval_status="pending",
     )
 
-    print("[19/21] Persisting agent investigation outputs...")
+    print("[19/22] Persisting agent investigation outputs...")
 
-    print("[20/21] Exporting LangGraph workflow visualization...")
+    print("[20/22] Exporting LangGraph workflow visualization...")
     workflow_export = export_langgraph_workflow()
 
     if workflow_export["png_generated"]:
@@ -331,12 +339,20 @@ def run_pipeline() -> None:
             f"Mermaid artifact generated: {workflow_export['mermaid_file']}"
         )
 
-    print("[21/21] Running agent evaluation suite...")
+    print("[21/22] Running agent evaluation suite...")
     evaluation_report = run_agent_evaluation()
 
     print(
         "Agent evaluation coverage : "
         f"{evaluation_report['summary']['overall_coverage_percent']}%"
+    )
+
+    print("[22/22] Running NIST incident response metrics...")
+    nist_report = run_nist_incident_response()
+
+    print(
+        "NIST incident report : "
+        f"{nist_report['incident_summary']['classification']}"
     )
 
     print("\nPipeline completed successfully.")
@@ -365,6 +381,10 @@ def run_pipeline() -> None:
     print(f"Agent eval results  : {AGENT_EVAL_RESULTS_FILE}")
     print(f"Agent eval report   : {AGENT_EVAL_REPORT_FILE}")
     print(f"Agent eval summary  : {AGENT_EVAL_SUMMARY_FILE}")
+    print(f"NIST report          : {NIST_INCIDENT_REPORT_FILE}")
+    print(f"Response metrics     : {RESPONSE_METRICS_FILE}")
+    print(f"Containment strategy : {CONTAINMENT_STRATEGY_FILE}")
+    print(f"Root cause analysis  : {ROOT_CAUSE_ANALYSIS_FILE}")
 
 
 if __name__ == "__main__":
