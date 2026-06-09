@@ -1,0 +1,14 @@
+{
+  "metrics_type": "agent_metrics",
+  "generated_at_utc": "2026-06-09T19:12:09.692476+00:00",
+  "n_agent_decisions": 4,
+  "n_workflow_events": 4,
+  "n_human_approvals": 1,
+  "human_approval_status": "approved_for_dry_run_only",
+  "human_loop_count": 0,
+  "n_tool_calls": 56,
+  "n_llm_calls": 1,
+  "n_dry_run_actions": 6,
+  "dry_run": true,
+  "status": "healthy"
+}

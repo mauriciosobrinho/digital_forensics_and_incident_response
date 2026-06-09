@@ -163,3 +163,22 @@ CONTAINMENT_STRATEGY_FILE = (
 ROOT_CAUSE_ANALYSIS_FILE = (
     EVIDENCE_DIR / "root_cause_analysis.json"
 )
+
+# Sprint 3.8
+OBSERVABILITY_DIR = DATA_DIR / "observability"
+
+PLATFORM_METRICS_FILE = (
+    OBSERVABILITY_DIR / "platform_metrics.json"
+)
+
+AGENT_METRICS_FILE = (
+    OBSERVABILITY_DIR / "agent_metrics.json"
+)
+
+HEALTHCHECK_FILE = (
+    OBSERVABILITY_DIR / "healthcheck.json"
+)
+
+SOC_DASHBOARD_DATA_FILE = (
+    OBSERVABILITY_DIR / "soc_dashboard_data.json"
+)

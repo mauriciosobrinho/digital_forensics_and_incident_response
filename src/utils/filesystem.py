@@ -13,6 +13,7 @@ def ensure_project_directories() -> None:
         MEMORY_DIR,
         KNOWLEDGE_DIR,
         EVALUATION_DIR,
+        OBSERVABILITY_DIR,
     )
 
     ensure_directory(PROCESSED_DIR)
@@ -20,3 +21,4 @@ def ensure_project_directories() -> None:
     ensure_directory(MEMORY_DIR)
     ensure_directory(KNOWLEDGE_DIR)
     ensure_directory(EVALUATION_DIR)
+    ensure_directory(OBSERVABILITY_DIR)

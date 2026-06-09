@@ -31,6 +31,10 @@ from src.config.settings import (
     RESPONSE_METRICS_FILE,
     CONTAINMENT_STRATEGY_FILE,
     ROOT_CAUSE_ANALYSIS_FILE,
+    PLATFORM_METRICS_FILE,
+    AGENT_METRICS_FILE,
+    HEALTHCHECK_FILE,
+    SOC_DASHBOARD_DATA_FILE,
 )
 
 
@@ -213,6 +217,7 @@ def main():
             "Agent Workflow",
             "Agent Evaluation",
             "NIST IR Metrics",
+            "Observability",
         ]
     )
 
@@ -457,6 +462,143 @@ def main():
         if root_cause:
             st.subheader("Root Cause Analysis")
             st.json(root_cause)    
+
+    with tabs[8]:
+        st.subheader("Observability & SOC Monitoring")
+
+        platform_metrics = load_json(
+            PLATFORM_METRICS_FILE
+        )
+
+        agent_metrics = load_json(
+            AGENT_METRICS_FILE
+        )
+
+        healthcheck = load_json(
+            HEALTHCHECK_FILE
+        )
+
+        dashboard_data = load_json(
+            SOC_DASHBOARD_DATA_FILE
+        )
+
+        if dashboard_data:
+            topline = dashboard_data.get(
+                "topline",
+                {},
+            )
+
+            col1, col2, col3, col4 = st.columns(4)
+
+            col1.metric(
+                "Health",
+                topline.get("health", "unknown"),
+            )
+
+            col2.metric(
+                "Severity",
+                topline.get("severity", "N/A"),
+            )
+
+            col3.metric(
+                "Priority",
+                topline.get("priority", "N/A"),
+            )
+
+            col4.metric(
+                "Coverage",
+                f"{topline.get('agent_evaluation_coverage', 0)}%",
+            )
+
+        if platform_metrics:
+            st.subheader("Pipeline Metrics")
+
+            pipeline = platform_metrics.get(
+                "pipeline_metrics",
+                {},
+            )
+
+            c1, c2, c3, c4, c5 = st.columns(5)
+
+            c1.metric(
+                "Logs Processed",
+                pipeline.get("n_logs_processed", 0),
+            )
+
+            c2.metric(
+                "IPs Analyzed",
+                pipeline.get("n_ips_analyzed", 0),
+            )
+
+            c3.metric(
+                "IDOR Findings",
+                pipeline.get("n_idor_findings", 0),
+            )
+
+            c4.metric(
+                "Anomalous IPs",
+                pipeline.get("n_anomalous_ips", 0),
+            )
+
+            c5.metric(
+                "IOCs Generated",
+                pipeline.get("n_iocs_generated", 0),
+            )
+
+            with st.expander("Platform metrics JSON"):
+                st.json(platform_metrics)
+
+        if agent_metrics:
+            st.subheader("Agent Metrics")
+
+            c1, c2, c3, c4, c5 = st.columns(5)
+
+            c1.metric(
+                "Agent Decisions",
+                agent_metrics.get("n_agent_decisions", 0),
+            )
+
+            c2.metric(
+                "Tool Calls",
+                agent_metrics.get("n_tool_calls", 0),
+            )
+
+            c3.metric(
+                "Human Approvals",
+                agent_metrics.get("n_human_approvals", 0),
+            )
+
+            c4.metric(
+                "LLM Calls",
+                agent_metrics.get("n_llm_calls", 0),
+            )
+
+            c5.metric(
+                "Dry-run Actions",
+                agent_metrics.get("n_dry_run_actions", 0),
+            )
+
+            with st.expander("Agent metrics JSON"):
+                st.json(agent_metrics)
+
+        if healthcheck:
+            st.subheader("Healthcheck")
+
+            st.metric(
+                "Overall Status",
+                healthcheck.get("overall_status", "unknown"),
+            )
+
+            with st.expander("Artifact completeness"):
+                st.json(
+                    healthcheck.get(
+                        "artifact_status",
+                        {},
+                    )
+                )
+
+            with st.expander("Full healthcheck JSON"):
+                st.json(healthcheck)
 
 
 if __name__ == "__main__":

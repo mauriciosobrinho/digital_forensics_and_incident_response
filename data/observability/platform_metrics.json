@@ -1,0 +1,25 @@
+{
+  "metrics_type": "platform_metrics",
+  "generated_at_utc": "2026-06-09T19:12:09.692476+00:00",
+  "pipeline_metrics": {
+    "n_logs_processed": 4478619,
+    "n_ips_analyzed": 5726,
+    "n_idor_findings": 182,
+    "n_anomaly_scores": 5726,
+    "n_anomalous_ips": 172,
+    "n_iocs_generated": 586
+  },
+  "forensic_summary": {
+    "total_scored_ips": 5726,
+    "total_idor_findings": 182,
+    "total_anomalous_ips": 172,
+    "top_attackers_count": 20
+  },
+  "ioc_summary": {
+    "total_suspicious_ips": 182,
+    "total_idor_findings": 182,
+    "total_anomalous_ips": 172,
+    "top_n": 50
+  },
+  "status": "healthy"
+}

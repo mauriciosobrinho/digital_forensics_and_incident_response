@@ -1,0 +1,44 @@
+{
+  "healthcheck_type": "platform_healthcheck",
+  "generated_at_utc": "2026-06-09T19:12:09.693512+00:00",
+  "overall_status": "healthy",
+  "missing_artifacts": [],
+  "degraded_components": [],
+  "artifact_status": {
+    "forensic_evidence": {
+      "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\forensic_evidence.json",
+      "exists": true,
+      "size_bytes": 383745
+    },
+    "attack_iocs": {
+      "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\iocs.json",
+      "exists": true,
+      "size_bytes": 46666
+    },
+    "agent_investigation": {
+      "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\agent_investigation.json",
+      "exists": true,
+      "size_bytes": 15676
+    },
+    "agent_decision_log": {
+      "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\agent_decision_log.json",
+      "exists": true,
+      "size_bytes": 1042
+    },
+    "workflow_timeline": {
+      "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\agent_workflow_timeline.json",
+      "exists": true,
+      "size_bytes": 1107
+    },
+    "nist_incident_report": {
+      "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\nist_incident_report.json",
+      "exists": true,
+      "size_bytes": 13719
+    },
+    "agent_eval_report": {
+      "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evaluation\\agent_eval_report.json",
+      "exists": true,
+      "size_bytes": 1547
+    }
+  }
+}
