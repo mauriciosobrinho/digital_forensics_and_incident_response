@@ -1,0 +1,21 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	triage(triage)
+	forensic_analysis(forensic_analysis)
+	response_advice(response_advice)
+	human_approval(human_approval)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> triage;
+	forensic_analysis --> response_advice;
+	human_approval -. &nbsp;end&nbsp; .-> __end__;
+	human_approval -.-> forensic_analysis;
+	response_advice --> human_approval;
+	triage --> forensic_analysis;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

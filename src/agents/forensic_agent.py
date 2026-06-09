@@ -2,10 +2,33 @@ from datetime import datetime, timezone
 
 from src.agents.state import InvestigationState
 
+from src.agents.workflow import append_workflow_event
 
 def forensic_analyst_agent(
     state: InvestigationState,
 ) -> InvestigationState:
+    
+    # is_reentry = (
+    #     state.get("workflow_stage") == "requesting_more_evidence"
+    # )
+
+    human_loop_count = state.get(
+        "human_loop_count",
+        0,
+    )
+
+    is_reentry = (
+        state.get("workflow_stage")
+        == "requesting_more_evidence"
+        or human_loop_count > 0
+    )
+
+    analysis_type = (
+        "additional_evidence_review"
+        if is_reentry
+        else "initial_forensic_review"
+    )
+
     evidence = state["forensic_evidence"]
     timeline = state["attack_timeline"]
     iocs = state["iocs"]
@@ -112,6 +135,16 @@ def forensic_analyst_agent(
             "top_risk_ips",
             [],
         )[:10],
+
+        # "analysis_iteration": (
+        #     "additional_evidence_review"
+        #     if is_reentry
+        #     else "initial_forensic_review"
+        # ),
+
+        "analysis_iteration": analysis_type,
+
+        "human_requested_more_evidence": is_reentry,
     }
 
     decision = {
@@ -119,11 +152,24 @@ def forensic_analyst_agent(
         "decision": "confirmed_likely_idor_enumeration",
         "patient_zero_candidate": patient_zero,
         "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
+        "analysis_iteration": analysis_type,
+        "human_requested_more_evidence": is_reentry,
     }
 
     return {
         **state,
         "forensic_analysis": result,
+        "workflow_stage": "forensic_analysis",
+        "workflow_timeline": append_workflow_event(
+            state,
+            stage="forensic_analysis",
+            decision="idor_pattern_analyzed",
+            details={
+                "patient_zero_candidate": patient_zero,
+                "analysis_iteration": analysis_type,
+                "human_requested_more_evidence": is_reentry,
+            },
+        ),
         "decision_log": [
             *state.get("decision_log", []),
             decision,

@@ -114,3 +114,16 @@ MCP_TOOL_EXECUTION_LOG_FILE = (
 INTERACTIVE_SESSION_LOG_FILE = (
     EVIDENCE_DIR / "interactive_session_log.json"
 )
+
+# Sprint 3.5
+AGENT_WORKFLOW_TIMELINE_FILE = (
+    EVIDENCE_DIR / "agent_workflow_timeline.json"
+)
+
+LANGGRAPH_WORKFLOW_FILE = (
+    EVIDENCE_DIR / "langgraph_workflow.png"
+)
+
+LANGGRAPH_WORKFLOW_MERMAID_FILE = (
+    EVIDENCE_DIR / "langgraph_workflow.mmd"
+)

@@ -6,6 +6,7 @@ from src.agents.llm_client import build_llm_client
 from src.agents.prompt_loader import load_prompt
 from src.config.llm_settings import load_agent_runtime_settings
 
+from src.agents.workflow import append_workflow_event
 
 def triage_agent(
     state: InvestigationState,
@@ -111,4 +112,16 @@ def triage_agent(
             *state.get("llm_agent_reasoning", []),
             reasoning,
         ],
+
+        "workflow_stage": "triage",
+        "workflow_timeline": append_workflow_event(
+            state,
+            stage="triage",
+            decision=result["severity"],
+            details={
+                "priority": result["priority"],
+                "incident_classification": result["incident_classification"],
+            },
+        ),
+
     }

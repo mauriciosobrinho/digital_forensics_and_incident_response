@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 
 from src.agents.state import InvestigationState
 
+from src.agents.workflow import append_workflow_event
 
 def response_advisor_agent(
     state: InvestigationState,
@@ -120,4 +121,16 @@ def response_advisor_agent(
             *state.get("decision_log", []),
             decision,
         ],
+
+        "workflow_stage": "response_planning",
+        "workflow_timeline": append_workflow_event(
+            state,
+            stage="response_planning",
+            decision="containment_plan_generated",
+            details={
+                "dry_run": dry_run,
+                "human_approval_required": True,
+            },
+        ),
+
     }

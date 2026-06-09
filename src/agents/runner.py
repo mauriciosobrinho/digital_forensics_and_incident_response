@@ -21,6 +21,12 @@ from src.config.settings import (
     FORENSIC_EVIDENCE_FILE,
     IOCS_FILE,
     RISK_SCORES_FILE,
+    HUMAN_APPROVAL_REQUEST_FILE,
+    HUMAN_APPROVAL_DECISION_FILE,
+    INVESTIGATION_MEMORY_FILE,
+    LLM_AGENT_REASONING_FILE,
+    TOOL_EXECUTION_LOG_FILE,
+    AGENT_WORKFLOW_TIMELINE_FILE,
 )
 
 from src.config.llm_settings import (
@@ -33,13 +39,18 @@ from src.agents.memory import (
     update_investigation_memory,
 )
 
-from src.config.settings import (
-    HUMAN_APPROVAL_REQUEST_FILE,
-    HUMAN_APPROVAL_DECISION_FILE,
-    INVESTIGATION_MEMORY_FILE,
-    LLM_AGENT_REASONING_FILE,
-    TOOL_EXECUTION_LOG_FILE,
-)
+# from src.config.settings import (
+#     HUMAN_APPROVAL_REQUEST_FILE,
+#     HUMAN_APPROVAL_DECISION_FILE,
+#     INVESTIGATION_MEMORY_FILE,
+#     LLM_AGENT_REASONING_FILE,
+#     TOOL_EXECUTION_LOG_FILE,
+#     AGENT_WORKFLOW_TIMELINE_FILE,
+# )
+
+# from src.config.settings import (
+#     AGENT_WORKFLOW_TIMELINE_FILE,
+# )
 
 
 def save_json(
@@ -109,6 +120,10 @@ def run_agent_investigation(
         "memory": memory,
         "tool_execution_log": [],
         "llm_agent_reasoning": [],
+        "workflow_stage": "initialized",
+        "workflow_timeline": [],
+        "human_loop_count": 0,
+        "human_decision_scenario": settings.human_decision_scenario,
     }
 
     final_state = graph.invoke(
@@ -134,6 +149,10 @@ def run_agent_investigation(
             "rejected_actions",
             [],
         ),
+
+        "workflow_stage": final_state.get("workflow_stage"),
+        "workflow_timeline": final_state.get("workflow_timeline", []),
+        "modified_action_plan": final_state.get("modified_action_plan", {}),
     }
 
     save_json(
@@ -188,6 +207,14 @@ def run_agent_investigation(
     save_investigation_memory(
         updated_memory,
         INVESTIGATION_MEMORY_FILE,
+    )
+
+    save_json(
+        final_state.get(
+            "workflow_timeline",
+            [],
+        ),
+        AGENT_WORKFLOW_TIMELINE_FILE,
     )
 
     return investigation

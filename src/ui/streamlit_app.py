@@ -17,6 +17,7 @@ from src.config.settings import (
     AGENT_DECISION_LOG_FILE,
     AGENT_INVESTIGATION_FILE,
     AGENT_RESPONSE_PLAYBOOK_FILE,
+    AGENT_WORKFLOW_TIMELINE_FILE,
     FORENSIC_EVIDENCE_FILE,
     HUMAN_APPROVAL_DECISION_FILE,
     HUMAN_APPROVAL_REQUEST_FILE,
@@ -201,6 +202,7 @@ def main():
             "Human Approval",
             "Forensic Evidence",
             "RAG / MCP Logs",
+            "Agent Workflow",
         ]
     )
 
@@ -262,6 +264,32 @@ def main():
                 "MCP-safe Tool Execution Log",
                 MCP_TOOL_EXECUTION_LOG_FILE,
             )
+
+    with tabs[5]:
+        st.subheader("Agent Workflow & Human-in-the-loop")
+
+        workflow = load_json(
+            AGENT_WORKFLOW_TIMELINE_FILE
+        )
+
+        if workflow:
+            st.write("Workflow Timeline")
+            st.json(workflow)
+
+            latest = workflow[-1]
+            st.metric(
+                "Current Stage",
+                latest.get("stage", "unknown"),
+            )
+
+            st.metric(
+                "Latest Decision",
+                latest.get("decision", "unknown"),
+            )
+        else:
+            st.warning(
+                "Workflow timeline not generated yet."
+            )    
 
 
 if __name__ == "__main__":

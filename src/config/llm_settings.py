@@ -29,10 +29,14 @@ class AgentRuntimeSettings:
     llm_api_key: str | None
     llm_model: str
     llm_base_url: str | None
+
     agents_use_llm: bool
     agents_dry_run: bool
+
     human_approval_mode: str
     checkpoint_backend: str
+    
+    human_decision_scenario: str
 
 
 def load_agent_runtime_settings() -> AgentRuntimeSettings:
@@ -66,5 +70,9 @@ def load_agent_runtime_settings() -> AgentRuntimeSettings:
         checkpoint_backend=os.getenv(
             "LANGGRAPH_CHECKPOINT_BACKEND",
             "memory",
+        ),
+        human_decision_scenario=os.getenv(
+        "HUMAN_DECISION_SCENARIO",
+        "approve",
         ),
     )

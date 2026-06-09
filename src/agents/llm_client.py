@@ -1,100 +1,106 @@
+import json
 from typing import Any
 
 from src.config.llm_settings import (
     AgentRuntimeSettings,
+    load_agent_runtime_settings,
 )
 
 
-class DeterministicLLMClient:
-    def generate_json(
-        self,
-        *,
-        agent_name: str,
-        prompt: str,
-        context: dict[str, Any],
-    ) -> dict[str, Any]:
-        return {
-            "agent": agent_name,
-            "mode": "deterministic_stub",
-            "used_llm": False,
-            "summary": (
-                "LLM disabled. Deterministic reasoning generated "
-                "from structured evidence."
-            ),
-            "prompt_preview": prompt[:500],
-            "context_keys": list(context.keys()),
-        }
-
-
-class OpenAILLMClient:
+class LLMClient:
     def __init__(
         self,
-        settings: AgentRuntimeSettings,
+        settings: AgentRuntimeSettings | None = None,
     ) -> None:
-        self.settings = settings
+        self.settings = (
+            settings
+            if settings is not None
+            else load_agent_runtime_settings()
+        )
 
-    def generate_json(
+    def is_enabled(self) -> bool:
+        return (
+            self.settings.agents_use_llm
+            and self.settings.llm_api_key is not None
+        )
+
+    def generate_text(
         self,
-        *,
-        agent_name: str,
         prompt: str,
-        context: dict[str, Any],
-    ) -> dict[str, Any]:
-        if not self.settings.openai_api_key:
-            return {
-                "agent": agent_name,
-                "mode": "openai_not_configured",
-                "used_llm": False,
-                "summary": (
-                    "AGENTS_USE_LLM=true but OPENAI_API_KEY is missing. "
-                    "Falling back to deterministic behavior."
-                ),
-            }
+    ) -> str | None:
+
+        if not self.is_enabled():
+            return None
 
         try:
             from langchain_openai import ChatOpenAI
         except ImportError:
-            return {
-                "agent": agent_name,
-                "mode": "langchain_openai_missing",
-                "used_llm": False,
-                "summary": (
-                    "langchain-openai is not installed. "
-                    "Falling back to deterministic behavior."
-                ),
-            }
+            return None
 
-        llm = ChatOpenAI(
-            model=self.settings.openai_model,
-            api_key=self.settings.openai_api_key,
-            temperature=0,
-        )
-
-        message = (
-            f"{prompt}\n\n"
-            "Return a concise JSON-like investigation reasoning summary.\n\n"
-            f"Context:\n{context}"
-        )
-
-        response = llm.invoke(
-            message
-        )
-
-        return {
-            "agent": agent_name,
-            "mode": "openai",
-            "used_llm": True,
-            "model": self.settings.openai_model,
-            "summary": response.content,
+        llm_kwargs = {
+            "model": self.settings.llm_model,
+            "api_key": self.settings.llm_api_key,
+            "temperature": 0,
         }
+
+        if self.settings.llm_base_url:
+            llm_kwargs["base_url"] = (
+                self.settings.llm_base_url
+            )
+
+        try:
+            llm = ChatOpenAI(
+                **llm_kwargs
+            )
+
+            response = llm.invoke(
+                prompt
+            )
+
+            return response.content
+
+        except Exception:
+            return None
+
+    def generate_json(
+        self,
+        prompt: str,
+        agent_name: str | None = None,
+        context: dict[str, Any] | None = None,
+    ) -> dict[str, Any] | None:
+
+        enriched_prompt = prompt
+
+        if agent_name or context:
+            enriched_prompt = (
+                f"{prompt}\n\n"
+                "Return only valid JSON.\n\n"
+                f"agent_name: {agent_name}\n\n"
+                f"context:\n{json.dumps(context or {}, ensure_ascii=False, indent=2)}"
+            )
+
+        content = self.generate_text(
+            enriched_prompt
+        )
+
+        if not content:
+            return None
+
+        try:
+            return json.loads(
+                content
+            )
+
+        except json.JSONDecodeError:
+            return {
+                "raw_response": content,
+                "json_parse_error": True,
+            }
 
 
 def build_llm_client(
-    settings: AgentRuntimeSettings,
-):
-    if settings.agents_use_llm:
-        return OpenAILLMClient(
-            settings
-        )
-
-    return DeterministicLLMClient()
+    settings: AgentRuntimeSettings | None = None,
+) -> LLMClient:
+    return LLMClient(
+        settings
+    )
