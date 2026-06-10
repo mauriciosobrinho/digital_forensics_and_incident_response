@@ -1,0 +1,184 @@
+{
+  "agent": "forensic_analyst_agent",
+  "generated_at_utc": "2026-06-09T23:01:52.509830+00:00",
+  "patient_zero_candidate": "204.210.158.207",
+  "attack_window": {
+    "first_seen": "2020-10-01 00:00:00.000000",
+    "last_seen": "2020-12-31 23:58:00.000000"
+  },
+  "first_seen": "2020-10-01 00:00:00.000000",
+  "last_seen": "2020-12-31 23:58:00.000000",
+  "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
+  "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
+  "automation_assessment": {
+    "is_likely_automated": true,
+    "likely_automated": true,
+    "automation_type": "bot-driven invoice enumeration",
+    "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
+    "supporting_signals": [
+      "high request volume",
+      "high unique invoice diversity",
+      "high sequential access ratio",
+      "bot detection convergence",
+      "anomaly detection convergence"
+    ],
+    "total_anomalous_ips": 172
+  },
+  "idor_evidence_assessment": {
+    "clear_idor_evidence": true,
+    "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
+    "top_enumeration_pattern": {
+      "ip": "204.210.158.207",
+      "sequential_access_ratio": 0.6628086419753086,
+      "unique_invoice_ids": 6481,
+      "invoice_span": 111111999,
+      "min_invoice_id": 118822000,
+      "max_invoice_id": 229933999,
+      "idor_severity": "critical",
+      "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
+    }
+  },
+  "estimated_impact": {
+    "unique_invoices_accessed_by_top_attackers": 10221,
+    "unique_tokens_seen": 35,
+    "total_attack_events": 96829
+  },
+  "mitre_attack_mapping_high_level": [
+    {
+      "tactic": "Credential Access / Discovery",
+      "technique": "Automated resource enumeration",
+      "note": "Mapped at high level due to identifier enumeration behavior."
+    },
+    {
+      "tactic": "Collection",
+      "technique": "Data from information repositories",
+      "note": "Invoice data may represent sensitive business/user information."
+    },
+    {
+      "tactic": "Defense Evasion",
+      "technique": "Use of distributed IPs or repeated low-rate access",
+      "note": "Multiple suspicious IPs may indicate campaign distribution."
+    }
+  ],
+  "mitre_attack_mapping": [
+    {
+      "tactic": "Discovery",
+      "technique": "Application endpoint and object identifier enumeration",
+      "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
+    },
+    {
+      "tactic": "Collection",
+      "technique": "Data from Information Repositories",
+      "rationale": "The observed behavior indicates large-scale access to invoice objects."
+    },
+    {
+      "tactic": "Credential Access / Defense Evasion",
+      "technique": "Valid Accounts or Token Misuse",
+      "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
+    }
+  ],
+  "top_attackers_reviewed": [
+    {
+      "ip": "204.210.158.207",
+      "risk_score": 86.04241498055296,
+      "risk_level": "critical",
+      "is_idor_suspect": true,
+      "is_likely_bot": true,
+      "sequential_access_ratio": 0.6628086419753086,
+      "unique_invoice_ids": 6481,
+      "total_requests": 12409
+    },
+    {
+      "ip": "73.130.229.200",
+      "risk_score": 85.88302533017595,
+      "risk_level": "critical",
+      "is_idor_suspect": true,
+      "is_likely_bot": true,
+      "sequential_access_ratio": 0.6625776397515528,
+      "unique_invoice_ids": 6441,
+      "total_requests": 12453
+    },
+    {
+      "ip": "216.21.168.27",
+      "risk_score": 85.75971025623024,
+      "risk_level": "critical",
+      "is_idor_suspect": true,
+      "is_likely_bot": true,
+      "sequential_access_ratio": 0.6627108057464085,
+      "unique_invoice_ids": 6405,
+      "total_requests": 12429
+    },
+    {
+      "ip": "74.88.210.56",
+      "risk_score": 85.72791306614572,
+      "risk_level": "critical",
+      "is_idor_suspect": true,
+      "is_likely_bot": true,
+      "sequential_access_ratio": 0.6602334630350195,
+      "unique_invoice_ids": 6426,
+      "total_requests": 12426
+    },
+    {
+      "ip": "24.163.83.34",
+      "risk_score": 84.9608873784426,
+      "risk_level": "critical",
+      "is_idor_suspect": true,
+      "is_likely_bot": true,
+      "sequential_access_ratio": 0.6585098039215687,
+      "unique_invoice_ids": 6376,
+      "total_requests": 12244
+    },
+    {
+      "ip": "181.88.192.48",
+      "risk_score": 45.79610824077543,
+      "risk_level": "medium",
+      "is_idor_suspect": true,
+      "is_likely_bot": false,
+      "sequential_access_ratio": 0.6579261025029798,
+      "unique_invoice_ids": 1679,
+      "total_requests": 3010
+    },
+    {
+      "ip": "181.88.192.87",
+      "risk_score": 45.46652259670832,
+      "risk_level": "medium",
+      "is_idor_suspect": true,
+      "is_likely_bot": false,
+      "sequential_access_ratio": 0.6534056660638939,
+      "unique_invoice_ids": 1660,
+      "total_requests": 2961
+    },
+    {
+      "ip": "181.88.192.16",
+      "risk_score": 45.38353249541662,
+      "risk_level": "medium",
+      "is_idor_suspect": true,
+      "is_likely_bot": false,
+      "sequential_access_ratio": 0.6556372549019608,
+      "unique_invoice_ids": 1633,
+      "total_requests": 2945
+    },
+    {
+      "ip": "181.88.192.59",
+      "risk_score": 45.098413151661326,
+      "risk_level": "medium",
+      "is_idor_suspect": true,
+      "is_likely_bot": false,
+      "sequential_access_ratio": 0.6504315659679408,
+      "unique_invoice_ids": 1623,
+      "total_requests": 2917
+    },
+    {
+      "ip": "181.88.192.115",
+      "risk_score": 44.71399628334233,
+      "risk_level": "medium",
+      "is_idor_suspect": true,
+      "is_likely_bot": false,
+      "sequential_access_ratio": 0.6461538461538462,
+      "unique_invoice_ids": 1626,
+      "total_requests": 2865
+    }
+  ],
+  "analysis_iteration": "initial_forensic_review",
+  "human_requested_more_evidence": false
+}

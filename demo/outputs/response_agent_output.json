@@ -1,0 +1,69 @@
+{
+  "agent": "response_advisor_agent",
+  "generated_at_utc": "2026-06-09T23:01:52.510348+00:00",
+  "dry_run": true,
+  "human_approval_required": true,
+  "human_approval_status": "pending",
+  "recommended_containment": {
+    "immediate": [
+      {
+        "action": "block_or_challenge_critical_ips",
+        "targets": [
+          "204.210.158.207",
+          "73.130.229.200",
+          "216.21.168.27",
+          "74.88.210.56",
+          "24.163.83.34"
+        ],
+        "requires_human_approval": true,
+        "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+        "priority": "P1"
+      },
+      {
+        "action": "dynamic_rate_limiting_invoice_search",
+        "targets": [
+          "/invoices/search"
+        ],
+        "requires_human_approval": false,
+        "business_risk": "Low to medium; may affect heavy legitimate usage.",
+        "priority": "P1"
+      },
+      {
+        "action": "increase_monitoring_for_high_risk_ips",
+        "targets": [],
+        "requires_human_approval": false,
+        "business_risk": "Low.",
+        "priority": "P2"
+      }
+    ],
+    "strategic": [
+      {
+        "action": "fix_object_level_authorization",
+        "description": "Ensure invoice access checks validate ownership/authorization server-side.",
+        "requires_human_approval": true,
+        "priority": "P1"
+      },
+      {
+        "action": "rotate_or_revoke_suspicious_tokens",
+        "description": "Review tokens observed in suspicious access patterns.",
+        "requires_human_approval": true,
+        "priority": "P2"
+      },
+      {
+        "action": "update_waf_rules",
+        "description": "Add rules for sequential invoice enumeration patterns.",
+        "requires_human_approval": true,
+        "priority": "P2"
+      }
+    ]
+  },
+  "mini_playbook": [
+    "Validate critical IPs against customer support and internal allowlists.",
+    "Apply dry-run blocklist simulation.",
+    "Enable rate limiting for invoice search endpoint.",
+    "Escalate object-level authorization fix to application security owners.",
+    "Review token exposure and revoke suspicious tokens if confirmed.",
+    "Monitor anomaly score and risk score deltas after containment."
+  ],
+  "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
+}

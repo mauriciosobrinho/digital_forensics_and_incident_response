@@ -1,6 +1,6 @@
 {
   "dashboard_type": "soc_dashboard_data",
-  "generated_at_utc": "2026-06-09T22:15:31.879600+00:00",
+  "generated_at_utc": "2026-06-10T16:03:22.003683+00:00",
   "topline": {
     "health": "healthy",
     "severity": "critical",
@@ -23,12 +23,12 @@
     "human_approval_status": "approved_for_dry_run_only",
     "human_loop_count": 0,
     "n_llm_calls": 1,
-    "n_tool_calls": 61,
+    "n_tool_calls": 65,
     "n_dry_run_actions": 6
   },
   "healthcheck": {
     "healthcheck_type": "platform_healthcheck",
-    "generated_at_utc": "2026-06-09T22:15:31.879600+00:00",
+    "generated_at_utc": "2026-06-10T16:03:22.003683+00:00",
     "overall_status": "healthy",
     "missing_artifacts": [],
     "degraded_components": [],
@@ -61,7 +61,7 @@
       "nist_incident_report": {
         "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evidence\\nist_incident_report.json",
         "exists": true,
-        "size_bytes": 13718
+        "size_bytes": 13719
       },
       "agent_eval_report": {
         "path": "C:\\Users\\mlsob\\Developer\\idor-response-platform\\data\\evaluation\\agent_eval_report.json",

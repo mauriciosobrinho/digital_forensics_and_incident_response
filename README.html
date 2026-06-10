@@ -1,4 +1,19 @@
 <h1>IDOR Response Platform</h1>
+<p align="center">
+  <strong>IDOR Response Platform</strong><br/>
+  Digital Forensics & Incident Response · GenAI Agents · Human-in-the-loop · NIST IR · SOC Observability
+</p>
+
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.12-blue">
+  <img alt="Polars" src="https://img.shields.io/badge/Polars-Data%20Processing-orange">
+  <img alt="LangGraph" src="https://img.shields.io/badge/LangGraph-Agent%20Orchestration-purple">
+  <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-SOC%20UI-red">
+  <img alt="Pytest" src="https://img.shields.io/badge/Pytest-36%20tests%20passing-green">
+  <img alt="Status" src="https://img.shields.io/badge/Project-Sprint%204.0%20in%20progress-yellow">
+</p>
+
+<hr />
 <h2>Digital Forensics &amp; Incident Response Platform</h2>
 <p>Technical Challenge — Technical Leader, Digital Forensics and Incident Response
 Mercado Livre / Mercado Libre Cybersecurity Case</p>
@@ -27,7 +42,7 @@ Mercado Livre / Mercado Libre Cybersecurity Case</p>
 </ul>
 <p>All containment actions are executed in <strong>dry-run mode</strong>, ensuring safety, auditability and human oversight.</p>
 <hr />
-<h2>Challenge Objectives Covered</h2>
+<h2>Challenge Requirements Coverage</h2>
 <p>| Challenge Requirement        | Platform Capability                    | Status |
 | ---------------------------- | -------------------------------------- | ------ |
 | Incident classification      | Triage Agent                           | ✅      |
@@ -279,8 +294,13 @@ src/
 └── test_uri_parser.py
 ```</p>
 <hr />
-<h2>Installation</h2>
-<h3>Create virtual environment</h3>
+<h2>Setup and Installation</h2>
+<h3>Clone Repository</h3>
+<p>```bash
+git clone <repository_url></p>
+<p>cd idor-response-platform
+```</p>
+<h3>Create Virtual Environment</h3>
 <p>Windows:</p>
 <p><code>bash
 python -m venv .venv
@@ -289,7 +309,7 @@ python -m venv .venv
 <p><code>bash
 python -m venv .venv
 source .venv/bin/activate</code></p>
-<h3>Install dependencies</h3>
+<h3>Install Dependencies</h3>
 <p><code>bash
 pip install -r requirements.txt</code></p>
 <hr />
@@ -332,44 +352,192 @@ HUMAN_DECISION_SCENARIO=request_more_evidence</code></p>
 human_loop_count = 1
 decision_log = 7</code></p>
 <hr />
+<hr />
+<h2>Human-in-the-Loop Validation</h2>
+<p>The platform supports simulated human intervention through a LangGraph state machine. The human reviewer can approve, reject, modify or request additional evidence before containment is approved.</p>
+<h3>Validated scenarios</h3>
+<p>| Scenario | Expected Evidence | Interpretation |
+| --- | --- | --- |
+| <code>approve</code> | <code>human_loop_count = 0</code>, <code>decision_log = 4</code> | Linear approval flow |
+| <code>reject</code> | <code>workflow_stage = rejected</code>, <code>decision_log = 4</code> | Containment is interrupted |
+| <code>modify</code> | <code>modified_action_plan != {}</code>, <code>decision_log = 4</code> | Human reviewer changes the response plan |
+| <code>request_more_evidence</code> | <code>human_loop_count = 1</code>, <code>decision_log = 7</code> | Workflow re-enters forensic analysis |</p>
+<h3>Re-entry workflow</h3>
+<p><code>text
+Triage
+  ↓
+Forensic Analysis
+  ↓
+Response Advice
+  ↓
+Human Approval
+  ↓
+Request More Evidence
+  ↓
+Forensic Re-analysis
+  ↓
+Response Advice
+  ↓
+Human Approval
+  ↓
+Approved</code></p>
+<p>This validates the most important governance requirement of the challenge: the platform does not blindly execute containment. It allows a human analyst to request additional forensic evidence and resumes the investigation before approval.</p>
 <h2>LLM Provider Examples</h2>
-<p>The platform uses an OpenAI-compatible client interface. Change only <code>LLM_PROVIDER</code>, <code>LLM_MODEL</code>, <code>LLM_API_KEY</code> and <code>LLM_BASE_URL</code>.</p>
-<h3>Groq</h3>
+<p>The platform uses an OpenAI-compatible client interface for most providers. In most cases, change only:</p>
 <p><code>env
-AGENTS_USE_LLM=true
-LLM_PROVIDER=groq
+LLM_PROVIDER
+LLM_MODEL
+LLM_API_KEY
+LLM_BASE_URL</code></p>
+<h3>Groq OpenAI-compatible API key and settings</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=groq
+LLM_API_KEY=gsk_...
 LLM_MODEL=llama-3.3-70b-versatile
-LLM_API_KEY=your_groq_key
-LLM_BASE_URL=https://api.groq.com/openai/v1</code></p>
-<h3>OpenAI</h3>
-<p><code>env
-AGENTS_USE_LLM=true
-LLM_PROVIDER=openai
+LLM_BASE_URL=https://api.groq.com/openai/v1
+```</p>
+<h3>OpenAI API key and settings</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=openai
+LLM_API_KEY=sk-proj-...
 LLM_MODEL=gpt-4.1-mini
-LLM_API_KEY=your_openai_key
-LLM_BASE_URL=</code></p>
-<h3>OpenRouter</h3>
-<p><code>env
-AGENTS_USE_LLM=true
-LLM_PROVIDER=openrouter
+LLM_BASE_URL=
+```</p>
+<h3>OpenRouter API key and settings</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
 LLM_MODEL=openai/gpt-4.1-mini
-LLM_API_KEY=your_openrouter_key
-LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
-<h3>Google Gemini OpenAI-compatible endpoint</h3>
-<p><code>env
-AGENTS_USE_LLM=true
-LLM_PROVIDER=gemini
-LLM_MODEL=gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```</p>
+<h3>Anthropic Claude Sonnet via OpenRouter</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```</p>
+<h3>Anthropic Claude Haiku via OpenRouter</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-haiku
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```</p>
+<h3>Anthropic Claude Opus via OpenRouter</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3-opus
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```</p>
+<h3>Google Gemini native OpenAI-compatible endpoint</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=gemini
 LLM_API_KEY=your_gemini_key
-LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/</code></p>
+LLM_MODEL=gemini-2.5-flash
+LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+```</p>
+<h3>Google Gemini via OpenRouter</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```</p>
+<h3>Perplexity OpenAI-compatible API key and settings</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-pro
+LLM_BASE_URL=https://api.perplexity.ai
+```</p>
+<h3>Perplexity Sonar Reasoning</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-reasoning-pro
+LLM_BASE_URL=https://api.perplexity.ai
+```</p>
+<h3>xAI Grok</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=xai
+LLM_API_KEY=xai-...
+LLM_MODEL=grok-3
+LLM_BASE_URL=https://api.x.ai/v1
+```</p>
+<h3>xAI Grok Mini</h3>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=xai
+LLM_API_KEY=xai-...
+LLM_MODEL=grok-3-mini
+LLM_BASE_URL=https://api.x.ai/v1
+```</p>
 <h3>Local OpenAI-compatible server</h3>
-<p>Example for local gateways such as LM Studio, Ollama-compatible proxies or local OpenAI-compatible endpoints:</p>
-<p><code>env
-AGENTS_USE_LLM=true
-LLM_PROVIDER=local
-LLM_MODEL=local-model-name
+<p>Example for local gateways such as LM Studio, Ollama-compatible proxies, LiteLLM, vLLM or local OpenAI-compatible endpoints:</p>
+<p>```env
+AGENTS_USE_LLM=true</p>
+<p>LLM_PROVIDER=local
 LLM_API_KEY=local_or_dummy_key
-LLM_BASE_URL=http://localhost:1234/v1</code></p>
+LLM_MODEL=local-model-name
+LLM_BASE_URL=http://localhost:1234/v1
+```</p>
+<h3>Quick provider switching examples</h3>
+<h4>OpenRouter + GPT-4.1 Mini</h4>
+<p><code>env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=openai/gpt-4.1-mini
+LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
+<h4>OpenRouter + Claude Sonnet</h4>
+<p><code>env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
+<h4>OpenRouter + Gemini Flash</h4>
+<p><code>env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
+<h4>Groq + Llama 3.3 70B</h4>
+<p><code>env
+LLM_PROVIDER=groq
+LLM_API_KEY=gsk_...
+LLM_MODEL=llama-3.3-70b-versatile
+LLM_BASE_URL=https://api.groq.com/openai/v1</code></p>
+<h4>Perplexity Sonar Pro</h4>
+<p><code>env
+LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-pro
+LLM_BASE_URL=https://api.perplexity.ai</code></p>
+<h3>Native Claude/Gemini note</h3>
+<p>For native Claude/Gemini SDKs, the SDK and client implementation may change. If using Claude or Gemini via OpenRouter, the existing OpenAI-compatible code path can be preserved and only the model changes:</p>
+<p><code>env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
+<p>or:</p>
+<p><code>env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
 <hr />
 <h2>Running the Full Pipeline</h2>
 <p><code>bash
@@ -451,6 +619,51 @@ streamlit run src/ui/streamlit_app.py</code></p>
 | <code>NIST IR Metrics</code>   | Incident response metrics    | TTD, TTR, TTC, containment strategy and root cause analysis       |
 | <code>Observability</code>     | SOC monitoring               | Health, pipeline metrics, agent metrics and evidence completeness |</p>
 <hr />
+<hr />
+<h2>Agent Evaluation Results</h2>
+<p>The platform includes an explicit validation suite that maps challenge requirements to expected evidence in each agent output.</p>
+<p>| Agent / Component | Coverage |
+| --- | ---: |
+| Triage Agent | 100% |
+| Forensic Analyst Agent | 100% |
+| Response Advisor Agent | 100% |
+| Human Approval Agent | 100% |
+| LangGraph Workflow | 100% |
+| SOC Copilot | 100% |</p>
+<p>| Evaluation Metric | Value |
+| --- | ---: |
+| Total questions | 15 |
+| Overall score | 1.0 |
+| Overall coverage | 100% |
+| Passed | 15 |
+| Partial | 0 |
+| Failed | 0 |</p>
+<p>The validation suite proves that the agentic layer covers classification, hypothesis generation, prioritization, forensic reasoning, patient zero identification, automation assessment, MITRE mapping, containment planning, human approval and workflow re-entry.</p>
+<hr />
+<h2>Generated Evidence Artifacts</h2>
+<p>| Artifact | Purpose |
+| --- | --- |
+| <code>data/evidence/chain_of_custody.json</code> | SHA-256 integrity and forensic provenance |
+| <code>data/processed/parsed_events.parquet</code> | Normalized events and extracted URI fields |
+| <code>data/processed/ip_features.parquet</code> | IP-level features for investigation and detection |
+| <code>data/processed/idor_findings.parquet</code> | IDOR-compatible findings |
+| <code>data/processed/anomaly_scores.parquet</code> | Isolation Forest anomaly scores |
+| <code>data/evidence/attack_timeline.json</code> | Attack window and timeline reconstruction |
+| <code>data/evidence/iocs.json</code> | Indicators of compromise |
+| <code>data/evidence/forensic_evidence.json</code> | Consolidated forensic evidence package |
+| <code>data/evidence/agent_investigation.json</code> | Consolidated multi-agent investigation output |
+| <code>data/evidence/agent_decision_log.json</code> | Agent and human decision trail |
+| <code>data/evidence/human_approval_decision.json</code> | Human approval governance evidence |
+| <code>data/evidence/nist_incident_report.json</code> | NIST-style incident response report |
+| <code>data/evaluation/agent_eval_report.json</code> | Agent validation and coverage report |
+| <code>data/observability/platform_metrics.json</code> | Platform observability metrics |
+| <code>data/observability/soc_dashboard_data.json</code> | SOC dashboard data |
+| <code>reports/technical_report.md</code> | Technical report |
+| <code>reports/executive_summary.md</code> | Executive summary |
+| <code>presentation/technical_pitch.pptx</code> | Technical presentation deck |
+| <code>presentation/executive_pitch.pptx</code> | Executive presentation deck |
+| <code>demo/demo_script.md</code> | Demonstration script |
+| <code>demo/demo_questions.md</code> | Demo question bank |</p>
 <h2>Generated Artifacts</h2>
 <h3>Processed Data</h3>
 <p><code>text
@@ -567,7 +780,7 @@ reports/
 | Sprint 3.7 | NIST incident response metrics                       | ✅      |
 | Sprint 3.8 | Observability and SOC monitoring                     | ✅      |
 | Sprint 3.9 | Final technical report and executive summary         | ✅      |
-| Sprint 4.0 | Demo package and presentation                        | 🚧     |</p>
+| Sprint 4.0 | Demo package and presentation                        | 🚧 In Progress |</p>
 <hr />
 <h2>Production Hardening Backlog</h2>
 <p>The MVP intentionally prioritizes investigation, evidence, agents, explainability, human approval, dry-run safety and incident response.</p>

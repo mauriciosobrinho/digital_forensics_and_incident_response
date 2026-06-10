@@ -1,6 +1,6 @@
 {
   "metrics_type": "platform_metrics",
-  "generated_at_utc": "2026-06-09T22:15:31.878591+00:00",
+  "generated_at_utc": "2026-06-10T16:03:22.002682+00:00",
   "pipeline_metrics": {
     "n_logs_processed": 4478619,
     "n_ips_analyzed": 5726,

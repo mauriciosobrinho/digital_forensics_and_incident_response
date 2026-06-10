@@ -22,6 +22,10 @@ seaborn
 
 markdown
 
+python-pptx
+
+python-docx
+
 weasyprint
 
 pyarrow

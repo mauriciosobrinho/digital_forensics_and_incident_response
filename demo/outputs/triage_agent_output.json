@@ -1,0 +1,22 @@
+{
+  "agent": "triage_agent",
+  "generated_at_utc": "2026-06-09T23:01:52.508261+00:00",
+  "incident_classification": "Potential IDOR exploitation via invoice enumeration",
+  "severity": "critical",
+  "priority": "P1",
+  "top_risk_score": 86.04241498055296,
+  "total_suspicious_ips": 182,
+  "total_anomalous_ips": 172,
+  "initial_hypotheses": [
+    "Automated invoice enumeration against invoice search endpoint.",
+    "Possible IDOR exploitation due to high invoice diversity per IP.",
+    "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
+  ],
+  "investigation_plan": [
+    "Review top risk IPs and their invoice enumeration pattern.",
+    "Validate whether accessed invoices belong to different users.",
+    "Review auth token reuse and suspicious user-agent patterns.",
+    "Correlate risk scoring with Isolation Forest anomaly results.",
+    "Prioritize containment for critical IPs with confirmed high-risk behavior."
+  ]
+}

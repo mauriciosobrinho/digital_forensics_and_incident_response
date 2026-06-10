@@ -1,2295 +1,6 @@
 {
   "prior_runs": [
     {
-      "generated_at_utc": "2026-06-09T14:34:27.633361+00:00",
-      "summary": {
-        "triage": {
-          "agent": "triage_agent",
-          "generated_at_utc": "2026-06-09T14:34:17.583224+00:00",
-          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
-          "severity": "critical",
-          "priority": "P1",
-          "top_risk_score": 86.04241498055296,
-          "total_suspicious_ips": 182,
-          "total_anomalous_ips": 172,
-          "initial_hypotheses": [
-            "Automated invoice enumeration against invoice search endpoint.",
-            "Possible IDOR exploitation due to high invoice diversity per IP.",
-            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
-          ],
-          "investigation_plan": [
-            "Review top risk IPs and their invoice enumeration pattern.",
-            "Validate whether accessed invoices belong to different users.",
-            "Review auth token reuse and suspicious user-agent patterns.",
-            "Correlate risk scoring with Isolation Forest anomaly results.",
-            "Prioritize containment for critical IPs with confirmed high-risk behavior."
-          ]
-        },
-        "forensic_analysis": {
-          "agent": "forensic_analyst_agent",
-          "generated_at_utc": "2026-06-09T14:34:27.616658+00:00",
-          "patient_zero_candidate": "204.210.158.207",
-          "attack_window": {
-            "first_seen": "2020-10-01 00:00:00.000000",
-            "last_seen": "2020-12-31 23:58:00.000000"
-          },
-          "first_seen": "2020-10-01 00:00:00.000000",
-          "last_seen": "2020-12-31 23:58:00.000000",
-          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
-          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
-          "automation_assessment": {
-            "is_likely_automated": true,
-            "likely_automated": true,
-            "automation_type": "bot-driven invoice enumeration",
-            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
-            "supporting_signals": [
-              "high request volume",
-              "high unique invoice diversity",
-              "high sequential access ratio",
-              "bot detection convergence",
-              "anomaly detection convergence"
-            ],
-            "total_anomalous_ips": 172
-          },
-          "idor_evidence_assessment": {
-            "clear_idor_evidence": true,
-            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
-            "top_enumeration_pattern": {
-              "ip": "204.210.158.207",
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "invoice_span": 111111999,
-              "min_invoice_id": 118822000,
-              "max_invoice_id": 229933999,
-              "idor_severity": "critical",
-              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
-            }
-          },
-          "estimated_impact": {
-            "unique_invoices_accessed_by_top_attackers": 10221,
-            "unique_tokens_seen": 35,
-            "total_attack_events": 96829
-          },
-          "mitre_attack_mapping_high_level": [
-            {
-              "tactic": "Credential Access / Discovery",
-              "technique": "Automated resource enumeration",
-              "note": "Mapped at high level due to identifier enumeration behavior."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from information repositories",
-              "note": "Invoice data may represent sensitive business/user information."
-            },
-            {
-              "tactic": "Defense Evasion",
-              "technique": "Use of distributed IPs or repeated low-rate access",
-              "note": "Multiple suspicious IPs may indicate campaign distribution."
-            }
-          ],
-          "mitre_attack_mapping": [
-            {
-              "tactic": "Discovery",
-              "technique": "Application endpoint and object identifier enumeration",
-              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from Information Repositories",
-              "rationale": "The observed behavior indicates large-scale access to invoice objects."
-            },
-            {
-              "tactic": "Credential Access / Defense Evasion",
-              "technique": "Valid Accounts or Token Misuse",
-              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
-            }
-          ],
-          "top_attackers_reviewed": [
-            {
-              "ip": "204.210.158.207",
-              "risk_score": 86.04241498055296,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "total_requests": 12409
-            },
-            {
-              "ip": "73.130.229.200",
-              "risk_score": 85.88302533017595,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6625776397515528,
-              "unique_invoice_ids": 6441,
-              "total_requests": 12453
-            },
-            {
-              "ip": "216.21.168.27",
-              "risk_score": 85.75971025623024,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6627108057464085,
-              "unique_invoice_ids": 6405,
-              "total_requests": 12429
-            },
-            {
-              "ip": "74.88.210.56",
-              "risk_score": 85.72791306614572,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6602334630350195,
-              "unique_invoice_ids": 6426,
-              "total_requests": 12426
-            },
-            {
-              "ip": "24.163.83.34",
-              "risk_score": 84.9608873784426,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6585098039215687,
-              "unique_invoice_ids": 6376,
-              "total_requests": 12244
-            },
-            {
-              "ip": "181.88.192.48",
-              "risk_score": 45.79610824077543,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6579261025029798,
-              "unique_invoice_ids": 1679,
-              "total_requests": 3010
-            },
-            {
-              "ip": "181.88.192.87",
-              "risk_score": 45.46652259670832,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6534056660638939,
-              "unique_invoice_ids": 1660,
-              "total_requests": 2961
-            },
-            {
-              "ip": "181.88.192.16",
-              "risk_score": 45.38353249541662,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6556372549019608,
-              "unique_invoice_ids": 1633,
-              "total_requests": 2945
-            },
-            {
-              "ip": "181.88.192.59",
-              "risk_score": 45.098413151661326,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6504315659679408,
-              "unique_invoice_ids": 1623,
-              "total_requests": 2917
-            },
-            {
-              "ip": "181.88.192.115",
-              "risk_score": 44.71399628334233,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6461538461538462,
-              "unique_invoice_ids": 1626,
-              "total_requests": 2865
-            }
-          ],
-          "analysis_iteration": "initial_forensic_review",
-          "human_requested_more_evidence": false
-        },
-        "response_recommendation": {
-          "agent": "response_advisor_agent",
-          "generated_at_utc": "2026-06-09T14:34:27.617655+00:00",
-          "dry_run": true,
-          "human_approval_required": true,
-          "human_approval_status": "pending",
-          "recommended_containment": {
-            "immediate": [
-              {
-                "action": "block_or_challenge_critical_ips",
-                "targets": [
-                  "204.210.158.207",
-                  "73.130.229.200",
-                  "216.21.168.27",
-                  "74.88.210.56",
-                  "24.163.83.34"
-                ],
-                "requires_human_approval": true,
-                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-                "priority": "P1"
-              },
-              {
-                "action": "dynamic_rate_limiting_invoice_search",
-                "targets": [
-                  "/invoices/search"
-                ],
-                "requires_human_approval": false,
-                "business_risk": "Low to medium; may affect heavy legitimate usage.",
-                "priority": "P1"
-              },
-              {
-                "action": "increase_monitoring_for_high_risk_ips",
-                "targets": [],
-                "requires_human_approval": false,
-                "business_risk": "Low.",
-                "priority": "P2"
-              }
-            ],
-            "strategic": [
-              {
-                "action": "fix_object_level_authorization",
-                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
-                "requires_human_approval": true,
-                "priority": "P1"
-              },
-              {
-                "action": "rotate_or_revoke_suspicious_tokens",
-                "description": "Review tokens observed in suspicious access patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              },
-              {
-                "action": "update_waf_rules",
-                "description": "Add rules for sequential invoice enumeration patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              }
-            ]
-          },
-          "mini_playbook": [
-            "Validate critical IPs against customer support and internal allowlists.",
-            "Apply dry-run blocklist simulation.",
-            "Enable rate limiting for invoice search endpoint.",
-            "Escalate object-level authorization fix to application security owners.",
-            "Review token exposure and revoke suspicious tokens if confirmed.",
-            "Monitor anomaly score and risk score deltas after containment."
-          ],
-          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
-        },
-        "human_approval_required": true,
-        "dry_run": true,
-        "human_approval_request": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T14:34:27.618658+00:00",
-          "approval_required": true,
-          "dry_run": true,
-          "workflow_stage": "awaiting_human_approval",
-          "actions_waiting_approval": [
-            {
-              "action": "block_or_challenge_critical_ips",
-              "targets": [
-                "204.210.158.207",
-                "73.130.229.200",
-                "216.21.168.27",
-                "74.88.210.56",
-                "24.163.83.34"
-              ],
-              "requires_human_approval": true,
-              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-              "priority": "P1"
-            }
-          ],
-          "allowed_decisions": [
-            "approved_for_dry_run_only",
-            "rejected",
-            "modified",
-            "request_more_evidence"
-          ]
-        },
-        "human_approval_response": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T14:34:27.618658+00:00",
-          "decision": "approved_for_dry_run_only",
-          "dry_run": true,
-          "approved_actions_count": 6,
-          "rejected_actions_count": 0,
-          "workflow_stage": "approved",
-          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
-        },
-        "approved_actions": [
-          {
-            "action": "block_ip",
-            "target": "204.210.158.207",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:34:27.618658+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "73.130.229.200",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:34:27.618658+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "216.21.168.27",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:34:27.618658+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "74.88.210.56",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:34:27.618658+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "24.163.83.34",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:34:27.618658+00:00"
-          },
-          {
-            "action": "rate_limit_endpoint",
-            "target": "/invoices/search",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:34:27.618658+00:00"
-          }
-        ],
-        "rejected_actions": [],
-        "workflow_stage": "approved",
-        "workflow_timeline": [
-          {
-            "timestamp_utc": "2026-06-09T14:34:27.615655+00:00",
-            "stage": "triage",
-            "decision": "critical",
-            "details": {
-              "priority": "P1",
-              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:34:27.616658+00:00",
-            "stage": "forensic_analysis",
-            "decision": "idor_pattern_analyzed",
-            "details": {
-              "patient_zero_candidate": "204.210.158.207",
-              "analysis_iteration": "initial_forensic_review",
-              "human_requested_more_evidence": false
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:34:27.617655+00:00",
-            "stage": "response_planning",
-            "decision": "containment_plan_generated",
-            "details": {
-              "dry_run": true,
-              "human_approval_required": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:34:27.618658+00:00",
-            "stage": "human_approval",
-            "decision": "approved_for_dry_run_only",
-            "details": {
-              "workflow_stage": "approved",
-              "approved_actions_count": 6,
-              "rejected_actions_count": 0
-            }
-          }
-        ],
-        "modified_action_plan": {}
-      }
-    },
-    {
-      "generated_at_utc": "2026-06-09T14:43:26.397290+00:00",
-      "summary": {
-        "triage": {
-          "agent": "triage_agent",
-          "generated_at_utc": "2026-06-09T14:43:21.118310+00:00",
-          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
-          "severity": "critical",
-          "priority": "P1",
-          "top_risk_score": 86.04241498055296,
-          "total_suspicious_ips": 182,
-          "total_anomalous_ips": 172,
-          "initial_hypotheses": [
-            "Automated invoice enumeration against invoice search endpoint.",
-            "Possible IDOR exploitation due to high invoice diversity per IP.",
-            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
-          ],
-          "investigation_plan": [
-            "Review top risk IPs and their invoice enumeration pattern.",
-            "Validate whether accessed invoices belong to different users.",
-            "Review auth token reuse and suspicious user-agent patterns.",
-            "Correlate risk scoring with Isolation Forest anomaly results.",
-            "Prioritize containment for critical IPs with confirmed high-risk behavior."
-          ]
-        },
-        "forensic_analysis": {
-          "agent": "forensic_analyst_agent",
-          "generated_at_utc": "2026-06-09T14:43:26.385948+00:00",
-          "patient_zero_candidate": "204.210.158.207",
-          "attack_window": {
-            "first_seen": "2020-10-01 00:00:00.000000",
-            "last_seen": "2020-12-31 23:58:00.000000"
-          },
-          "first_seen": "2020-10-01 00:00:00.000000",
-          "last_seen": "2020-12-31 23:58:00.000000",
-          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
-          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
-          "automation_assessment": {
-            "is_likely_automated": true,
-            "likely_automated": true,
-            "automation_type": "bot-driven invoice enumeration",
-            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
-            "supporting_signals": [
-              "high request volume",
-              "high unique invoice diversity",
-              "high sequential access ratio",
-              "bot detection convergence",
-              "anomaly detection convergence"
-            ],
-            "total_anomalous_ips": 172
-          },
-          "idor_evidence_assessment": {
-            "clear_idor_evidence": true,
-            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
-            "top_enumeration_pattern": {
-              "ip": "204.210.158.207",
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "invoice_span": 111111999,
-              "min_invoice_id": 118822000,
-              "max_invoice_id": 229933999,
-              "idor_severity": "critical",
-              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
-            }
-          },
-          "estimated_impact": {
-            "unique_invoices_accessed_by_top_attackers": 10221,
-            "unique_tokens_seen": 35,
-            "total_attack_events": 96829
-          },
-          "mitre_attack_mapping_high_level": [
-            {
-              "tactic": "Credential Access / Discovery",
-              "technique": "Automated resource enumeration",
-              "note": "Mapped at high level due to identifier enumeration behavior."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from information repositories",
-              "note": "Invoice data may represent sensitive business/user information."
-            },
-            {
-              "tactic": "Defense Evasion",
-              "technique": "Use of distributed IPs or repeated low-rate access",
-              "note": "Multiple suspicious IPs may indicate campaign distribution."
-            }
-          ],
-          "mitre_attack_mapping": [
-            {
-              "tactic": "Discovery",
-              "technique": "Application endpoint and object identifier enumeration",
-              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from Information Repositories",
-              "rationale": "The observed behavior indicates large-scale access to invoice objects."
-            },
-            {
-              "tactic": "Credential Access / Defense Evasion",
-              "technique": "Valid Accounts or Token Misuse",
-              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
-            }
-          ],
-          "top_attackers_reviewed": [
-            {
-              "ip": "204.210.158.207",
-              "risk_score": 86.04241498055296,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "total_requests": 12409
-            },
-            {
-              "ip": "73.130.229.200",
-              "risk_score": 85.88302533017595,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6625776397515528,
-              "unique_invoice_ids": 6441,
-              "total_requests": 12453
-            },
-            {
-              "ip": "216.21.168.27",
-              "risk_score": 85.75971025623024,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6627108057464085,
-              "unique_invoice_ids": 6405,
-              "total_requests": 12429
-            },
-            {
-              "ip": "74.88.210.56",
-              "risk_score": 85.72791306614572,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6602334630350195,
-              "unique_invoice_ids": 6426,
-              "total_requests": 12426
-            },
-            {
-              "ip": "24.163.83.34",
-              "risk_score": 84.9608873784426,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6585098039215687,
-              "unique_invoice_ids": 6376,
-              "total_requests": 12244
-            },
-            {
-              "ip": "181.88.192.48",
-              "risk_score": 45.79610824077543,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6579261025029798,
-              "unique_invoice_ids": 1679,
-              "total_requests": 3010
-            },
-            {
-              "ip": "181.88.192.87",
-              "risk_score": 45.46652259670832,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6534056660638939,
-              "unique_invoice_ids": 1660,
-              "total_requests": 2961
-            },
-            {
-              "ip": "181.88.192.16",
-              "risk_score": 45.38353249541662,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6556372549019608,
-              "unique_invoice_ids": 1633,
-              "total_requests": 2945
-            },
-            {
-              "ip": "181.88.192.59",
-              "risk_score": 45.098413151661326,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6504315659679408,
-              "unique_invoice_ids": 1623,
-              "total_requests": 2917
-            },
-            {
-              "ip": "181.88.192.115",
-              "risk_score": 44.71399628334233,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6461538461538462,
-              "unique_invoice_ids": 1626,
-              "total_requests": 2865
-            }
-          ],
-          "analysis_iteration": "initial_forensic_review",
-          "human_requested_more_evidence": false
-        },
-        "response_recommendation": {
-          "agent": "response_advisor_agent",
-          "generated_at_utc": "2026-06-09T14:43:26.385948+00:00",
-          "dry_run": true,
-          "human_approval_required": true,
-          "human_approval_status": "pending",
-          "recommended_containment": {
-            "immediate": [
-              {
-                "action": "block_or_challenge_critical_ips",
-                "targets": [
-                  "204.210.158.207",
-                  "73.130.229.200",
-                  "216.21.168.27",
-                  "74.88.210.56",
-                  "24.163.83.34"
-                ],
-                "requires_human_approval": true,
-                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-                "priority": "P1"
-              },
-              {
-                "action": "dynamic_rate_limiting_invoice_search",
-                "targets": [
-                  "/invoices/search"
-                ],
-                "requires_human_approval": false,
-                "business_risk": "Low to medium; may affect heavy legitimate usage.",
-                "priority": "P1"
-              },
-              {
-                "action": "increase_monitoring_for_high_risk_ips",
-                "targets": [],
-                "requires_human_approval": false,
-                "business_risk": "Low.",
-                "priority": "P2"
-              }
-            ],
-            "strategic": [
-              {
-                "action": "fix_object_level_authorization",
-                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
-                "requires_human_approval": true,
-                "priority": "P1"
-              },
-              {
-                "action": "rotate_or_revoke_suspicious_tokens",
-                "description": "Review tokens observed in suspicious access patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              },
-              {
-                "action": "update_waf_rules",
-                "description": "Add rules for sequential invoice enumeration patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              }
-            ]
-          },
-          "mini_playbook": [
-            "Validate critical IPs against customer support and internal allowlists.",
-            "Apply dry-run blocklist simulation.",
-            "Enable rate limiting for invoice search endpoint.",
-            "Escalate object-level authorization fix to application security owners.",
-            "Review token exposure and revoke suspicious tokens if confirmed.",
-            "Monitor anomaly score and risk score deltas after containment."
-          ],
-          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
-        },
-        "human_approval_required": true,
-        "dry_run": true,
-        "human_approval_request": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T14:43:26.385948+00:00",
-          "approval_required": true,
-          "dry_run": true,
-          "workflow_stage": "awaiting_human_approval",
-          "actions_waiting_approval": [
-            {
-              "action": "block_or_challenge_critical_ips",
-              "targets": [
-                "204.210.158.207",
-                "73.130.229.200",
-                "216.21.168.27",
-                "74.88.210.56",
-                "24.163.83.34"
-              ],
-              "requires_human_approval": true,
-              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-              "priority": "P1"
-            }
-          ],
-          "allowed_decisions": [
-            "approved_for_dry_run_only",
-            "rejected",
-            "modified",
-            "request_more_evidence"
-          ]
-        },
-        "human_approval_response": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T14:43:26.385948+00:00",
-          "decision": "approved_for_dry_run_only",
-          "dry_run": true,
-          "approved_actions_count": 6,
-          "rejected_actions_count": 0,
-          "workflow_stage": "approved",
-          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
-        },
-        "approved_actions": [
-          {
-            "action": "block_ip",
-            "target": "204.210.158.207",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "73.130.229.200",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "216.21.168.27",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "74.88.210.56",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "24.163.83.34",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00"
-          },
-          {
-            "action": "rate_limit_endpoint",
-            "target": "/invoices/search",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00"
-          }
-        ],
-        "rejected_actions": [],
-        "workflow_stage": "approved",
-        "workflow_timeline": [
-          {
-            "timestamp_utc": "2026-06-09T14:43:26.384949+00:00",
-            "stage": "triage",
-            "decision": "critical",
-            "details": {
-              "priority": "P1",
-              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00",
-            "stage": "forensic_analysis",
-            "decision": "idor_pattern_analyzed",
-            "details": {
-              "patient_zero_candidate": "204.210.158.207",
-              "analysis_iteration": "initial_forensic_review",
-              "human_requested_more_evidence": false
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00",
-            "stage": "response_planning",
-            "decision": "containment_plan_generated",
-            "details": {
-              "dry_run": true,
-              "human_approval_required": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:43:26.385948+00:00",
-            "stage": "human_approval",
-            "decision": "approved_for_dry_run_only",
-            "details": {
-              "workflow_stage": "approved",
-              "approved_actions_count": 6,
-              "rejected_actions_count": 0
-            }
-          }
-        ],
-        "human_loop_count": 0,
-        "decision_log": [
-          {
-            "agent": "triage_agent",
-            "decision": "classified_incident",
-            "severity": "critical",
-            "priority": "P1",
-            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
-          },
-          {
-            "agent": "forensic_analyst_agent",
-            "decision": "confirmed_likely_idor_enumeration",
-            "patient_zero_candidate": "204.210.158.207",
-            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
-            "analysis_iteration": "initial_forensic_review",
-            "human_requested_more_evidence": false
-          },
-          {
-            "agent": "response_advisor_agent",
-            "decision": "recommended_dry_run_containment",
-            "dry_run": true,
-            "human_approval_required": true,
-            "reason": "Blocking actions can affect users and require human approval."
-          },
-          {
-            "agent": "human_approval_agent",
-            "decision": "approved_for_dry_run_only",
-            "workflow_stage": "approved",
-            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
-          }
-        ],
-        "modified_action_plan": {}
-      }
-    },
-    {
-      "generated_at_utc": "2026-06-09T14:46:23.831037+00:00",
-      "summary": {
-        "triage": {
-          "agent": "triage_agent",
-          "generated_at_utc": "2026-06-09T14:46:18.753545+00:00",
-          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
-          "severity": "critical",
-          "priority": "P1",
-          "top_risk_score": 86.04241498055296,
-          "total_suspicious_ips": 182,
-          "total_anomalous_ips": 172,
-          "initial_hypotheses": [
-            "Automated invoice enumeration against invoice search endpoint.",
-            "Possible IDOR exploitation due to high invoice diversity per IP.",
-            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
-          ],
-          "investigation_plan": [
-            "Review top risk IPs and their invoice enumeration pattern.",
-            "Validate whether accessed invoices belong to different users.",
-            "Review auth token reuse and suspicious user-agent patterns.",
-            "Correlate risk scoring with Isolation Forest anomaly results.",
-            "Prioritize containment for critical IPs with confirmed high-risk behavior."
-          ]
-        },
-        "forensic_analysis": {
-          "agent": "forensic_analyst_agent",
-          "generated_at_utc": "2026-06-09T14:46:23.821519+00:00",
-          "patient_zero_candidate": "204.210.158.207",
-          "attack_window": {
-            "first_seen": "2020-10-01 00:00:00.000000",
-            "last_seen": "2020-12-31 23:58:00.000000"
-          },
-          "first_seen": "2020-10-01 00:00:00.000000",
-          "last_seen": "2020-12-31 23:58:00.000000",
-          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
-          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
-          "automation_assessment": {
-            "is_likely_automated": true,
-            "likely_automated": true,
-            "automation_type": "bot-driven invoice enumeration",
-            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
-            "supporting_signals": [
-              "high request volume",
-              "high unique invoice diversity",
-              "high sequential access ratio",
-              "bot detection convergence",
-              "anomaly detection convergence"
-            ],
-            "total_anomalous_ips": 172
-          },
-          "idor_evidence_assessment": {
-            "clear_idor_evidence": true,
-            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
-            "top_enumeration_pattern": {
-              "ip": "204.210.158.207",
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "invoice_span": 111111999,
-              "min_invoice_id": 118822000,
-              "max_invoice_id": 229933999,
-              "idor_severity": "critical",
-              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
-            }
-          },
-          "estimated_impact": {
-            "unique_invoices_accessed_by_top_attackers": 10221,
-            "unique_tokens_seen": 35,
-            "total_attack_events": 96829
-          },
-          "mitre_attack_mapping_high_level": [
-            {
-              "tactic": "Credential Access / Discovery",
-              "technique": "Automated resource enumeration",
-              "note": "Mapped at high level due to identifier enumeration behavior."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from information repositories",
-              "note": "Invoice data may represent sensitive business/user information."
-            },
-            {
-              "tactic": "Defense Evasion",
-              "technique": "Use of distributed IPs or repeated low-rate access",
-              "note": "Multiple suspicious IPs may indicate campaign distribution."
-            }
-          ],
-          "mitre_attack_mapping": [
-            {
-              "tactic": "Discovery",
-              "technique": "Application endpoint and object identifier enumeration",
-              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from Information Repositories",
-              "rationale": "The observed behavior indicates large-scale access to invoice objects."
-            },
-            {
-              "tactic": "Credential Access / Defense Evasion",
-              "technique": "Valid Accounts or Token Misuse",
-              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
-            }
-          ],
-          "top_attackers_reviewed": [
-            {
-              "ip": "204.210.158.207",
-              "risk_score": 86.04241498055296,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "total_requests": 12409
-            },
-            {
-              "ip": "73.130.229.200",
-              "risk_score": 85.88302533017595,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6625776397515528,
-              "unique_invoice_ids": 6441,
-              "total_requests": 12453
-            },
-            {
-              "ip": "216.21.168.27",
-              "risk_score": 85.75971025623024,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6627108057464085,
-              "unique_invoice_ids": 6405,
-              "total_requests": 12429
-            },
-            {
-              "ip": "74.88.210.56",
-              "risk_score": 85.72791306614572,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6602334630350195,
-              "unique_invoice_ids": 6426,
-              "total_requests": 12426
-            },
-            {
-              "ip": "24.163.83.34",
-              "risk_score": 84.9608873784426,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6585098039215687,
-              "unique_invoice_ids": 6376,
-              "total_requests": 12244
-            },
-            {
-              "ip": "181.88.192.48",
-              "risk_score": 45.79610824077543,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6579261025029798,
-              "unique_invoice_ids": 1679,
-              "total_requests": 3010
-            },
-            {
-              "ip": "181.88.192.87",
-              "risk_score": 45.46652259670832,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6534056660638939,
-              "unique_invoice_ids": 1660,
-              "total_requests": 2961
-            },
-            {
-              "ip": "181.88.192.16",
-              "risk_score": 45.38353249541662,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6556372549019608,
-              "unique_invoice_ids": 1633,
-              "total_requests": 2945
-            },
-            {
-              "ip": "181.88.192.59",
-              "risk_score": 45.098413151661326,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6504315659679408,
-              "unique_invoice_ids": 1623,
-              "total_requests": 2917
-            },
-            {
-              "ip": "181.88.192.115",
-              "risk_score": 44.71399628334233,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6461538461538462,
-              "unique_invoice_ids": 1626,
-              "total_requests": 2865
-            }
-          ],
-          "analysis_iteration": "additional_evidence_review",
-          "human_requested_more_evidence": true
-        },
-        "response_recommendation": {
-          "agent": "response_advisor_agent",
-          "generated_at_utc": "2026-06-09T14:46:23.821519+00:00",
-          "dry_run": true,
-          "human_approval_required": true,
-          "human_approval_status": "request_more_evidence",
-          "recommended_containment": {
-            "immediate": [
-              {
-                "action": "block_or_challenge_critical_ips",
-                "targets": [
-                  "204.210.158.207",
-                  "73.130.229.200",
-                  "216.21.168.27",
-                  "74.88.210.56",
-                  "24.163.83.34"
-                ],
-                "requires_human_approval": true,
-                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-                "priority": "P1"
-              },
-              {
-                "action": "dynamic_rate_limiting_invoice_search",
-                "targets": [
-                  "/invoices/search"
-                ],
-                "requires_human_approval": false,
-                "business_risk": "Low to medium; may affect heavy legitimate usage.",
-                "priority": "P1"
-              },
-              {
-                "action": "increase_monitoring_for_high_risk_ips",
-                "targets": [],
-                "requires_human_approval": false,
-                "business_risk": "Low.",
-                "priority": "P2"
-              }
-            ],
-            "strategic": [
-              {
-                "action": "fix_object_level_authorization",
-                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
-                "requires_human_approval": true,
-                "priority": "P1"
-              },
-              {
-                "action": "rotate_or_revoke_suspicious_tokens",
-                "description": "Review tokens observed in suspicious access patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              },
-              {
-                "action": "update_waf_rules",
-                "description": "Add rules for sequential invoice enumeration patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              }
-            ]
-          },
-          "mini_playbook": [
-            "Validate critical IPs against customer support and internal allowlists.",
-            "Apply dry-run blocklist simulation.",
-            "Enable rate limiting for invoice search endpoint.",
-            "Escalate object-level authorization fix to application security owners.",
-            "Review token exposure and revoke suspicious tokens if confirmed.",
-            "Monitor anomaly score and risk score deltas after containment."
-          ],
-          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
-        },
-        "human_approval_required": true,
-        "dry_run": true,
-        "human_approval_request": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T14:46:23.821519+00:00",
-          "approval_required": true,
-          "dry_run": true,
-          "workflow_stage": "awaiting_human_approval",
-          "actions_waiting_approval": [
-            {
-              "action": "block_or_challenge_critical_ips",
-              "targets": [
-                "204.210.158.207",
-                "73.130.229.200",
-                "216.21.168.27",
-                "74.88.210.56",
-                "24.163.83.34"
-              ],
-              "requires_human_approval": true,
-              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-              "priority": "P1"
-            }
-          ],
-          "allowed_decisions": [
-            "approved_for_dry_run_only",
-            "rejected",
-            "modified",
-            "request_more_evidence"
-          ]
-        },
-        "human_approval_response": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T14:46:23.821519+00:00",
-          "decision": "approved_for_dry_run_only",
-          "dry_run": true,
-          "approved_actions_count": 6,
-          "rejected_actions_count": 0,
-          "workflow_stage": "approved",
-          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
-        },
-        "approved_actions": [
-          {
-            "action": "block_ip",
-            "target": "204.210.158.207",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "73.130.229.200",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "216.21.168.27",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "74.88.210.56",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "24.163.83.34",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00"
-          },
-          {
-            "action": "rate_limit_endpoint",
-            "target": "/invoices/search",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00"
-          }
-        ],
-        "rejected_actions": [],
-        "workflow_stage": "approved",
-        "workflow_timeline": [
-          {
-            "timestamp_utc": "2026-06-09T14:46:23.818521+00:00",
-            "stage": "triage",
-            "decision": "critical",
-            "details": {
-              "priority": "P1",
-              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:46:23.819524+00:00",
-            "stage": "forensic_analysis",
-            "decision": "idor_pattern_analyzed",
-            "details": {
-              "patient_zero_candidate": "204.210.158.207",
-              "analysis_iteration": "initial_forensic_review",
-              "human_requested_more_evidence": false
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:46:23.820518+00:00",
-            "stage": "response_planning",
-            "decision": "containment_plan_generated",
-            "details": {
-              "dry_run": true,
-              "human_approval_required": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:46:23.820518+00:00",
-            "stage": "human_approval",
-            "decision": "request_more_evidence",
-            "details": {
-              "workflow_stage": "requesting_more_evidence",
-              "approved_actions_count": 0,
-              "rejected_actions_count": 0
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00",
-            "stage": "forensic_analysis",
-            "decision": "idor_pattern_analyzed",
-            "details": {
-              "patient_zero_candidate": "204.210.158.207",
-              "analysis_iteration": "additional_evidence_review",
-              "human_requested_more_evidence": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00",
-            "stage": "response_planning",
-            "decision": "containment_plan_generated",
-            "details": {
-              "dry_run": true,
-              "human_approval_required": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T14:46:23.821519+00:00",
-            "stage": "human_approval",
-            "decision": "approved_for_dry_run_only",
-            "details": {
-              "workflow_stage": "approved",
-              "approved_actions_count": 6,
-              "rejected_actions_count": 0
-            }
-          }
-        ],
-        "human_loop_count": 1,
-        "decision_log": [
-          {
-            "agent": "triage_agent",
-            "decision": "classified_incident",
-            "severity": "critical",
-            "priority": "P1",
-            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
-          },
-          {
-            "agent": "forensic_analyst_agent",
-            "decision": "confirmed_likely_idor_enumeration",
-            "patient_zero_candidate": "204.210.158.207",
-            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
-            "analysis_iteration": "initial_forensic_review",
-            "human_requested_more_evidence": false
-          },
-          {
-            "agent": "response_advisor_agent",
-            "decision": "recommended_dry_run_containment",
-            "dry_run": true,
-            "human_approval_required": true,
-            "reason": "Blocking actions can affect users and require human approval."
-          },
-          {
-            "agent": "human_approval_agent",
-            "decision": "request_more_evidence",
-            "workflow_stage": "requesting_more_evidence",
-            "reason": "Human reviewer requested additional forensic evidence before approving containment."
-          },
-          {
-            "agent": "forensic_analyst_agent",
-            "decision": "confirmed_likely_idor_enumeration",
-            "patient_zero_candidate": "204.210.158.207",
-            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
-            "analysis_iteration": "additional_evidence_review",
-            "human_requested_more_evidence": true
-          },
-          {
-            "agent": "response_advisor_agent",
-            "decision": "recommended_dry_run_containment",
-            "dry_run": true,
-            "human_approval_required": true,
-            "reason": "Blocking actions can affect users and require human approval."
-          },
-          {
-            "agent": "human_approval_agent",
-            "decision": "approved_for_dry_run_only",
-            "workflow_stage": "approved",
-            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
-          }
-        ],
-        "modified_action_plan": {}
-      }
-    },
-    {
-      "generated_at_utc": "2026-06-09T15:01:25.732919+00:00",
-      "summary": {
-        "triage": {
-          "agent": "triage_agent",
-          "generated_at_utc": "2026-06-09T15:01:19.762650+00:00",
-          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
-          "severity": "critical",
-          "priority": "P1",
-          "top_risk_score": 86.04241498055296,
-          "total_suspicious_ips": 182,
-          "total_anomalous_ips": 172,
-          "initial_hypotheses": [
-            "Automated invoice enumeration against invoice search endpoint.",
-            "Possible IDOR exploitation due to high invoice diversity per IP.",
-            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
-          ],
-          "investigation_plan": [
-            "Review top risk IPs and their invoice enumeration pattern.",
-            "Validate whether accessed invoices belong to different users.",
-            "Review auth token reuse and suspicious user-agent patterns.",
-            "Correlate risk scoring with Isolation Forest anomaly results.",
-            "Prioritize containment for critical IPs with confirmed high-risk behavior."
-          ]
-        },
-        "forensic_analysis": {
-          "agent": "forensic_analyst_agent",
-          "generated_at_utc": "2026-06-09T15:01:25.713561+00:00",
-          "patient_zero_candidate": "204.210.158.207",
-          "attack_window": {
-            "first_seen": "2020-10-01 00:00:00.000000",
-            "last_seen": "2020-12-31 23:58:00.000000"
-          },
-          "first_seen": "2020-10-01 00:00:00.000000",
-          "last_seen": "2020-12-31 23:58:00.000000",
-          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
-          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
-          "automation_assessment": {
-            "is_likely_automated": true,
-            "likely_automated": true,
-            "automation_type": "bot-driven invoice enumeration",
-            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
-            "supporting_signals": [
-              "high request volume",
-              "high unique invoice diversity",
-              "high sequential access ratio",
-              "bot detection convergence",
-              "anomaly detection convergence"
-            ],
-            "total_anomalous_ips": 172
-          },
-          "idor_evidence_assessment": {
-            "clear_idor_evidence": true,
-            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
-            "top_enumeration_pattern": {
-              "ip": "204.210.158.207",
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "invoice_span": 111111999,
-              "min_invoice_id": 118822000,
-              "max_invoice_id": 229933999,
-              "idor_severity": "critical",
-              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
-            }
-          },
-          "estimated_impact": {
-            "unique_invoices_accessed_by_top_attackers": 10221,
-            "unique_tokens_seen": 35,
-            "total_attack_events": 96829
-          },
-          "mitre_attack_mapping_high_level": [
-            {
-              "tactic": "Credential Access / Discovery",
-              "technique": "Automated resource enumeration",
-              "note": "Mapped at high level due to identifier enumeration behavior."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from information repositories",
-              "note": "Invoice data may represent sensitive business/user information."
-            },
-            {
-              "tactic": "Defense Evasion",
-              "technique": "Use of distributed IPs or repeated low-rate access",
-              "note": "Multiple suspicious IPs may indicate campaign distribution."
-            }
-          ],
-          "mitre_attack_mapping": [
-            {
-              "tactic": "Discovery",
-              "technique": "Application endpoint and object identifier enumeration",
-              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from Information Repositories",
-              "rationale": "The observed behavior indicates large-scale access to invoice objects."
-            },
-            {
-              "tactic": "Credential Access / Defense Evasion",
-              "technique": "Valid Accounts or Token Misuse",
-              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
-            }
-          ],
-          "top_attackers_reviewed": [
-            {
-              "ip": "204.210.158.207",
-              "risk_score": 86.04241498055296,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "total_requests": 12409
-            },
-            {
-              "ip": "73.130.229.200",
-              "risk_score": 85.88302533017595,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6625776397515528,
-              "unique_invoice_ids": 6441,
-              "total_requests": 12453
-            },
-            {
-              "ip": "216.21.168.27",
-              "risk_score": 85.75971025623024,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6627108057464085,
-              "unique_invoice_ids": 6405,
-              "total_requests": 12429
-            },
-            {
-              "ip": "74.88.210.56",
-              "risk_score": 85.72791306614572,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6602334630350195,
-              "unique_invoice_ids": 6426,
-              "total_requests": 12426
-            },
-            {
-              "ip": "24.163.83.34",
-              "risk_score": 84.9608873784426,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6585098039215687,
-              "unique_invoice_ids": 6376,
-              "total_requests": 12244
-            },
-            {
-              "ip": "181.88.192.48",
-              "risk_score": 45.79610824077543,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6579261025029798,
-              "unique_invoice_ids": 1679,
-              "total_requests": 3010
-            },
-            {
-              "ip": "181.88.192.87",
-              "risk_score": 45.46652259670832,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6534056660638939,
-              "unique_invoice_ids": 1660,
-              "total_requests": 2961
-            },
-            {
-              "ip": "181.88.192.16",
-              "risk_score": 45.38353249541662,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6556372549019608,
-              "unique_invoice_ids": 1633,
-              "total_requests": 2945
-            },
-            {
-              "ip": "181.88.192.59",
-              "risk_score": 45.098413151661326,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6504315659679408,
-              "unique_invoice_ids": 1623,
-              "total_requests": 2917
-            },
-            {
-              "ip": "181.88.192.115",
-              "risk_score": 44.71399628334233,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6461538461538462,
-              "unique_invoice_ids": 1626,
-              "total_requests": 2865
-            }
-          ],
-          "analysis_iteration": "additional_evidence_review",
-          "human_requested_more_evidence": true
-        },
-        "response_recommendation": {
-          "agent": "response_advisor_agent",
-          "generated_at_utc": "2026-06-09T15:01:25.714502+00:00",
-          "dry_run": true,
-          "human_approval_required": true,
-          "human_approval_status": "request_more_evidence",
-          "recommended_containment": {
-            "immediate": [
-              {
-                "action": "block_or_challenge_critical_ips",
-                "targets": [
-                  "204.210.158.207",
-                  "73.130.229.200",
-                  "216.21.168.27",
-                  "74.88.210.56",
-                  "24.163.83.34"
-                ],
-                "requires_human_approval": true,
-                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-                "priority": "P1"
-              },
-              {
-                "action": "dynamic_rate_limiting_invoice_search",
-                "targets": [
-                  "/invoices/search"
-                ],
-                "requires_human_approval": false,
-                "business_risk": "Low to medium; may affect heavy legitimate usage.",
-                "priority": "P1"
-              },
-              {
-                "action": "increase_monitoring_for_high_risk_ips",
-                "targets": [],
-                "requires_human_approval": false,
-                "business_risk": "Low.",
-                "priority": "P2"
-              }
-            ],
-            "strategic": [
-              {
-                "action": "fix_object_level_authorization",
-                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
-                "requires_human_approval": true,
-                "priority": "P1"
-              },
-              {
-                "action": "rotate_or_revoke_suspicious_tokens",
-                "description": "Review tokens observed in suspicious access patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              },
-              {
-                "action": "update_waf_rules",
-                "description": "Add rules for sequential invoice enumeration patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              }
-            ]
-          },
-          "mini_playbook": [
-            "Validate critical IPs against customer support and internal allowlists.",
-            "Apply dry-run blocklist simulation.",
-            "Enable rate limiting for invoice search endpoint.",
-            "Escalate object-level authorization fix to application security owners.",
-            "Review token exposure and revoke suspicious tokens if confirmed.",
-            "Monitor anomaly score and risk score deltas after containment."
-          ],
-          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
-        },
-        "human_approval_required": true,
-        "dry_run": true,
-        "human_approval_request": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T15:01:25.717889+00:00",
-          "approval_required": true,
-          "dry_run": true,
-          "workflow_stage": "awaiting_human_approval",
-          "actions_waiting_approval": [
-            {
-              "action": "block_or_challenge_critical_ips",
-              "targets": [
-                "204.210.158.207",
-                "73.130.229.200",
-                "216.21.168.27",
-                "74.88.210.56",
-                "24.163.83.34"
-              ],
-              "requires_human_approval": true,
-              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-              "priority": "P1"
-            }
-          ],
-          "allowed_decisions": [
-            "approved_for_dry_run_only",
-            "rejected",
-            "modified",
-            "request_more_evidence"
-          ]
-        },
-        "human_approval_response": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T15:01:25.717889+00:00",
-          "decision": "approved_for_dry_run_only",
-          "dry_run": true,
-          "approved_actions_count": 6,
-          "rejected_actions_count": 0,
-          "workflow_stage": "approved",
-          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
-        },
-        "approved_actions": [
-          {
-            "action": "block_ip",
-            "target": "204.210.158.207",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:01:25.717889+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "73.130.229.200",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:01:25.717889+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "216.21.168.27",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:01:25.717889+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "74.88.210.56",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:01:25.717889+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "24.163.83.34",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:01:25.717889+00:00"
-          },
-          {
-            "action": "rate_limit_endpoint",
-            "target": "/invoices/search",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:01:25.717889+00:00"
-          }
-        ],
-        "rejected_actions": [],
-        "workflow_stage": "approved",
-        "workflow_timeline": [
-          {
-            "timestamp_utc": "2026-06-09T15:01:25.708624+00:00",
-            "stage": "triage",
-            "decision": "critical",
-            "details": {
-              "priority": "P1",
-              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:01:25.710327+00:00",
-            "stage": "forensic_analysis",
-            "decision": "idor_pattern_analyzed",
-            "details": {
-              "patient_zero_candidate": "204.210.158.207",
-              "analysis_iteration": "initial_forensic_review",
-              "human_requested_more_evidence": false
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:01:25.711565+00:00",
-            "stage": "response_planning",
-            "decision": "containment_plan_generated",
-            "details": {
-              "dry_run": true,
-              "human_approval_required": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:01:25.712461+00:00",
-            "stage": "human_approval",
-            "decision": "request_more_evidence",
-            "details": {
-              "workflow_stage": "requesting_more_evidence",
-              "approved_actions_count": 0,
-              "rejected_actions_count": 0
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:01:25.713561+00:00",
-            "stage": "forensic_analysis",
-            "decision": "idor_pattern_analyzed",
-            "details": {
-              "patient_zero_candidate": "204.210.158.207",
-              "analysis_iteration": "additional_evidence_review",
-              "human_requested_more_evidence": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:01:25.714502+00:00",
-            "stage": "response_planning",
-            "decision": "containment_plan_generated",
-            "details": {
-              "dry_run": true,
-              "human_approval_required": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:01:25.717889+00:00",
-            "stage": "human_approval",
-            "decision": "approved_for_dry_run_only",
-            "details": {
-              "workflow_stage": "approved",
-              "approved_actions_count": 6,
-              "rejected_actions_count": 0
-            }
-          }
-        ],
-        "human_loop_count": 1,
-        "decision_log": [
-          {
-            "agent": "triage_agent",
-            "decision": "classified_incident",
-            "severity": "critical",
-            "priority": "P1",
-            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
-          },
-          {
-            "agent": "forensic_analyst_agent",
-            "decision": "confirmed_likely_idor_enumeration",
-            "patient_zero_candidate": "204.210.158.207",
-            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
-            "analysis_iteration": "initial_forensic_review",
-            "human_requested_more_evidence": false
-          },
-          {
-            "agent": "response_advisor_agent",
-            "decision": "recommended_dry_run_containment",
-            "dry_run": true,
-            "human_approval_required": true,
-            "reason": "Blocking actions can affect users and require human approval."
-          },
-          {
-            "agent": "human_approval_agent",
-            "decision": "request_more_evidence",
-            "workflow_stage": "requesting_more_evidence",
-            "reason": "Human reviewer requested additional forensic evidence before approving containment."
-          },
-          {
-            "agent": "forensic_analyst_agent",
-            "decision": "confirmed_likely_idor_enumeration",
-            "patient_zero_candidate": "204.210.158.207",
-            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
-            "analysis_iteration": "additional_evidence_review",
-            "human_requested_more_evidence": true
-          },
-          {
-            "agent": "response_advisor_agent",
-            "decision": "recommended_dry_run_containment",
-            "dry_run": true,
-            "human_approval_required": true,
-            "reason": "Blocking actions can affect users and require human approval."
-          },
-          {
-            "agent": "human_approval_agent",
-            "decision": "approved_for_dry_run_only",
-            "workflow_stage": "approved",
-            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
-          }
-        ],
-        "modified_action_plan": {}
-      }
-    },
-    {
-      "generated_at_utc": "2026-06-09T15:07:54.306552+00:00",
-      "summary": {
-        "triage": {
-          "agent": "triage_agent",
-          "generated_at_utc": "2026-06-09T15:07:48.812477+00:00",
-          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
-          "severity": "critical",
-          "priority": "P1",
-          "top_risk_score": 86.04241498055296,
-          "total_suspicious_ips": 182,
-          "total_anomalous_ips": 172,
-          "initial_hypotheses": [
-            "Automated invoice enumeration against invoice search endpoint.",
-            "Possible IDOR exploitation due to high invoice diversity per IP.",
-            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
-          ],
-          "investigation_plan": [
-            "Review top risk IPs and their invoice enumeration pattern.",
-            "Validate whether accessed invoices belong to different users.",
-            "Review auth token reuse and suspicious user-agent patterns.",
-            "Correlate risk scoring with Isolation Forest anomaly results.",
-            "Prioritize containment for critical IPs with confirmed high-risk behavior."
-          ]
-        },
-        "forensic_analysis": {
-          "agent": "forensic_analyst_agent",
-          "generated_at_utc": "2026-06-09T15:07:54.296361+00:00",
-          "patient_zero_candidate": "204.210.158.207",
-          "attack_window": {
-            "first_seen": "2020-10-01 00:00:00.000000",
-            "last_seen": "2020-12-31 23:58:00.000000"
-          },
-          "first_seen": "2020-10-01 00:00:00.000000",
-          "last_seen": "2020-12-31 23:58:00.000000",
-          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
-          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
-          "automation_assessment": {
-            "is_likely_automated": true,
-            "likely_automated": true,
-            "automation_type": "bot-driven invoice enumeration",
-            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
-            "supporting_signals": [
-              "high request volume",
-              "high unique invoice diversity",
-              "high sequential access ratio",
-              "bot detection convergence",
-              "anomaly detection convergence"
-            ],
-            "total_anomalous_ips": 172
-          },
-          "idor_evidence_assessment": {
-            "clear_idor_evidence": true,
-            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
-            "top_enumeration_pattern": {
-              "ip": "204.210.158.207",
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "invoice_span": 111111999,
-              "min_invoice_id": 118822000,
-              "max_invoice_id": 229933999,
-              "idor_severity": "critical",
-              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
-            }
-          },
-          "estimated_impact": {
-            "unique_invoices_accessed_by_top_attackers": 10221,
-            "unique_tokens_seen": 35,
-            "total_attack_events": 96829
-          },
-          "mitre_attack_mapping_high_level": [
-            {
-              "tactic": "Credential Access / Discovery",
-              "technique": "Automated resource enumeration",
-              "note": "Mapped at high level due to identifier enumeration behavior."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from information repositories",
-              "note": "Invoice data may represent sensitive business/user information."
-            },
-            {
-              "tactic": "Defense Evasion",
-              "technique": "Use of distributed IPs or repeated low-rate access",
-              "note": "Multiple suspicious IPs may indicate campaign distribution."
-            }
-          ],
-          "mitre_attack_mapping": [
-            {
-              "tactic": "Discovery",
-              "technique": "Application endpoint and object identifier enumeration",
-              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
-            },
-            {
-              "tactic": "Collection",
-              "technique": "Data from Information Repositories",
-              "rationale": "The observed behavior indicates large-scale access to invoice objects."
-            },
-            {
-              "tactic": "Credential Access / Defense Evasion",
-              "technique": "Valid Accounts or Token Misuse",
-              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
-            }
-          ],
-          "top_attackers_reviewed": [
-            {
-              "ip": "204.210.158.207",
-              "risk_score": 86.04241498055296,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6628086419753086,
-              "unique_invoice_ids": 6481,
-              "total_requests": 12409
-            },
-            {
-              "ip": "73.130.229.200",
-              "risk_score": 85.88302533017595,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6625776397515528,
-              "unique_invoice_ids": 6441,
-              "total_requests": 12453
-            },
-            {
-              "ip": "216.21.168.27",
-              "risk_score": 85.75971025623024,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6627108057464085,
-              "unique_invoice_ids": 6405,
-              "total_requests": 12429
-            },
-            {
-              "ip": "74.88.210.56",
-              "risk_score": 85.72791306614572,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6602334630350195,
-              "unique_invoice_ids": 6426,
-              "total_requests": 12426
-            },
-            {
-              "ip": "24.163.83.34",
-              "risk_score": 84.9608873784426,
-              "risk_level": "critical",
-              "is_idor_suspect": true,
-              "is_likely_bot": true,
-              "sequential_access_ratio": 0.6585098039215687,
-              "unique_invoice_ids": 6376,
-              "total_requests": 12244
-            },
-            {
-              "ip": "181.88.192.48",
-              "risk_score": 45.79610824077543,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6579261025029798,
-              "unique_invoice_ids": 1679,
-              "total_requests": 3010
-            },
-            {
-              "ip": "181.88.192.87",
-              "risk_score": 45.46652259670832,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6534056660638939,
-              "unique_invoice_ids": 1660,
-              "total_requests": 2961
-            },
-            {
-              "ip": "181.88.192.16",
-              "risk_score": 45.38353249541662,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6556372549019608,
-              "unique_invoice_ids": 1633,
-              "total_requests": 2945
-            },
-            {
-              "ip": "181.88.192.59",
-              "risk_score": 45.098413151661326,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6504315659679408,
-              "unique_invoice_ids": 1623,
-              "total_requests": 2917
-            },
-            {
-              "ip": "181.88.192.115",
-              "risk_score": 44.71399628334233,
-              "risk_level": "medium",
-              "is_idor_suspect": true,
-              "is_likely_bot": false,
-              "sequential_access_ratio": 0.6461538461538462,
-              "unique_invoice_ids": 1626,
-              "total_requests": 2865
-            }
-          ],
-          "analysis_iteration": "initial_forensic_review",
-          "human_requested_more_evidence": false
-        },
-        "response_recommendation": {
-          "agent": "response_advisor_agent",
-          "generated_at_utc": "2026-06-09T15:07:54.297360+00:00",
-          "dry_run": true,
-          "human_approval_required": true,
-          "human_approval_status": "pending",
-          "recommended_containment": {
-            "immediate": [
-              {
-                "action": "block_or_challenge_critical_ips",
-                "targets": [
-                  "204.210.158.207",
-                  "73.130.229.200",
-                  "216.21.168.27",
-                  "74.88.210.56",
-                  "24.163.83.34"
-                ],
-                "requires_human_approval": true,
-                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-                "priority": "P1"
-              },
-              {
-                "action": "dynamic_rate_limiting_invoice_search",
-                "targets": [
-                  "/invoices/search"
-                ],
-                "requires_human_approval": false,
-                "business_risk": "Low to medium; may affect heavy legitimate usage.",
-                "priority": "P1"
-              },
-              {
-                "action": "increase_monitoring_for_high_risk_ips",
-                "targets": [],
-                "requires_human_approval": false,
-                "business_risk": "Low.",
-                "priority": "P2"
-              }
-            ],
-            "strategic": [
-              {
-                "action": "fix_object_level_authorization",
-                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
-                "requires_human_approval": true,
-                "priority": "P1"
-              },
-              {
-                "action": "rotate_or_revoke_suspicious_tokens",
-                "description": "Review tokens observed in suspicious access patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              },
-              {
-                "action": "update_waf_rules",
-                "description": "Add rules for sequential invoice enumeration patterns.",
-                "requires_human_approval": true,
-                "priority": "P2"
-              }
-            ]
-          },
-          "mini_playbook": [
-            "Validate critical IPs against customer support and internal allowlists.",
-            "Apply dry-run blocklist simulation.",
-            "Enable rate limiting for invoice search endpoint.",
-            "Escalate object-level authorization fix to application security owners.",
-            "Review token exposure and revoke suspicious tokens if confirmed.",
-            "Monitor anomaly score and risk score deltas after containment."
-          ],
-          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
-        },
-        "human_approval_required": true,
-        "dry_run": true,
-        "human_approval_request": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T15:07:54.297360+00:00",
-          "approval_required": true,
-          "dry_run": true,
-          "workflow_stage": "awaiting_human_approval",
-          "actions_waiting_approval": [
-            {
-              "action": "block_or_challenge_critical_ips",
-              "targets": [
-                "204.210.158.207",
-                "73.130.229.200",
-                "216.21.168.27",
-                "74.88.210.56",
-                "24.163.83.34"
-              ],
-              "requires_human_approval": true,
-              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
-              "priority": "P1"
-            }
-          ],
-          "allowed_decisions": [
-            "approved_for_dry_run_only",
-            "rejected",
-            "modified",
-            "request_more_evidence"
-          ]
-        },
-        "human_approval_response": {
-          "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-09T15:07:54.297360+00:00",
-          "decision": "approved_for_dry_run_only",
-          "dry_run": true,
-          "approved_actions_count": 6,
-          "rejected_actions_count": 0,
-          "workflow_stage": "approved",
-          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
-        },
-        "approved_actions": [
-          {
-            "action": "block_ip",
-            "target": "204.210.158.207",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "73.130.229.200",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "216.21.168.27",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "74.88.210.56",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00"
-          },
-          {
-            "action": "block_ip",
-            "target": "24.163.83.34",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00"
-          },
-          {
-            "action": "rate_limit_endpoint",
-            "target": "/invoices/search",
-            "dry_run": true,
-            "executed": false,
-            "status": "simulated",
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00"
-          }
-        ],
-        "rejected_actions": [],
-        "workflow_stage": "approved",
-        "workflow_timeline": [
-          {
-            "timestamp_utc": "2026-06-09T15:07:54.295358+00:00",
-            "stage": "triage",
-            "decision": "critical",
-            "details": {
-              "priority": "P1",
-              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:07:54.296361+00:00",
-            "stage": "forensic_analysis",
-            "decision": "idor_pattern_analyzed",
-            "details": {
-              "patient_zero_candidate": "204.210.158.207",
-              "analysis_iteration": "initial_forensic_review",
-              "human_requested_more_evidence": false
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00",
-            "stage": "response_planning",
-            "decision": "containment_plan_generated",
-            "details": {
-              "dry_run": true,
-              "human_approval_required": true
-            }
-          },
-          {
-            "timestamp_utc": "2026-06-09T15:07:54.297360+00:00",
-            "stage": "human_approval",
-            "decision": "approved_for_dry_run_only",
-            "details": {
-              "workflow_stage": "approved",
-              "approved_actions_count": 6,
-              "rejected_actions_count": 0
-            }
-          }
-        ],
-        "human_loop_count": 0,
-        "decision_log": [
-          {
-            "agent": "triage_agent",
-            "decision": "classified_incident",
-            "severity": "critical",
-            "priority": "P1",
-            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
-          },
-          {
-            "agent": "forensic_analyst_agent",
-            "decision": "confirmed_likely_idor_enumeration",
-            "patient_zero_candidate": "204.210.158.207",
-            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
-            "analysis_iteration": "initial_forensic_review",
-            "human_requested_more_evidence": false
-          },
-          {
-            "agent": "response_advisor_agent",
-            "decision": "recommended_dry_run_containment",
-            "dry_run": true,
-            "human_approval_required": true,
-            "reason": "Blocking actions can affect users and require human approval."
-          },
-          {
-            "agent": "human_approval_agent",
-            "decision": "approved_for_dry_run_only",
-            "workflow_stage": "approved",
-            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
-          }
-        ],
-        "modified_action_plan": {}
-      }
-    },
-    {
       "generated_at_utc": "2026-06-09T15:14:04.216375+00:00",
       "summary": {
         "triage": {
@@ -8906,6 +6617,2226 @@
           },
           {
             "timestamp_utc": "2026-06-09T22:15:28.876646+00:00",
+            "stage": "human_approval",
+            "decision": "approved_for_dry_run_only",
+            "details": {
+              "workflow_stage": "approved",
+              "approved_actions_count": 6,
+              "rejected_actions_count": 0
+            }
+          }
+        ],
+        "human_loop_count": 0,
+        "decision_log": [
+          {
+            "agent": "triage_agent",
+            "decision": "classified_incident",
+            "severity": "critical",
+            "priority": "P1",
+            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
+          },
+          {
+            "agent": "forensic_analyst_agent",
+            "decision": "confirmed_likely_idor_enumeration",
+            "patient_zero_candidate": "204.210.158.207",
+            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
+            "analysis_iteration": "initial_forensic_review",
+            "human_requested_more_evidence": false
+          },
+          {
+            "agent": "response_advisor_agent",
+            "decision": "recommended_dry_run_containment",
+            "dry_run": true,
+            "human_approval_required": true,
+            "reason": "Blocking actions can affect users and require human approval."
+          },
+          {
+            "agent": "human_approval_agent",
+            "decision": "approved_for_dry_run_only",
+            "workflow_stage": "approved",
+            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
+          }
+        ],
+        "modified_action_plan": {}
+      }
+    },
+    {
+      "generated_at_utc": "2026-06-09T23:01:52.519925+00:00",
+      "summary": {
+        "triage": {
+          "agent": "triage_agent",
+          "generated_at_utc": "2026-06-09T23:01:52.508261+00:00",
+          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
+          "severity": "critical",
+          "priority": "P1",
+          "top_risk_score": 86.04241498055296,
+          "total_suspicious_ips": 182,
+          "total_anomalous_ips": 172,
+          "initial_hypotheses": [
+            "Automated invoice enumeration against invoice search endpoint.",
+            "Possible IDOR exploitation due to high invoice diversity per IP.",
+            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
+          ],
+          "investigation_plan": [
+            "Review top risk IPs and their invoice enumeration pattern.",
+            "Validate whether accessed invoices belong to different users.",
+            "Review auth token reuse and suspicious user-agent patterns.",
+            "Correlate risk scoring with Isolation Forest anomaly results.",
+            "Prioritize containment for critical IPs with confirmed high-risk behavior."
+          ]
+        },
+        "forensic_analysis": {
+          "agent": "forensic_analyst_agent",
+          "generated_at_utc": "2026-06-09T23:01:52.509830+00:00",
+          "patient_zero_candidate": "204.210.158.207",
+          "attack_window": {
+            "first_seen": "2020-10-01 00:00:00.000000",
+            "last_seen": "2020-12-31 23:58:00.000000"
+          },
+          "first_seen": "2020-10-01 00:00:00.000000",
+          "last_seen": "2020-12-31 23:58:00.000000",
+          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
+          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
+          "automation_assessment": {
+            "is_likely_automated": true,
+            "likely_automated": true,
+            "automation_type": "bot-driven invoice enumeration",
+            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
+            "supporting_signals": [
+              "high request volume",
+              "high unique invoice diversity",
+              "high sequential access ratio",
+              "bot detection convergence",
+              "anomaly detection convergence"
+            ],
+            "total_anomalous_ips": 172
+          },
+          "idor_evidence_assessment": {
+            "clear_idor_evidence": true,
+            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
+            "top_enumeration_pattern": {
+              "ip": "204.210.158.207",
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "invoice_span": 111111999,
+              "min_invoice_id": 118822000,
+              "max_invoice_id": 229933999,
+              "idor_severity": "critical",
+              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
+            }
+          },
+          "estimated_impact": {
+            "unique_invoices_accessed_by_top_attackers": 10221,
+            "unique_tokens_seen": 35,
+            "total_attack_events": 96829
+          },
+          "mitre_attack_mapping_high_level": [
+            {
+              "tactic": "Credential Access / Discovery",
+              "technique": "Automated resource enumeration",
+              "note": "Mapped at high level due to identifier enumeration behavior."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from information repositories",
+              "note": "Invoice data may represent sensitive business/user information."
+            },
+            {
+              "tactic": "Defense Evasion",
+              "technique": "Use of distributed IPs or repeated low-rate access",
+              "note": "Multiple suspicious IPs may indicate campaign distribution."
+            }
+          ],
+          "mitre_attack_mapping": [
+            {
+              "tactic": "Discovery",
+              "technique": "Application endpoint and object identifier enumeration",
+              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from Information Repositories",
+              "rationale": "The observed behavior indicates large-scale access to invoice objects."
+            },
+            {
+              "tactic": "Credential Access / Defense Evasion",
+              "technique": "Valid Accounts or Token Misuse",
+              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
+            }
+          ],
+          "top_attackers_reviewed": [
+            {
+              "ip": "204.210.158.207",
+              "risk_score": 86.04241498055296,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "total_requests": 12409
+            },
+            {
+              "ip": "73.130.229.200",
+              "risk_score": 85.88302533017595,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6625776397515528,
+              "unique_invoice_ids": 6441,
+              "total_requests": 12453
+            },
+            {
+              "ip": "216.21.168.27",
+              "risk_score": 85.75971025623024,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6627108057464085,
+              "unique_invoice_ids": 6405,
+              "total_requests": 12429
+            },
+            {
+              "ip": "74.88.210.56",
+              "risk_score": 85.72791306614572,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6602334630350195,
+              "unique_invoice_ids": 6426,
+              "total_requests": 12426
+            },
+            {
+              "ip": "24.163.83.34",
+              "risk_score": 84.9608873784426,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6585098039215687,
+              "unique_invoice_ids": 6376,
+              "total_requests": 12244
+            },
+            {
+              "ip": "181.88.192.48",
+              "risk_score": 45.79610824077543,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6579261025029798,
+              "unique_invoice_ids": 1679,
+              "total_requests": 3010
+            },
+            {
+              "ip": "181.88.192.87",
+              "risk_score": 45.46652259670832,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6534056660638939,
+              "unique_invoice_ids": 1660,
+              "total_requests": 2961
+            },
+            {
+              "ip": "181.88.192.16",
+              "risk_score": 45.38353249541662,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6556372549019608,
+              "unique_invoice_ids": 1633,
+              "total_requests": 2945
+            },
+            {
+              "ip": "181.88.192.59",
+              "risk_score": 45.098413151661326,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6504315659679408,
+              "unique_invoice_ids": 1623,
+              "total_requests": 2917
+            },
+            {
+              "ip": "181.88.192.115",
+              "risk_score": 44.71399628334233,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6461538461538462,
+              "unique_invoice_ids": 1626,
+              "total_requests": 2865
+            }
+          ],
+          "analysis_iteration": "initial_forensic_review",
+          "human_requested_more_evidence": false
+        },
+        "response_recommendation": {
+          "agent": "response_advisor_agent",
+          "generated_at_utc": "2026-06-09T23:01:52.510348+00:00",
+          "dry_run": true,
+          "human_approval_required": true,
+          "human_approval_status": "pending",
+          "recommended_containment": {
+            "immediate": [
+              {
+                "action": "block_or_challenge_critical_ips",
+                "targets": [
+                  "204.210.158.207",
+                  "73.130.229.200",
+                  "216.21.168.27",
+                  "74.88.210.56",
+                  "24.163.83.34"
+                ],
+                "requires_human_approval": true,
+                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+                "priority": "P1"
+              },
+              {
+                "action": "dynamic_rate_limiting_invoice_search",
+                "targets": [
+                  "/invoices/search"
+                ],
+                "requires_human_approval": false,
+                "business_risk": "Low to medium; may affect heavy legitimate usage.",
+                "priority": "P1"
+              },
+              {
+                "action": "increase_monitoring_for_high_risk_ips",
+                "targets": [],
+                "requires_human_approval": false,
+                "business_risk": "Low.",
+                "priority": "P2"
+              }
+            ],
+            "strategic": [
+              {
+                "action": "fix_object_level_authorization",
+                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
+                "requires_human_approval": true,
+                "priority": "P1"
+              },
+              {
+                "action": "rotate_or_revoke_suspicious_tokens",
+                "description": "Review tokens observed in suspicious access patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              },
+              {
+                "action": "update_waf_rules",
+                "description": "Add rules for sequential invoice enumeration patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              }
+            ]
+          },
+          "mini_playbook": [
+            "Validate critical IPs against customer support and internal allowlists.",
+            "Apply dry-run blocklist simulation.",
+            "Enable rate limiting for invoice search endpoint.",
+            "Escalate object-level authorization fix to application security owners.",
+            "Review token exposure and revoke suspicious tokens if confirmed.",
+            "Monitor anomaly score and risk score deltas after containment."
+          ],
+          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
+        },
+        "human_approval_required": true,
+        "dry_run": true,
+        "human_approval_request": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-09T23:01:52.510348+00:00",
+          "approval_required": true,
+          "dry_run": true,
+          "workflow_stage": "awaiting_human_approval",
+          "actions_waiting_approval": [
+            {
+              "action": "block_or_challenge_critical_ips",
+              "targets": [
+                "204.210.158.207",
+                "73.130.229.200",
+                "216.21.168.27",
+                "74.88.210.56",
+                "24.163.83.34"
+              ],
+              "requires_human_approval": true,
+              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+              "priority": "P1"
+            }
+          ],
+          "allowed_decisions": [
+            "approved_for_dry_run_only",
+            "rejected",
+            "modified",
+            "request_more_evidence"
+          ]
+        },
+        "human_approval_response": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-09T23:01:52.510348+00:00",
+          "decision": "approved_for_dry_run_only",
+          "dry_run": true,
+          "approved_actions_count": 6,
+          "rejected_actions_count": 0,
+          "workflow_stage": "approved",
+          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
+        },
+        "approved_actions": [
+          {
+            "action": "block_ip",
+            "target": "204.210.158.207",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "73.130.229.200",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "216.21.168.27",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "74.88.210.56",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "24.163.83.34",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00"
+          },
+          {
+            "action": "rate_limit_endpoint",
+            "target": "/invoices/search",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00"
+          }
+        ],
+        "rejected_actions": [],
+        "workflow_stage": "approved",
+        "workflow_timeline": [
+          {
+            "timestamp_utc": "2026-06-09T23:01:52.509309+00:00",
+            "stage": "triage",
+            "decision": "critical",
+            "details": {
+              "priority": "P1",
+              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-09T23:01:52.509830+00:00",
+            "stage": "forensic_analysis",
+            "decision": "idor_pattern_analyzed",
+            "details": {
+              "patient_zero_candidate": "204.210.158.207",
+              "analysis_iteration": "initial_forensic_review",
+              "human_requested_more_evidence": false
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00",
+            "stage": "response_planning",
+            "decision": "containment_plan_generated",
+            "details": {
+              "dry_run": true,
+              "human_approval_required": true
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-09T23:01:52.510348+00:00",
+            "stage": "human_approval",
+            "decision": "approved_for_dry_run_only",
+            "details": {
+              "workflow_stage": "approved",
+              "approved_actions_count": 6,
+              "rejected_actions_count": 0
+            }
+          }
+        ],
+        "human_loop_count": 0,
+        "decision_log": [
+          {
+            "agent": "triage_agent",
+            "decision": "classified_incident",
+            "severity": "critical",
+            "priority": "P1",
+            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
+          },
+          {
+            "agent": "forensic_analyst_agent",
+            "decision": "confirmed_likely_idor_enumeration",
+            "patient_zero_candidate": "204.210.158.207",
+            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
+            "analysis_iteration": "initial_forensic_review",
+            "human_requested_more_evidence": false
+          },
+          {
+            "agent": "response_advisor_agent",
+            "decision": "recommended_dry_run_containment",
+            "dry_run": true,
+            "human_approval_required": true,
+            "reason": "Blocking actions can affect users and require human approval."
+          },
+          {
+            "agent": "human_approval_agent",
+            "decision": "approved_for_dry_run_only",
+            "workflow_stage": "approved",
+            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
+          }
+        ],
+        "modified_action_plan": {}
+      }
+    },
+    {
+      "generated_at_utc": "2026-06-10T03:21:25.707855+00:00",
+      "summary": {
+        "triage": {
+          "agent": "triage_agent",
+          "generated_at_utc": "2026-06-10T03:21:25.691312+00:00",
+          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
+          "severity": "critical",
+          "priority": "P1",
+          "top_risk_score": 86.04241498055296,
+          "total_suspicious_ips": 182,
+          "total_anomalous_ips": 172,
+          "initial_hypotheses": [
+            "Automated invoice enumeration against invoice search endpoint.",
+            "Possible IDOR exploitation due to high invoice diversity per IP.",
+            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
+          ],
+          "investigation_plan": [
+            "Review top risk IPs and their invoice enumeration pattern.",
+            "Validate whether accessed invoices belong to different users.",
+            "Review auth token reuse and suspicious user-agent patterns.",
+            "Correlate risk scoring with Isolation Forest anomaly results.",
+            "Prioritize containment for critical IPs with confirmed high-risk behavior."
+          ]
+        },
+        "forensic_analysis": {
+          "agent": "forensic_analyst_agent",
+          "generated_at_utc": "2026-06-10T03:21:25.694067+00:00",
+          "patient_zero_candidate": "204.210.158.207",
+          "attack_window": {
+            "first_seen": "2020-10-01 00:00:00.000000",
+            "last_seen": "2020-12-31 23:58:00.000000"
+          },
+          "first_seen": "2020-10-01 00:00:00.000000",
+          "last_seen": "2020-12-31 23:58:00.000000",
+          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
+          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
+          "automation_assessment": {
+            "is_likely_automated": true,
+            "likely_automated": true,
+            "automation_type": "bot-driven invoice enumeration",
+            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
+            "supporting_signals": [
+              "high request volume",
+              "high unique invoice diversity",
+              "high sequential access ratio",
+              "bot detection convergence",
+              "anomaly detection convergence"
+            ],
+            "total_anomalous_ips": 172
+          },
+          "idor_evidence_assessment": {
+            "clear_idor_evidence": true,
+            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
+            "top_enumeration_pattern": {
+              "ip": "204.210.158.207",
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "invoice_span": 111111999,
+              "min_invoice_id": 118822000,
+              "max_invoice_id": 229933999,
+              "idor_severity": "critical",
+              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
+            }
+          },
+          "estimated_impact": {
+            "unique_invoices_accessed_by_top_attackers": 10221,
+            "unique_tokens_seen": 35,
+            "total_attack_events": 96829
+          },
+          "mitre_attack_mapping_high_level": [
+            {
+              "tactic": "Credential Access / Discovery",
+              "technique": "Automated resource enumeration",
+              "note": "Mapped at high level due to identifier enumeration behavior."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from information repositories",
+              "note": "Invoice data may represent sensitive business/user information."
+            },
+            {
+              "tactic": "Defense Evasion",
+              "technique": "Use of distributed IPs or repeated low-rate access",
+              "note": "Multiple suspicious IPs may indicate campaign distribution."
+            }
+          ],
+          "mitre_attack_mapping": [
+            {
+              "tactic": "Discovery",
+              "technique": "Application endpoint and object identifier enumeration",
+              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from Information Repositories",
+              "rationale": "The observed behavior indicates large-scale access to invoice objects."
+            },
+            {
+              "tactic": "Credential Access / Defense Evasion",
+              "technique": "Valid Accounts or Token Misuse",
+              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
+            }
+          ],
+          "top_attackers_reviewed": [
+            {
+              "ip": "204.210.158.207",
+              "risk_score": 86.04241498055296,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "total_requests": 12409
+            },
+            {
+              "ip": "73.130.229.200",
+              "risk_score": 85.88302533017595,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6625776397515528,
+              "unique_invoice_ids": 6441,
+              "total_requests": 12453
+            },
+            {
+              "ip": "216.21.168.27",
+              "risk_score": 85.75971025623024,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6627108057464085,
+              "unique_invoice_ids": 6405,
+              "total_requests": 12429
+            },
+            {
+              "ip": "74.88.210.56",
+              "risk_score": 85.72791306614572,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6602334630350195,
+              "unique_invoice_ids": 6426,
+              "total_requests": 12426
+            },
+            {
+              "ip": "24.163.83.34",
+              "risk_score": 84.9608873784426,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6585098039215687,
+              "unique_invoice_ids": 6376,
+              "total_requests": 12244
+            },
+            {
+              "ip": "181.88.192.48",
+              "risk_score": 45.79610824077543,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6579261025029798,
+              "unique_invoice_ids": 1679,
+              "total_requests": 3010
+            },
+            {
+              "ip": "181.88.192.87",
+              "risk_score": 45.46652259670832,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6534056660638939,
+              "unique_invoice_ids": 1660,
+              "total_requests": 2961
+            },
+            {
+              "ip": "181.88.192.16",
+              "risk_score": 45.38353249541662,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6556372549019608,
+              "unique_invoice_ids": 1633,
+              "total_requests": 2945
+            },
+            {
+              "ip": "181.88.192.59",
+              "risk_score": 45.098413151661326,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6504315659679408,
+              "unique_invoice_ids": 1623,
+              "total_requests": 2917
+            },
+            {
+              "ip": "181.88.192.115",
+              "risk_score": 44.71399628334233,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6461538461538462,
+              "unique_invoice_ids": 1626,
+              "total_requests": 2865
+            }
+          ],
+          "analysis_iteration": "initial_forensic_review",
+          "human_requested_more_evidence": false
+        },
+        "response_recommendation": {
+          "agent": "response_advisor_agent",
+          "generated_at_utc": "2026-06-10T03:21:25.695072+00:00",
+          "dry_run": true,
+          "human_approval_required": true,
+          "human_approval_status": "pending",
+          "recommended_containment": {
+            "immediate": [
+              {
+                "action": "block_or_challenge_critical_ips",
+                "targets": [
+                  "204.210.158.207",
+                  "73.130.229.200",
+                  "216.21.168.27",
+                  "74.88.210.56",
+                  "24.163.83.34"
+                ],
+                "requires_human_approval": true,
+                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+                "priority": "P1"
+              },
+              {
+                "action": "dynamic_rate_limiting_invoice_search",
+                "targets": [
+                  "/invoices/search"
+                ],
+                "requires_human_approval": false,
+                "business_risk": "Low to medium; may affect heavy legitimate usage.",
+                "priority": "P1"
+              },
+              {
+                "action": "increase_monitoring_for_high_risk_ips",
+                "targets": [],
+                "requires_human_approval": false,
+                "business_risk": "Low.",
+                "priority": "P2"
+              }
+            ],
+            "strategic": [
+              {
+                "action": "fix_object_level_authorization",
+                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
+                "requires_human_approval": true,
+                "priority": "P1"
+              },
+              {
+                "action": "rotate_or_revoke_suspicious_tokens",
+                "description": "Review tokens observed in suspicious access patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              },
+              {
+                "action": "update_waf_rules",
+                "description": "Add rules for sequential invoice enumeration patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              }
+            ]
+          },
+          "mini_playbook": [
+            "Validate critical IPs against customer support and internal allowlists.",
+            "Apply dry-run blocklist simulation.",
+            "Enable rate limiting for invoice search endpoint.",
+            "Escalate object-level authorization fix to application security owners.",
+            "Review token exposure and revoke suspicious tokens if confirmed.",
+            "Monitor anomaly score and risk score deltas after containment."
+          ],
+          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
+        },
+        "human_approval_required": true,
+        "dry_run": true,
+        "human_approval_request": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T03:21:25.696074+00:00",
+          "approval_required": true,
+          "dry_run": true,
+          "workflow_stage": "awaiting_human_approval",
+          "actions_waiting_approval": [
+            {
+              "action": "block_or_challenge_critical_ips",
+              "targets": [
+                "204.210.158.207",
+                "73.130.229.200",
+                "216.21.168.27",
+                "74.88.210.56",
+                "24.163.83.34"
+              ],
+              "requires_human_approval": true,
+              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+              "priority": "P1"
+            }
+          ],
+          "allowed_decisions": [
+            "approved_for_dry_run_only",
+            "rejected",
+            "modified",
+            "request_more_evidence"
+          ]
+        },
+        "human_approval_response": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T03:21:25.696074+00:00",
+          "decision": "approved_for_dry_run_only",
+          "dry_run": true,
+          "approved_actions_count": 6,
+          "rejected_actions_count": 0,
+          "workflow_stage": "approved",
+          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
+        },
+        "approved_actions": [
+          {
+            "action": "block_ip",
+            "target": "204.210.158.207",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:21:25.696074+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "73.130.229.200",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:21:25.696074+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "216.21.168.27",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:21:25.696074+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "74.88.210.56",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:21:25.696074+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "24.163.83.34",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:21:25.696074+00:00"
+          },
+          {
+            "action": "rate_limit_endpoint",
+            "target": "/invoices/search",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:21:25.696074+00:00"
+          }
+        ],
+        "rejected_actions": [],
+        "workflow_stage": "approved",
+        "workflow_timeline": [
+          {
+            "timestamp_utc": "2026-06-10T03:21:25.693071+00:00",
+            "stage": "triage",
+            "decision": "critical",
+            "details": {
+              "priority": "P1",
+              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:21:25.694067+00:00",
+            "stage": "forensic_analysis",
+            "decision": "idor_pattern_analyzed",
+            "details": {
+              "patient_zero_candidate": "204.210.158.207",
+              "analysis_iteration": "initial_forensic_review",
+              "human_requested_more_evidence": false
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:21:25.695072+00:00",
+            "stage": "response_planning",
+            "decision": "containment_plan_generated",
+            "details": {
+              "dry_run": true,
+              "human_approval_required": true
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:21:25.696074+00:00",
+            "stage": "human_approval",
+            "decision": "approved_for_dry_run_only",
+            "details": {
+              "workflow_stage": "approved",
+              "approved_actions_count": 6,
+              "rejected_actions_count": 0
+            }
+          }
+        ],
+        "human_loop_count": 0,
+        "decision_log": [
+          {
+            "agent": "triage_agent",
+            "decision": "classified_incident",
+            "severity": "critical",
+            "priority": "P1",
+            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
+          },
+          {
+            "agent": "forensic_analyst_agent",
+            "decision": "confirmed_likely_idor_enumeration",
+            "patient_zero_candidate": "204.210.158.207",
+            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
+            "analysis_iteration": "initial_forensic_review",
+            "human_requested_more_evidence": false
+          },
+          {
+            "agent": "response_advisor_agent",
+            "decision": "recommended_dry_run_containment",
+            "dry_run": true,
+            "human_approval_required": true,
+            "reason": "Blocking actions can affect users and require human approval."
+          },
+          {
+            "agent": "human_approval_agent",
+            "decision": "approved_for_dry_run_only",
+            "workflow_stage": "approved",
+            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
+          }
+        ],
+        "modified_action_plan": {}
+      }
+    },
+    {
+      "generated_at_utc": "2026-06-10T03:32:30.853063+00:00",
+      "summary": {
+        "triage": {
+          "agent": "triage_agent",
+          "generated_at_utc": "2026-06-10T03:32:30.838739+00:00",
+          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
+          "severity": "critical",
+          "priority": "P1",
+          "top_risk_score": 86.04241498055296,
+          "total_suspicious_ips": 182,
+          "total_anomalous_ips": 172,
+          "initial_hypotheses": [
+            "Automated invoice enumeration against invoice search endpoint.",
+            "Possible IDOR exploitation due to high invoice diversity per IP.",
+            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
+          ],
+          "investigation_plan": [
+            "Review top risk IPs and their invoice enumeration pattern.",
+            "Validate whether accessed invoices belong to different users.",
+            "Review auth token reuse and suspicious user-agent patterns.",
+            "Correlate risk scoring with Isolation Forest anomaly results.",
+            "Prioritize containment for critical IPs with confirmed high-risk behavior."
+          ]
+        },
+        "forensic_analysis": {
+          "agent": "forensic_analyst_agent",
+          "generated_at_utc": "2026-06-10T03:32:30.842735+00:00",
+          "patient_zero_candidate": "204.210.158.207",
+          "attack_window": {
+            "first_seen": "2020-10-01 00:00:00.000000",
+            "last_seen": "2020-12-31 23:58:00.000000"
+          },
+          "first_seen": "2020-10-01 00:00:00.000000",
+          "last_seen": "2020-12-31 23:58:00.000000",
+          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
+          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
+          "automation_assessment": {
+            "is_likely_automated": true,
+            "likely_automated": true,
+            "automation_type": "bot-driven invoice enumeration",
+            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
+            "supporting_signals": [
+              "high request volume",
+              "high unique invoice diversity",
+              "high sequential access ratio",
+              "bot detection convergence",
+              "anomaly detection convergence"
+            ],
+            "total_anomalous_ips": 172
+          },
+          "idor_evidence_assessment": {
+            "clear_idor_evidence": true,
+            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
+            "top_enumeration_pattern": {
+              "ip": "204.210.158.207",
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "invoice_span": 111111999,
+              "min_invoice_id": 118822000,
+              "max_invoice_id": 229933999,
+              "idor_severity": "critical",
+              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
+            }
+          },
+          "estimated_impact": {
+            "unique_invoices_accessed_by_top_attackers": 10221,
+            "unique_tokens_seen": 35,
+            "total_attack_events": 96829
+          },
+          "mitre_attack_mapping_high_level": [
+            {
+              "tactic": "Credential Access / Discovery",
+              "technique": "Automated resource enumeration",
+              "note": "Mapped at high level due to identifier enumeration behavior."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from information repositories",
+              "note": "Invoice data may represent sensitive business/user information."
+            },
+            {
+              "tactic": "Defense Evasion",
+              "technique": "Use of distributed IPs or repeated low-rate access",
+              "note": "Multiple suspicious IPs may indicate campaign distribution."
+            }
+          ],
+          "mitre_attack_mapping": [
+            {
+              "tactic": "Discovery",
+              "technique": "Application endpoint and object identifier enumeration",
+              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from Information Repositories",
+              "rationale": "The observed behavior indicates large-scale access to invoice objects."
+            },
+            {
+              "tactic": "Credential Access / Defense Evasion",
+              "technique": "Valid Accounts or Token Misuse",
+              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
+            }
+          ],
+          "top_attackers_reviewed": [
+            {
+              "ip": "204.210.158.207",
+              "risk_score": 86.04241498055296,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "total_requests": 12409
+            },
+            {
+              "ip": "73.130.229.200",
+              "risk_score": 85.88302533017595,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6625776397515528,
+              "unique_invoice_ids": 6441,
+              "total_requests": 12453
+            },
+            {
+              "ip": "216.21.168.27",
+              "risk_score": 85.75971025623024,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6627108057464085,
+              "unique_invoice_ids": 6405,
+              "total_requests": 12429
+            },
+            {
+              "ip": "74.88.210.56",
+              "risk_score": 85.72791306614572,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6602334630350195,
+              "unique_invoice_ids": 6426,
+              "total_requests": 12426
+            },
+            {
+              "ip": "24.163.83.34",
+              "risk_score": 84.9608873784426,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6585098039215687,
+              "unique_invoice_ids": 6376,
+              "total_requests": 12244
+            },
+            {
+              "ip": "181.88.192.48",
+              "risk_score": 45.79610824077543,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6579261025029798,
+              "unique_invoice_ids": 1679,
+              "total_requests": 3010
+            },
+            {
+              "ip": "181.88.192.87",
+              "risk_score": 45.46652259670832,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6534056660638939,
+              "unique_invoice_ids": 1660,
+              "total_requests": 2961
+            },
+            {
+              "ip": "181.88.192.16",
+              "risk_score": 45.38353249541662,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6556372549019608,
+              "unique_invoice_ids": 1633,
+              "total_requests": 2945
+            },
+            {
+              "ip": "181.88.192.59",
+              "risk_score": 45.098413151661326,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6504315659679408,
+              "unique_invoice_ids": 1623,
+              "total_requests": 2917
+            },
+            {
+              "ip": "181.88.192.115",
+              "risk_score": 44.71399628334233,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6461538461538462,
+              "unique_invoice_ids": 1626,
+              "total_requests": 2865
+            }
+          ],
+          "analysis_iteration": "initial_forensic_review",
+          "human_requested_more_evidence": false
+        },
+        "response_recommendation": {
+          "agent": "response_advisor_agent",
+          "generated_at_utc": "2026-06-10T03:32:30.842735+00:00",
+          "dry_run": true,
+          "human_approval_required": true,
+          "human_approval_status": "pending",
+          "recommended_containment": {
+            "immediate": [
+              {
+                "action": "block_or_challenge_critical_ips",
+                "targets": [
+                  "204.210.158.207",
+                  "73.130.229.200",
+                  "216.21.168.27",
+                  "74.88.210.56",
+                  "24.163.83.34"
+                ],
+                "requires_human_approval": true,
+                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+                "priority": "P1"
+              },
+              {
+                "action": "dynamic_rate_limiting_invoice_search",
+                "targets": [
+                  "/invoices/search"
+                ],
+                "requires_human_approval": false,
+                "business_risk": "Low to medium; may affect heavy legitimate usage.",
+                "priority": "P1"
+              },
+              {
+                "action": "increase_monitoring_for_high_risk_ips",
+                "targets": [],
+                "requires_human_approval": false,
+                "business_risk": "Low.",
+                "priority": "P2"
+              }
+            ],
+            "strategic": [
+              {
+                "action": "fix_object_level_authorization",
+                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
+                "requires_human_approval": true,
+                "priority": "P1"
+              },
+              {
+                "action": "rotate_or_revoke_suspicious_tokens",
+                "description": "Review tokens observed in suspicious access patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              },
+              {
+                "action": "update_waf_rules",
+                "description": "Add rules for sequential invoice enumeration patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              }
+            ]
+          },
+          "mini_playbook": [
+            "Validate critical IPs against customer support and internal allowlists.",
+            "Apply dry-run blocklist simulation.",
+            "Enable rate limiting for invoice search endpoint.",
+            "Escalate object-level authorization fix to application security owners.",
+            "Review token exposure and revoke suspicious tokens if confirmed.",
+            "Monitor anomaly score and risk score deltas after containment."
+          ],
+          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
+        },
+        "human_approval_required": true,
+        "dry_run": true,
+        "human_approval_request": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T03:32:30.843738+00:00",
+          "approval_required": true,
+          "dry_run": true,
+          "workflow_stage": "awaiting_human_approval",
+          "actions_waiting_approval": [
+            {
+              "action": "block_or_challenge_critical_ips",
+              "targets": [
+                "204.210.158.207",
+                "73.130.229.200",
+                "216.21.168.27",
+                "74.88.210.56",
+                "24.163.83.34"
+              ],
+              "requires_human_approval": true,
+              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+              "priority": "P1"
+            }
+          ],
+          "allowed_decisions": [
+            "approved_for_dry_run_only",
+            "rejected",
+            "modified",
+            "request_more_evidence"
+          ]
+        },
+        "human_approval_response": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T03:32:30.843738+00:00",
+          "decision": "approved_for_dry_run_only",
+          "dry_run": true,
+          "approved_actions_count": 6,
+          "rejected_actions_count": 0,
+          "workflow_stage": "approved",
+          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
+        },
+        "approved_actions": [
+          {
+            "action": "block_ip",
+            "target": "204.210.158.207",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:32:30.843738+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "73.130.229.200",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:32:30.843738+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "216.21.168.27",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:32:30.843738+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "74.88.210.56",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:32:30.843738+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "24.163.83.34",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:32:30.843738+00:00"
+          },
+          {
+            "action": "rate_limit_endpoint",
+            "target": "/invoices/search",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:32:30.843738+00:00"
+          }
+        ],
+        "rejected_actions": [],
+        "workflow_stage": "approved",
+        "workflow_timeline": [
+          {
+            "timestamp_utc": "2026-06-10T03:32:30.840738+00:00",
+            "stage": "triage",
+            "decision": "critical",
+            "details": {
+              "priority": "P1",
+              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:32:30.842735+00:00",
+            "stage": "forensic_analysis",
+            "decision": "idor_pattern_analyzed",
+            "details": {
+              "patient_zero_candidate": "204.210.158.207",
+              "analysis_iteration": "initial_forensic_review",
+              "human_requested_more_evidence": false
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:32:30.842735+00:00",
+            "stage": "response_planning",
+            "decision": "containment_plan_generated",
+            "details": {
+              "dry_run": true,
+              "human_approval_required": true
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:32:30.843738+00:00",
+            "stage": "human_approval",
+            "decision": "approved_for_dry_run_only",
+            "details": {
+              "workflow_stage": "approved",
+              "approved_actions_count": 6,
+              "rejected_actions_count": 0
+            }
+          }
+        ],
+        "human_loop_count": 0,
+        "decision_log": [
+          {
+            "agent": "triage_agent",
+            "decision": "classified_incident",
+            "severity": "critical",
+            "priority": "P1",
+            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
+          },
+          {
+            "agent": "forensic_analyst_agent",
+            "decision": "confirmed_likely_idor_enumeration",
+            "patient_zero_candidate": "204.210.158.207",
+            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
+            "analysis_iteration": "initial_forensic_review",
+            "human_requested_more_evidence": false
+          },
+          {
+            "agent": "response_advisor_agent",
+            "decision": "recommended_dry_run_containment",
+            "dry_run": true,
+            "human_approval_required": true,
+            "reason": "Blocking actions can affect users and require human approval."
+          },
+          {
+            "agent": "human_approval_agent",
+            "decision": "approved_for_dry_run_only",
+            "workflow_stage": "approved",
+            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
+          }
+        ],
+        "modified_action_plan": {}
+      }
+    },
+    {
+      "generated_at_utc": "2026-06-10T03:33:42.480576+00:00",
+      "summary": {
+        "triage": {
+          "agent": "triage_agent",
+          "generated_at_utc": "2026-06-10T03:33:42.462665+00:00",
+          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
+          "severity": "critical",
+          "priority": "P1",
+          "top_risk_score": 86.04241498055296,
+          "total_suspicious_ips": 182,
+          "total_anomalous_ips": 172,
+          "initial_hypotheses": [
+            "Automated invoice enumeration against invoice search endpoint.",
+            "Possible IDOR exploitation due to high invoice diversity per IP.",
+            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
+          ],
+          "investigation_plan": [
+            "Review top risk IPs and their invoice enumeration pattern.",
+            "Validate whether accessed invoices belong to different users.",
+            "Review auth token reuse and suspicious user-agent patterns.",
+            "Correlate risk scoring with Isolation Forest anomaly results.",
+            "Prioritize containment for critical IPs with confirmed high-risk behavior."
+          ]
+        },
+        "forensic_analysis": {
+          "agent": "forensic_analyst_agent",
+          "generated_at_utc": "2026-06-10T03:33:42.467192+00:00",
+          "patient_zero_candidate": "204.210.158.207",
+          "attack_window": {
+            "first_seen": "2020-10-01 00:00:00.000000",
+            "last_seen": "2020-12-31 23:58:00.000000"
+          },
+          "first_seen": "2020-10-01 00:00:00.000000",
+          "last_seen": "2020-12-31 23:58:00.000000",
+          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
+          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
+          "automation_assessment": {
+            "is_likely_automated": true,
+            "likely_automated": true,
+            "automation_type": "bot-driven invoice enumeration",
+            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
+            "supporting_signals": [
+              "high request volume",
+              "high unique invoice diversity",
+              "high sequential access ratio",
+              "bot detection convergence",
+              "anomaly detection convergence"
+            ],
+            "total_anomalous_ips": 172
+          },
+          "idor_evidence_assessment": {
+            "clear_idor_evidence": true,
+            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
+            "top_enumeration_pattern": {
+              "ip": "204.210.158.207",
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "invoice_span": 111111999,
+              "min_invoice_id": 118822000,
+              "max_invoice_id": 229933999,
+              "idor_severity": "critical",
+              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
+            }
+          },
+          "estimated_impact": {
+            "unique_invoices_accessed_by_top_attackers": 10221,
+            "unique_tokens_seen": 35,
+            "total_attack_events": 96829
+          },
+          "mitre_attack_mapping_high_level": [
+            {
+              "tactic": "Credential Access / Discovery",
+              "technique": "Automated resource enumeration",
+              "note": "Mapped at high level due to identifier enumeration behavior."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from information repositories",
+              "note": "Invoice data may represent sensitive business/user information."
+            },
+            {
+              "tactic": "Defense Evasion",
+              "technique": "Use of distributed IPs or repeated low-rate access",
+              "note": "Multiple suspicious IPs may indicate campaign distribution."
+            }
+          ],
+          "mitre_attack_mapping": [
+            {
+              "tactic": "Discovery",
+              "technique": "Application endpoint and object identifier enumeration",
+              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from Information Repositories",
+              "rationale": "The observed behavior indicates large-scale access to invoice objects."
+            },
+            {
+              "tactic": "Credential Access / Defense Evasion",
+              "technique": "Valid Accounts or Token Misuse",
+              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
+            }
+          ],
+          "top_attackers_reviewed": [
+            {
+              "ip": "204.210.158.207",
+              "risk_score": 86.04241498055296,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "total_requests": 12409
+            },
+            {
+              "ip": "73.130.229.200",
+              "risk_score": 85.88302533017595,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6625776397515528,
+              "unique_invoice_ids": 6441,
+              "total_requests": 12453
+            },
+            {
+              "ip": "216.21.168.27",
+              "risk_score": 85.75971025623024,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6627108057464085,
+              "unique_invoice_ids": 6405,
+              "total_requests": 12429
+            },
+            {
+              "ip": "74.88.210.56",
+              "risk_score": 85.72791306614572,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6602334630350195,
+              "unique_invoice_ids": 6426,
+              "total_requests": 12426
+            },
+            {
+              "ip": "24.163.83.34",
+              "risk_score": 84.9608873784426,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6585098039215687,
+              "unique_invoice_ids": 6376,
+              "total_requests": 12244
+            },
+            {
+              "ip": "181.88.192.48",
+              "risk_score": 45.79610824077543,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6579261025029798,
+              "unique_invoice_ids": 1679,
+              "total_requests": 3010
+            },
+            {
+              "ip": "181.88.192.87",
+              "risk_score": 45.46652259670832,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6534056660638939,
+              "unique_invoice_ids": 1660,
+              "total_requests": 2961
+            },
+            {
+              "ip": "181.88.192.16",
+              "risk_score": 45.38353249541662,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6556372549019608,
+              "unique_invoice_ids": 1633,
+              "total_requests": 2945
+            },
+            {
+              "ip": "181.88.192.59",
+              "risk_score": 45.098413151661326,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6504315659679408,
+              "unique_invoice_ids": 1623,
+              "total_requests": 2917
+            },
+            {
+              "ip": "181.88.192.115",
+              "risk_score": 44.71399628334233,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6461538461538462,
+              "unique_invoice_ids": 1626,
+              "total_requests": 2865
+            }
+          ],
+          "analysis_iteration": "initial_forensic_review",
+          "human_requested_more_evidence": false
+        },
+        "response_recommendation": {
+          "agent": "response_advisor_agent",
+          "generated_at_utc": "2026-06-10T03:33:42.468188+00:00",
+          "dry_run": true,
+          "human_approval_required": true,
+          "human_approval_status": "pending",
+          "recommended_containment": {
+            "immediate": [
+              {
+                "action": "block_or_challenge_critical_ips",
+                "targets": [
+                  "204.210.158.207",
+                  "73.130.229.200",
+                  "216.21.168.27",
+                  "74.88.210.56",
+                  "24.163.83.34"
+                ],
+                "requires_human_approval": true,
+                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+                "priority": "P1"
+              },
+              {
+                "action": "dynamic_rate_limiting_invoice_search",
+                "targets": [
+                  "/invoices/search"
+                ],
+                "requires_human_approval": false,
+                "business_risk": "Low to medium; may affect heavy legitimate usage.",
+                "priority": "P1"
+              },
+              {
+                "action": "increase_monitoring_for_high_risk_ips",
+                "targets": [],
+                "requires_human_approval": false,
+                "business_risk": "Low.",
+                "priority": "P2"
+              }
+            ],
+            "strategic": [
+              {
+                "action": "fix_object_level_authorization",
+                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
+                "requires_human_approval": true,
+                "priority": "P1"
+              },
+              {
+                "action": "rotate_or_revoke_suspicious_tokens",
+                "description": "Review tokens observed in suspicious access patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              },
+              {
+                "action": "update_waf_rules",
+                "description": "Add rules for sequential invoice enumeration patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              }
+            ]
+          },
+          "mini_playbook": [
+            "Validate critical IPs against customer support and internal allowlists.",
+            "Apply dry-run blocklist simulation.",
+            "Enable rate limiting for invoice search endpoint.",
+            "Escalate object-level authorization fix to application security owners.",
+            "Review token exposure and revoke suspicious tokens if confirmed.",
+            "Monitor anomaly score and risk score deltas after containment."
+          ],
+          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
+        },
+        "human_approval_required": true,
+        "dry_run": true,
+        "human_approval_request": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T03:33:42.468917+00:00",
+          "approval_required": true,
+          "dry_run": true,
+          "workflow_stage": "awaiting_human_approval",
+          "actions_waiting_approval": [
+            {
+              "action": "block_or_challenge_critical_ips",
+              "targets": [
+                "204.210.158.207",
+                "73.130.229.200",
+                "216.21.168.27",
+                "74.88.210.56",
+                "24.163.83.34"
+              ],
+              "requires_human_approval": true,
+              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+              "priority": "P1"
+            }
+          ],
+          "allowed_decisions": [
+            "approved_for_dry_run_only",
+            "rejected",
+            "modified",
+            "request_more_evidence"
+          ]
+        },
+        "human_approval_response": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T03:33:42.468917+00:00",
+          "decision": "approved_for_dry_run_only",
+          "dry_run": true,
+          "approved_actions_count": 6,
+          "rejected_actions_count": 0,
+          "workflow_stage": "approved",
+          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
+        },
+        "approved_actions": [
+          {
+            "action": "block_ip",
+            "target": "204.210.158.207",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:33:42.468917+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "73.130.229.200",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:33:42.468917+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "216.21.168.27",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:33:42.468917+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "74.88.210.56",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:33:42.468917+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "24.163.83.34",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:33:42.468917+00:00"
+          },
+          {
+            "action": "rate_limit_endpoint",
+            "target": "/invoices/search",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T03:33:42.468917+00:00"
+          }
+        ],
+        "rejected_actions": [],
+        "workflow_stage": "approved",
+        "workflow_timeline": [
+          {
+            "timestamp_utc": "2026-06-10T03:33:42.465372+00:00",
+            "stage": "triage",
+            "decision": "critical",
+            "details": {
+              "priority": "P1",
+              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:33:42.467192+00:00",
+            "stage": "forensic_analysis",
+            "decision": "idor_pattern_analyzed",
+            "details": {
+              "patient_zero_candidate": "204.210.158.207",
+              "analysis_iteration": "initial_forensic_review",
+              "human_requested_more_evidence": false
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:33:42.468188+00:00",
+            "stage": "response_planning",
+            "decision": "containment_plan_generated",
+            "details": {
+              "dry_run": true,
+              "human_approval_required": true
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T03:33:42.468917+00:00",
+            "stage": "human_approval",
+            "decision": "approved_for_dry_run_only",
+            "details": {
+              "workflow_stage": "approved",
+              "approved_actions_count": 6,
+              "rejected_actions_count": 0
+            }
+          }
+        ],
+        "human_loop_count": 0,
+        "decision_log": [
+          {
+            "agent": "triage_agent",
+            "decision": "classified_incident",
+            "severity": "critical",
+            "priority": "P1",
+            "reason": "Severity derived from top risk score, IOC count and anomaly convergence."
+          },
+          {
+            "agent": "forensic_analyst_agent",
+            "decision": "confirmed_likely_idor_enumeration",
+            "patient_zero_candidate": "204.210.158.207",
+            "reason": "Evidence converges across timeline, IOCs, risk and anomaly scores.",
+            "analysis_iteration": "initial_forensic_review",
+            "human_requested_more_evidence": false
+          },
+          {
+            "agent": "response_advisor_agent",
+            "decision": "recommended_dry_run_containment",
+            "dry_run": true,
+            "human_approval_required": true,
+            "reason": "Blocking actions can affect users and require human approval."
+          },
+          {
+            "agent": "human_approval_agent",
+            "decision": "approved_for_dry_run_only",
+            "workflow_stage": "approved",
+            "reason": "Human reviewer approved containment simulation only. No production action is authorized."
+          }
+        ],
+        "modified_action_plan": {}
+      }
+    },
+    {
+      "generated_at_utc": "2026-06-10T16:03:21.233904+00:00",
+      "summary": {
+        "triage": {
+          "agent": "triage_agent",
+          "generated_at_utc": "2026-06-10T16:03:21.221658+00:00",
+          "incident_classification": "Potential IDOR exploitation via invoice enumeration",
+          "severity": "critical",
+          "priority": "P1",
+          "top_risk_score": 86.04241498055296,
+          "total_suspicious_ips": 182,
+          "total_anomalous_ips": 172,
+          "initial_hypotheses": [
+            "Automated invoice enumeration against invoice search endpoint.",
+            "Possible IDOR exploitation due to high invoice diversity per IP.",
+            "Likely bot-driven activity due to convergence of heuristic and anomaly signals."
+          ],
+          "investigation_plan": [
+            "Review top risk IPs and their invoice enumeration pattern.",
+            "Validate whether accessed invoices belong to different users.",
+            "Review auth token reuse and suspicious user-agent patterns.",
+            "Correlate risk scoring with Isolation Forest anomaly results.",
+            "Prioritize containment for critical IPs with confirmed high-risk behavior."
+          ]
+        },
+        "forensic_analysis": {
+          "agent": "forensic_analyst_agent",
+          "generated_at_utc": "2026-06-10T16:03:21.224665+00:00",
+          "patient_zero_candidate": "204.210.158.207",
+          "attack_window": {
+            "first_seen": "2020-10-01 00:00:00.000000",
+            "last_seen": "2020-12-31 23:58:00.000000"
+          },
+          "first_seen": "2020-10-01 00:00:00.000000",
+          "last_seen": "2020-12-31 23:58:00.000000",
+          "attack_pattern": "Automated sequential invoice enumeration through exposed application object identifiers.",
+          "attack_pattern_explanation": "The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.",
+          "automation_assessment": {
+            "is_likely_automated": true,
+            "likely_automated": true,
+            "automation_type": "bot-driven invoice enumeration",
+            "rationale": "Top IPs converge across risk scoring, bot likelihood and Isolation Forest anomaly detection.",
+            "supporting_signals": [
+              "high request volume",
+              "high unique invoice diversity",
+              "high sequential access ratio",
+              "bot detection convergence",
+              "anomaly detection convergence"
+            ],
+            "total_anomalous_ips": 172
+          },
+          "idor_evidence_assessment": {
+            "clear_idor_evidence": true,
+            "reason": "Multiple IPs accessed thousands of unique invoice IDs with strong sequential patterns, suggesting enumeration of object references.",
+            "top_enumeration_pattern": {
+              "ip": "204.210.158.207",
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "invoice_span": 111111999,
+              "min_invoice_id": 118822000,
+              "max_invoice_id": 229933999,
+              "idor_severity": "critical",
+              "idor_evidence": "Sequential invoice enumeration pattern. unique_invoice_ids=6481, total_requests=12409, sequential_access_ratio=0.6628"
+            }
+          },
+          "estimated_impact": {
+            "unique_invoices_accessed_by_top_attackers": 10221,
+            "unique_tokens_seen": 35,
+            "total_attack_events": 96829
+          },
+          "mitre_attack_mapping_high_level": [
+            {
+              "tactic": "Credential Access / Discovery",
+              "technique": "Automated resource enumeration",
+              "note": "Mapped at high level due to identifier enumeration behavior."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from information repositories",
+              "note": "Invoice data may represent sensitive business/user information."
+            },
+            {
+              "tactic": "Defense Evasion",
+              "technique": "Use of distributed IPs or repeated low-rate access",
+              "note": "Multiple suspicious IPs may indicate campaign distribution."
+            }
+          ],
+          "mitre_attack_mapping": [
+            {
+              "tactic": "Discovery",
+              "technique": "Application endpoint and object identifier enumeration",
+              "rationale": "The attacker enumerates invoice-like objects through exposed application endpoints."
+            },
+            {
+              "tactic": "Collection",
+              "technique": "Data from Information Repositories",
+              "rationale": "The observed behavior indicates large-scale access to invoice objects."
+            },
+            {
+              "tactic": "Credential Access / Defense Evasion",
+              "technique": "Valid Accounts or Token Misuse",
+              "rationale": "The investigation observed suspicious token reuse across invoice access patterns."
+            }
+          ],
+          "top_attackers_reviewed": [
+            {
+              "ip": "204.210.158.207",
+              "risk_score": 86.04241498055296,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6628086419753086,
+              "unique_invoice_ids": 6481,
+              "total_requests": 12409
+            },
+            {
+              "ip": "73.130.229.200",
+              "risk_score": 85.88302533017595,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6625776397515528,
+              "unique_invoice_ids": 6441,
+              "total_requests": 12453
+            },
+            {
+              "ip": "216.21.168.27",
+              "risk_score": 85.75971025623024,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6627108057464085,
+              "unique_invoice_ids": 6405,
+              "total_requests": 12429
+            },
+            {
+              "ip": "74.88.210.56",
+              "risk_score": 85.72791306614572,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6602334630350195,
+              "unique_invoice_ids": 6426,
+              "total_requests": 12426
+            },
+            {
+              "ip": "24.163.83.34",
+              "risk_score": 84.9608873784426,
+              "risk_level": "critical",
+              "is_idor_suspect": true,
+              "is_likely_bot": true,
+              "sequential_access_ratio": 0.6585098039215687,
+              "unique_invoice_ids": 6376,
+              "total_requests": 12244
+            },
+            {
+              "ip": "181.88.192.48",
+              "risk_score": 45.79610824077543,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6579261025029798,
+              "unique_invoice_ids": 1679,
+              "total_requests": 3010
+            },
+            {
+              "ip": "181.88.192.87",
+              "risk_score": 45.46652259670832,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6534056660638939,
+              "unique_invoice_ids": 1660,
+              "total_requests": 2961
+            },
+            {
+              "ip": "181.88.192.16",
+              "risk_score": 45.38353249541662,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6556372549019608,
+              "unique_invoice_ids": 1633,
+              "total_requests": 2945
+            },
+            {
+              "ip": "181.88.192.59",
+              "risk_score": 45.098413151661326,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6504315659679408,
+              "unique_invoice_ids": 1623,
+              "total_requests": 2917
+            },
+            {
+              "ip": "181.88.192.115",
+              "risk_score": 44.71399628334233,
+              "risk_level": "medium",
+              "is_idor_suspect": true,
+              "is_likely_bot": false,
+              "sequential_access_ratio": 0.6461538461538462,
+              "unique_invoice_ids": 1626,
+              "total_requests": 2865
+            }
+          ],
+          "analysis_iteration": "initial_forensic_review",
+          "human_requested_more_evidence": false
+        },
+        "response_recommendation": {
+          "agent": "response_advisor_agent",
+          "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+          "dry_run": true,
+          "human_approval_required": true,
+          "human_approval_status": "pending",
+          "recommended_containment": {
+            "immediate": [
+              {
+                "action": "block_or_challenge_critical_ips",
+                "targets": [
+                  "204.210.158.207",
+                  "73.130.229.200",
+                  "216.21.168.27",
+                  "74.88.210.56",
+                  "24.163.83.34"
+                ],
+                "requires_human_approval": true,
+                "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+                "priority": "P1"
+              },
+              {
+                "action": "dynamic_rate_limiting_invoice_search",
+                "targets": [
+                  "/invoices/search"
+                ],
+                "requires_human_approval": false,
+                "business_risk": "Low to medium; may affect heavy legitimate usage.",
+                "priority": "P1"
+              },
+              {
+                "action": "increase_monitoring_for_high_risk_ips",
+                "targets": [],
+                "requires_human_approval": false,
+                "business_risk": "Low.",
+                "priority": "P2"
+              }
+            ],
+            "strategic": [
+              {
+                "action": "fix_object_level_authorization",
+                "description": "Ensure invoice access checks validate ownership/authorization server-side.",
+                "requires_human_approval": true,
+                "priority": "P1"
+              },
+              {
+                "action": "rotate_or_revoke_suspicious_tokens",
+                "description": "Review tokens observed in suspicious access patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              },
+              {
+                "action": "update_waf_rules",
+                "description": "Add rules for sequential invoice enumeration patterns.",
+                "requires_human_approval": true,
+                "priority": "P2"
+              }
+            ]
+          },
+          "mini_playbook": [
+            "Validate critical IPs against customer support and internal allowlists.",
+            "Apply dry-run blocklist simulation.",
+            "Enable rate limiting for invoice search endpoint.",
+            "Escalate object-level authorization fix to application security owners.",
+            "Review token exposure and revoke suspicious tokens if confirmed.",
+            "Monitor anomaly score and risk score deltas after containment."
+          ],
+          "executive_summary": "Incident classified as critical / P1. Likely IDOR enumeration confirmed by forensic analysis. Patient-zero candidate: 204.210.158.207."
+        },
+        "human_approval_required": true,
+        "dry_run": true,
+        "human_approval_request": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+          "approval_required": true,
+          "dry_run": true,
+          "workflow_stage": "awaiting_human_approval",
+          "actions_waiting_approval": [
+            {
+              "action": "block_or_challenge_critical_ips",
+              "targets": [
+                "204.210.158.207",
+                "73.130.229.200",
+                "216.21.168.27",
+                "74.88.210.56",
+                "24.163.83.34"
+              ],
+              "requires_human_approval": true,
+              "business_risk": "Possible false positives may impact legitimate users behind shared IPs.",
+              "priority": "P1"
+            }
+          ],
+          "allowed_decisions": [
+            "approved_for_dry_run_only",
+            "rejected",
+            "modified",
+            "request_more_evidence"
+          ]
+        },
+        "human_approval_response": {
+          "agent": "human_approval_agent",
+          "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+          "decision": "approved_for_dry_run_only",
+          "dry_run": true,
+          "approved_actions_count": 6,
+          "rejected_actions_count": 0,
+          "workflow_stage": "approved",
+          "rationale": "Human reviewer approved containment simulation only. No production action is authorized."
+        },
+        "approved_actions": [
+          {
+            "action": "block_ip",
+            "target": "204.210.158.207",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "73.130.229.200",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "216.21.168.27",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "74.88.210.56",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+          },
+          {
+            "action": "block_ip",
+            "target": "24.163.83.34",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+          },
+          {
+            "action": "rate_limit_endpoint",
+            "target": "/invoices/search",
+            "dry_run": true,
+            "executed": false,
+            "status": "simulated",
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+          }
+        ],
+        "rejected_actions": [],
+        "workflow_stage": "approved",
+        "workflow_timeline": [
+          {
+            "timestamp_utc": "2026-06-10T16:03:21.223666+00:00",
+            "stage": "triage",
+            "decision": "critical",
+            "details": {
+              "priority": "P1",
+              "incident_classification": "Potential IDOR exploitation via invoice enumeration"
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T16:03:21.224665+00:00",
+            "stage": "forensic_analysis",
+            "decision": "idor_pattern_analyzed",
+            "details": {
+              "patient_zero_candidate": "204.210.158.207",
+              "analysis_iteration": "initial_forensic_review",
+              "human_requested_more_evidence": false
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00",
+            "stage": "response_planning",
+            "decision": "containment_plan_generated",
+            "details": {
+              "dry_run": true,
+              "human_approval_required": true
+            }
+          },
+          {
+            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00",
             "stage": "human_approval",
             "decision": "approved_for_dry_run_only",
             "details": {

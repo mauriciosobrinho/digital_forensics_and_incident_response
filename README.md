@@ -1,5 +1,21 @@
 # IDOR Response Platform
 
+<p align="center">
+  <strong>IDOR Response Platform</strong><br/>
+  Digital Forensics & Incident Response · GenAI Agents · Human-in-the-loop · NIST IR · SOC Observability
+</p>
+
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.12-blue">
+  <img alt="Polars" src="https://img.shields.io/badge/Polars-Data%20Processing-orange">
+  <img alt="LangGraph" src="https://img.shields.io/badge/LangGraph-Agent%20Orchestration-purple">
+  <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-SOC%20UI-red">
+  <img alt="Pytest" src="https://img.shields.io/badge/Pytest-36%20tests%20passing-green">
+  <img alt="Status" src="https://img.shields.io/badge/Project-Sprint%204.0%20in%20progress-yellow">
+</p>
+
+---
+
 ## Digital Forensics & Incident Response Platform
 
 Technical Challenge — Technical Leader, Digital Forensics and Incident Response
@@ -35,7 +51,7 @@ All containment actions are executed in **dry-run mode**, ensuring safety, audit
 
 ---
 
-## Challenge Objectives Covered
+## Challenge Requirements Coverage
 
 | Challenge Requirement        | Platform Capability                    | Status |
 | ---------------------------- | -------------------------------------- | ------ |
@@ -315,9 +331,17 @@ tests/
 
 ---
 
-## Installation
+## Setup and Installation
 
-### Create virtual environment
+### Clone Repository
+
+```bash
+git clone <repository_url>
+
+cd idor-response-platform
+```
+
+### Create Virtual Environment
 
 Windows:
 
@@ -333,7 +357,7 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### Install dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -400,60 +424,267 @@ decision_log = 7
 
 ---
 
+---
+
+## Human-in-the-Loop Validation
+
+The platform supports simulated human intervention through a LangGraph state machine. The human reviewer can approve, reject, modify or request additional evidence before containment is approved.
+
+### Validated scenarios
+
+| Scenario | Expected Evidence | Interpretation |
+| --- | --- | --- |
+| `approve` | `human_loop_count = 0`, `decision_log = 4` | Linear approval flow |
+| `reject` | `workflow_stage = rejected`, `decision_log = 4` | Containment is interrupted |
+| `modify` | `modified_action_plan != {}`, `decision_log = 4` | Human reviewer changes the response plan |
+| `request_more_evidence` | `human_loop_count = 1`, `decision_log = 7` | Workflow re-enters forensic analysis |
+
+### Re-entry workflow
+
+```text
+Triage
+  ↓
+Forensic Analysis
+  ↓
+Response Advice
+  ↓
+Human Approval
+  ↓
+Request More Evidence
+  ↓
+Forensic Re-analysis
+  ↓
+Response Advice
+  ↓
+Human Approval
+  ↓
+Approved
+```
+
+This validates the most important governance requirement of the challenge: the platform does not blindly execute containment. It allows a human analyst to request additional forensic evidence and resumes the investigation before approval.
+
+
 ## LLM Provider Examples
 
-The platform uses an OpenAI-compatible client interface. Change only `LLM_PROVIDER`, `LLM_MODEL`, `LLM_API_KEY` and `LLM_BASE_URL`.
+The platform uses an OpenAI-compatible client interface for most providers. In most cases, change only:
 
-### Groq
+```env
+LLM_PROVIDER
+LLM_MODEL
+LLM_API_KEY
+LLM_BASE_URL
+```
+
+### Groq OpenAI-compatible API key and settings
 
 ```env
 AGENTS_USE_LLM=true
+
 LLM_PROVIDER=groq
+LLM_API_KEY=gsk_...
 LLM_MODEL=llama-3.3-70b-versatile
-LLM_API_KEY=your_groq_key
 LLM_BASE_URL=https://api.groq.com/openai/v1
 ```
 
-### OpenAI
+### OpenAI API key and settings
 
 ```env
 AGENTS_USE_LLM=true
+
 LLM_PROVIDER=openai
+LLM_API_KEY=sk-proj-...
 LLM_MODEL=gpt-4.1-mini
-LLM_API_KEY=your_openai_key
 LLM_BASE_URL=
 ```
 
-### OpenRouter
+### OpenRouter API key and settings
 
 ```env
 AGENTS_USE_LLM=true
+
 LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
 LLM_MODEL=openai/gpt-4.1-mini
-LLM_API_KEY=your_openrouter_key
 LLM_BASE_URL=https://openrouter.ai/api/v1
 ```
 
-### Google Gemini OpenAI-compatible endpoint
+### Anthropic Claude Sonnet via OpenRouter
 
 ```env
 AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+### Anthropic Claude Haiku via OpenRouter
+
+```env
+AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-haiku
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+### Anthropic Claude Opus via OpenRouter
+
+```env
+AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3-opus
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+### Google Gemini native OpenAI-compatible endpoint
+
+```env
+AGENTS_USE_LLM=true
+
 LLM_PROVIDER=gemini
-LLM_MODEL=gemini-2.5-flash
 LLM_API_KEY=your_gemini_key
+LLM_MODEL=gemini-2.5-flash
 LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+```
+
+### Google Gemini via OpenRouter
+
+```env
+AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+### Perplexity OpenAI-compatible API key and settings
+
+```env
+AGENTS_USE_LLM=true
+
+LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-pro
+LLM_BASE_URL=https://api.perplexity.ai
+```
+
+### Perplexity Sonar Reasoning
+
+```env
+AGENTS_USE_LLM=true
+
+LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-reasoning-pro
+LLM_BASE_URL=https://api.perplexity.ai
+```
+
+### xAI Grok
+
+```env
+AGENTS_USE_LLM=true
+
+LLM_PROVIDER=xai
+LLM_API_KEY=xai-...
+LLM_MODEL=grok-3
+LLM_BASE_URL=https://api.x.ai/v1
+```
+
+### xAI Grok Mini
+
+```env
+AGENTS_USE_LLM=true
+
+LLM_PROVIDER=xai
+LLM_API_KEY=xai-...
+LLM_MODEL=grok-3-mini
+LLM_BASE_URL=https://api.x.ai/v1
 ```
 
 ### Local OpenAI-compatible server
 
-Example for local gateways such as LM Studio, Ollama-compatible proxies or local OpenAI-compatible endpoints:
+Example for local gateways such as LM Studio, Ollama-compatible proxies, LiteLLM, vLLM or local OpenAI-compatible endpoints:
 
 ```env
 AGENTS_USE_LLM=true
+
 LLM_PROVIDER=local
-LLM_MODEL=local-model-name
 LLM_API_KEY=local_or_dummy_key
+LLM_MODEL=local-model-name
 LLM_BASE_URL=http://localhost:1234/v1
+```
+
+### Quick provider switching examples
+
+#### OpenRouter + GPT-4.1 Mini
+
+```env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=openai/gpt-4.1-mini
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+#### OpenRouter + Claude Sonnet
+
+```env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+#### OpenRouter + Gemini Flash
+
+```env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+#### Groq + Llama 3.3 70B
+
+```env
+LLM_PROVIDER=groq
+LLM_API_KEY=gsk_...
+LLM_MODEL=llama-3.3-70b-versatile
+LLM_BASE_URL=https://api.groq.com/openai/v1
+```
+
+#### Perplexity Sonar Pro
+
+```env
+LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-pro
+LLM_BASE_URL=https://api.perplexity.ai
+```
+
+### Native Claude/Gemini note
+
+For native Claude/Gemini SDKs, the SDK and client implementation may change. If using Claude or Gemini via OpenRouter, the existing OpenAI-compatible code path can be preserved and only the model changes:
+
+```env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1
+```
+
+or:
+
+```env
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1
 ```
 
 ---
@@ -576,6 +807,62 @@ streamlit run src/ui/streamlit_app.py
 | `Observability`     | SOC monitoring               | Health, pipeline metrics, agent metrics and evidence completeness |
 
 ---
+
+---
+
+## Agent Evaluation Results
+
+The platform includes an explicit validation suite that maps challenge requirements to expected evidence in each agent output.
+
+| Agent / Component | Coverage |
+| --- | ---: |
+| Triage Agent | 100% |
+| Forensic Analyst Agent | 100% |
+| Response Advisor Agent | 100% |
+| Human Approval Agent | 100% |
+| LangGraph Workflow | 100% |
+| SOC Copilot | 100% |
+
+| Evaluation Metric | Value |
+| --- | ---: |
+| Total questions | 15 |
+| Overall score | 1.0 |
+| Overall coverage | 100% |
+| Passed | 15 |
+| Partial | 0 |
+| Failed | 0 |
+
+The validation suite proves that the agentic layer covers classification, hypothesis generation, prioritization, forensic reasoning, patient zero identification, automation assessment, MITRE mapping, containment planning, human approval and workflow re-entry.
+
+
+---
+
+## Generated Evidence Artifacts
+
+| Artifact | Purpose |
+| --- | --- |
+| `data/evidence/chain_of_custody.json` | SHA-256 integrity and forensic provenance |
+| `data/processed/parsed_events.parquet` | Normalized events and extracted URI fields |
+| `data/processed/ip_features.parquet` | IP-level features for investigation and detection |
+| `data/processed/idor_findings.parquet` | IDOR-compatible findings |
+| `data/processed/anomaly_scores.parquet` | Isolation Forest anomaly scores |
+| `data/evidence/attack_timeline.json` | Attack window and timeline reconstruction |
+| `data/evidence/iocs.json` | Indicators of compromise |
+| `data/evidence/forensic_evidence.json` | Consolidated forensic evidence package |
+| `data/evidence/agent_investigation.json` | Consolidated multi-agent investigation output |
+| `data/evidence/agent_decision_log.json` | Agent and human decision trail |
+| `data/evidence/human_approval_decision.json` | Human approval governance evidence |
+| `data/evidence/nist_incident_report.json` | NIST-style incident response report |
+| `data/evaluation/agent_eval_report.json` | Agent validation and coverage report |
+| `data/observability/platform_metrics.json` | Platform observability metrics |
+| `data/observability/soc_dashboard_data.json` | SOC dashboard data |
+| `reports/technical_report.md` | Technical report |
+| `reports/executive_summary.md` | Executive summary |
+| `presentation/technical_pitch.pptx` | Technical presentation deck |
+| `presentation/executive_pitch.pptx` | Executive presentation deck |
+| `demo/demo_script.md` | Demonstration script |
+| `demo/demo_questions.md` | Demo question bank |
+
 
 ## Generated Artifacts
 
@@ -722,7 +1009,7 @@ Interpretation:
 | Sprint 3.7 | NIST incident response metrics                       | ✅      |
 | Sprint 3.8 | Observability and SOC monitoring                     | ✅      |
 | Sprint 3.9 | Final technical report and executive summary         | ✅      |
-| Sprint 4.0 | Demo package and presentation                        | 🚧     |
+| Sprint 4.0 | Demo package and presentation                        | 🚧 In Progress |
 
 ---
 
