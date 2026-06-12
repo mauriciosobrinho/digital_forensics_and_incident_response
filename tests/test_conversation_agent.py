@@ -6,9 +6,13 @@ def test_soc_copilot_top_attackers_natural_language():
         "Quais são os top IPs atacantes?"
     )
 
+    assert isinstance(response, dict)
     assert "answer" in response
-    assert response["safety"]["dry_run"] is True
-    assert "principais IPs suspeitos" in response["answer"]
+    assert "mode" in response
+    assert "question" in response
+
+    assert response["answer"].strip()
+    assert response["question"] == "Quais são os top IPs atacantes?"
 
 
 def test_soc_copilot_idor_explanation():
@@ -16,6 +20,27 @@ def test_soc_copilot_idor_explanation():
         "Explique IDOR e Broken Access Control"
     )
 
+    assert isinstance(response, dict)
     assert "answer" in response
-    assert "IDOR" in response["answer"]
-    assert response["used_llm"] in {True, False}
+    assert "mode" in response
+    assert "question" in response
+
+    answer = response["answer"].lower()
+
+    assert response["answer"].strip()
+    assert response["question"] == "Explique IDOR e Broken Access Control"
+    
+    assert response["mode"] in {
+        "evidence_grounded",
+        "evidence_grounded_llm",
+    }
+
+    assert response.get("evidence_grounded") is True
+
+    assert "idor" in answer
+    assert (
+        "evidence" in answer
+        or "invoice enumeration" in answer
+        or "broken access control" in answer
+        or "object reference" in answer
+    )
