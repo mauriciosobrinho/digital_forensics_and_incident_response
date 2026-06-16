@@ -1,0 +1,158 @@
+{
+  "name": "SOC Copilot Massive Question Bank",
+  "version": "sprint-4.2",
+  "questions": [
+    {
+      "id": "patient_zero_001",
+      "category": "patient_zero",
+      "question": "Who is the patient zero?",
+      "expected_intent": "patient_zero",
+      "expected_contains": ["204.210.158.207"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "patient_zero_002",
+      "category": "patient_zero",
+      "question": "Which IP should be treated as the initial attacker?",
+      "expected_intent": "patient_zero",
+      "expected_contains": ["204.210.158.207"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "timeline_001",
+      "category": "timeline",
+      "question": "When did the attack start?",
+      "expected_intent": "attack_start",
+      "expected_contains": ["2020-10-01"],
+      "forbidden_contains": ["2020-12-31"]
+    },
+    {
+      "id": "timeline_002",
+      "category": "timeline",
+      "question": "When did the attack end?",
+      "expected_intent": "attack_end",
+      "expected_contains": ["2020-12-31"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "timeline_003",
+      "category": "timeline",
+      "question": "What was the observed exploitation window?",
+      "expected_intent": "response_metrics",
+      "expected_contains": ["2020-10-01", "2020-12-31"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "automation_001",
+      "category": "automation",
+      "question": "Was the attack automated?",
+      "expected_intent": "automation",
+      "expected_contains": ["automated"],
+      "forbidden_contains": ["manual only"]
+    },
+    {
+      "id": "automation_002",
+      "category": "automation",
+      "question": "What evidence suggests bot-like or automated behavior?",
+      "expected_intent": "automation",
+      "expected_contains": ["automation", "invoice"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "idor_001",
+      "category": "idor_evidence",
+      "question": "What evidence supports IDOR exploitation?",
+      "expected_intent": "idor_evidence",
+      "expected_contains": ["idor", "invoice", "enumeration"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "idor_002",
+      "category": "idor_evidence",
+      "question": "Explain why this incident is related to Broken Access Control.",
+      "expected_intent": "idor_evidence",
+      "expected_contains": ["idor", "access", "invoice"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "impact_001",
+      "category": "business_impact",
+      "question": "What is the business impact?",
+      "expected_intent": "business_impact",
+      "expected_contains": ["critical", "p1", "10221"],
+      "forbidden_contains": ["low impact"]
+    },
+    {
+      "id": "impact_002",
+      "category": "business_impact",
+      "question": "How many invoices were affected?",
+      "expected_intent": "affected_invoices",
+      "expected_contains": ["10221"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "containment_001",
+      "category": "containment",
+      "question": "What containment actions are recommended?",
+      "expected_intent": "containment",
+      "expected_contains": ["containment", "rate", "block"],
+      "forbidden_contains": ["production action executed"]
+    },
+    {
+      "id": "containment_002",
+      "category": "containment",
+      "question": "Should the platform execute blocking automatically?",
+      "expected_intent": "containment",
+      "expected_contains": ["dry-run", "human", "approval"],
+      "forbidden_contains": ["automatically executed"]
+    },
+    {
+      "id": "metrics_001",
+      "category": "response_metrics",
+      "question": "What are the TTD, TTR and TTC metrics?",
+      "expected_intent": "response_metrics",
+      "expected_contains": ["ttd", "ttr", "ttc"],
+      "forbidden_contains": ["not enough evidence"]
+    },
+    {
+      "id": "nist_001",
+      "category": "nist",
+      "question": "Explain the incident using the NIST incident response framework.",
+      "expected_intent": "response_metrics",
+      "expected_contains": ["nist", "containment", "response"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "root_cause_001",
+      "category": "root_cause",
+      "question": "What is the root cause of the incident?",
+      "expected_intent": "business_impact",
+      "expected_contains": ["authorization", "idor", "access"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "executive_001",
+      "category": "executive_summary",
+      "question": "Summarize the incident for a CISO in less than 10 bullet points.",
+      "expected_intent": null,
+      "expected_contains": ["critical", "idor", "containment"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "correlation_001",
+      "category": "multi_document_reasoning",
+      "question": "Correlate the forensic evidence, NIST report and observability metrics into a single incident narrative.",
+      "expected_intent": null,
+      "expected_contains": ["forensic", "nist", "observability"],
+      "forbidden_contains": []
+    },
+    {
+      "id": "full_assessment_001",
+      "category": "full_assessment",
+      "question": "You are the lead DFIR analyst. Build a complete incident assessment covering patient zero, timeline, IDOR evidence, automation, affected assets, business impact and containment.",
+      "expected_intent": null,
+      "expected_contains": ["patient zero", "timeline", "idor", "containment"],
+      "forbidden_contains": []
+    }
+  ]
+}

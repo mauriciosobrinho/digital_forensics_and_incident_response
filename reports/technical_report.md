@@ -1,6 +1,6 @@
 # IDOR Response Platform — Technical Report
 
-Generated at: 2026-06-10T16:03:23.551126+00:00
+Generated at: 2026-06-15T20:51:52.030577+00:00
 
 ## 1. Context and Objective
 
@@ -78,17 +78,17 @@ Platform health: **healthy**
 
 Agent decisions: **4**
 
-Tool calls: **65**
+Tool calls: **86**
 
 Dry-run actions: **6**
 
 ## 11. Evaluation
 
-Overall evaluation coverage: **100.0%**
+Overall evaluation coverage: **97.78%**
 
-Passed: **15**
+Passed: **14**
 
-Partial: **0**
+Partial: **1**
 
 Failed: **0**
 

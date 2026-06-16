@@ -33,6 +33,8 @@ def test_soc_copilot_idor_explanation():
     assert response["mode"] in {
         "evidence_grounded",
         "evidence_grounded_llm",
+        "professional_vector_rag_llm",
+        "professional_vector_rag_deterministic",
     }
 
     assert response.get("evidence_grounded") is True

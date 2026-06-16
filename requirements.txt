@@ -39,3 +39,5 @@ langchain-openai
 mcp
 
 streamlit
+
+chromadb

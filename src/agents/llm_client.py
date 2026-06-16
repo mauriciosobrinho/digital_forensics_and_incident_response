@@ -17,6 +17,7 @@ class LLMClient:
             if settings is not None
             else load_agent_runtime_settings()
         )
+        self.last_error: str | None = None
 
     def is_enabled(self) -> bool:
         return (
@@ -34,13 +35,17 @@ class LLMClient:
 
         try:
             from langchain_openai import ChatOpenAI
-        except ImportError:
+        except ImportError as exc:
+            self.last_error = f"langchain_openai import failed: {exc}"
             return None
 
         llm_kwargs = {
             "model": self.settings.llm_model,
             "api_key": self.settings.llm_api_key,
             "temperature": 0,
+            "max_tokens": 500,
+            "timeout": 60,
+            "max_retries": 2,
         }
 
         if self.settings.llm_base_url:
@@ -57,9 +62,21 @@ class LLMClient:
                 prompt
             )
 
-            return response.content
+            content = getattr(
+                response,
+                "content",
+                None,
+            )
 
-        except Exception:
+            if not content:
+                self.last_error = "LLM returned empty content."
+                return None
+
+            self.last_error = None
+            return str(content)
+
+        except Exception as exc:
+            self.last_error = f"{type(exc).__name__}: {exc}"
             return None
 
     def generate_json(

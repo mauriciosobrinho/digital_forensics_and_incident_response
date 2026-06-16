@@ -1,0 +1,175 @@
+{
+  "name": "SOC Copilot Multilingual Question Bank",
+  "version": "sprint-4.2",
+  "languages": ["en", "pt", "es"],
+  "cases": [
+    {
+      "id": "patient_zero_001",
+      "category": "patient_zero",
+      "expected_intent": "patient_zero",
+      "expected_facts": ["204.210.158.207"],
+      "questions": {
+        "en": "Who is the patient zero?",
+        "pt": "Quem é o paciente zero?",
+        "es": "¿Quién es el paciente cero?"
+      },
+      "expected_any_terms": {
+        "any": [
+          [
+            "evidence",
+            "evidência",
+            "evidencia",
+            "supporting evidence",
+            "evidência de suporte",
+            "evidencia de soporte"
+          ]
+        ]
+      },
+      "forbidden_terms": {
+        "any": ["not enough evidence", "não há evidência suficiente", "no hay evidencia suficiente"]
+      }
+    },
+    {
+      "id": "timeline_start_001",
+      "category": "timeline",
+      "expected_intent": "attack_start",
+      "expected_facts": ["2020-10-01"],
+      "questions": {
+        "en": "When did the attack start?",
+        "pt": "Quando o ataque começou?",
+        "es": "¿Cuándo comenzó el ataque?"
+      },
+      "expected_any_terms": {
+        "any": [["started", "starts", "start", "começou", "comenzó", "início", "inicio"]]
+      },
+      "forbidden_terms": {
+        "any": ["not enough evidence", "não há evidência suficiente", "no hay evidencia suficiente"]
+      }
+    },
+    {
+      "id": "timeline_end_001",
+      "category": "timeline",
+      "expected_intent": "attack_end",
+      "expected_facts": ["2020-12-31"],
+      "questions": {
+        "en": "When did the attack end?",
+        "pt": "Quando o ataque terminou?",
+        "es": "¿Cuándo terminó el ataque?"
+      },
+      "expected_any_terms": {
+        "any": [["ended", "terminou", "terminó", "fim", "fin"]]
+      },
+      "forbidden_terms": {
+        "any": ["the observed exploitation window starts at"]
+      }
+    },
+    {
+      "id": "automation_001",
+      "category": "automation",
+      "expected_intent": "automation",
+      "expected_facts": ["automated"],
+      "questions": {
+        "en": "Was the attack automated?",
+        "pt": "O ataque foi automatizado?",
+        "es": "¿El ataque fue automatizado?"
+      },
+      "expected_any_terms": {
+        "any": [["automated", "automatizado", "automatizada", "automação", "automatización"]]
+      },
+      "forbidden_terms": {
+        "any": ["not automated", "não automatizado", "no automatizado"]
+      }
+    },
+    {
+      "id": "idor_evidence_001",
+      "category": "idor_evidence",
+      "expected_intent": "idor_evidence",
+      "expected_facts": ["idor", "invoice", "enumeration"],
+      "questions": {
+        "en": "What evidence supports IDOR exploitation?",
+        "pt": "Quais evidências sustentam exploração IDOR?",
+        "es": "¿Qué evidencias sustentan la explotación IDOR?"
+      },
+      "expected_any_terms": {
+        "any": [["idor"], ["invoice", "invoices", "fatura", "faturas", "factura", "facturas"], ["enumeration", "enumeração", "enumeración"]]
+      },
+      "forbidden_terms": {
+        "any": ["not enough evidence", "não há evidência suficiente", "no hay evidencia suficiente"]
+      }
+    },
+    {
+      "id": "containment_001",
+      "category": "containment",
+      "expected_intent": "containment",
+      "expected_facts": [],
+      "questions": {
+        "en": "What containment actions are recommended?",
+        "pt": "Quais ações de contenção são recomendadas?",
+        "es": "¿Qué acciones de contención se recomiendan?"
+      },
+      "expected_any_terms": {
+        "any": [
+          [
+            "containment",
+            "contenção",
+            "contencao",
+            "contención",
+            "contencion"
+          ],
+          [
+            "approval",
+            "approved",
+            "human approval",
+            "manual approval",
+            "aprovação",
+            "aprovacao",
+            "aprovação humana",
+            "aprovacao humana",
+            "aprovação manual",
+            "aprovacao manual",
+            "aprobación",
+            "aprobacion",
+            "aprobación humana",
+            "aprobacion humana",
+            "aprobación manual",
+            "aprobacion manual"
+          ],
+          [
+            "dry-run",
+            "dry run",
+            "simulated",
+            "simulado",
+            "simulada",
+            "bloqueio",
+            "bloqueo",
+            "block"
+          ]
+        ]
+      },
+      "forbidden_terms": {
+        "any": [
+          "external action executed",
+          "ação externa executada",
+          "acción externa ejecutada"
+        ]
+      }
+    },
+    {
+      "id": "metrics_001",
+      "category": "response_metrics",
+      "expected_intent": "response_metrics",
+      "expected_facts": ["ttd", "ttr", "ttc"],
+      "questions": {
+        "en": "What are the TTD, TTR and TTC metrics?",
+        "pt": "Quais são as métricas TTD, TTR e TTC?",
+        "es": "¿Cuáles son las métricas TTD, TTR y TTC?"
+      },
+      "expected_any_terms": {
+        "any": [["ttd"], ["ttr"], ["ttc"]]
+      },
+      "forbidden_terms": {
+        "any": ["not enough evidence", "não há evidência suficiente", "no hay evidencia suficiente"]
+      }
+    }
+  ]
+}

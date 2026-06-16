@@ -32,6 +32,10 @@ from src.rag.rag_context import (
     save_rag_context,
 )
 
+from src.agents.professional_soc_copilot import answer_professional_soc_question
+
+from src.agents.llm_client import build_llm_client
+
 
 def _build_grounded_llm_prompt(
     question: str,
@@ -86,6 +90,21 @@ def ask_soc_copilot(
 ) -> dict[str, Any]:
 
     normalized = question.lower()
+
+    llm_client = build_llm_client()
+
+    if llm_client.is_enabled():
+        professional_response = answer_professional_soc_question(
+            question,
+        )
+
+        append_conversation_turn(
+            INTERACTIVE_SESSION_LOG_FILE,
+            question,
+            professional_response,
+        )
+
+        return professional_response
 
     grounded_answer = answer_from_structured_evidence(question)
 
