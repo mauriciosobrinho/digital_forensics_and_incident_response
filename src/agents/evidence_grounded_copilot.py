@@ -19,12 +19,33 @@ COPILOT_GROUNDED_ANSWERS_PATH = (
 )
 
 
-def _load_json(path: Path, default: Any) -> Any:
+def _load_json(
+    path: Path,
+    default: Any,
+) -> Any:
     if not path.exists():
         return default
 
-    with path.open("r", encoding="utf-8") as file:
-        return json.load(file)
+    try:
+        with path.open(
+            "r",
+            encoding="utf-8",
+        ) as file:
+            return json.load(file)
+
+    except json.JSONDecodeError:
+        broken_path = path.with_suffix(
+            path.suffix + ".broken"
+        )
+
+        try:
+            path.replace(
+                broken_path,
+            )
+        except OSError:
+            pass
+
+        return default
 
 
 def load_structured_evidence(
@@ -160,6 +181,38 @@ def _answer_attack_start(
         evidence=[
             "The incident report contains a structured start timestamp.",
             "The same report also records the observed end of the attack window.",
+            "The value is generated from the forensic timeline and incident response layer.",
+        ],
+        source_artifacts=[
+            "data/evidence/nist_incident_report.json",
+            "data/evidence/forensic_evidence.json",
+        ],
+        confidence="high",
+        technical_payload={
+            "attack_start": start,
+            "attack_end": end,
+        },
+    )
+
+
+def _answer_attack_end(
+    question: str,
+    artifacts: dict[str, Any],
+) -> dict[str, Any]:
+    questions = _questions(artifacts)
+
+    start = questions.get("when_did_it_start")
+    end = questions.get("when_did_it_end")
+
+    if not end:
+        return not_enough_structured_evidence(question)
+
+    return _build_answer(
+        question=question,
+        answer=f"The observed exploitation window ended at {end}.",
+        evidence=[
+            "The incident report contains a structured end timestamp.",
+            "The same report also records the observed start of the attack window.",
             "The value is generated from the forensic timeline and incident response layer.",
         ],
         source_artifacts=[
@@ -498,6 +551,7 @@ def build_grounded_answer(
 
     handlers = {
         EvidenceIntent.PATIENT_ZERO: _answer_patient_zero,
+        EvidenceIntent.ATTACK_END: _answer_attack_end,
         EvidenceIntent.ATTACK_START: _answer_attack_start,
         EvidenceIntent.AUTOMATION: _answer_automation,
         EvidenceIntent.AFFECTED_INVOICES: _answer_affected_invoices,
@@ -527,22 +581,45 @@ def persist_grounded_answer(
     answer: dict[str, Any],
     output_path: Path = COPILOT_GROUNDED_ANSWERS_PATH,
 ) -> None:
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
-    existing = _load_json(output_path, [])
+    existing = _load_json(
+        output_path,
+        [],
+    )
 
     if not isinstance(existing, list):
         existing = [existing]
 
     existing.append(answer)
+    
+    # Keep only the N most recent records
+    # avoiding indefinite file growth.
+    MAX_HISTORY = 1000
 
-    with output_path.open("w", encoding="utf-8") as file:
+    existing = existing[-MAX_HISTORY:]
+
+    temp_path = output_path.with_suffix(
+        output_path.suffix + ".tmp"
+    )
+
+    with temp_path.open(
+        "w",
+        encoding="utf-8",
+    ) as file:
         json.dump(
             existing,
             file,
             indent=2,
             ensure_ascii=False,
         )
+
+    temp_path.replace(
+        output_path
+    )
 
 
 def answer_from_structured_evidence(question: str) -> dict[str, Any]:

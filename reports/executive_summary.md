@@ -39,9 +39,9 @@ Destructive actions require human approval. The system supports approve, reject,
 
 ## Validation
 
-Evaluation coverage: **100.0%**
+Evaluation coverage: **97.78%**
 
-Passed: **15**
+Passed: **14**
 
 Failed: **0**
 

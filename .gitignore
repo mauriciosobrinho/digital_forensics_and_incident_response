@@ -34,4 +34,30 @@ venv/
 Thumbs.db
 
 # dotenv
-.env    
+.env
+.env.deterministic    
+
+# vector_store
+data/vector_store/
+
+# generated evaluation artifacts
+data/evaluation/soc_copilot_question_batch_results.json
+data/evaluation/soc_copilot_question_batch_report.md
+data/evaluation/soc_copilot_question_batch_summary.csv
+data/evaluation/soc_copilot_semantic_quality_results.json
+data/evaluation/soc_copilot_semantic_quality_report.md
+data/evaluation/soc_copilot_semantic_quality_results.csv
+
+# generated observability artifacts
+data/observability/llm_metrics.json
+
+# generated/broken evidence artifacts
+data/evidence/copilot_grounded_answers.json
+data/evidence/copilot_grounded_answers.json.broken
+
+# pdf generation fallbacks
+reports/*.pdf.not_generated.txt
+
+# obsolete local prompt variants
+src/agents/prompts/*.py.long
+src/evaluation/*.py.old

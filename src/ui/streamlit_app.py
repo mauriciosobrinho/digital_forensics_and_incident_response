@@ -12,7 +12,8 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import streamlit as st
 
-from src.agents.soc_assistant import answer_soc_question
+from src.agents.conversation_agent import ask_soc_copilot
+
 from src.config.settings import (
     AGENT_DECISION_LOG_FILE,
     AGENT_INVESTIGATION_FILE,
@@ -87,6 +88,19 @@ def render_top_metrics():
 def render_chat():
     st.subheader("SOC Agent Chat")
 
+    # st.success("Professional SOC Copilot enabled via ask_soc_copilot")
+
+    st.caption(
+        "Professional SOC Copilot · Vector RAG · LLM/Deterministic fallback"
+    )
+
+    if st.button("Reset SOC chat"):
+        st.session_state.pop(
+            "messages",
+            None,
+        )
+        st.rerun()
+
     if "messages" not in st.session_state:
         st.session_state.messages = [
             {
@@ -103,6 +117,16 @@ def render_chat():
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
+            payload = message.get(
+                "payload"
+            )
+
+            if payload:
+                with st.expander(
+                    "Ver payload técnico"
+                ):
+                    st.json(payload)
+
     prompt = st.chat_input(
         "Pergunte algo: ex. Quais são os top IPs atacantes?"
     )
@@ -118,7 +142,7 @@ def render_chat():
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        response = answer_soc_question(
+        response = ask_soc_copilot(
             prompt
         )
 
@@ -131,6 +155,7 @@ def render_chat():
             {
                 "role": "assistant",
                 "content": answer,
+                "payload": response,
             }
         )
 
@@ -139,6 +164,12 @@ def render_chat():
 
             with st.expander("Ver payload técnico"):
                 st.json(response)
+
+            st.caption(
+                f"mode={response.get('mode')} | "
+                f"used_llm={response.get('used_llm')} | "
+                f"intent={response.get('intent')}"
+            )
 
 
 def render_json_section(title: str, path: Path):

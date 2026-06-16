@@ -32,7 +32,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.221658+00:00",
+        "generated_at_utc": "2026-06-15T20:50:54.150889+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -78,7 +78,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.221658+00:00",
+        "generated_at_utc": "2026-06-15T20:50:54.150889+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -119,7 +119,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.221658+00:00",
+        "generated_at_utc": "2026-06-15T20:50:54.150889+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -165,7 +165,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "triage_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.221658+00:00",
+        "generated_at_utc": "2026-06-15T20:50:54.150889+00:00",
         "incident_classification": "Potential IDOR exploitation via invoice enumeration",
         "severity": "critical",
         "priority": "P1",
@@ -206,7 +206,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.224665+00:00",
+        "generated_at_utc": "2026-06-15T20:51:36.069399+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -414,7 +414,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.224665+00:00",
+        "generated_at_utc": "2026-06-15T20:51:36.069399+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -622,7 +622,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.224665+00:00",
+        "generated_at_utc": "2026-06-15T20:51:36.069399+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -825,7 +825,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "forensic_analyst_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.224665+00:00",
+        "generated_at_utc": "2026-06-15T20:51:36.069399+00:00",
         "patient_zero_candidate": "204.210.158.207",
         "attack_window": {
           "first_seen": "2020-10-01 00:00:00.000000",
@@ -1033,7 +1033,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "response_advisor_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+        "generated_at_utc": "2026-06-15T20:51:36.069920+00:00",
         "dry_run": true,
         "human_approval_required": true,
         "human_approval_status": "pending",
@@ -1126,7 +1126,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "response_advisor_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+        "generated_at_utc": "2026-06-15T20:51:36.069920+00:00",
         "dry_run": true,
         "human_approval_required": true,
         "human_approval_status": "pending",
@@ -1214,7 +1214,7 @@
       ],
       "evidence_payload_preview": {
         "agent": "response_advisor_agent",
-        "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+        "generated_at_utc": "2026-06-15T20:51:36.069920+00:00",
         "dry_run": true,
         "human_approval_required": true,
         "human_approval_status": "pending",
@@ -1313,7 +1313,7 @@
       "evidence_payload_preview": {
         "human_approval_request": {
           "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+          "generated_at_utc": "2026-06-15T20:51:36.070440+00:00",
           "approval_required": true,
           "dry_run": true,
           "workflow_stage": "awaiting_human_approval",
@@ -1341,7 +1341,7 @@
         },
         "human_approval_response": {
           "agent": "human_approval_agent",
-          "generated_at_utc": "2026-06-10T16:03:21.225665+00:00",
+          "generated_at_utc": "2026-06-15T20:51:36.070440+00:00",
           "decision": "approved_for_dry_run_only",
           "dry_run": true,
           "approved_actions_count": 6,
@@ -1357,7 +1357,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00"
           },
           {
             "action": "block_ip",
@@ -1365,7 +1365,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00"
           },
           {
             "action": "block_ip",
@@ -1373,7 +1373,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00"
           },
           {
             "action": "block_ip",
@@ -1381,7 +1381,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00"
           },
           {
             "action": "block_ip",
@@ -1389,7 +1389,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00"
           },
           {
             "action": "rate_limit_endpoint",
@@ -1397,7 +1397,7 @@
             "dry_run": true,
             "executed": false,
             "status": "simulated",
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00"
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00"
           }
         ],
         "rejected_actions": [],
@@ -1436,7 +1436,7 @@
         "workflow_stage": "approved",
         "workflow_timeline": [
           {
-            "timestamp_utc": "2026-06-10T16:03:21.223666+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.068353+00:00",
             "stage": "triage",
             "decision": "critical",
             "details": {
@@ -1445,7 +1445,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-10T16:03:21.224665+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.069399+00:00",
             "stage": "forensic_analysis",
             "decision": "idor_pattern_analyzed",
             "details": {
@@ -1455,7 +1455,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.069920+00:00",
             "stage": "response_planning",
             "decision": "containment_plan_generated",
             "details": {
@@ -1464,7 +1464,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00",
             "stage": "human_approval",
             "decision": "approved_for_dry_run_only",
             "details": {
@@ -1539,7 +1539,7 @@
         "workflow_stage": "approved",
         "workflow_timeline": [
           {
-            "timestamp_utc": "2026-06-10T16:03:21.223666+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.068353+00:00",
             "stage": "triage",
             "decision": "critical",
             "details": {
@@ -1548,7 +1548,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-10T16:03:21.224665+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.069399+00:00",
             "stage": "forensic_analysis",
             "decision": "idor_pattern_analyzed",
             "details": {
@@ -1558,7 +1558,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.069920+00:00",
             "stage": "response_planning",
             "decision": "containment_plan_generated",
             "details": {
@@ -1567,7 +1567,7 @@
             }
           },
           {
-            "timestamp_utc": "2026-06-10T16:03:21.225665+00:00",
+            "timestamp_utc": "2026-06-15T20:51:36.070440+00:00",
             "stage": "human_approval",
             "decision": "approved_for_dry_run_only",
             "details": {
@@ -1620,9 +1620,9 @@
         "safety"
       ],
       "challenge_requirement": "Support investigation through agentic interaction",
-      "score": 1.0,
-      "status": "passed",
-      "passed_checks": 3,
+      "score": 0.6667,
+      "status": "partial",
+      "passed_checks": 2,
       "total_checks": 3,
       "checks": [
         {
@@ -1631,7 +1631,7 @@
         },
         {
           "evidence": "tool_result",
-          "found": true
+          "found": false
         },
         {
           "evidence": "safety",
@@ -1640,15 +1640,207 @@
       ],
       "evidence_payload_preview": {
         "question": "O SOC Copilot responde perguntas em linguagem natural?",
-        "answer": "Não encontrei uma tool específica ou contexto RAG suficiente para responder com precisão. Você pode perguntar sobre top IPs atacantes, janela do ataque, IDOR, IOCs ou contenção.",
-        "mode": "deterministic_natural_language",
-        "used_llm": false,
-        "rag_context": {
-          "query": "O SOC Copilot responde perguntas em linguagem natural?",
-          "top_k": 3,
-          "retrieved_documents": []
+        "answer": "Executive answer:  \nNão há evidências estruturadas que confirmem que o SOC Copilot responde a perguntas em linguagem natural.\n\nSupporting evidence:\n1. O artefato “structured_answer” indica que a pergunta não foi respondida (“is_answered”: false) e que não há resposta estruturada disponível.\n2. O “intent” classifica a pergunta como “unknown” com alta confiança, sugerindo que não corresponde a nenhum fluxo de investigação DFIR/SOC definido.\n3. Nenhum documento de vetor ou artefato de investigação menciona a capacidade de linguagem natural do SOC Copilot.\n\nReasoning:  \nA ausência de uma resposta estruturada, a classificação de intenção “unknown” e a falta de qualquer referência a funcionalidades de linguagem natural nos artefatos de investigação indicam que não há evidência de que o SOC Copilot suporte consultas em linguagem natural.\n\nOperational implication:  \nA equipe deve confirmar manualmente a funcionalidade de linguagem natural do SOC Copilot por meio de testes ou documentação oficial, pois não há evidência automática no conjunto de dados analisado.\n\nConfidence level: Low\n\nCitations:\n- data/evidence/agent_investigation.json (structured_answer section)",
+        "mode": "professional_vector_rag_llm",
+        "used_llm": true,
+        "llm_requested": true,
+        "llm_error": null,
+        "intent": {
+          "intent": "unknown",
+          "confidence": 0.95,
+          "rationale": "The question asks about the SOC Copilot's ability to respond to natural language queries, which does not correspond to any of the defined DFIR/SOC investigation intents such as timeline, containment, or root cause.",
+          "classifier": "llm"
         },
-        "tool_result": null,
+        "evidence_grounded": false,
+        "structured_answer": {
+          "question": "O SOC Copilot responde perguntas em linguagem natural?",
+          "is_answered": false,
+          "answer": "No structured evidence answer was generated for this question.",
+          "evidence": [],
+          "source_artifacts": [],
+          "confidence": "low",
+          "technical_payload": {},
+          "fallback_to_rag": true,
+          "intent": "unknown",
+          "intent_confidence": 0.0,
+          "intent_rationale": "No structured evidence intent matched the question."
+        },
+        "vector_context": {
+          "query": "O SOC Copilot responde perguntas em linguagem natural?",
+          "top_k": 6,
+          "retrieved_documents": [
+            {
+              "content": "on_plan[4]: Prioritize containment for critical IPs with confirmed high-risk behavior.\nforensic_analysis.agent: forensic_analyst_agent\nforensic_analysis.generated_at_utc: 2026-06-13T00:43:52.368989+00:00\nforensic_analysis.patient_zero_candidate: 204.210.158.207\nforensic_analysis.attack_window.first_seen: 2020-10-01 00:00:00.000000\nforensic_analysis.attack_window.last_seen: 2020-12-31 23:58:00.000000\nforensic_analysis.first_seen: 2020-10-01 00:00:00.000000\nforensic_analysis.last_seen: 2020-12-31 23:58:00.000000\nforensic_analysis.attack_pattern: Automated sequential invoice enumeration through exposed application object identifiers.\nforensic_analysis.attack_pattern_explanation: The evidence shows high-volume invoice access, high invoice diversity and elevated sequential access ratio. This combination is consistent with automated enumeration of direct object identifiers.\nforensic_analysis.automation_assessment.is_likely_automated: True\nforensic_analysis.automation_assessment.likely_automated: True\nforensic_analysis.automation_assessment.automation_type: bot-driven invoice enumeration\nforensic_analysis.automation_assessment.rationale: Top IPs converge across risk scoring, bot likelihoo",
+              "source_path": "data/evidence/agent_investigation.json",
+              "artifact_type": "json",
+              "chunk_index": 1,
+              "distance": 1.6419425010681152
+            },
+            {
+              "content": "triage.agent: triage_agent\ntriage.generated_at_utc: 2026-06-13T00:43:52.366983+00:00\ntriage.incident_classification: Potential IDOR exploitation via invoice enumeration\ntriage.severity: critical\ntriage.priority: P1\ntriage.top_risk_score: 86.04241498055296\ntriage.total_suspicious_ips: 182\ntriage.total_anomalous_ips: 172\ntriage.initial_hypotheses[0]: Automated invoice enumeration against invoice search endpoint.\ntriage.initial_hypotheses[1]: Possible IDOR exploitation due to high invoice diversity per IP.\ntriage.initial_hypotheses[2]: Likely bot-driven activity due to convergence of heuristic and anomaly signals.\ntriage.investigation_plan[0]: Review top risk IPs and their invoice enumeration pattern.\ntriage.investigation_plan[1]: Validate whether accessed invoices belong to different users.\ntriage.investigation_plan[2]: Review auth token reuse and suspicious user-agent patterns.\ntriage.investigation_plan[3]: Correlate risk scoring with Isolation Forest anomaly results.\ntriage.investigation_plan[4]: Prioritize containment for critical IPs with confirmed high-risk behavior.\nforensic_analysis.agent: forensic_analyst_agent\nforensic_analysis.generated_at_utc: 2026-06-13T00:43:52.368989+00",
+              "source_path": "data/evidence/agent_investigation.json",
+              "artifact_type": "json",
+              "chunk_index": 0,
+              "distance": 1.6590434312820435
+            },
+            {
+              "content": "m\niocs.anomaly_indicators[48].risk_score: 30.941402789375363\niocs.anomaly_indicators[48].risk_level: low\niocs.anomaly_indicators[49].ip: 125.0.215.60\niocs.anomaly_indicators[49].anomaly_score: 68.89765790059968\niocs.anomaly_indicators[49].anomaly_level: medium\niocs.anomaly_indicators[49].risk_score: 31.406261128882537\niocs.anomaly_indicators[49].risk_level: low\ninvestigative_conclusion: The evidence indicates automated invoice enumeration behavior consistent with potential IDOR exploitation. High-risk IPs show large invoice diversity, sequential access patterns, elevated risk scores and convergence with anomaly detection.\nrecommended_next_steps[0]: Block or challenge top critical IPs after human approval.\nrecommended_next_steps[1]: Apply dynamic rate limiting to invoice search endpoints.\nrecommended_next_steps[2]: Review authorization checks for invoice ownership.\nrecommended_next_steps[3]: Revoke or rotate exposed suspicious tokens.\nrecommended_next_steps[4]: Create WAF rules for detected enumeration patterns.\nrecommended_next_steps[5]: Continue monitoring anomalous IP behavior.",
+              "source_path": "data/evidence/forensic_evidence.json",
+              "artifact_type": "json",
+              "chunk_index": 579,
+              "distance": 1.7051160335540771
+            },
+            {
+              "content": "ing_evidence.mitre_attack_mapping[1].rationale: The observed behavior indicates large-scale access to invoice objects.\nsupporting_evidence.mitre_attack_mapping[2].tactic: Credential Access / Defense Evasion\nsupporting_evidence.mitre_attack_mapping[2].technique: Valid Accounts or Token Misuse\nsupporting_evidence.mitre_attack_mapping[2].rationale: The investigation observed suspicious token reuse across invoice access patterns.\nfailed_controls[0].control: object_level_authorization\nfailed_controls[0].assessment: Application endpoints appear to allow enumeration of invoice identifiers without sufficient ownership validation.\nfailed_controls[1].control: anti_enumeration_rate_limiting\nfailed_controls[1].assessment: Observed request volume and invoice diversity indicate that enumeration was not sufficiently throttled.\nfailed_controls[2].control: token_abuse_monitoring\nfailed_controls[2].assessment: Suspicious token patterns require validation and potential rotation.\neradication_plan[0].step: 1\neradication_plan[0].action: enforce_server_side_object_ownership_checks\neradication_plan[0].expected_result: Only authorized users can access their own invoice objects.\neradication_plan[1].step: 2",
+              "source_path": "data/evidence/root_cause_analysis.json",
+              "artifact_type": "json",
+              "chunk_index": 3,
+              "distance": 1.7217565774917603
+            },
+            {
+              "content": "nswered.mitre_mapping[1].tactic: Collection\nquestions_answered.mitre_mapping[1].technique: Data from Information Repositories\nquestions_answered.mitre_mapping[1].rationale: The observed behavior indicates large-scale access to invoice objects.\nquestions_answered.mitre_mapping[2].tactic: Credential Access / Defense Evasion\nquestions_answered.mitre_mapping[2].technique: Valid Accounts or Token Misuse\nquestions_answered.mitre_mapping[2].rationale: The investigation observed suspicious token reuse across invoice access patterns.\nnist_lifecycle.analysis.status: completed\nnist_lifecycle.analysis.evidence[0]: forensic_evidence.json\nnist_lifecycle.analysis.evidence[1]: attack_timeline.json\nnist_lifecycle.analysis.evidence[2]: iocs.json\nnist_lifecycle.analysis.evidence[3]: risk_scores.parquet\nnist_lifecycle.analysis.evidence[4]: anomaly_scores.parquet\nnist_lifecycle.analysis.summary: The platform classified the event as likely IDOR exploitation through invoice enumeration and generated forensic evidence.\nnist_lifecycle.containment.status: proposed_dry_run\nnist_lifecycle.containment.strategy_file: containment_strategy.json\nnist_lifecycle.containment.summary: Immediate and strategic containme",
+              "source_path": "data/evidence/nist_incident_report.json",
+              "artifact_type": "json",
+              "chunk_index": 1,
+              "distance": 1.7397103309631348
+            },
+            {
+              "content": "eline.hourly_timeline[215].requests: 7\nattack_timeline.hourly_timeline[215].unique_ips: 5\nattack_timeline.hourly_timeline[215].unique_invoice_ids: 7\nattack_timeline.hourly_timeline[216].hour_bucket: 2020-10-10 00\nattack_timeline.hourly_timeline[216].requests: 10\nattack_timeline.hourly_timeline[216].unique_ips: 7\nattack_timeline.hourly_timeline[216].unique_invoice_ids: 10\nattack_timeline.hourly_timeline[217].hour_bucket: 2020-10-10 01\nattack_timeline.hourly_timeline[217].requests: 13\nattack_timeline.hourly_timeline[217].unique_ips: 10\nattack_timeline.hourly_timeline[217].unique_invoice_ids: 13\nattack_timeline.hourly_timeline[218].hour_bucket: 2020-10-10 02\nattack_timeline.hourly_timeline[218].requests: 11\nattack_timeline.hourly_timeline[218].unique_ips: 6\nattack_timeline.hourly_timeline[218].unique_invoice_ids: 11\nattack_timeline.hourly_timeline[219].hour_bucket: 2020-10-10 03\nattack_timeline.hourly_timeline[219].requests: 15\nattack_timeline.hourly_timeline[219].unique_ips: 8\nattack_timeline.hourly_timeline[219].unique_invoice_ids: 15\nattack_timeline.hourly_timeline[220].hour_bucket: 2020-10-10 04\nattack_timeline.hourly_timeline[220].requests: 11\nattack_timeline.hourly_timeline[220]",
+              "source_path": "data/evidence/forensic_evidence.json",
+              "artifact_type": "json",
+              "chunk_index": 57,
+              "distance": 1.7590646743774414
+            }
+          ]
+        },
+        "session_context": {
+          "recent_turns": [
+            {
+              "timestamp_utc": "2026-06-15T20:44:11.320100+00:00",
+              "question": "What are the TTD, TTR and TTC metrics?",
+              "answer": "Executive answer:\nTTD (Time‑to‑Detect) is 49 944.73 hours, TTR (Time‑to‑Respond) is 0 hours, and TTC (Time‑to‑Contain) is 0 hours for this incident.\n\nSupporting evidence:\n1. The response_metrics artifact defines TTD as “Time between first observed malicious activity and platform detection” with a value of 49944.7312 hours.【data/evidence/response_metrics.json】\n2. The same artifact defines TTR as “Time between detection and response recommendation generation” with a value of 0.0 hours.【data/evidence/response_metrics.json】\n3. The artifact also defines TTC as “Time between detection and containment approval or simulated containment decision” with a value of 0.0 hours.【data/evidence/response_metrics.json】\n\nReasoning:\nThe structured response_metrics JSON provides explicit metric definitions and numeric values. TTD is calculated from the first_seen timestamp (2020‑10‑01) to the current detection execution time, yielding a large retrospective latency. Because the platform operates in an automated dry‑run pipeline, the response recommendation and simulated containment are produced in the same execution cycle, resulting in zero hours for both TTR and TTC.\n\nOperational implication:\nSOC/DFIR teams should note that, in this simulated environment, detection latency is high (reflecting historical data), but the automated workflow eliminates any additional delay between detection, recommendation, and simulated containment. In production, efforts should focus on reducing the retrospective TTD by improving real‑time monitoring, while the automated pipeline can continue to provide immediate response and containment recommendations once detection occurs.\n\nConfidence level: High\n\nCitations:\n- data/evidence/response_metrics.json",
+              "mode": "professional_vector_rag_llm",
+              "used_llm": true
+            },
+            {
+              "timestamp_utc": "2026-06-15T20:44:36.949207+00:00",
+              "question": "Quais são as métricas TTD, TTR e TTC?",
+              "answer": "Executive answer:\nTTD (Time‑to‑Detect) = 49 944.73 horas, TTR (Time‑to‑Respond) = 0 horas e TTC (Time‑to‑Contain) = 0 horas.\n\nSupporting evidence:\n1. O artefato **response_metrics.json** define TTD como “Tempo entre a primeira atividade maliciosa observada e a detecção pela plataforma” com valor 49944.7312 horas.  \n2. O mesmo artefato define TTR como “Tempo entre a detecção e a geração da recomendação de resposta” com valor 0.0 horas.  \n3. O artefato também define TTC como “Tempo entre a detecção e a aprovação ou decisão simulada de contenção” com valor 0.0 horas.\n\nReasoning:\nO JSON de métricas fornece definições claras e valores numéricos para cada métrica. O TTD reflete a latência retrospectiva calculada a partir da data 2020‑10‑01 (primeira atividade) até o momento da execução da detecção, resultando em um número elevado de horas. Como o pipeline está configurado em modo *dry‑run* e automatizado, a recomendação de resposta e a decisão de contenção simulada são produzidas na mesma execução, o que gera valores zero para TTR e TTC.\n\nOperational implication:\n- A equipe SOC/DFIR deve reconhecer que, em ambiente de produção, o TTD pode ser reduzido ao melhorar a coleta e correlação em tempo real.  \n- O fluxo automatizado já elimina atrasos entre detecção, recomendação e contenção simulada (TTR e TTC = 0), portanto o foco deve ser na redução do TTD e na validação de que as ações simuladas sejam rapidamente convertidas em medidas reais após aprovação humana.\n\nConfidence level: High\n\nCitations:\n- data/evidence/response_metrics.json",
+              "mode": "professional_vector_rag_llm",
+              "used_llm": true
+            },
+            {
+              "timestamp_utc": "2026-06-15T20:45:04.149166+00:00",
+              "question": "¿Cuáles son las métricas TTD, TTR y TTC?",
+              "answer": "Executive answer:\nTTD (Time‑to‑Detect) = 49 944.73 horas, TTR (Time‑to‑Respond) = 0 horas y TTC (Time‑to‑Contain) = 0 horas.\n\nSupporting evidence:\n1. El artefacto **response_metrics.json** define TTD como “Time between first observed malicious activity and platform detection” con valor 49944.7312 horas.【data/evidence/response_metrics.json】\n2. El mismo artefacto define TTR como “Time between detection and response recommendation generation” con valor 0.0 horas.【data/evidence/response_metrics.json】\n3. El artefacto también define TTC como “Time between detection and containment approval or simulated containment decision” con valor 0.0 horas.【data/evidence/response_metrics.json】\n\nReasoning:\nEl JSON de métricas proporciona definiciones claras y valores numéricos para cada métrica. El TTD se calcula retrospectivamente desde la primera actividad observada (2020‑10‑01) hasta el momento de ejecución de la detección, lo que genera un número elevado de horas. Como el flujo está configurado en modo *dry‑run* y es totalmente automatizado, la recomendación de respuesta y la decisión de contención simulada se producen en la misma ejecución del pipeline, resultando en valores cero para TTR y TTC.\n\nOperational implication:\n- En producción, el objetivo debe ser reducir el TTD mejorando la monitorización y correlación en tiempo real, ya que actualmente refleja una latencia histórica.\n- El pipeline automatizado ya elimina cualquier retraso entre detección, generación de la recomendación y contención simulada (TTR y TTC = 0), por lo que el foco operativo está en acortar el tiempo de detección y validar que las acciones simuladas se conviertan rápidamente en medidas reales tras la aprobación humana.\n\nConfidence level: High\n\nCitations:\n- data/evidence/response_metrics.json",
+              "mode": "professional_vector_rag_llm",
+              "used_llm": true
+            },
+            {
+              "timestamp_utc": "2026-06-15T20:49:15.083407+00:00",
+              "question": "Who is the patient zero?",
+              "answer": "Executive answer:  \nPatient zero candidate: **204.210.158.207**\n\nSupporting evidence:  \n1. The NIST incident report’s `patient_zero_candidate` field lists 204.210.158.207.  \n2. The forensic evidence summary correlates this IP with the highest anomaly score and sequential invoice enumeration pattern.  \n3. The agent investigation output explicitly identifies 204.210.158.207 as the patient zero candidate.\n\nReasoning:  \nThe structured answer from the platform’s `patient_zero` skill, backed by the NIST incident report and forensic evidence, consistently points to the same IP address. No conflicting evidence is present, and the confidence level is marked high in the structured answer.\n\nOperational implication:  \nSOC/DFIR teams should treat 204.210.158.207 as the initial source of the IDOR activity. Immediate actions include isolating this IP, blocking outbound traffic, and conducting a deeper investigation into the originating host for potential lateral movement or credential compromise.\n\nConfidence level: High\n\nCitations:  \n- data/evidence/nist_incident_report.json  \n- data/evidence/forensic_evidence.json  \n- data/evidence/agent_investigation.json",
+              "mode": "professional_vector_rag_llm",
+              "used_llm": true
+            },
+            {
+              "timestamp_utc": "2026-06-15T20:49:51.221684+00:00",
+              "question": "Quando o ataque começou?",
+              "answer": "The observed exploitation window starts at 2020-10-01 00:00:00.000000.\n\nEvidence:\n- The incident report contains a structured start timestamp.\n- The same report also records the observed end of the attack window.\n- The value is generated from the forensic timeline and incident response layer.\n\nSource artifacts:\n- `data/evidence/nist_incident_report.json`\n- `data/evidence/forensic_evidence.json`\n\nConfidence: high\n\nTechnical payload:\n- attack_start: 2020-10-01 00:00:00.000000\n- attack_end: 2020-12-31 23:58:00.000000",
+              "mode": "professional_vector_rag_deterministic",
+              "used_llm": false
+            },
+            {
+              "timestamp_utc": "2026-06-15T20:50:25.913304+00:00",
+              "question": "¿Qué evidencias sustentan la explotación IDOR?",
+              "answer": "Executive answer:\nLa evidencia disponible indica que el comportamiento observado corresponde a una explotación de IDOR mediante enumeración masiva de facturas.\n\nSupporting evidence:\n1. Se detectó una gran diversidad de facturas accedidas (10 221 facturas) durante la actividad sospechosa.  \n2. El informe NIST confirma indicadores de enumeración de facturas, clasificando el incidente como posible explotación de IDOR.  \n3. El comportamiento fue catalogado como automatizado o compatible con automatización, lo que concuerda con la rápida y repetitiva solicitud de recursos de tipo IDOR.\n\nReasoning:\n- Un número elevado de facturas distintas accedidas sugiere que el atacante está probando diferentes identificadores de objeto (invoice_id) sin autorización, patrón típico de IDOR.  \n- El informe NIST, que sirve como fuente oficial del análisis, menciona explícitamente “invoice enumeration indicators” y nombra el incidente como “potential IDOR exploitation via invoice enumeration”, reforzando la hipótesis.  \n- La clasificación de la actividad como automatizada indica que el atacante utilizó scripts o herramientas para iterar sobre los IDs, lo que es coherente con la técnica de enumeración de objetos vulnerables.\n\nOperational implication:\nEl SOC/DFIR debe considerar que la vulnerabilidad radica en la falta de control de acceso a nivel de objeto (facturas). Se recomienda revisar y reforzar la autorización en los endpoints que exponen IDs, implementar validaciones de pertenencia del recurso al usuario autenticado y aplicar mitigaciones como rate‑limiting y monitoreo de patrones de acceso anómalo.\n\nConfidence level: High\n\nCitations:\n- data/evidence/nist_incident_report.json  \n- data/evidence/forensic_evidence.json  \n- data/evidence/agent_investigation.json",
+              "mode": "professional_vector_rag_llm",
+              "used_llm": true
+            }
+          ],
+          "summary": "User asked: What are the TTD, TTR and TTC metrics?\nAssistant answered: \n\nUser asked: Quais são as métricas TTD, TTR e TTC?\nAssistant answered: \n\nUser asked: ¿Cuáles son las métricas TTD, TTR y TTC?\nAssistant answered: \n\nUser asked: Who is the patient zero?\nAssistant answered: \n\nUser asked: Quando o ataque começou?\nAssistant answered: \n\nUser asked: ¿Qué evidencias sustentan la explotación IDOR?\nAssistant answered: "
+        },
+        "skill_outputs": {
+          "patient_zero": {
+            "skill": "patient_zero",
+            "patient_zero_candidate": "204.210.158.207",
+            "evidence": [
+              "NIST incident report questions_answered.patient_zero_candidate",
+              "forensic evidence correlation",
+              "agent investigation output"
+            ]
+          },
+          "timeline": {
+            "skill": "timeline",
+            "attack_start": "2020-10-01 00:00:00.000000",
+            "attack_end": "2020-12-31 23:58:00.000000"
+          },
+          "containment": {
+            "skill": "containment",
+            "dry_run": true,
+            "strategy": {},
+            "note": "No external containment action is executed automatically."
+          },
+          "impact": {
+            "skill": "impact",
+            "topline": {
+              "health": "healthy",
+              "severity": "critical",
+              "priority": "P1",
+              "dry_run": true,
+              "agent_evaluation_coverage": 100.0
+            },
+            "pipeline_metrics": {}
+          },
+          "mitre": {
+            "skill": "mitre",
+            "mapping": {}
+          },
+          "root_cause": {
+            "skill": "root_cause",
+            "root_cause_analysis": {}
+          },
+          "metrics": {
+            "skill": "metrics",
+            "ttd": null,
+            "ttr": null,
+            "ttc": null,
+            "response_metrics": {
+              "metrics_type": "nist_incident_response_metrics",
+              "generated_at_utc": "2026-06-13T00:43:53.306799+00:00",
+              "attack_window": {
+                "first_seen": "2020-10-01 00:00:00.000000",
+                "last_seen": "2020-12-31 23:58:00.000000"
+              },
+              "time_to_detect": {
+                "metric": "TTD",
+                "definition": "Time between first observed malicious activity and platform detection.",
+                "value_hours": 49944.7312,
+                "interpretation": "Computed from first_seen to current detection execution time. For this historical dataset, the value reflects retrospective detection latency."
+              },
+              "time_to_respond": {
+                "metric": "TTR",
+                "definition": "Time between detection and response recommendation generation.",
+                "value_hours": 0.0,
+                "interpretation": "In the automated pipeline, response recommendation is generated during the same execution cycle."
+              },
+              "time_to_contain": {
+                "metric": "TTC",
+                "definition": "Time between detection and containment approval or simulated containment decision.",
+                "value_hours": 0.0,
+                "interpretation": "Because the platform runs in dry-run mode, TTC represents time to simulated containment approval, not production containment."
+              },
+              "automation_impact": {
+                "manual_process_baseline": "Manual DFIR triage and evidence review may take hours or days depending on analyst availability and data volume.",
+                "automated_process_observed": "The platform generates detection, forensic evidence, response recommendations and approval artifacts in a single pipeline run.",
+                "expected_reduction": "Automation reduces TTD/TTR/TTC by consolidating evidence extraction, risk scoring, anomaly detection, agent reasoning and playbook generation."
+              }
+            }
+          }
+        },
+        "tool_outputs": {},
+        "confidence": "low",
+        "source_artifacts": [],
         "safety": {
           "dry_run": true,
           "external_actions_executed": false,

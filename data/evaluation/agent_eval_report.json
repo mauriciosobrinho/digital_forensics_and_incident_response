@@ -1,12 +1,12 @@
 {
   "report_type": "agent_evaluation_report",
-  "generated_at_utc": "2026-06-10T16:03:21.919159+00:00",
+  "generated_at_utc": "2026-06-15T20:51:50.425763+00:00",
   "summary": {
     "total_questions": 15,
-    "overall_score": 1.0,
-    "overall_coverage_percent": 100.0,
-    "passed": 15,
-    "partial": 0,
+    "overall_score": 0.9778,
+    "overall_coverage_percent": 97.78,
+    "passed": 14,
+    "partial": 1,
     "failed": 0
   },
   "agent_scores": {
@@ -52,10 +52,10 @@
     },
     "soc_copilot": {
       "questions": 1,
-      "average_score": 1.0,
-      "coverage_percent": 100.0,
-      "passed": 1,
-      "partial": 0,
+      "average_score": 0.6667,
+      "coverage_percent": 66.67,
+      "passed": 0,
+      "partial": 1,
       "failed": 0
     }
   },
