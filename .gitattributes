@@ -1,0 +1,10 @@
+*.sh text eol=lf
+docker/entrypoints/*.sh text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+*.md text
+*.html text
+*.yml text eol=lf
+*.yaml text eol=lf
+Dockerfile text eol=lf
+*.Dockerfile text eol=lf
