@@ -40,6 +40,9 @@ Thumbs.db
 # vector_store
 data/vector_store/
 
+# docker local production env
+docker/environments/production.env
+
 # generated evaluation artifacts
 data/evaluation/soc_copilot_question_batch_results.json
 data/evaluation/soc_copilot_question_batch_report.md

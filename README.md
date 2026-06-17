@@ -1038,6 +1038,450 @@ Expected:
 ```text
 nothing to commit, working tree clean
 ```
+---
+
+
+# Docker Runtime Packaging
+
+## Overview
+
+This section documents the Docker runtime packaging added to the DFIR IDOR Response Platform.
+
+The goal is to make the platform reproducible from a clean clone using Docker Compose. The current container stack runs:
+
+- Streamlit UI on `http://127.0.0.1:8501`
+- FastAPI API on `http://127.0.0.1:8000`
+
+The Docker layout is also prepared for future observability services such as Prometheus and Grafana.
+
+---
+
+## Docker Layout
+
+```text
+idor-response-platform/
+│
+├── docker-compose.yml
+│
+├── docker/
+│   ├── app.Dockerfile
+│   ├── streamlit.Dockerfile
+│   ├── fastapi.Dockerfile
+│   │
+│   ├── compose/
+│   │   ├── local.yml
+│   │   ├── full-stack.yml
+│   │   └── production.yml
+│   │
+│   ├── entrypoints/
+│   │   ├── api.sh
+│   │   └── streamlit.sh
+│   │
+│   └── environments/
+│       ├── local.env
+│       ├── docker.env
+│       └── production.env.example
+│
+├── src/
+├── tests/
+├── data/
+├── reports/
+├── requirements.txt
+├── .dockerignore
+└── .gitignore
+```
+
+---
+
+## Main Files
+
+### `docker-compose.yml`
+
+Root Compose file used for the default local runtime.
+
+```bash
+docker compose build
+docker compose up
+```
+
+It starts:
+
+- `dfir-streamlit`
+- `dfir-api`
+
+---
+
+### `docker/compose/local.yml`
+
+Local development Compose profile.
+
+```bash
+docker compose -f docker/compose/local.yml config
+docker compose -f docker/compose/local.yml build
+docker compose -f docker/compose/local.yml up
+```
+
+---
+
+### `docker/compose/full-stack.yml`
+
+Full-stack Compose profile prepared for future services.
+
+Current scope:
+
+- Streamlit
+- FastAPI
+
+Future scope:
+
+- Prometheus
+- Grafana
+- Alert rules
+
+```bash
+docker compose -f docker/compose/full-stack.yml config
+```
+
+---
+
+### `docker/compose/production.yml`
+
+Production-oriented Compose profile.
+
+It expects a non-versioned environment file:
+
+```text
+docker/environments/production.env
+```
+
+Create it from the example file:
+
+```bash
+cp docker/environments/production.env.example docker/environments/production.env
+```
+
+Validate it:
+
+```bash
+docker compose -f docker/compose/production.yml config
+```
+
+Do not commit:
+
+```text
+docker/environments/production.env
+```
+
+---
+
+### `docker/streamlit.Dockerfile`
+
+Builds the Streamlit UI container.
+
+Entrypoint:
+
+```text
+docker/entrypoints/streamlit.sh
+```
+
+Exposes:
+
+```text
+8501
+```
+
+---
+
+### `docker/fastapi.Dockerfile`
+
+Builds the FastAPI container.
+
+Entrypoint:
+
+```text
+docker/entrypoints/api.sh
+```
+
+Exposes:
+
+```text
+8000
+```
+
+---
+
+### `docker/app.Dockerfile`
+
+Reserved for future standalone DFIR Core execution.
+
+Expected future usage:
+
+```bash
+python -m src.app
+```
+
+---
+
+### `docker/entrypoints/streamlit.sh`
+
+Starts the Streamlit application:
+
+```bash
+streamlit run src/ui/streamlit_app.py   --server.address=0.0.0.0   --server.port=8501
+```
+
+---
+
+### `docker/entrypoints/api.sh`
+
+Starts the FastAPI application:
+
+```bash
+uvicorn src.api.main:app   --host 0.0.0.0   --port 8000
+```
+
+---
+
+### `docker/environments/docker.env`
+
+Docker runtime configuration.
+
+Example:
+
+```env
+AGENTS_USE_LLM=false
+AGENTS_DRY_RUN=true
+HUMAN_APPROVAL_MODE=simulated
+HUMAN_DECISION_SCENARIO=approve
+LANGGRAPH_CHECKPOINT_BACKEND=memory
+VECTOR_STORE_BACKEND=chroma
+VECTOR_STORE_DIR=data/vector_store/chroma
+VECTOR_STORE_COLLECTION=dfir_investigation_artifacts
+EMBEDDING_PROVIDER=hash
+EMBEDDING_DIMENSIONS=384
+```
+
+---
+
+### `.dockerignore`
+
+Prevents unnecessary files from being sent to the Docker build context.
+
+It excludes local environments, cache folders, generated artifacts, raw data, processed data, evidence outputs, and vector stores.
+
+This keeps Docker builds smaller, faster, and safer.
+
+---
+
+### `.gitignore`
+
+Keeps local, sensitive, or generated files out of version control.
+
+Examples:
+
+```text
+.env
+docker/environments/production.env
+data/raw/
+data/processed/
+data/vector_store/
+data/evidence/
+.pytest_cache/
+.venv/
+```
+
+---
+
+
+## Build and Run from a Clean Clone
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd idor-response-platform
+```
+
+---
+
+### 2. Validate Docker
+
+```bash
+docker version
+docker info
+```
+
+The output must include the Docker `Server` section.
+
+---
+
+### 3. Validate Compose
+
+```bash
+docker compose config
+```
+
+---
+
+### 4. Build images
+
+```bash
+docker compose build
+```
+
+---
+
+### 5. Start the platform
+
+```bash
+docker compose up
+```
+
+Expected services:
+
+```text
+dfir-api
+dfir-streamlit
+```
+
+Expected URLs:
+
+```text
+http://127.0.0.1:8000
+http://127.0.0.1:8501
+```
+
+---
+
+## Validate FastAPI
+
+Health endpoint:
+
+```bash
+python -c "import requests; r=requests.get('http://127.0.0.1:8000/health'); print(r.status_code); print(r.json())"
+```
+
+Version endpoint:
+
+```bash
+python -c "import requests; r=requests.get('http://127.0.0.1:8000/version'); print(r.status_code); print(r.json())"
+```
+
+Swagger UI:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Current API routes:
+
+```text
+GET /
+GET /health
+GET /version
+GET /docs
+GET /redoc
+```
+
+---
+
+## Validate Streamlit
+
+Open:
+
+```text
+http://127.0.0.1:8501
+```
+
+In the SOC Chat tab, ask:
+
+```text
+Who is the patient zero?
+```
+
+Expected answer must identify:
+
+```text
+204.210.158.207
+```
+
+The UI must not return legacy fallback messages.
+
+---
+
+## Stop the Platform
+
+Stop the active terminal with:
+
+```bash
+CTRL+C
+```
+
+Then remove containers and network:
+
+```bash
+docker compose down
+```
+
+---
+
+## Docker Desktop Recovery on Windows
+
+If Docker Desktop loses the daemon connection or shows pipe errors, open PowerShell as Administrator and run:
+
+```powershell
+taskkill /F /IM "Docker Desktop.exe"
+taskkill /F /IM "com.docker.backend.exe"
+taskkill /F /IM "com.docker.proxy.exe"
+taskkill /F /IM "vpnkit.exe"
+
+Stop-Service com.docker.service -Force
+wsl --shutdown
+Start-Service com.docker.service
+Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+```
+
+Validate:
+
+```powershell
+wsl -l -v
+docker context ls
+docker version
+```
+
+Expected WSL state:
+
+```text
+docker-desktop-data    Running
+docker-desktop         Running
+```
+
+---
+
+## Future Observability Path
+
+The Docker structure is prepared for a future observability profile:
+
+```text
+docker/compose/observability.yml
+docker/prometheus/prometheus.yml
+docker/prometheus/alert_rules.yml
+docker/grafana/provisioning/
+docker/grafana/dashboards/
+```
+
+Planned flow:
+
+```text
+DFIR Platform
+↓
+FastAPI /metrics
+↓
+Prometheus scrape
+↓
+Grafana dashboards
+```
+
 
 ---
 

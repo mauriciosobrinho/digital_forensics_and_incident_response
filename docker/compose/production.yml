@@ -1,0 +1,30 @@
+name: dfir-platform-production
+
+services:
+  dfir-streamlit:
+    build:
+      context: ../..
+      dockerfile: docker/streamlit.Dockerfile
+    container_name: dfir-streamlit-prod
+    env_file:
+      - ../environments/production.env
+    ports:
+      - "8501:8501"
+    volumes:
+      - ../../data:/app/data
+      - ../../reports:/app/reports
+    restart: unless-stopped
+
+  dfir-api:
+    build:
+      context: ../..
+      dockerfile: docker/fastapi.Dockerfile
+    container_name: dfir-api-prod
+    env_file:
+      - ../environments/production.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../data:/app/data
+      - ../../reports:/app/reports
+    restart: unless-stopped
