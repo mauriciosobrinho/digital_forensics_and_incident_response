@@ -1,4 +1,4 @@
-<h1>IDOR Response Platform</h1>
+<h1 id="idor-response-platform">IDOR Response Platform</h1>
 <p align="center">
   <strong>IDOR Response Platform</strong><br/>
   Digital Forensics & Incident Response · GenAI Agents · Human-in-the-loop · NIST IR · SOC Observability
@@ -14,11 +14,11 @@
 </p>
 
 <hr />
-<h2>Digital Forensics &amp; Incident Response Platform</h2>
+<h2 id="digital-forensics-incident-response-platform">Digital Forensics &amp; Incident Response Platform</h2>
 <p>Technical Challenge — Technical Leader, Digital Forensics and Incident Response
 Mercado Livre / Mercado Libre Cybersecurity Case</p>
 <hr />
-<h2>Overview</h2>
+<h2 id="overview">Overview</h2>
 <p>The <strong>IDOR Response Platform</strong> is an end-to-end Digital Forensics and Incident Response platform designed to investigate, explain, validate and safely respond to <strong>IDOR — Insecure Direct Object Reference</strong> incidents.</p>
 <p>The project was built as a complete DFIR/SOC investigation platform, combining:</p>
 <ul>
@@ -42,32 +42,116 @@ Mercado Livre / Mercado Libre Cybersecurity Case</p>
 </ul>
 <p>All containment actions are executed in <strong>dry-run mode</strong>, ensuring safety, auditability and human oversight.</p>
 <hr />
-<h2>Challenge Requirements Coverage</h2>
-<p>| Challenge Requirement        | Platform Capability                    | Status |
-| ---------------------------- | -------------------------------------- | ------ |
-| Incident classification      | Triage Agent                           | ✅      |
-| Severity classification      | Risk scoring + Triage Agent            | ✅      |
-| Hypothesis generation        | Triage Agent                           | ✅      |
-| Investigation prioritization | Risk score + anomaly convergence       | ✅      |
-| Forensic analysis            | Forensic Analyst Agent                 | ✅      |
-| Patient zero identification  | Forensic evidence package              | ✅      |
-| Initial exploitation window  | Attack timeline                        | ✅      |
-| Automation assessment        | Bot/anomaly/sequential access analysis | ✅      |
-| MITRE ATT&amp;CK mapping         | Forensic Analyst Agent                 | ✅      |
-| Immediate containment        | Response Advisor Agent                 | ✅      |
-| Strategic containment        | NIST IR layer                          | ✅      |
-| Human approval               | Human Approval Agent                   | ✅      |
-| Dry-run execution            | Safe simulated tools                   | ✅      |
-| Decision logging             | Agent decision log                     | ✅      |
-| Workflow state machine       | LangGraph workflow                     | ✅      |
-| Workflow re-entry            | Request more evidence scenario         | ✅      |
-| Response metrics             | TTD / TTR / TTC                        | ✅      |
-| Dashboards / metrics         | Streamlit + observability artifacts    | ✅      |
-| Final reports                | Technical report + executive summary   | ✅      |</p>
+<h2 id="challenge-requirements-coverage">Challenge Requirements Coverage</h2>
+<table>
+<thead>
+<tr>
+<th>Challenge Requirement</th>
+<th>Platform Capability</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Incident classification</td>
+<td>Triage Agent</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Severity classification</td>
+<td>Risk scoring + Triage Agent</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Hypothesis generation</td>
+<td>Triage Agent</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Investigation prioritization</td>
+<td>Risk score + anomaly convergence</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Forensic analysis</td>
+<td>Forensic Analyst Agent</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Patient zero identification</td>
+<td>Forensic evidence package</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Initial exploitation window</td>
+<td>Attack timeline</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Automation assessment</td>
+<td>Bot/anomaly/sequential access analysis</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>MITRE ATT&amp;CK mapping</td>
+<td>Forensic Analyst Agent</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Immediate containment</td>
+<td>Response Advisor Agent</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Strategic containment</td>
+<td>NIST IR layer</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Human approval</td>
+<td>Human Approval Agent</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Dry-run execution</td>
+<td>Safe simulated tools</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Decision logging</td>
+<td>Agent decision log</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Workflow state machine</td>
+<td>LangGraph workflow</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Workflow re-entry</td>
+<td>Request more evidence scenario</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Response metrics</td>
+<td>TTD / TTR / TTC</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Dashboards / metrics</td>
+<td>Streamlit + observability artifacts</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Final reports</td>
+<td>Technical report + executive summary</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>High-Level Architecture</h2>
-<p><code>text
-Raw Web Logs
+<h2 id="high-level-architecture">High-Level Architecture</h2>
+<pre><code class="language-text">Raw Web Logs
     │
     ▼
 Evidence Integrity / Chain of Custody
@@ -111,59 +195,178 @@ Observability &amp; SOC Monitoring
 SOC Copilot / Streamlit UI
     │
     ▼
-Technical Reports &amp; Executive Summary</code></p>
+Technical Reports &amp; Executive Summary
+</code></pre>
 <hr />
-<h2>Technology Stack</h2>
-<p>| Layer                  | Technology                          |
-| ---------------------- | ----------------------------------- |
-| Language               | Python 3.12                         |
-| Data processing        | Polars                              |
-| Storage format         | Parquet                             |
-| Validation             | Pydantic v2                         |
-| ML / anomaly detection | Scikit-learn / Isolation Forest     |
-| Agent orchestration    | LangGraph                           |
-| LLM interface          | OpenAI-compatible API via LangChain |
-| UI                     | Streamlit                           |
-| Testing                | Pytest                              |
-| Reporting              | Markdown + Matplotlib figures       |
-| Evidence format        | JSON                                |
-| Workflow visualization | Mermaid / PNG                       |</p>
+<h2 id="technology-stack">Technology Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language</td>
+<td>Python 3.12</td>
+</tr>
+<tr>
+<td>Data processing</td>
+<td>Polars</td>
+</tr>
+<tr>
+<td>Storage format</td>
+<td>Parquet</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>Pydantic v2</td>
+</tr>
+<tr>
+<td>ML / anomaly detection</td>
+<td>Scikit-learn / Isolation Forest</td>
+</tr>
+<tr>
+<td>Agent orchestration</td>
+<td>LangGraph</td>
+</tr>
+<tr>
+<td>LLM interface</td>
+<td>OpenAI-compatible API via LangChain</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>Streamlit</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>Pytest</td>
+</tr>
+<tr>
+<td>Reporting</td>
+<td>Markdown + Matplotlib figures</td>
+</tr>
+<tr>
+<td>Evidence format</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td>Workflow visualization</td>
+<td>Mermaid / PNG</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>Dataset</h2>
+<h2 id="dataset">Dataset</h2>
 <p>Input file:</p>
-<p><code>text
-data/raw/three_months.csv</code></p>
+<pre><code class="language-text">data/raw/three_months.csv
+</code></pre>
 <p>Observed dataset size:</p>
-<p>| Metric         |     Value |
-| -------------- | --------: |
-| Raw events     | 4,478,619 |
-| Columns        |         8 |
-| Analyzed IPs   |     5,726 |
-| IDOR findings  |       182 |
-| Anomalous IPs  |       172 |
-| Generated IOCs |       586 |</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raw events</td>
+<td style="text-align: right;">4,478,619</td>
+</tr>
+<tr>
+<td>Columns</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr>
+<td>Analyzed IPs</td>
+<td style="text-align: right;">5,726</td>
+</tr>
+<tr>
+<td>IDOR findings</td>
+<td style="text-align: right;">182</td>
+</tr>
+<tr>
+<td>Anomalous IPs</td>
+<td style="text-align: right;">172</td>
+</tr>
+<tr>
+<td>Generated IOCs</td>
+<td style="text-align: right;">586</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>Input Schema</h2>
-<p>| Original Column   | Normalized Column |
-| ----------------- | ----------------- |
-| <code>timestamp</code>       | <code>timestamp</code>       |
-| <code>http_staus</code>      | <code>status_code</code>     |
-| <code>http_host</code>       | <code>host</code>            |
-| <code>http_uri</code>        | <code>uri</code>             |
-| <code>http_method</code>     | <code>method</code>          |
-| <code>http_referer</code>    | <code>referer</code>         |
-| <code>http_user_agent</code> | <code>user_agent</code>      |
-| <code>source_ip</code>       | <code>source_ip</code>       |</p>
+<h2 id="input-schema">Input Schema</h2>
+<table>
+<thead>
+<tr>
+<th>Original Column</th>
+<th>Normalized Column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>timestamp</code></td>
+</tr>
+<tr>
+<td><code>http_staus</code></td>
+<td><code>status_code</code></td>
+</tr>
+<tr>
+<td><code>http_host</code></td>
+<td><code>host</code></td>
+</tr>
+<tr>
+<td><code>http_uri</code></td>
+<td><code>uri</code></td>
+</tr>
+<tr>
+<td><code>http_method</code></td>
+<td><code>method</code></td>
+</tr>
+<tr>
+<td><code>http_referer</code></td>
+<td><code>referer</code></td>
+</tr>
+<tr>
+<td><code>http_user_agent</code></td>
+<td><code>user_agent</code></td>
+</tr>
+<tr>
+<td><code>source_ip</code></td>
+<td><code>source_ip</code></td>
+</tr>
+</tbody>
+</table>
 <p>Extracted URI fields:</p>
-<p>| Field        | Description                                               |
-| ------------ | --------------------------------------------------------- |
-| <code>invoice_id</code> | Direct object identifier used for invoice access analysis |
-| <code>site_id</code>    | Site/country/business context identifier                  |
-| <code>auth_token</code> | Token-like value observed in request URI                  |</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>invoice_id</code></td>
+<td>Direct object identifier used for invoice access analysis</td>
+</tr>
+<tr>
+<td><code>site_id</code></td>
+<td>Site/country/business context identifier</td>
+</tr>
+<tr>
+<td><code>auth_token</code></td>
+<td>Token-like value observed in request URI</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>Project Structure</h2>
-<p>```text
-src/
+<h2 id="project-structure">Project Structure</h2>
+<pre><code class="language-text">src/
 ├── agents/
 │   ├── conversation_agent.py
 │   ├── conversation_memory.py
@@ -258,16 +461,18 @@ src/
 ├── utils/
 │   └── filesystem.py
 │
-└── app.py</p>
-<p>data/
+└── app.py
+
+data/
 ├── raw/
 ├── processed/
 ├── evidence/
 ├── evaluation/
 ├── observability/
 ├── memory/
-└── knowledge/</p>
-<p>reports/
+└── knowledge/
+
+reports/
 ├── technical_report.md
 ├── executive_summary.md
 ├── architecture.md
@@ -277,8 +482,9 @@ src/
     ├── agent_coverage.png
     ├── agent_metrics.png
     ├── pipeline_metrics.png
-    └── streamlit_ui.png</p>
-<p>tests/
+    └── streamlit_ui.png
+
+tests/
 ├── test_agent_evaluation.py
 ├── test_agents.py
 ├── test_anomaly_detection.py
@@ -292,26 +498,25 @@ src/
 ├── test_observability.py
 ├── test_reporting.py
 └── test_uri_parser.py
-```</p>
+</code></pre>
 <hr />
-<h1>Reproducibility Guide</h1>
+<h1 id="reproducibility-guide">Reproducibility Guide</h1>
 <p>This section is the single source of truth for setup, installation, environment configuration, dataset requirements, compilation, pipeline execution, automated tests, integration validation, human approval scenarios, SOC Copilot modes, Streamlit UI validation, smoke tests, release validation and local Git cleanup.</p>
 <p>It is intentionally detailed so that a technical reviewer can reproduce the Release 1.0 delivery from a clean clone while also having the option to run the same workflow through reproducibility scripts.</p>
 <hr />
-<h2>Validation Assumptions</h2>
+<h2 id="validation-assumptions">Validation Assumptions</h2>
 <p>The official submitted version is frozen in the Git tag:</p>
-<p><code>text
-v1.0.0</code></p>
+<pre><code class="language-text">v1.0.0
+</code></pre>
 <p>The expected Release 1.0 commit is:</p>
-<p><code>text
-35c26e1 feat(sprint-4.0): generate final delivery package and presentation assets</code></p>
+<pre><code class="language-text">35c26e1 feat(sprint-4.0): generate final delivery package and presentation assets
+</code></pre>
 <p>The full pipeline requires the original challenge dataset at:</p>
-<p><code>text
-data/raw/three_months.csv</code></p>
+<pre><code class="language-text">data/raw/three_months.csv
+</code></pre>
 <p>This raw file is intentionally not versioned in Git because it is large and should be treated as raw input evidence.</p>
 <p>In a clean clone, the recommended execution order is:</p>
-<p><code>text
-clone repository
+<pre><code class="language-text">clone repository
 ↓
 create virtual environment
 ↓
@@ -331,100 +536,106 @@ validate artifacts
 ↓
 validate metrics
 ↓
-validate Streamlit UI</code></p>
+validate Streamlit UI
+</code></pre>
 <p>The pipeline should be executed before the full test suite in a clean clone because some integration tests validate artifacts generated in:</p>
-<p><code>text
-data/evidence/
+<pre><code class="language-text">data/evidence/
 data/evaluation/
-data/observability/</code></p>
+data/observability/
+</code></pre>
 <hr />
-<h1>Option A — Guided Manual Setup</h1>
+<h1 id="option-a-guided-manual-setup">Option A — Guided Manual Setup</h1>
 <p>Use this option when the reviewer wants to execute the validation flow command by command and inspect every stage of the platform.</p>
 <hr />
-<h2>Block 1 — Clean Release Clone</h2>
-<p>```bash
-cd ~/OneDrive/Documentos</p>
-<p>rm -rf idor-clean-test</p>
-<p>git clone -b master https://github.com/mauriciosobrinho/digital_forensics_and_incident_response.git idor-clean-test</p>
-<p>cd idor-clean-test</p>
-<p>git branch --show-current
-```</p>
+<h2 id="block-1-clean-release-clone">Block 1 — Clean Release Clone</h2>
+<pre><code class="language-bash">cd ~/OneDrive/Documentos
+
+rm -rf idor-clean-test
+
+git clone -b master https://github.com/mauriciosobrinho/digital_forensics_and_incident_response.git idor-clean-test
+
+cd idor-clean-test
+
+git branch --show-current
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-master</code></p>
-<p><code>bash
-git log --oneline -1</code></p>
+<pre><code class="language-text">master
+</code></pre>
+<pre><code class="language-bash">git log --oneline -1
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-35c26e1 feat(sprint-4.0): generate final delivery package and presentation assets</code></p>
-<p><code>bash
-git tag --list</code></p>
+<pre><code class="language-text">35c26e1 feat(sprint-4.0): generate final delivery package and presentation assets
+</code></pre>
+<pre><code class="language-bash">git tag --list
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-v1.0.0</code></p>
+<pre><code class="language-text">v1.0.0
+</code></pre>
 <p>Optional:</p>
-<p><code>bash
-git checkout v1.0.0
-git checkout master</code></p>
+<pre><code class="language-bash">git checkout v1.0.0
+git checkout master
+</code></pre>
 <hr />
-<h2>Block 2 — Validate Project Structure</h2>
-<p>```bash
-ls -lah</p>
-<p>ls -lah src data reports presentation demo scripts
-```</p>
+<h2 id="block-2-validate-project-structure">Block 2 — Validate Project Structure</h2>
+<pre><code class="language-bash">ls -lah
+
+ls -lah src data reports presentation demo scripts
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-src/
+<pre><code class="language-text">src/
 data/
 reports/
 presentation/
 demo/
 scripts/
 requirements.txt
-README.md</code></p>
+README.md
+</code></pre>
 <hr />
-<h2>Block 3 — Create and Activate Virtual Environment</h2>
-<p>```bash
-python -m venv .venv</p>
-<p>source .venv/Scripts/activate</p>
-<p>which python</p>
-<p>python --version
-```</p>
+<h2 id="block-3-create-and-activate-virtual-environment">Block 3 — Create and Activate Virtual Environment</h2>
+<pre><code class="language-bash">python -m venv .venv
+
+source .venv/Scripts/activate
+
+which python
+
+python --version
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-Python 3.12.x</code></p>
+<pre><code class="language-text">Python 3.12.x
+</code></pre>
 <p>Windows CMD:</p>
-<p><code>bat
-.venv\Scripts\activate</code></p>
+<pre><code class="language-bat">.venv\Scripts\activate
+</code></pre>
 <p>Linux/macOS:</p>
-<p><code>bash
-source .venv/bin/activate</code></p>
+<pre><code class="language-bash">source .venv/bin/activate
+</code></pre>
 <hr />
-<h2>Block 4 — Install Dependencies</h2>
-<p>```bash
-python -m pip install --upgrade pip</p>
-<p>pip install -r requirements.txt
-```</p>
+<h2 id="block-4-install-dependencies">Block 4 — Install Dependencies</h2>
+<pre><code class="language-bash">python -m pip install --upgrade pip
+
+pip install -r requirements.txt
+</code></pre>
 <hr />
-<h2>Block 5 — Configure Deterministic Environment</h2>
-<p><code>bash
-cat &gt; .env &lt;&lt;'EOF'
+<h2 id="block-5-configure-deterministic-environment">Block 5 — Configure Deterministic Environment</h2>
+<pre><code class="language-bash">cat &gt; .env &lt;&lt;'EOF'
 AGENTS_USE_LLM=false
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
 LANGGRAPH_CHECKPOINT_BACKEND=memory
-EOF</code></p>
+EOF
+</code></pre>
 <p>Validate:</p>
-<p><code>bash
-cat .env</code></p>
+<pre><code class="language-bash">cat .env
+</code></pre>
 <p>Expected:</p>
-<p><code>env
-AGENTS_USE_LLM=false
+<pre><code class="language-env">AGENTS_USE_LLM=false
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
-LANGGRAPH_CHECKPOINT_BACKEND=memory</code></p>
+LANGGRAPH_CHECKPOINT_BACKEND=memory
+</code></pre>
 <p>Purpose:</p>
 <ul>
 <li>reproducible testing</li>
@@ -435,150 +646,160 @@ LANGGRAPH_CHECKPOINT_BACKEND=memory</code></p>
 <li>no API cost</li>
 </ul>
 <hr />
-<h2>Block 6 — Required Dataset</h2>
+<h2 id="block-6-required-dataset">Block 6 — Required Dataset</h2>
 <p>Create raw directory:</p>
-<p><code>bash
-mkdir -p data/raw</code></p>
+<pre><code class="language-bash">mkdir -p data/raw
+</code></pre>
 <p>Copy dataset:</p>
-<p><code>bash
-cp /path/to/three_months.csv data/raw/three_months.csv</code></p>
+<pre><code class="language-bash">cp /path/to/three_months.csv data/raw/three_months.csv
+</code></pre>
 <p>Validate:</p>
-<p><code>bash
-ls -lah data/raw/three_months.csv</code></p>
+<pre><code class="language-bash">ls -lah data/raw/three_months.csv
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-data/raw/three_months.csv</code></p>
+<pre><code class="language-text">data/raw/three_months.csv
+</code></pre>
 <p>If the file is missing the platform will intentionally fail during chain-of-custody generation because SHA-256 integrity validation is mandatory.</p>
 <hr />
-<h2>Block 7 — Compile Critical Modules</h2>
-<p>```bash
-python -m py_compile src/app.py</p>
-<p>python -m py_compile src/ui/streamlit_app.py</p>
-<p>python -m py_compile src/reporting/pdf_exporter.py</p>
-<p>python -m py_compile scripts/generate_final_delivery_package.py</p>
-<p>python -m py_compile src/agents/evidence_router.py</p>
-<p>python -m py_compile src/agents/evidence_answer_templates.py</p>
-<p>python -m py_compile src/agents/evidence_grounded_copilot.py</p>
-<p>python -m py_compile src/agents/conversation_agent.py
-```</p>
+<h2 id="block-7-compile-critical-modules">Block 7 — Compile Critical Modules</h2>
+<pre><code class="language-bash">python -m py_compile src/app.py
+
+python -m py_compile src/ui/streamlit_app.py
+
+python -m py_compile src/reporting/pdf_exporter.py
+
+python -m py_compile scripts/generate_final_delivery_package.py
+
+python -m py_compile src/agents/evidence_router.py
+
+python -m py_compile src/agents/evidence_answer_templates.py
+
+python -m py_compile src/agents/evidence_grounded_copilot.py
+
+python -m py_compile src/agents/conversation_agent.py
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-Return to prompt without errors.</code></p>
+<pre><code class="language-text">Return to prompt without errors.
+</code></pre>
 <hr />
-<h2>Block 8 — Run Full Pipeline</h2>
-<p><code>bash
-python -m src.app</code></p>
+<h2 id="block-8-run-full-pipeline">Block 8 — Run Full Pipeline</h2>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-Pipeline completed successfully.
+<pre><code class="language-text">Pipeline completed successfully.
 Agent evaluation coverage : 100.0%
-SOC observability health : healthy</code></p>
+SOC observability health : healthy
+</code></pre>
 <p>Windows may show non-blocking WeasyPrint warnings.</p>
 <hr />
-<h2>Block 9 — Run Full Test Suite</h2>
+<h2 id="block-9-run-full-test-suite">Block 9 — Run Full Test Suite</h2>
 <p>Keep:</p>
-<p><code>env
-HUMAN_DECISION_SCENARIO=approve</code></p>
+<pre><code class="language-env">HUMAN_DECISION_SCENARIO=approve
+</code></pre>
 <p>Run:</p>
-<p><code>bash
-pytest -v</code></p>
+<pre><code class="language-bash">pytest -v
+</code></pre>
 <p>Expected after Sprint 4.1:</p>
-<p><code>text
-46 passed</code></p>
+<pre><code class="language-text">46 passed
+</code></pre>
 <hr />
-<h2>Block 10 — Validate Generated Artifacts</h2>
-<p>```bash
-ls -lah data/evidence</p>
-<p>ls -lah data/evaluation</p>
-<p>ls -lah data/observability</p>
-<p>ls -lah reports</p>
-<p>ls -lah presentation</p>
-<p>ls -lah demo/outputs
-```</p>
+<h2 id="block-10-validate-generated-artifacts">Block 10 — Validate Generated Artifacts</h2>
+<pre><code class="language-bash">ls -lah data/evidence
+
+ls -lah data/evaluation
+
+ls -lah data/observability
+
+ls -lah reports
+
+ls -lah presentation
+
+ls -lah demo/outputs
+</code></pre>
 <hr />
-<h2>Block 11 — Validate Core Metrics</h2>
-<p><code>bash
-python -c "import json;d=json.load(open('data/observability/platform_metrics.json',encoding='utf-8'));print(json.dumps(d['pipeline_metrics'],indent=2,ensure_ascii=False))"</code></p>
-<p><code>bash
-python -c "import json;d=json.load(open('data/observability/soc_dashboard_data.json',encoding='utf-8'));print(json.dumps(d['topline'],indent=2,ensure_ascii=False))"</code></p>
-<p><code>bash
-python -c "import json;d=json.load(open('data/evaluation/agent_eval_report.json',encoding='utf-8'));print(json.dumps(d['summary'],indent=2,ensure_ascii=False))"</code></p>
+<h2 id="block-11-validate-core-metrics">Block 11 — Validate Core Metrics</h2>
+<pre><code class="language-bash">python -c &quot;import json;d=json.load(open('data/observability/platform_metrics.json',encoding='utf-8'));print(json.dumps(d['pipeline_metrics'],indent=2,ensure_ascii=False))&quot;
+</code></pre>
+<pre><code class="language-bash">python -c &quot;import json;d=json.load(open('data/observability/soc_dashboard_data.json',encoding='utf-8'));print(json.dumps(d['topline'],indent=2,ensure_ascii=False))&quot;
+</code></pre>
+<pre><code class="language-bash">python -c &quot;import json;d=json.load(open('data/evaluation/agent_eval_report.json',encoding='utf-8'));print(json.dumps(d['summary'],indent=2,ensure_ascii=False))&quot;
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-4,478,619 logs
+<pre><code class="language-text">4,478,619 logs
 5,726 IPs
 182 findings
 172 anomalous IPs
 586 IOCs
 100% agent evaluation coverage
-healthy SOC observability</code></p>
+healthy SOC observability
+</code></pre>
 <hr />
-<h2>Block 12 — Human Approval Scenarios</h2>
-<h3>approve</h3>
-<p><code>bash
-python -m src.app</code></p>
+<h2 id="block-12-human-approval-scenarios">Block 12 — Human Approval Scenarios</h2>
+<h3 id="approve">approve</h3>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-human_loop_count = 0
-decision_log = 4</code></p>
-<h3>reject</h3>
+<pre><code class="language-text">human_loop_count = 0
+decision_log = 4
+</code></pre>
+<h3 id="reject">reject</h3>
 <p>Set:</p>
-<p><code>env
-HUMAN_DECISION_SCENARIO=reject</code></p>
+<pre><code class="language-env">HUMAN_DECISION_SCENARIO=reject
+</code></pre>
 <p>Run:</p>
-<p><code>bash
-python -m src.app</code></p>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-workflow_stage = rejected
-decision_log = 4</code></p>
-<h3>modify</h3>
+<pre><code class="language-text">workflow_stage = rejected
+decision_log = 4
+</code></pre>
+<h3 id="modify">modify</h3>
 <p>Set:</p>
-<p><code>env
-HUMAN_DECISION_SCENARIO=modify</code></p>
+<pre><code class="language-env">HUMAN_DECISION_SCENARIO=modify
+</code></pre>
 <p>Run:</p>
-<p><code>bash
-python -m src.app</code></p>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-modified_action_plan != {}
-decision_log = 4</code></p>
-<h3>request_more_evidence</h3>
+<pre><code class="language-text">modified_action_plan != {}
+decision_log = 4
+</code></pre>
+<h3 id="request_more_evidence">request_more_evidence</h3>
 <p>Set:</p>
-<p><code>env
-HUMAN_DECISION_SCENARIO=request_more_evidence</code></p>
+<pre><code class="language-env">HUMAN_DECISION_SCENARIO=request_more_evidence
+</code></pre>
 <p>Run:</p>
-<p><code>bash
-python -m src.app</code></p>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-human_loop_count = 1
-decision_log = 7</code></p>
+<pre><code class="language-text">human_loop_count = 1
+decision_log = 7
+</code></pre>
 <hr />
-<h2>Block 13 — Restore Default Environment</h2>
-<p><code>bash
-cat &gt; .env &lt;&lt;'EOF'
+<h2 id="block-13-restore-default-environment">Block 13 — Restore Default Environment</h2>
+<pre><code class="language-bash">cat &gt; .env &lt;&lt;'EOF'
 AGENTS_USE_LLM=false
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
 LANGGRAPH_CHECKPOINT_BACKEND=memory
-EOF</code></p>
+EOF
+</code></pre>
 <hr />
-<h2>Block 14 — Re-run Tests</h2>
-<p><code>bash
-pytest -v</code></p>
+<h2 id="block-14-re-run-tests">Block 14 — Re-run Tests</h2>
+<pre><code class="language-bash">pytest -v
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-46 passed</code></p>
+<pre><code class="language-text">46 passed
+</code></pre>
 <hr />
-<h2>SOC Copilot Modes</h2>
+<h2 id="soc-copilot-modes">SOC Copilot Modes</h2>
 <p>The SOC Copilot supports two different validation modes.</p>
-<h3>Mode A — Deterministic Mode</h3>
+<h3 id="mode-a-deterministic-mode">Mode A — Deterministic Mode</h3>
 <p>Configuration:</p>
-<p><code>env
-AGENTS_USE_LLM=false
-HUMAN_DECISION_SCENARIO=approve</code></p>
+<pre><code class="language-env">AGENTS_USE_LLM=false
+HUMAN_DECISION_SCENARIO=approve
+</code></pre>
 <p>Use this mode for:</p>
 <ul>
 <li>reproducible testing</li>
@@ -589,32 +810,32 @@ HUMAN_DECISION_SCENARIO=approve</code></p>
 <li>no API cost</li>
 </ul>
 <p>Expected behavior:</p>
-<p><code>text
-Question
+<pre><code class="language-text">Question
  ↓
 RAG lookup
  ↓
 Template response
  ↓
-Deterministic output</code></p>
+Deterministic output
+</code></pre>
 <p>In this mode, responses may look more template-based because the LLM is disabled. That is expected and correct.</p>
-<h3>Mode B — LLM-Assisted Mode</h3>
+<h3 id="mode-b-llm-assisted-mode">Mode B — LLM-Assisted Mode</h3>
 <p>Configuration:</p>
-<p><code>env
-AGENTS_USE_LLM=true
-HUMAN_DECISION_SCENARIO=approve</code></p>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+HUMAN_DECISION_SCENARIO=approve
+</code></pre>
 <p>Additional provider-specific configuration is required. Example with Groq:</p>
-<p>```env
-AGENTS_USE_LLM=true
+<pre><code class="language-env">AGENTS_USE_LLM=true
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
-LANGGRAPH_CHECKPOINT_BACKEND=memory</p>
-<p>LLM_PROVIDER=groq
+LANGGRAPH_CHECKPOINT_BACKEND=memory
+
+LLM_PROVIDER=groq
 LLM_API_KEY=gsk_...
 LLM_MODEL=llama-3.3-70b-versatile
 LLM_BASE_URL=https://api.groq.com/openai/v1
-```</p>
+</code></pre>
 <p>Use this mode for:</p>
 <ul>
 <li>analyst copilot experience</li>
@@ -624,8 +845,7 @@ LLM_BASE_URL=https://api.groq.com/openai/v1
 <li>technical walkthroughs</li>
 </ul>
 <p>Expected behavior:</p>
-<p><code>text
-Question
+<pre><code class="language-text">Question
  ↓
 RAG lookup
  ↓
@@ -633,7 +853,8 @@ Relevant context
  ↓
 LLM reasoning
  ↓
-Natural-language analyst response</code></p>
+Natural-language analyst response
+</code></pre>
 <p>Recommended executive demonstration sequence:</p>
 <ol>
 <li>Start with deterministic mode to show that the platform works without external dependencies.</li>
@@ -642,65 +863,64 @@ Natural-language analyst response</code></p>
 <li>Demonstrate the difference between deterministic output and natural-language SOC analyst reasoning.</li>
 </ol>
 <hr />
-<h2>Block 18A — Streamlit UI Validation in Deterministic Mode</h2>
+<h2 id="block-18a-streamlit-ui-validation-in-deterministic-mode">Block 18A — Streamlit UI Validation in Deterministic Mode</h2>
 <p>Restore deterministic configuration:</p>
-<p><code>bash
-cat &gt; .env &lt;&lt;'EOF'
+<pre><code class="language-bash">cat &gt; .env &lt;&lt;'EOF'
 AGENTS_USE_LLM=false
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
 LANGGRAPH_CHECKPOINT_BACKEND=memory
-EOF</code></p>
+EOF
+</code></pre>
 <p>Run the UI:</p>
-<p><code>bash
-streamlit run src/ui/streamlit_app.py</code></p>
+<pre><code class="language-bash">streamlit run src/ui/streamlit_app.py
+</code></pre>
 <p>Open:</p>
-<p><code>text
-http://localhost:8501</code></p>
+<pre><code class="language-text">http://localhost:8501
+</code></pre>
 <p>Suggested SOC Chat questions:</p>
-<p><code>text
-Who is the patient zero?
+<pre><code class="language-text">Who is the patient zero?
 Was the attack automated?
 What containment is recommended?
 What evidence supports IDOR exploitation?
-What are the TTD TTR TTC metrics?</code></p>
+What are the TTD TTR TTC metrics?
+</code></pre>
 <p>Expected: the UI should answer using deterministic retrieval/template behavior.</p>
 <hr />
-<h2>Block 18B — Streamlit UI Validation in LLM-Assisted Mode</h2>
+<h2 id="block-18b-streamlit-ui-validation-in-llm-assisted-mode">Block 18B — Streamlit UI Validation in LLM-Assisted Mode</h2>
 <p>Configure LLM mode:</p>
-<p>```bash
-cat &gt; .env &lt;&lt;'EOF'
+<pre><code class="language-bash">cat &gt; .env &lt;&lt;'EOF'
 AGENTS_USE_LLM=true
 AGENTS_DRY_RUN=true
 HUMAN_APPROVAL_MODE=simulated
 HUMAN_DECISION_SCENARIO=approve
-LANGGRAPH_CHECKPOINT_BACKEND=memory</p>
-<p>LLM_PROVIDER=groq
+LANGGRAPH_CHECKPOINT_BACKEND=memory
+
+LLM_PROVIDER=groq
 LLM_API_KEY=gsk_...
 LLM_MODEL=llama-3.3-70b-versatile
 LLM_BASE_URL=https://api.groq.com/openai/v1
 EOF
-```</p>
+</code></pre>
 <p>Run the UI:</p>
-<p><code>bash
-streamlit run src/ui/streamlit_app.py</code></p>
+<pre><code class="language-bash">streamlit run src/ui/streamlit_app.py
+</code></pre>
 <p>Open:</p>
-<p><code>text
-http://localhost:8501</code></p>
+<pre><code class="language-text">http://localhost:8501
+</code></pre>
 <p>Suggested SOC Chat questions:</p>
-<p><code>text
-Who is the patient zero?
+<pre><code class="language-text">Who is the patient zero?
 Was the attack automated?
 What containment is recommended?
 What evidence supports IDOR exploitation?
-What is the business impact?</code></p>
+What is the business impact?
+</code></pre>
 <p>Expected: the UI should provide richer natural-language responses using the configured LLM provider.</p>
 <hr />
-<h2>Block 19 — Streamlit Smoke Test</h2>
+<h2 id="block-19-streamlit-smoke-test">Block 19 — Streamlit Smoke Test</h2>
 <p>Validate the following tabs:</p>
-<p><code>text
-SOC Chat
+<pre><code class="language-text">SOC Chat
 Investigation
 Human Approval
 Forensic Evidence
@@ -708,187 +928,458 @@ RAG / MCP Logs
 Agent Workflow
 Agent Evaluation
 NIST IR Metrics
-Observability</code></p>
+Observability
+</code></pre>
 <p>Expected: all tabs should load without runtime errors after the pipeline has generated the required artifacts.</p>
 <hr />
-<h2>Block 20 — Git Workspace Cleanup After Local Validation</h2>
+<h2 id="block-20-git-workspace-cleanup-after-local-validation">Block 20 — Git Workspace Cleanup After Local Validation</h2>
 <p>Running the pipeline and UI may regenerate local artifacts. This is expected.</p>
 <p>Check repository state:</p>
-<p><code>bash
-git status</code></p>
+<pre><code class="language-bash">git status
+</code></pre>
 <p>Restore tracked generated artifacts if needed:</p>
-<p><code>bash
-git restore data/evaluation data/observability data/memory reports/technical_report.md reports/figures/agent_metrics.png</code></p>
+<pre><code class="language-bash">git restore data/evaluation data/observability data/memory reports/technical_report.md reports/figures/agent_metrics.png
+</code></pre>
 <p>Remove optional non-generated PDF marker files if present:</p>
-<p><code>bash
-rm -f reports/technical_report.pdf.not_generated.txt reports/executive_summary.pdf.not_generated.txt</code></p>
+<pre><code class="language-bash">rm -f reports/technical_report.pdf.not_generated.txt reports/executive_summary.pdf.not_generated.txt
+</code></pre>
 <p>Validate clean workspace:</p>
-<p><code>bash
-git status</code></p>
+<pre><code class="language-bash">git status
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-nothing to commit, working tree clean</code></p>
+<pre><code class="language-text">nothing to commit, working tree clean
+</code></pre>
 <hr />
-<h2>LLM Provider Examples</h2>
+<h1 id="docker-runtime-packaging">Docker Runtime Packaging</h1>
+<h2 id="overview_1">Overview</h2>
+<p>This section documents the Docker runtime packaging added to the DFIR IDOR Response Platform.</p>
+<p>The goal is to make the platform reproducible from a clean clone using Docker Compose. The current container stack runs:</p>
+<ul>
+<li>Streamlit UI on <code>http://127.0.0.1:8501</code></li>
+<li>FastAPI API on <code>http://127.0.0.1:8000</code></li>
+</ul>
+<p>The Docker layout is also prepared for future observability services such as Prometheus and Grafana.</p>
+<hr />
+<h2 id="docker-layout">Docker Layout</h2>
+<pre><code class="language-text">idor-response-platform/
+│
+├── docker-compose.yml
+│
+├── docker/
+│   ├── app.Dockerfile
+│   ├── streamlit.Dockerfile
+│   ├── fastapi.Dockerfile
+│   │
+│   ├── compose/
+│   │   ├── local.yml
+│   │   ├── full-stack.yml
+│   │   └── production.yml
+│   │
+│   ├── entrypoints/
+│   │   ├── api.sh
+│   │   └── streamlit.sh
+│   │
+│   └── environments/
+│       ├── local.env
+│       ├── docker.env
+│       └── production.env.example
+│
+├── src/
+├── tests/
+├── data/
+├── reports/
+├── requirements.txt
+├── .dockerignore
+└── .gitignore
+</code></pre>
+<hr />
+<h2 id="main-files">Main Files</h2>
+<h3 id="docker-composeyml"><code>docker-compose.yml</code></h3>
+<p>Root Compose file used for the default local runtime.</p>
+<pre><code class="language-bash">docker compose build
+docker compose up
+</code></pre>
+<p>It starts:</p>
+<ul>
+<li><code>dfir-streamlit</code></li>
+<li><code>dfir-api</code></li>
+</ul>
+<hr />
+<h3 id="dockercomposelocalyml"><code>docker/compose/local.yml</code></h3>
+<p>Local development Compose profile.</p>
+<pre><code class="language-bash">docker compose -f docker/compose/local.yml config
+docker compose -f docker/compose/local.yml build
+docker compose -f docker/compose/local.yml up
+</code></pre>
+<hr />
+<h3 id="dockercomposefull-stackyml"><code>docker/compose/full-stack.yml</code></h3>
+<p>Full-stack Compose profile prepared for future services.</p>
+<p>Current scope:</p>
+<ul>
+<li>Streamlit</li>
+<li>FastAPI</li>
+</ul>
+<p>Future scope:</p>
+<ul>
+<li>Prometheus</li>
+<li>Grafana</li>
+<li>Alert rules</li>
+</ul>
+<pre><code class="language-bash">docker compose -f docker/compose/full-stack.yml config
+</code></pre>
+<hr />
+<h3 id="dockercomposeproductionyml"><code>docker/compose/production.yml</code></h3>
+<p>Production-oriented Compose profile.</p>
+<p>It expects a non-versioned environment file:</p>
+<pre><code class="language-text">docker/environments/production.env
+</code></pre>
+<p>Create it from the example file:</p>
+<pre><code class="language-bash">cp docker/environments/production.env.example docker/environments/production.env
+</code></pre>
+<p>Validate it:</p>
+<pre><code class="language-bash">docker compose -f docker/compose/production.yml config
+</code></pre>
+<p>Do not commit:</p>
+<pre><code class="language-text">docker/environments/production.env
+</code></pre>
+<hr />
+<h3 id="dockerstreamlitdockerfile"><code>docker/streamlit.Dockerfile</code></h3>
+<p>Builds the Streamlit UI container.</p>
+<p>Entrypoint:</p>
+<pre><code class="language-text">docker/entrypoints/streamlit.sh
+</code></pre>
+<p>Exposes:</p>
+<pre><code class="language-text">8501
+</code></pre>
+<hr />
+<h3 id="dockerfastapidockerfile"><code>docker/fastapi.Dockerfile</code></h3>
+<p>Builds the FastAPI container.</p>
+<p>Entrypoint:</p>
+<pre><code class="language-text">docker/entrypoints/api.sh
+</code></pre>
+<p>Exposes:</p>
+<pre><code class="language-text">8000
+</code></pre>
+<hr />
+<h3 id="dockerappdockerfile"><code>docker/app.Dockerfile</code></h3>
+<p>Reserved for future standalone DFIR Core execution.</p>
+<p>Expected future usage:</p>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
+<hr />
+<h3 id="dockerentrypointsstreamlitsh"><code>docker/entrypoints/streamlit.sh</code></h3>
+<p>Starts the Streamlit application:</p>
+<pre><code class="language-bash">streamlit run src/ui/streamlit_app.py   --server.address=0.0.0.0   --server.port=8501
+</code></pre>
+<hr />
+<h3 id="dockerentrypointsapish"><code>docker/entrypoints/api.sh</code></h3>
+<p>Starts the FastAPI application:</p>
+<pre><code class="language-bash">uvicorn src.api.main:app   --host 0.0.0.0   --port 8000
+</code></pre>
+<hr />
+<h3 id="dockerenvironmentsdockerenv"><code>docker/environments/docker.env</code></h3>
+<p>Docker runtime configuration.</p>
+<p>Example:</p>
+<pre><code class="language-env">AGENTS_USE_LLM=false
+AGENTS_DRY_RUN=true
+HUMAN_APPROVAL_MODE=simulated
+HUMAN_DECISION_SCENARIO=approve
+LANGGRAPH_CHECKPOINT_BACKEND=memory
+VECTOR_STORE_BACKEND=chroma
+VECTOR_STORE_DIR=data/vector_store/chroma
+VECTOR_STORE_COLLECTION=dfir_investigation_artifacts
+EMBEDDING_PROVIDER=hash
+EMBEDDING_DIMENSIONS=384
+</code></pre>
+<hr />
+<h3 id="dockerignore"><code>.dockerignore</code></h3>
+<p>Prevents unnecessary files from being sent to the Docker build context.</p>
+<p>It excludes local environments, cache folders, generated artifacts, raw data, processed data, evidence outputs, and vector stores.</p>
+<p>This keeps Docker builds smaller, faster, and safer.</p>
+<hr />
+<h3 id="gitignore"><code>.gitignore</code></h3>
+<p>Keeps local, sensitive, or generated files out of version control.</p>
+<p>Examples:</p>
+<pre><code class="language-text">.env
+docker/environments/production.env
+data/raw/
+data/processed/
+data/vector_store/
+data/evidence/
+.pytest_cache/
+.venv/
+</code></pre>
+<hr />
+<h2 id="build-and-run-from-a-clean-clone">Build and Run from a Clean Clone</h2>
+<h3 id="1-clone-the-repository">1. Clone the repository</h3>
+<pre><code class="language-bash">git clone &lt;repository-url&gt;
+cd idor-response-platform
+</code></pre>
+<hr />
+<h3 id="2-validate-docker">2. Validate Docker</h3>
+<pre><code class="language-bash">docker version
+docker info
+</code></pre>
+<p>The output must include the Docker <code>Server</code> section.</p>
+<hr />
+<h3 id="3-validate-compose">3. Validate Compose</h3>
+<pre><code class="language-bash">docker compose config
+</code></pre>
+<hr />
+<h3 id="4-build-images">4. Build images</h3>
+<pre><code class="language-bash">docker compose build
+</code></pre>
+<hr />
+<h3 id="5-start-the-platform">5. Start the platform</h3>
+<pre><code class="language-bash">docker compose up
+</code></pre>
+<p>Expected services:</p>
+<pre><code class="language-text">dfir-api
+dfir-streamlit
+</code></pre>
+<p>Expected URLs:</p>
+<pre><code class="language-text">http://127.0.0.1:8000
+http://127.0.0.1:8501
+</code></pre>
+<hr />
+<h2 id="validate-fastapi">Validate FastAPI</h2>
+<p>Health endpoint:</p>
+<pre><code class="language-bash">python -c &quot;import requests; r=requests.get('http://127.0.0.1:8000/health'); print(r.status_code); print(r.json())&quot;
+</code></pre>
+<p>Version endpoint:</p>
+<pre><code class="language-bash">python -c &quot;import requests; r=requests.get('http://127.0.0.1:8000/version'); print(r.status_code); print(r.json())&quot;
+</code></pre>
+<p>Swagger UI:</p>
+<pre><code class="language-text">http://127.0.0.1:8000/docs
+</code></pre>
+<p>Current API routes:</p>
+<pre><code class="language-text">GET /
+GET /health
+GET /version
+GET /docs
+GET /redoc
+</code></pre>
+<hr />
+<h2 id="validate-streamlit">Validate Streamlit</h2>
+<p>Open:</p>
+<pre><code class="language-text">http://127.0.0.1:8501
+</code></pre>
+<p>In the SOC Chat tab, ask:</p>
+<pre><code class="language-text">Who is the patient zero?
+</code></pre>
+<p>Expected answer must identify:</p>
+<pre><code class="language-text">204.210.158.207
+</code></pre>
+<p>The UI must not return legacy fallback messages.</p>
+<hr />
+<h2 id="stop-the-platform">Stop the Platform</h2>
+<p>Stop the active terminal with:</p>
+<pre><code class="language-bash">CTRL+C
+</code></pre>
+<p>Then remove containers and network:</p>
+<pre><code class="language-bash">docker compose down
+</code></pre>
+<hr />
+<h2 id="docker-desktop-recovery-on-windows">Docker Desktop Recovery on Windows</h2>
+<p>If Docker Desktop loses the daemon connection or shows pipe errors, open PowerShell as Administrator and run:</p>
+<pre><code class="language-powershell">taskkill /F /IM &quot;Docker Desktop.exe&quot;
+taskkill /F /IM &quot;com.docker.backend.exe&quot;
+taskkill /F /IM &quot;com.docker.proxy.exe&quot;
+taskkill /F /IM &quot;vpnkit.exe&quot;
+
+Stop-Service com.docker.service -Force
+wsl --shutdown
+Start-Service com.docker.service
+Start-Process &quot;C:\Program Files\Docker\Docker\Docker Desktop.exe&quot;
+</code></pre>
+<p>Validate:</p>
+<pre><code class="language-powershell">wsl -l -v
+docker context ls
+docker version
+</code></pre>
+<p>Expected WSL state:</p>
+<pre><code class="language-text">docker-desktop-data    Running
+docker-desktop         Running
+</code></pre>
+<hr />
+<h2 id="future-observability-path">Future Observability Path</h2>
+<p>The Docker structure is prepared for a future observability profile:</p>
+<pre><code class="language-text">docker/compose/observability.yml
+docker/prometheus/prometheus.yml
+docker/prometheus/alert_rules.yml
+docker/grafana/provisioning/
+docker/grafana/dashboards/
+</code></pre>
+<p>Planned flow:</p>
+<pre><code class="language-text">DFIR Platform
+↓
+FastAPI /metrics
+↓
+Prometheus scrape
+↓
+Grafana dashboards
+</code></pre>
+<hr />
+<h2 id="llm-provider-examples">LLM Provider Examples</h2>
 <p>The platform uses an OpenAI-compatible client interface for most providers. In most cases, change only:</p>
-<p><code>env
-LLM_PROVIDER
+<pre><code class="language-env">LLM_PROVIDER
 LLM_MODEL
 LLM_API_KEY
-LLM_BASE_URL</code></p>
-<h3>Groq OpenAI-compatible API key and settings</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=groq
-LLM_API_KEY=gsk_...
-LLM_MODEL=llama-3.3-70b-versatile
-LLM_BASE_URL=https://api.groq.com/openai/v1
-```</p>
-<h3>OpenAI API key and settings</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=openai
-LLM_API_KEY=sk-proj-...
-LLM_MODEL=gpt-4.1-mini
-LLM_BASE_URL=
-```</p>
-<h3>OpenRouter API key and settings</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=openai/gpt-4.1-mini
-LLM_BASE_URL=https://openrouter.ai/api/v1
-```</p>
-<h3>Anthropic Claude Sonnet via OpenRouter</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=anthropic/claude-3.5-sonnet
-LLM_BASE_URL=https://openrouter.ai/api/v1
-```</p>
-<h3>Anthropic Claude Haiku via OpenRouter</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=anthropic/claude-3.5-haiku
-LLM_BASE_URL=https://openrouter.ai/api/v1
-```</p>
-<h3>Anthropic Claude Opus via OpenRouter</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=anthropic/claude-3-opus
-LLM_BASE_URL=https://openrouter.ai/api/v1
-```</p>
-<h3>Google Gemini native OpenAI-compatible endpoint</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=gemini
-LLM_API_KEY=your_gemini_key
-LLM_MODEL=gemini-2.5-flash
-LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
-```</p>
-<h3>Google Gemini via OpenRouter</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=google/gemini-2.5-flash
-LLM_BASE_URL=https://openrouter.ai/api/v1
-```</p>
-<h3>Perplexity OpenAI-compatible API key and settings</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=perplexity
-LLM_API_KEY=pplx-...
-LLM_MODEL=sonar-pro
-LLM_BASE_URL=https://api.perplexity.ai
-```</p>
-<h3>Perplexity Sonar Reasoning</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=perplexity
-LLM_API_KEY=pplx-...
-LLM_MODEL=sonar-reasoning-pro
-LLM_BASE_URL=https://api.perplexity.ai
-```</p>
-<h3>xAI Grok</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=xai
-LLM_API_KEY=xai-...
-LLM_MODEL=grok-3
-LLM_BASE_URL=https://api.x.ai/v1
-```</p>
-<h3>xAI Grok Mini</h3>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=xai
-LLM_API_KEY=xai-...
-LLM_MODEL=grok-3-mini
-LLM_BASE_URL=https://api.x.ai/v1
-```</p>
-<h3>Local OpenAI-compatible server</h3>
-<p>Example for local gateways such as LM Studio, Ollama-compatible proxies, LiteLLM, vLLM or local OpenAI-compatible endpoints:</p>
-<p>```env
-AGENTS_USE_LLM=true</p>
-<p>LLM_PROVIDER=local
-LLM_API_KEY=local_or_dummy_key
-LLM_MODEL=local-model-name
-LLM_BASE_URL=http://localhost:1234/v1
-```</p>
-<h3>Quick provider switching examples</h3>
-<h4>OpenRouter + GPT-4.1 Mini</h4>
-<p><code>env
-LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=openai/gpt-4.1-mini
-LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
-<h4>OpenRouter + Claude Sonnet</h4>
-<p><code>env
-LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=anthropic/claude-3.5-sonnet
-LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
-<h4>OpenRouter + Gemini Flash</h4>
-<p><code>env
-LLM_PROVIDER=openrouter
-LLM_API_KEY=sk-or-...
-LLM_MODEL=google/gemini-2.5-flash
-LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
-<h4>Groq + Llama 3.3 70B</h4>
-<p><code>env
+LLM_BASE_URL
+</code></pre>
+<h3 id="groq-openai-compatible-api-key-and-settings">Groq OpenAI-compatible API key and settings</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
 LLM_PROVIDER=groq
 LLM_API_KEY=gsk_...
 LLM_MODEL=llama-3.3-70b-versatile
-LLM_BASE_URL=https://api.groq.com/openai/v1</code></p>
-<h4>Perplexity Sonar Pro</h4>
-<p><code>env
-LLM_PROVIDER=perplexity
-LLM_API_KEY=pplx-...
-LLM_MODEL=sonar-pro
-LLM_BASE_URL=https://api.perplexity.ai</code></p>
-<h3>Native Claude/Gemini note</h3>
-<p>For native Claude/Gemini SDKs, the SDK and client implementation may change. If using Claude or Gemini via OpenRouter, the existing OpenAI-compatible code path can be preserved and only the model changes:</p>
-<p><code>env
+LLM_BASE_URL=https://api.groq.com/openai/v1
+</code></pre>
+<h3 id="openai-api-key-and-settings">OpenAI API key and settings</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openai
+LLM_API_KEY=sk-proj-...
+LLM_MODEL=gpt-4.1-mini
+LLM_BASE_URL=
+</code></pre>
+<h3 id="openrouter-api-key-and-settings">OpenRouter API key and settings</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=openai/gpt-4.1-mini
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h3 id="anthropic-claude-sonnet-via-openrouter">Anthropic Claude Sonnet via OpenRouter</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
 LLM_PROVIDER=openrouter
 LLM_API_KEY=sk-or-...
 LLM_MODEL=anthropic/claude-3.5-sonnet
-LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
-<p>or:</p>
-<p><code>env
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h3 id="anthropic-claude-haiku-via-openrouter">Anthropic Claude Haiku via OpenRouter</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-haiku
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h3 id="anthropic-claude-opus-via-openrouter">Anthropic Claude Opus via OpenRouter</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3-opus
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h3 id="google-gemini-native-openai-compatible-endpoint">Google Gemini native OpenAI-compatible endpoint</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=gemini
+LLM_API_KEY=your_gemini_key
+LLM_MODEL=gemini-2.5-flash
+LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+</code></pre>
+<h3 id="google-gemini-via-openrouter">Google Gemini via OpenRouter</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
 LLM_PROVIDER=openrouter
 LLM_API_KEY=sk-or-...
 LLM_MODEL=google/gemini-2.5-flash
-LLM_BASE_URL=https://openrouter.ai/api/v1</code></p>
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h3 id="perplexity-openai-compatible-api-key-and-settings">Perplexity OpenAI-compatible API key and settings</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-pro
+LLM_BASE_URL=https://api.perplexity.ai
+</code></pre>
+<h3 id="perplexity-sonar-reasoning">Perplexity Sonar Reasoning</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-reasoning-pro
+LLM_BASE_URL=https://api.perplexity.ai
+</code></pre>
+<h3 id="xai-grok">xAI Grok</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=xai
+LLM_API_KEY=xai-...
+LLM_MODEL=grok-3
+LLM_BASE_URL=https://api.x.ai/v1
+</code></pre>
+<h3 id="xai-grok-mini">xAI Grok Mini</h3>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=xai
+LLM_API_KEY=xai-...
+LLM_MODEL=grok-3-mini
+LLM_BASE_URL=https://api.x.ai/v1
+</code></pre>
+<h3 id="local-openai-compatible-server">Local OpenAI-compatible server</h3>
+<p>Example for local gateways such as LM Studio, Ollama-compatible proxies, LiteLLM, vLLM or local OpenAI-compatible endpoints:</p>
+<pre><code class="language-env">AGENTS_USE_LLM=true
+
+LLM_PROVIDER=local
+LLM_API_KEY=local_or_dummy_key
+LLM_MODEL=local-model-name
+LLM_BASE_URL=http://localhost:1234/v1
+</code></pre>
+<h3 id="quick-provider-switching-examples">Quick provider switching examples</h3>
+<h4 id="openrouter-gpt-41-mini">OpenRouter + GPT-4.1 Mini</h4>
+<pre><code class="language-env">LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=openai/gpt-4.1-mini
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h4 id="openrouter-claude-sonnet">OpenRouter + Claude Sonnet</h4>
+<pre><code class="language-env">LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h4 id="openrouter-gemini-flash">OpenRouter + Gemini Flash</h4>
+<pre><code class="language-env">LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<h4 id="groq-llama-33-70b">Groq + Llama 3.3 70B</h4>
+<pre><code class="language-env">LLM_PROVIDER=groq
+LLM_API_KEY=gsk_...
+LLM_MODEL=llama-3.3-70b-versatile
+LLM_BASE_URL=https://api.groq.com/openai/v1
+</code></pre>
+<h4 id="perplexity-sonar-pro">Perplexity Sonar Pro</h4>
+<pre><code class="language-env">LLM_PROVIDER=perplexity
+LLM_API_KEY=pplx-...
+LLM_MODEL=sonar-pro
+LLM_BASE_URL=https://api.perplexity.ai
+</code></pre>
+<h3 id="native-claudegemini-note">Native Claude/Gemini note</h3>
+<p>For native Claude/Gemini SDKs, the SDK and client implementation may change. If using Claude or Gemini via OpenRouter, the existing OpenAI-compatible code path can be preserved and only the model changes:</p>
+<pre><code class="language-env">LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=anthropic/claude-3.5-sonnet
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
+<p>or:</p>
+<pre><code class="language-env">LLM_PROVIDER=openrouter
+LLM_API_KEY=sk-or-...
+LLM_MODEL=google/gemini-2.5-flash
+LLM_BASE_URL=https://openrouter.ai/api/v1
+</code></pre>
 <hr />
-<h2>Running the Full Pipeline</h2>
-<p><code>bash
-python -m src.app</code></p>
+<h2 id="running-the-full-pipeline">Running the Full Pipeline</h2>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
 <p>The pipeline generates:</p>
 <ul>
 <li>processed Parquet datasets</li>
@@ -902,29 +1393,28 @@ python -m src.app</code></p>
 <li>final technical reports</li>
 </ul>
 <hr />
-<h2>Validation Commands</h2>
-<h3>Compile critical files</h3>
-<p><code>bash
-python -m py_compile src/app.py
-python -m py_compile src/ui/streamlit_app.py</code></p>
-<h3>Run tests</h3>
-<p><code>bash
-pytest -v</code></p>
-<h3>Run pipeline</h3>
-<p><code>bash
-python -m src.app</code></p>
-<h3>Run Streamlit UI</h3>
-<p><code>bash
-streamlit run src/ui/streamlit_app.py</code></p>
+<h2 id="validation-commands">Validation Commands</h2>
+<h3 id="compile-critical-files">Compile critical files</h3>
+<pre><code class="language-bash">python -m py_compile src/app.py
+python -m py_compile src/ui/streamlit_app.py
+</code></pre>
+<h3 id="run-tests">Run tests</h3>
+<pre><code class="language-bash">pytest -v
+</code></pre>
+<h3 id="run-pipeline">Run pipeline</h3>
+<pre><code class="language-bash">python -m src.app
+</code></pre>
+<h3 id="run-streamlit-ui">Run Streamlit UI</h3>
+<pre><code class="language-bash">streamlit run src/ui/streamlit_app.py
+</code></pre>
 <hr />
-<h2>SOC Copilot Consoles</h2>
-<h3>Analyst console</h3>
+<h2 id="soc-copilot-consoles">SOC Copilot Consoles</h2>
+<h3 id="analyst-console">Analyst console</h3>
 <p>Natural language interface for investigation:</p>
-<p><code>bash
-python -m src.agents.interactive_console</code></p>
+<pre><code class="language-bash">python -m src.agents.interactive_console
+</code></pre>
 <p>Example questions:</p>
-<p><code>text
-Quais são os top IPs atacantes?
+<pre><code class="language-text">Quais são os top IPs atacantes?
 Qual foi a janela do ataque?
 Explique IDOR e Broken Access Control.
 O ataque apresenta automação?
@@ -933,11 +1423,12 @@ Quais ações de contenção são recomendadas?
 Qual foi o resultado da intervenção humana?
 Mostre a timeline do workflow.
 Houve reentrada no agente forense?
-Quais são as métricas TTD, TTR e TTC?</code></p>
-<h3>Debug console</h3>
+Quais são as métricas TTD, TTR e TTC?
+</code></pre>
+<h3 id="debug-console">Debug console</h3>
 <p>Shows raw JSON payloads for inspection:</p>
-<p><code>bash
-python -m src.agents.interactive_console --json</code></p>
+<pre><code class="language-bash">python -m src.agents.interactive_console --json
+</code></pre>
 <p>Use this mode to validate:</p>
 <ul>
 <li>selected intent</li>
@@ -948,24 +1439,26 @@ python -m src.agents.interactive_console --json</code></p>
 <li>evidence references</li>
 </ul>
 <hr />
-<h2>Block 17 — Git Cleanup</h2>
-<p>```bash
-git status</p>
-<p>git restore data/evaluation data/observability data/memory reports/technical_report.md reports/figures/agent_metrics.png</p>
-<p>rm -f reports/technical_report.pdf.not_generated.txt</p>
-<p>rm -f reports/executive_summary.pdf.not_generated.txt</p>
-<p>git status
-```</p>
+<h2 id="block-17-git-cleanup">Block 17 — Git Cleanup</h2>
+<pre><code class="language-bash">git status
+
+git restore data/evaluation data/observability data/memory reports/technical_report.md reports/figures/agent_metrics.png
+
+rm -f reports/technical_report.pdf.not_generated.txt
+
+rm -f reports/executive_summary.pdf.not_generated.txt
+
+git status
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-nothing to commit, working tree clean</code></p>
+<pre><code class="language-text">nothing to commit, working tree clean
+</code></pre>
 <hr />
-<h1>Option B — Scripted Setup</h1>
+<h1 id="option-b-scripted-setup">Option B — Scripted Setup</h1>
 <p>Use this option when the reviewer wants a one-command reproducible validation workflow.</p>
 <hr />
-<h2>Script Inventory</h2>
-<p><code>text
-scripts/
+<h2 id="script-inventory">Script Inventory</h2>
+<pre><code class="language-text">scripts/
 ├── setup_env.sh
 ├── setup_env.bat
 ├── validate_static.sh
@@ -981,179 +1474,394 @@ scripts/
 ├── set_env_llm_example.sh
 ├── set_env_llm_example.bat
 ├── validate_release.sh
-└── validate_release.bat</code></p>
+└── validate_release.bat
+</code></pre>
 <hr />
-<h2>Script Responsibilities</h2>
-<p>| Script | Purpose |
-|----------|----------|
-| setup_env | Create venv and install dependencies |
-| set_env_deterministic | Create deterministic .env |
-| set_env_llm_example | Generate LLM example configuration |
-| validate_static | Compile critical modules |
-| run_pipeline | Execute full pipeline |
-| run_tests | Execute pytest suite |
-| run_ui | Launch Streamlit UI |
-| validate_release | Execute deterministic end-to-end validation |</p>
+<h2 id="script-responsibilities">Script Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setup_env</td>
+<td>Create venv and install dependencies</td>
+</tr>
+<tr>
+<td>set_env_deterministic</td>
+<td>Create deterministic .env</td>
+</tr>
+<tr>
+<td>set_env_llm_example</td>
+<td>Generate LLM example configuration</td>
+</tr>
+<tr>
+<td>validate_static</td>
+<td>Compile critical modules</td>
+</tr>
+<tr>
+<td>run_pipeline</td>
+<td>Execute full pipeline</td>
+</tr>
+<tr>
+<td>run_tests</td>
+<td>Execute pytest suite</td>
+</tr>
+<tr>
+<td>run_ui</td>
+<td>Launch Streamlit UI</td>
+</tr>
+<tr>
+<td>validate_release</td>
+<td>Execute deterministic end-to-end validation</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>Fastest Release Validation (Recommended)</h2>
+<h2 id="fastest-release-validation-recommended">Fastest Release Validation (Recommended)</h2>
 <p>Git Bash / Linux / macOS:</p>
-<p>```bash
-chmod +x scripts/*.sh</p>
-<p>scripts/validate_release.sh
-```</p>
+<pre><code class="language-bash">chmod +x scripts/*.sh
+
+scripts/validate_release.sh
+</code></pre>
 <p>Windows CMD:</p>
-<p><code>bat
-scripts\validate_release.bat</code></p>
+<pre><code class="language-bat">scripts\validate_release.bat
+</code></pre>
 <p>This executes:</p>
-<p><code>text
-set_env_deterministic
+<pre><code class="language-text">set_env_deterministic
 ↓
 validate_static
 ↓
 run_pipeline
 ↓
-run_tests</code></p>
+run_tests
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-46 passed
-Release validation completed successfully.</code></p>
+<pre><code class="language-text">46 passed
+Release validation completed successfully.
+</code></pre>
 <hr />
-<h2>Scripted Execution — Step By Step</h2>
+<h2 id="scripted-execution-step-by-step">Scripted Execution — Step By Step</h2>
 <p>Git Bash:</p>
-<p>```bash
-chmod +x scripts/*.sh</p>
-<p>scripts/setup_env.sh</p>
-<p>source .venv/Scripts/activate</p>
-<p>scripts/set_env_deterministic.sh</p>
-<p>scripts/validate_static.sh</p>
-<p>scripts/run_pipeline.sh</p>
-<p>scripts/run_tests.sh</p>
-<p>scripts/run_ui.sh
-```</p>
+<pre><code class="language-bash">chmod +x scripts/*.sh
+
+scripts/setup_env.sh
+
+source .venv/Scripts/activate
+
+scripts/set_env_deterministic.sh
+
+scripts/validate_static.sh
+
+scripts/run_pipeline.sh
+
+scripts/run_tests.sh
+
+scripts/run_ui.sh
+</code></pre>
 <p>Windows CMD:</p>
-<p>```bat
-scripts\setup_env.bat</p>
-<p>.venv\Scripts\activate</p>
-<p>scripts\set_env_deterministic.bat</p>
-<p>scripts\validate_static.bat</p>
-<p>scripts\run_pipeline.bat</p>
-<p>scripts\run_tests.bat</p>
-<p>scripts\run_ui.bat
-```</p>
+<pre><code class="language-bat">scripts\setup_env.bat
+
+.venv\Scripts\activate
+
+scripts\set_env_deterministic.bat
+
+scripts\validate_static.bat
+
+scripts\run_pipeline.bat
+
+scripts\run_tests.bat
+
+scripts\run_ui.bat
+</code></pre>
 <hr />
-<h2>LLM Example Configuration</h2>
+<h2 id="llm-example-configuration">LLM Example Configuration</h2>
 <p>Generate:</p>
 <p>Git Bash:</p>
-<p><code>bash
-scripts/set_env_llm_example.sh</code></p>
+<pre><code class="language-bash">scripts/set_env_llm_example.sh
+</code></pre>
 <p>Windows CMD:</p>
-<p><code>bat
-scripts\set_env_llm_example.bat</code></p>
+<pre><code class="language-bat">scripts\set_env_llm_example.bat
+</code></pre>
 <p>Creates:</p>
-<p><code>text
-.env.example.llm</code></p>
+<pre><code class="language-text">.env.example.llm
+</code></pre>
 <p>The file never overwrites <code>.env</code>.</p>
 <p>Replace:</p>
-<p><code>env
-LLM_API_KEY=replace_me</code></p>
+<pre><code class="language-env">LLM_API_KEY=replace_me
+</code></pre>
 <p>with a valid provider key.</p>
 <hr />
-<h2>Sprint 4.1 Acceptance Criteria</h2>
+<h2 id="sprint-41-acceptance-criteria">Sprint 4.1 Acceptance Criteria</h2>
 <p>Git Bash:</p>
-<p>```bash
-scripts/set_env_deterministic.sh</p>
-<p>scripts/validate_static.sh</p>
-<p>scripts/run_pipeline.sh</p>
-<p>scripts/run_tests.sh
-```</p>
+<pre><code class="language-bash">scripts/set_env_deterministic.sh
+
+scripts/validate_static.sh
+
+scripts/run_pipeline.sh
+
+scripts/run_tests.sh
+</code></pre>
 <p>Windows CMD:</p>
-<p>```bat
-scripts\set_env_deterministic.bat</p>
-<p>scripts\validate_static.bat</p>
-<p>scripts\run_pipeline.bat</p>
-<p>scripts\run_tests.bat
-```</p>
+<pre><code class="language-bat">scripts\set_env_deterministic.bat
+
+scripts\validate_static.bat
+
+scripts\run_pipeline.bat
+
+scripts\run_tests.bat
+</code></pre>
 <p>Expected:</p>
-<p><code>text
-46 passed</code></p>
+<pre><code class="language-text">46 passed
+</code></pre>
 <hr />
-<h2>Streamlit UI</h2>
+<h2 id="streamlit-ui">Streamlit UI</h2>
 <p><img alt="Streamlit UI" src="reports/figures/streamlit_ui.png" /></p>
 <p>Launch:</p>
-<p><code>bash
-streamlit run src/ui/streamlit_app.py</code></p>
-<h3>Available Tabs</h3>
-<p>| Tab                 | Purpose                      | What to Expect                                                    |
-| ------------------- | ---------------------------- | ----------------------------------------------------------------- |
-| <code>SOC Chat</code>          | Natural language SOC Copilot | Ask investigation questions in Portuguese or English              |
-| <code>Investigation</code>     | Agent investigation output   | Triage, forensic analysis and response advisor JSON               |
-| <code>Human Approval</code>    | Human-in-the-loop governance | Approval request, approval decision and dry-run status            |
-| <code>Forensic Evidence</code> | Evidence package             | Chain of custody, summary, attack indicators and forensic context |
-| <code>RAG / MCP Logs</code>    | Retrieval and safe tool logs | RAG context and MCP-safe tool execution history                   |
-| <code>Agent Workflow</code>    | LangGraph execution trace    | Workflow timeline, current state and decision transitions         |
-| <code>Agent Evaluation</code>  | Validation suite             | Overall coverage, passed/partial/failed checks and question bank  |
-| <code>NIST IR Metrics</code>   | Incident response metrics    | TTD, TTR, TTC, containment strategy and root cause analysis       |
-| <code>Observability</code>     | SOC monitoring               | Health, pipeline metrics, agent metrics and evidence completeness |</p>
+<pre><code class="language-bash">streamlit run src/ui/streamlit_app.py
+</code></pre>
+<h3 id="available-tabs">Available Tabs</h3>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>Purpose</th>
+<th>What to Expect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SOC Chat</code></td>
+<td>Natural language SOC Copilot</td>
+<td>Ask investigation questions in Portuguese or English</td>
+</tr>
+<tr>
+<td><code>Investigation</code></td>
+<td>Agent investigation output</td>
+<td>Triage, forensic analysis and response advisor JSON</td>
+</tr>
+<tr>
+<td><code>Human Approval</code></td>
+<td>Human-in-the-loop governance</td>
+<td>Approval request, approval decision and dry-run status</td>
+</tr>
+<tr>
+<td><code>Forensic Evidence</code></td>
+<td>Evidence package</td>
+<td>Chain of custody, summary, attack indicators and forensic context</td>
+</tr>
+<tr>
+<td><code>RAG / MCP Logs</code></td>
+<td>Retrieval and safe tool logs</td>
+<td>RAG context and MCP-safe tool execution history</td>
+</tr>
+<tr>
+<td><code>Agent Workflow</code></td>
+<td>LangGraph execution trace</td>
+<td>Workflow timeline, current state and decision transitions</td>
+</tr>
+<tr>
+<td><code>Agent Evaluation</code></td>
+<td>Validation suite</td>
+<td>Overall coverage, passed/partial/failed checks and question bank</td>
+</tr>
+<tr>
+<td><code>NIST IR Metrics</code></td>
+<td>Incident response metrics</td>
+<td>TTD, TTR, TTC, containment strategy and root cause analysis</td>
+</tr>
+<tr>
+<td><code>Observability</code></td>
+<td>SOC monitoring</td>
+<td>Health, pipeline metrics, agent metrics and evidence completeness</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <hr />
-<h2>Agent Evaluation Results</h2>
+<h2 id="agent-evaluation-results">Agent Evaluation Results</h2>
 <p>The platform includes an explicit validation suite that maps challenge requirements to expected evidence in each agent output.</p>
-<p>| Agent / Component | Coverage |
-| --- | ---: |
-| Triage Agent | 100% |
-| Forensic Analyst Agent | 100% |
-| Response Advisor Agent | 100% |
-| Human Approval Agent | 100% |
-| LangGraph Workflow | 100% |
-| SOC Copilot | 100% |</p>
-<p>| Evaluation Metric | Value |
-| --- | ---: |
-| Total questions | 15 |
-| Overall score | 1.0 |
-| Overall coverage | 100% |
-| Passed | 15 |
-| Partial | 0 |
-| Failed | 0 |</p>
+<table>
+<thead>
+<tr>
+<th>Agent / Component</th>
+<th style="text-align: right;">Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Triage Agent</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>Forensic Analyst Agent</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>Response Advisor Agent</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>Human Approval Agent</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>LangGraph Workflow</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>SOC Copilot</td>
+<td style="text-align: right;">100%</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Evaluation Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total questions</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>Overall score</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr>
+<td>Overall coverage</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>Passed</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>Partial</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 <p>The validation suite proves that the agentic layer covers classification, hypothesis generation, prioritization, forensic reasoning, patient zero identification, automation assessment, MITRE mapping, containment planning, human approval and workflow re-entry.</p>
 <hr />
-<h2>Generated Evidence Artifacts</h2>
-<p>| Artifact | Purpose |
-| --- | --- |
-| <code>data/evidence/chain_of_custody.json</code> | SHA-256 integrity and forensic provenance |
-| <code>data/processed/parsed_events.parquet</code> | Normalized events and extracted URI fields |
-| <code>data/processed/ip_features.parquet</code> | IP-level features for investigation and detection |
-| <code>data/processed/idor_findings.parquet</code> | IDOR-compatible findings |
-| <code>data/processed/anomaly_scores.parquet</code> | Isolation Forest anomaly scores |
-| <code>data/evidence/attack_timeline.json</code> | Attack window and timeline reconstruction |
-| <code>data/evidence/iocs.json</code> | Indicators of compromise |
-| <code>data/evidence/forensic_evidence.json</code> | Consolidated forensic evidence package |
-| <code>data/evidence/agent_investigation.json</code> | Consolidated multi-agent investigation output |
-| <code>data/evidence/agent_decision_log.json</code> | Agent and human decision trail |
-| <code>data/evidence/human_approval_decision.json</code> | Human approval governance evidence |
-| <code>data/evidence/nist_incident_report.json</code> | NIST-style incident response report |
-| <code>data/evaluation/agent_eval_report.json</code> | Agent validation and coverage report |
-| <code>data/observability/platform_metrics.json</code> | Platform observability metrics |
-| <code>data/observability/soc_dashboard_data.json</code> | SOC dashboard data |
-| <code>reports/technical_report.md</code> | Technical report |
-| <code>reports/executive_summary.md</code> | Executive summary |
-| <code>presentation/technical_pitch.pptx</code> | Technical presentation deck |
-| <code>presentation/executive_pitch.pptx</code> | Executive presentation deck |
-| <code>demo/demo_script.md</code> | Demonstration script |
-| <code>demo/demo_questions.md</code> | Demo question bank |</p>
-<h2>Generated Artifacts</h2>
-<h3>Processed Data</h3>
-<p><code>text
-data/processed/
+<h2 id="generated-evidence-artifacts">Generated Evidence Artifacts</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data/evidence/chain_of_custody.json</code></td>
+<td>SHA-256 integrity and forensic provenance</td>
+</tr>
+<tr>
+<td><code>data/processed/parsed_events.parquet</code></td>
+<td>Normalized events and extracted URI fields</td>
+</tr>
+<tr>
+<td><code>data/processed/ip_features.parquet</code></td>
+<td>IP-level features for investigation and detection</td>
+</tr>
+<tr>
+<td><code>data/processed/idor_findings.parquet</code></td>
+<td>IDOR-compatible findings</td>
+</tr>
+<tr>
+<td><code>data/processed/anomaly_scores.parquet</code></td>
+<td>Isolation Forest anomaly scores</td>
+</tr>
+<tr>
+<td><code>data/evidence/attack_timeline.json</code></td>
+<td>Attack window and timeline reconstruction</td>
+</tr>
+<tr>
+<td><code>data/evidence/iocs.json</code></td>
+<td>Indicators of compromise</td>
+</tr>
+<tr>
+<td><code>data/evidence/forensic_evidence.json</code></td>
+<td>Consolidated forensic evidence package</td>
+</tr>
+<tr>
+<td><code>data/evidence/agent_investigation.json</code></td>
+<td>Consolidated multi-agent investigation output</td>
+</tr>
+<tr>
+<td><code>data/evidence/agent_decision_log.json</code></td>
+<td>Agent and human decision trail</td>
+</tr>
+<tr>
+<td><code>data/evidence/human_approval_decision.json</code></td>
+<td>Human approval governance evidence</td>
+</tr>
+<tr>
+<td><code>data/evidence/nist_incident_report.json</code></td>
+<td>NIST-style incident response report</td>
+</tr>
+<tr>
+<td><code>data/evaluation/agent_eval_report.json</code></td>
+<td>Agent validation and coverage report</td>
+</tr>
+<tr>
+<td><code>data/observability/platform_metrics.json</code></td>
+<td>Platform observability metrics</td>
+</tr>
+<tr>
+<td><code>data/observability/soc_dashboard_data.json</code></td>
+<td>SOC dashboard data</td>
+</tr>
+<tr>
+<td><code>reports/technical_report.md</code></td>
+<td>Technical report</td>
+</tr>
+<tr>
+<td><code>reports/executive_summary.md</code></td>
+<td>Executive summary</td>
+</tr>
+<tr>
+<td><code>presentation/technical_pitch.pptx</code></td>
+<td>Technical presentation deck</td>
+</tr>
+<tr>
+<td><code>presentation/executive_pitch.pptx</code></td>
+<td>Executive presentation deck</td>
+</tr>
+<tr>
+<td><code>demo/demo_script.md</code></td>
+<td>Demonstration script</td>
+</tr>
+<tr>
+<td><code>demo/demo_questions.md</code></td>
+<td>Demo question bank</td>
+</tr>
+</tbody>
+</table>
+<h2 id="generated-artifacts">Generated Artifacts</h2>
+<h3 id="processed-data">Processed Data</h3>
+<pre><code class="language-text">data/processed/
 ├── parsed_events.parquet
 ├── ip_features.parquet
 ├── idor_findings.parquet
 ├── risk_scores.parquet
 ├── suspicious_ips.parquet
 ├── anomaly_scores.parquet
-└── anomalous_ips.parquet</code></p>
-<h3>Forensic Evidence</h3>
-<p><code>text
-data/evidence/
+└── anomalous_ips.parquet
+</code></pre>
+<h3 id="forensic-evidence">Forensic Evidence</h3>
+<pre><code class="language-text">data/evidence/
 ├── chain_of_custody.json
 ├── attack_timeline.json
 ├── iocs.json
@@ -1169,40 +1877,60 @@ data/evidence/
 ├── nist_incident_report.json
 ├── response_metrics.json
 ├── containment_strategy.json
-└── root_cause_analysis.json</code></p>
-<h3>Evaluation</h3>
-<p><code>text
-data/evaluation/
+└── root_cause_analysis.json
+</code></pre>
+<h3 id="evaluation">Evaluation</h3>
+<pre><code class="language-text">data/evaluation/
 ├── agent_question_bank.json
 ├── agent_eval_results.json
 ├── agent_eval_report.json
-└── agent_eval_summary.csv</code></p>
+└── agent_eval_summary.csv
+</code></pre>
 <p>Latest validation:</p>
-<p>| Metric           | Value |
-| ---------------- | ----: |
-| Overall coverage |  100% |
-| Passed           |    15 |
-| Partial          |     0 |
-| Failed           |     0 |</p>
-<h3>Observability</h3>
-<p><code>text
-data/observability/
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overall coverage</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>Passed</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>Partial</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="observability">Observability</h3>
+<pre><code class="language-text">data/observability/
 ├── platform_metrics.json
 ├── agent_metrics.json
 ├── healthcheck.json
-└── soc_dashboard_data.json</code></p>
+└── soc_dashboard_data.json
+</code></pre>
 <p>Example topline:</p>
-<p><code>json
-{
-  "health": "healthy",
-  "severity": "critical",
-  "priority": "P1",
-  "dry_run": true,
-  "agent_evaluation_coverage": 100.0
-}</code></p>
-<h3>Reports</h3>
-<p><code>text
-reports/
+<pre><code class="language-json">{
+  &quot;health&quot;: &quot;healthy&quot;,
+  &quot;severity&quot;: &quot;critical&quot;,
+  &quot;priority&quot;: &quot;P1&quot;,
+  &quot;dry_run&quot;: true,
+  &quot;agent_evaluation_coverage&quot;: 100.0
+}
+</code></pre>
+<h3 id="reports">Reports</h3>
+<pre><code class="language-text">reports/
 ├── technical_report.md
 ├── executive_summary.md
 ├── architecture.md
@@ -1211,27 +1939,84 @@ reports/
 └── figures/
     ├── agent_coverage.png
     ├── agent_metrics.png
-    └── pipeline_metrics.png</code></p>
+    └── pipeline_metrics.png
+</code></pre>
 <hr />
-<h2>Key Results</h2>
-<p>| Metric                    |     Value |
-| ------------------------- | --------: |
-| Logs processed            | 4,478,619 |
-| IPs analyzed              |     5,726 |
-| IDOR findings             |       182 |
-| Anomalous IPs             |       172 |
-| IOCs generated            |       586 |
-| Agent evaluation coverage |      100% |
-| Severity                  |  critical |
-| Priority                  |        P1 |
-| Dry-run                   |      true |</p>
+<h2 id="key-results">Key Results</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logs processed</td>
+<td style="text-align: right;">4,478,619</td>
+</tr>
+<tr>
+<td>IPs analyzed</td>
+<td style="text-align: right;">5,726</td>
+</tr>
+<tr>
+<td>IDOR findings</td>
+<td style="text-align: right;">182</td>
+</tr>
+<tr>
+<td>Anomalous IPs</td>
+<td style="text-align: right;">172</td>
+</tr>
+<tr>
+<td>IOCs generated</td>
+<td style="text-align: right;">586</td>
+</tr>
+<tr>
+<td>Agent evaluation coverage</td>
+<td style="text-align: right;">100%</td>
+</tr>
+<tr>
+<td>Severity</td>
+<td style="text-align: right;">critical</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td style="text-align: right;">P1</td>
+</tr>
+<tr>
+<td>Dry-run</td>
+<td style="text-align: right;">true</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>NIST Incident Response Metrics</h2>
-<p>| Metric | Meaning         |                  Current Result |
-| ------ | --------------- | ------------------------------: |
-| TTD    | Time to Detect  | Historical retrospective metric |
-| TTR    | Time to Respond |                            0.0h |
-| TTC    | Time to Contain |                    0.0h dry-run |</p>
+<h2 id="nist-incident-response-metrics">NIST Incident Response Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Meaning</th>
+<th style="text-align: right;">Current Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TTD</td>
+<td>Time to Detect</td>
+<td style="text-align: right;">Historical retrospective metric</td>
+</tr>
+<tr>
+<td>TTR</td>
+<td>Time to Respond</td>
+<td style="text-align: right;">0.0h</td>
+</tr>
+<tr>
+<td>TTC</td>
+<td>Time to Contain</td>
+<td style="text-align: right;">0.0h dry-run</td>
+</tr>
+</tbody>
+</table>
 <p>Interpretation:</p>
 <ul>
 <li>TTD is high because the dataset is historical.</li>
@@ -1239,53 +2024,206 @@ reports/
 <li>TTC is zero because containment approval is simulated in dry-run during the same execution cycle.</li>
 </ul>
 <hr />
-<h2>Roadmap</h2>
-<p>| Sprint     | Description                                          | Status |
-| ---------- | ---------------------------------------------------- | ------ |
-| Sprint 0   | Architecture and planning                            | ✅     |
-| Sprint 1.1 | Evidence ingestion, chain of custody and URI parsing | ✅     |
-| Sprint 1.2 | Feature engineering and detection base               | ✅     |
-| Sprint 1.3 | Forensic evidence package                            | ✅     |
-| Sprint 2.x | IDOR detection, risk scoring and anomaly detection   | ✅     |
-| Sprint 3.1 | LangGraph investigation agents                       | ✅     |
-| Sprint 3.2 | Human approval and dry-run response                  | ✅     |
-| Sprint 3.3 | Streamlit SOC interface                              | ✅     |
-| Sprint 3.4 | Natural language SOC Copilot                         | ✅     |
-| Sprint 3.5 | Human-in-the-loop orchestration                      | ✅     |
-| Sprint 3.6 | Agent evaluation and validation suite                | ✅     |
-| Sprint 3.7 | NIST incident response metrics                       | ✅     |
-| Sprint 3.8 | Observability and SOC monitoring                     | ✅     |
-| Sprint 3.9 | Final technical report and executive summary         | ✅     |
-| Sprint 4.0 | Demo package and presentation                        | ✅     |</p>
+<h2 id="roadmap">Roadmap</h2>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 0</td>
+<td>Architecture and planning</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 1.1</td>
+<td>Evidence ingestion, chain of custody and URI parsing</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 1.2</td>
+<td>Feature engineering and detection base</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 1.3</td>
+<td>Forensic evidence package</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 2.x</td>
+<td>IDOR detection, risk scoring and anomaly detection</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.1</td>
+<td>LangGraph investigation agents</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.2</td>
+<td>Human approval and dry-run response</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.3</td>
+<td>Streamlit SOC interface</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.4</td>
+<td>Natural language SOC Copilot</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.5</td>
+<td>Human-in-the-loop orchestration</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.6</td>
+<td>Agent evaluation and validation suite</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.7</td>
+<td>NIST incident response metrics</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.8</td>
+<td>Observability and SOC monitoring</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 3.9</td>
+<td>Final technical report and executive summary</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sprint 4.0</td>
+<td>Demo package and presentation</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>Post-Release 1.0 Roadmap and Platform Evolution</h2>
+<h2 id="post-release-10-roadmap-and-platform-evolution">Post-Release 1.0 Roadmap and Platform Evolution</h2>
 <p>This section documents the official post-Release 1.0 roadmap. Release 1.0 is considered complete and published. The next sprints do not exist because the delivery is incomplete; they exist because the MVP is now solid enough to evolve from a technical challenge into an enterprise-grade Digital Forensics &amp; Incident Response platform.</p>
-<h3>Release 1.0 — Completed</h3>
+<h3 id="release-10-completed">Release 1.0 — Completed</h3>
 <p>Release 1.0 delivered the complete MVP required for the Technical Leader — Security Incident Response challenge.</p>
-<h4>Foundation Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 0 | Architecture &amp; Planning | Project structure, DFIR architecture, implementation roadmap |
-| Sprint 1.1 | Ingestion &amp; Integrity | Log ingestion, SHA-256 chain of custody, URI parsing |
-| Sprint 1.2 | Feature Engineering | IP-level features, invoice diversity, token diversity, request metrics |
-| Sprint 1.3 | Forensic Evidence Foundation | Timeline, IOC generation, forensic evidence package |</p>
-<h4>Detection Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 2.1 | IDOR Detection | IDOR findings, invoice enumeration detection, suspicious IPs |
-| Sprint 2.2 | Anomaly Detection | Isolation Forest, anomalous IP detection, anomaly scores |
-| Sprint 2.3 | IOC Generation &amp; Timeline Reconstruction | Structured IOCs, attack timeline, forensic JSON outputs |</p>
-<h4>Agentic DFIR Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 3.1 | LangGraph Multi-Agent Investigation | Triage, Forensic Analyst, Response Advisor agents |
-| Sprint 3.2 | MCP + RAG + Memory | Knowledge retrieval, tool logs, investigation memory |
-| Sprint 3.3 | SOC Copilot | Natural-language investigation interface |
-| Sprint 3.4 | Streamlit Investigation UI | SOC-facing UI with investigation, workflow and evidence tabs |</p>
-<h4>Governance Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 3.5 | Agent Orchestration &amp; Human-in-the-loop | Workflow state machine, decision log, human approval states |</p>
+<h4 id="foundation-layer">Foundation Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 0</td>
+<td>Architecture &amp; Planning</td>
+<td>Project structure, DFIR architecture, implementation roadmap</td>
+</tr>
+<tr>
+<td>Sprint 1.1</td>
+<td>Ingestion &amp; Integrity</td>
+<td>Log ingestion, SHA-256 chain of custody, URI parsing</td>
+</tr>
+<tr>
+<td>Sprint 1.2</td>
+<td>Feature Engineering</td>
+<td>IP-level features, invoice diversity, token diversity, request metrics</td>
+</tr>
+<tr>
+<td>Sprint 1.3</td>
+<td>Forensic Evidence Foundation</td>
+<td>Timeline, IOC generation, forensic evidence package</td>
+</tr>
+</tbody>
+</table>
+<h4 id="detection-layer">Detection Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 2.1</td>
+<td>IDOR Detection</td>
+<td>IDOR findings, invoice enumeration detection, suspicious IPs</td>
+</tr>
+<tr>
+<td>Sprint 2.2</td>
+<td>Anomaly Detection</td>
+<td>Isolation Forest, anomalous IP detection, anomaly scores</td>
+</tr>
+<tr>
+<td>Sprint 2.3</td>
+<td>IOC Generation &amp; Timeline Reconstruction</td>
+<td>Structured IOCs, attack timeline, forensic JSON outputs</td>
+</tr>
+</tbody>
+</table>
+<h4 id="agentic-dfir-layer">Agentic DFIR Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 3.1</td>
+<td>LangGraph Multi-Agent Investigation</td>
+<td>Triage, Forensic Analyst, Response Advisor agents</td>
+</tr>
+<tr>
+<td>Sprint 3.2</td>
+<td>MCP + RAG + Memory</td>
+<td>Knowledge retrieval, tool logs, investigation memory</td>
+</tr>
+<tr>
+<td>Sprint 3.3</td>
+<td>SOC Copilot</td>
+<td>Natural-language investigation interface</td>
+</tr>
+<tr>
+<td>Sprint 3.4</td>
+<td>Streamlit Investigation UI</td>
+<td>SOC-facing UI with investigation, workflow and evidence tabs</td>
+</tr>
+</tbody>
+</table>
+<h4 id="governance-layer">Governance Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 3.5</td>
+<td>Agent Orchestration &amp; Human-in-the-loop</td>
+<td>Workflow state machine, decision log, human approval states</td>
+</tr>
+</tbody>
+</table>
 <p>Delivered governance capabilities:</p>
 <ul>
 <li>workflow state machine;</li>
@@ -1298,10 +2236,23 @@ reports/
 <li>decision logs;</li>
 <li>workflow timeline.</li>
 </ul>
-<h4>Validation Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 3.6 | Agent Evaluation &amp; Validation | Question bank, evaluation engine, scoring, coverage reports |</p>
+<h4 id="validation-layer">Validation Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 3.6</td>
+<td>Agent Evaluation &amp; Validation</td>
+<td>Question bank, evaluation engine, scoring, coverage reports</td>
+</tr>
+</tbody>
+</table>
 <p>Delivered validation capabilities:</p>
 <ul>
 <li>agent question bank;</li>
@@ -1311,10 +2262,23 @@ reports/
 <li>validation reports;</li>
 <li>objective proof that agents satisfy challenge requirements.</li>
 </ul>
-<h4>Incident Response Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 3.7 | NIST Incident Response | NIST report, response metrics, containment strategy, root cause analysis |</p>
+<h4 id="incident-response-layer">Incident Response Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 3.7</td>
+<td>NIST Incident Response</td>
+<td>NIST report, response metrics, containment strategy, root cause analysis</td>
+</tr>
+</tbody>
+</table>
 <p>Delivered incident response capabilities:</p>
 <ul>
 <li>TTD;</li>
@@ -1325,10 +2289,23 @@ reports/
 <li>root cause;</li>
 <li>incident report.</li>
 </ul>
-<h4>Observability Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 3.8 | Observability &amp; SOC Monitoring | Platform metrics, SOC dashboard data, agent metrics, healthcheck |</p>
+<h4 id="observability-layer">Observability Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 3.8</td>
+<td>Observability &amp; SOC Monitoring</td>
+<td>Platform metrics, SOC dashboard data, agent metrics, healthcheck</td>
+</tr>
+</tbody>
+</table>
 <p>Delivered observability capabilities:</p>
 <ul>
 <li>platform metrics;</li>
@@ -1337,10 +2314,23 @@ reports/
 <li>SOC dashboard data;</li>
 <li>evidence completeness signals.</li>
 </ul>
-<h4>Delivery Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 3.9 | Documentation | README Enterprise, architecture, methodology, evidence appendix, technical report |</p>
+<h4 id="delivery-layer">Delivery Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 3.9</td>
+<td>Documentation</td>
+<td>README Enterprise, architecture, methodology, evidence appendix, technical report</td>
+</tr>
+</tbody>
+</table>
 <p>Delivered documentation capabilities:</p>
 <ul>
 <li>enterprise README;</li>
@@ -1349,10 +2339,23 @@ reports/
 <li>evidence appendix;</li>
 <li>technical report.</li>
 </ul>
-<h4>Executive Layer</h4>
-<p>| Sprint | Scope | Delivered |
-| --- | --- | --- |
-| Sprint 4.0 | Demo &amp; Presentation | Presentation deck, demo outputs, investigation question bank, executive summary |</p>
+<h4 id="executive-layer">Executive Layer</h4>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Scope</th>
+<th>Delivered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 4.0</td>
+<td>Demo &amp; Presentation</td>
+<td>Presentation deck, demo outputs, investigation question bank, executive summary</td>
+</tr>
+</tbody>
+</table>
 <p>Delivered executive artifacts:</p>
 <ul>
 <li>presentation deck;</li>
@@ -1361,34 +2364,34 @@ reports/
 <li>executive summary;</li>
 <li>final delivery package.</li>
 </ul>
-<h3>Release 1.1 — Immediate Backlog</h3>
-<h4>Sprint 4.1 — Evidence-Grounded SOC Copilot</h4>
+<h3 id="release-11-immediate-backlog">Release 1.1 — Immediate Backlog</h3>
+<h4 id="sprint-41-evidence-grounded-soc-copilot">Sprint 4.1 — Evidence-Grounded SOC Copilot</h4>
 <p>Objective: evolve the SOC Copilot from a RAG assistant into an evidence-grounded DFIR assistant.</p>
 <p>Current limitation:</p>
-<p><code>text
-RAG documents
+<pre><code class="language-text">RAG documents
 idor_playbook
-incident_response_policy</code></p>
+incident_response_policy
+</code></pre>
 <p>The current Copilot responses are safe, but can still be generic when the answer exists in structured forensic artifacts.</p>
 <p>Target behavior:</p>
-<p><code>text
-Evidence-grounded DFIR Assistant</code></p>
+<pre><code class="language-text">Evidence-grounded DFIR Assistant
+</code></pre>
 <p>The Copilot should answer first from structured evidence artifacts and only then use RAG or policy documents as fallback/enrichment.</p>
 <p>New modules:</p>
-<p><code>text
-src/agents/
+<pre><code class="language-text">src/agents/
 ├── evidence_router.py
 ├── evidence_grounded_copilot.py
-└── evidence_answer_templates.py</code></p>
+└── evidence_answer_templates.py
+</code></pre>
 <p>Primary evidence sources:</p>
-<p><code>text
-data/evidence/forensic_evidence.json
+<pre><code class="language-text">data/evidence/forensic_evidence.json
 data/evidence/agent_investigation.json
 data/evidence/nist_incident_report.json
-data/observability/soc_dashboard_data.json</code></p>
+data/observability/soc_dashboard_data.json
+</code></pre>
 <p>Expected artifact:</p>
-<p><code>text
-data/evidence/copilot_grounded_answers.json</code></p>
+<pre><code class="language-text">data/evidence/copilot_grounded_answers.json
+</code></pre>
 <p>Acceptance criteria:</p>
 <ul>
 <li>The Copilot must stop answering "not enough evidence" when the evidence exists in JSON artifacts.</li>
@@ -1397,15 +2400,16 @@ data/evidence/copilot_grounded_answers.json</code></p>
 <li>Responses must include confidence and evidence bullets.</li>
 </ul>
 <p>Expected answer pattern:</p>
-<p>```text
-Patient zero candidate: 204.210.158.207</p>
-<p>Evidence:
+<pre><code class="language-text">Patient zero candidate: 204.210.158.207
+
+Evidence:
 - earliest suspicious activity;
 - sequential enumeration pattern;
 - high risk score;
-- correlated IOC set.</p>
-<p>Confidence: High
-```</p>
+- correlated IOC set.
+
+Confidence: High
+</code></pre>
 <p>Platform value:</p>
 <ul>
 <li>more investigative answers;</li>
@@ -1413,10 +2417,10 @@ Patient zero candidate: 204.210.158.207</p>
 <li>higher explainability;</li>
 <li>closer to a real DFIR/SOC analyst assistant.</li>
 </ul>
-<h3>Release 1.2 — Immediate Backlog</h3>
-<h1>Sprint 4.2 Preview</h1>
-<p><code>text
-Sprint 4.2 — Professional SOC Copilot Reasoning &amp; Vector RAG</code></p>
+<h3 id="release-12-immediate-backlog">Release 1.2 — Immediate Backlog</h3>
+<h1 id="sprint-42-preview">Sprint 4.2 Preview</h1>
+<pre><code class="language-text">Sprint 4.2 — Professional SOC Copilot Reasoning &amp; Vector RAG
+</code></pre>
 <p>Objectives:</p>
 <ul>
 <li>ChromaDB or FAISS vector store</li>
@@ -1429,22 +2433,22 @@ Sprint 4.2 — Professional SOC Copilot Reasoning &amp; Vector RAG</code></p>
 <li>confidence-aware responses</li>
 <li>evidence-grounded explanations</li>
 </ul>
-<h4>Sprint 4.3 — Containerization &amp; Platform Packaging</h4>
+<h4 id="sprint-43-containerization-platform-packaging">Sprint 4.3 — Containerization &amp; Platform Packaging</h4>
 <p>Objective: transform the platform into a reproducible system that can be started with a single command.</p>
 <p>Target structure:</p>
-<p><code>text
-docker/
+<pre><code class="language-text">docker/
 ├── app.Dockerfile
 ├── streamlit.Dockerfile
 ├── grafana/
 ├── prometheus/
-└── compose/</code></p>
+└── compose/
+</code></pre>
 <p>Main deliverable:</p>
-<p><code>text
-docker-compose.yml</code></p>
+<pre><code class="language-text">docker-compose.yml
+</code></pre>
 <p>Execution model:</p>
-<p><code>bash
-docker compose up</code></p>
+<pre><code class="language-bash">docker compose up
+</code></pre>
 <p>Services expected to start:</p>
 <ul>
 <li>DFIR Platform;</li>
@@ -1470,24 +2474,24 @@ docker compose up</code></p>
 <li>easier reviewer setup;</li>
 <li>cleaner enterprise deployment path.</li>
 </ul>
-<h3>Release 1.3 — Future Backlog</h3>
-<h4>Sprint 4.4 — Prometheus &amp; Grafana Enterprise Observability</h4>
+<h3 id="release-13-future-backlog">Release 1.3 — Future Backlog</h3>
+<h4 id="sprint-44-prometheus-grafana-enterprise-observability">Sprint 4.4 — Prometheus &amp; Grafana Enterprise Observability</h4>
 <p>Objective: replace purely JSON-based observability with operational observability through Prometheus and Grafana.</p>
 <p>New modules:</p>
-<p><code>text
-src/observability/
+<pre><code class="language-text">src/observability/
 ├── prometheus_exporter.py
 ├── grafana_dashboards.py
-└── alert_rules.py</code></p>
+└── alert_rules.py
+</code></pre>
 <p>Dashboards:</p>
-<h5>Executive Dashboard</h5>
+<h5 id="executive-dashboard">Executive Dashboard</h5>
 <ul>
 <li>total incidents;</li>
 <li>severity;</li>
 <li>affected invoices;</li>
 <li>containment status.</li>
 </ul>
-<h5>DFIR Dashboard</h5>
+<h5 id="dfir-dashboard">DFIR Dashboard</h5>
 <ul>
 <li>attack timeline;</li>
 <li>IOC volume;</li>
@@ -1495,7 +2499,7 @@ src/observability/
 <li>top attackers;</li>
 <li>risk distribution.</li>
 </ul>
-<h5>Agents Dashboard</h5>
+<h5 id="agents-dashboard">Agents Dashboard</h5>
 <ul>
 <li>LLM calls;</li>
 <li>tool calls;</li>
@@ -1517,27 +2521,27 @@ src/observability/
 <li>stronger SOC readiness;</li>
 <li>clearer demonstration of production maturity.</li>
 </ul>
-<h3>Release 1.4 — Future Backlog</h3>
-<h4>Sprint 4.5 — DFIR API Platform</h4>
+<h3 id="release-14-future-backlog">Release 1.4 — Future Backlog</h3>
+<h4 id="sprint-45-dfir-api-platform">Sprint 4.5 — DFIR API Platform</h4>
 <p>Objective: expose the platform through APIs for integration with external tools.</p>
 <p>Target stack:</p>
-<p><code>text
-FastAPI</code></p>
+<pre><code class="language-text">FastAPI
+</code></pre>
 <p>Target structure:</p>
-<p><code>text
-src/api/
+<pre><code class="language-text">src/api/
 ├── incidents.py
 ├── evidence.py
 ├── agents.py
 ├── metrics.py
-└── health.py</code></p>
+└── health.py
+</code></pre>
 <p>Target endpoints:</p>
-<p><code>text
-/api/incidents
+<pre><code class="language-text">/api/incidents
 /api/evidence
 /api/forensics
 /api/metrics
-/api/health</code></p>
+/api/health
+</code></pre>
 <p>Acceptance criteria:</p>
 <ul>
 <li>main platform capabilities are available through REST endpoints;</li>
@@ -1554,8 +2558,8 @@ src/api/
 <li>automation;</li>
 <li>cloud readiness.</li>
 </ul>
-<h3>Release 1.5 — Future Backlog</h3>
-<h4>Sprint 4.6 — Security &amp; Enterprise Hardening</h4>
+<h3 id="release-15-future-backlog">Release 1.5 — Future Backlog</h3>
+<h4 id="sprint-46-security-enterprise-hardening">Sprint 4.6 — Security &amp; Enterprise Hardening</h4>
 <p>Objective: prepare the platform for enterprise-grade security and governance.</p>
 <p>Deliverables:</p>
 <ul>
@@ -1580,14 +2584,14 @@ src/api/
 <li>governance;</li>
 <li>safer incident response operations.</li>
 </ul>
-<h3>Release 2.0 — Strategic Evolution</h3>
-<h4>Sprint 5.0 — Autonomous DFIR Platform</h4>
+<h3 id="release-20-strategic-evolution">Release 2.0 — Strategic Evolution</h3>
+<h4 id="sprint-50-autonomous-dfir-platform">Sprint 5.0 — Autonomous DFIR Platform</h4>
 <p>Objective: evolve from a DFIR Investigation Platform into an Agentic DFIR Platform.</p>
 <p>Target evolution:</p>
-<p><code>text
-DFIR Investigation Platform
+<pre><code class="language-text">DFIR Investigation Platform
 ↓
-Agentic DFIR Platform</code></p>
+Agentic DFIR Platform
+</code></pre>
 <p>Capabilities:</p>
 <ul>
 <li>evidence-grounded reasoning;</li>
@@ -1600,11 +2604,11 @@ Agentic DFIR Platform</code></p>
 <li>continuous SOC monitoring.</li>
 </ul>
 <p>Expected result:</p>
-<p><code>text
-Digital Forensics &amp; Incident Response Platform v2.0</code></p>
+<pre><code class="language-text">Digital Forensics &amp; Incident Response Platform v2.0
+</code></pre>
 <p>Strategic interpretation:</p>
 <p>None of these future sprints exists because Release 1.0 is incomplete. They exist because Release 1.0 is now strong enough to evolve from a technical challenge into a production-oriented DFIR platform.</p>
-<h2>Production Hardening Backlog</h2>
+<h2 id="production-hardening-backlog">Production Hardening Backlog</h2>
 <p>The MVP intentionally prioritizes investigation, evidence, agents, explainability, human approval, dry-run safety and incident response.</p>
 <p>Production hardening items:</p>
 <ul>
@@ -1625,7 +2629,7 @@ Digital Forensics &amp; Incident Response Platform v2.0</code></p>
 <hr />
 <p>```</p>
 <hr />
-<h2>Author</h2>
+<h2 id="author">Author</h2>
 <p>Maurício Luiz Sobrinho</p>
 <p>Technical Challenge — Digital Forensics and Incident Response
 Mercado Livre / Mercado Libre</p>
