@@ -1,0 +1,29 @@
+groups:
+  - name: dfir-platform-alerts
+    rules:
+      - alert: DFIRPlatformDown
+        expr: dfir_platform_health == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "DFIR platform health is degraded"
+          description: "The DFIR platform health metric is not healthy."
+
+      - alert: HighIDORFindings
+        expr: dfir_idor_findings > 100
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High number of IDOR findings"
+          description: "The platform detected more than 100 IDOR findings."
+
+      - alert: LowEvaluationScore
+        expr: dfir_evaluation_score < 0.80
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low agent evaluation score"
+          description: "Agent evaluation score is below the expected quality threshold."

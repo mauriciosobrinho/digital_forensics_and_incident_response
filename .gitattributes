@@ -1,10 +1,101 @@
+# ==========================================================
+# DFIR IDOR Response Platform
+# Git Line Ending Policy
+# ==========================================================
+
+# Default
+* text=auto
+
+# ==========================================================
+# Linux / Docker / Containers
+# ==========================================================
+
 *.sh text eol=lf
-docker/entrypoints/*.sh text eol=lf
-*.bat text eol=crlf
-*.ps1 text eol=crlf
-*.md text
-*.html text
-*.yml text eol=lf
-*.yaml text eol=lf
+
 Dockerfile text eol=lf
 *.Dockerfile text eol=lf
+
+docker/** text eol=lf
+
+# ==========================================================
+# Configuration Files
+# ==========================================================
+
+*.yml text eol=lf
+*.yaml text eol=lf
+
+*.json text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.cfg text eol=lf
+*.conf text eol=lf
+
+.env text eol=lf
+.env.* text eol=lf
+
+# ==========================================================
+# Python
+# ==========================================================
+
+*.py text eol=lf
+*.pyi text eol=lf
+
+# ==========================================================
+# Frontend
+# ==========================================================
+
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+
+# ==========================================================
+# Documentation
+# ==========================================================
+
+*.md text eol=lf
+*.txt text eol=lf
+
+# ==========================================================
+# Windows Scripts
+# ==========================================================
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# ==========================================================
+# Binary Files
+# ==========================================================
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+
+*.parquet binary
+
+*.zip binary
+*.gz binary
+*.tar binary
+
+*.pptx binary
+*.docx binary
+*.xlsx binary
+
+# ==========================================================
+# Future Observability Assets
+# ==========================================================
+
+docker/prometheus/** text eol=lf
+docker/grafana/** text eol=lf
+
+# ==========================================================
+# Playwright (future sprint)
+# ==========================================================
+
+playwright/** text eol=lf
+tests/** text eol=lf

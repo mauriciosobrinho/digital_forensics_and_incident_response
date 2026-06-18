@@ -1,0 +1,33 @@
+{
+  "title": "SOC Agents Dashboard",
+  "uid": "dfir-agents",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "LLM Calls",
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_llm_calls" }]
+    },
+    {
+      "type": "stat",
+      "title": "Deterministic Calls",
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_deterministic_calls" }]
+    },
+    {
+      "type": "stat",
+      "title": "RAG Hit Rate",
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_rag_hit_rate" }]
+    },
+    {
+      "type": "stat",
+      "title": "Professional Answer Rate",
+      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_professional_answer_rate" }]
+    }
+  ]
+}
