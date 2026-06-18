@@ -1,0 +1,33 @@
+{
+  "title": "DFIR Executive Dashboard",
+  "uid": "dfir-executive",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Scored IPs",
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_scored_ips" }]
+    },
+    {
+      "type": "stat",
+      "title": "IDOR Findings",
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_idor_findings" }]
+    },
+    {
+      "type": "stat",
+      "title": "Platform Health",
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_platform_health" }]
+    },
+    {
+      "type": "stat",
+      "title": "Evaluation Score",
+      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_evaluation_score" }]
+    }
+  ]
+}

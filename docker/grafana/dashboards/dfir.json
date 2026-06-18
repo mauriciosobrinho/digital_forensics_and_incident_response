@@ -1,0 +1,27 @@
+{
+  "title": "DFIR Investigation Dashboard",
+  "uid": "dfir-investigation",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Anomalous IPs",
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_anomalous_ips" }]
+    },
+    {
+      "type": "stat",
+      "title": "Containment Actions",
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_containment_actions" }]
+    },
+    {
+      "type": "stat",
+      "title": "Mean Response Time",
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_mean_response_time_seconds" }]
+    }
+  ]
+}
