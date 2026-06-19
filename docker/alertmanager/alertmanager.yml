@@ -1,0 +1,21 @@
+global:
+  resolve_timeout: 5m
+
+templates:
+  - /etc/alertmanager/notification_templates.tmpl
+
+route:
+  receiver: dfir-default
+  group_by:
+    - alertname
+    - severity
+    - service
+  group_wait: 15s
+  group_interval: 1m
+  repeat_interval: 4h
+
+receivers:
+  - name: dfir-default
+    webhook_configs:
+      - url: http://dfir-api:8000/api/observability/alerts
+        send_resolved: true

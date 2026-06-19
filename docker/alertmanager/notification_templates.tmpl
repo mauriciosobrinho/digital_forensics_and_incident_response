@@ -1,0 +1,10 @@
+{{ define "dfir.title" }}
+DFIR Platform Alert: {{ .CommonLabels.alertname }}
+{{ end }}
+
+{{ define "dfir.body" }}
+Severity: {{ .CommonLabels.severity }}
+Service: {{ .CommonLabels.service }}
+Summary: {{ .CommonAnnotations.summary }}
+Description: {{ .CommonAnnotations.description }}
+{{ end }}
