@@ -126,8 +126,10 @@ def _home_html() -> str:
         <p>
             <a href="http://localhost:8501">Streamlit UI</a> |
             <a href="/docs">API Docs</a> |
-            <a href="/health">Health</a> |
-            <a href="/metrics">Metrics</a> |
+            <a href="/health">Health API</a> |
+            <a href="/health/ui">Health Dashboard</a> |
+            <a href="/metrics">Metrics API</a> |
+            <a href="/metrics/ui">Metrics Dashboard</a> |
             <a href="http://localhost:9090">Prometheus</a> |
             <a href="http://localhost:3000">Grafana</a> |
             <a href="http://localhost:9093">Alertmanager</a>

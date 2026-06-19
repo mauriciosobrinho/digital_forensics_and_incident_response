@@ -2,8 +2,10 @@
   "title": "SOC Agents Dashboard",
   "uid": "dfir-agents",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "refresh": "15s",
+  "tags": ["dfir", "agents", "rag", "mcp", "llm"],
+  "time": { "from": "now-6h", "to": "now" },
   "panels": [
     {
       "type": "stat",
@@ -18,16 +20,88 @@
       "targets": [{ "expr": "dfir_deterministic_calls" }]
     },
     {
-      "type": "stat",
+      "type": "gauge",
       "title": "RAG Hit Rate",
       "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_rag_hit_rate" }]
+      "targets": [{ "expr": "dfir_rag_hit_rate" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    {
+      "type": "gauge",
+      "title": "Professional Answer Rate",
+      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_professional_answer_rate" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Agent Latency Stack",
+      "gridPos": { "x": 0, "y": 4, "w": 12, "h": 7 },
+      "targets": [
+        { "expr": "dfir_agent_latency_seconds", "legendFormat": "Agent" },
+        { "expr": "dfir_rag_latency_seconds", "legendFormat": "RAG" },
+        { "expr": "dfir_mcp_tool_latency_seconds", "legendFormat": "MCP Tool" },
+        { "expr": "dfir_llm_latency_seconds", "legendFormat": "LLM" },
+        { "expr": "dfir_human_approval_latency_seconds", "legendFormat": "Human Approval" }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
+    },
+    {
+      "type": "bargauge",
+      "title": "Execution Mix",
+      "gridPos": { "x": 12, "y": 4, "w": 12, "h": 7 },
+      "targets": [
+        { "expr": "dfir_llm_calls", "legendFormat": "LLM Calls" },
+        { "expr": "dfir_deterministic_calls", "legendFormat": "Deterministic Calls" },
+        { "expr": "dfir_fallback_calls", "legendFormat": "Fallback Calls" },
+        { "expr": "dfir_agent_decisions", "legendFormat": "Agent Decisions" }
+      ]
+    },
+    {
+      "type": "gauge",
+      "title": "Approval Rate",
+      "gridPos": { "x": 0, "y": 11, "w": 8, "h": 5 },
+      "targets": [{ "expr": "dfir_approval_rate" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "type": "stat",
-      "title": "Professional Answer Rate",
-      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_professional_answer_rate" }]
+      "title": "Human Approval Latency",
+      "gridPos": { "x": 8, "y": 11, "w": 8, "h": 5 },
+      "targets": [{ "expr": "dfir_human_approval_latency_seconds" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Fallback Calls",
+      "gridPos": { "x": 16, "y": 11, "w": 8, "h": 5 },
+      "targets": [{ "expr": "dfir_fallback_calls" }]
     }
   ]
 }
