@@ -6,6 +6,7 @@ groups:
         for: 1m
         labels:
           severity: critical
+          service: dfir-api
         annotations:
           summary: "DFIR platform health is degraded"
           description: "The DFIR platform health metric is not healthy."
@@ -15,6 +16,7 @@ groups:
         for: 1m
         labels:
           severity: warning
+          service: dfir-api
         annotations:
           summary: "High number of IDOR findings"
           description: "The platform detected more than 100 IDOR findings."
@@ -24,6 +26,79 @@ groups:
         for: 1m
         labels:
           severity: warning
+          service: dfir-agents
         annotations:
           summary: "Low agent evaluation score"
           description: "Agent evaluation score is below the expected quality threshold."
+
+  - name: dfir-enterprise-alerts
+    rules:
+      - alert: CriticalIDORFindings
+        expr: dfir_idor_findings > 100
+        for: 30s
+        labels:
+          severity: critical
+          service: dfir-api
+        annotations:
+          summary: "Critical IDOR finding volume detected"
+          description: "IDOR findings exceeded operational threshold."
+
+      - alert: LowEvidenceCompleteness
+        expr: dfir_sli_evidence_completeness < 0.90
+        for: 1m
+        labels:
+          severity: warning
+          service: dfir-api
+        annotations:
+          summary: "Forensic evidence completeness degraded"
+          description: "Evidence completeness SLI is below target."
+
+      - alert: AgentLatencyDegradation
+        expr: dfir_agent_latency_seconds > 3
+        for: 1m
+        labels:
+          severity: warning
+          service: dfir-agents
+        annotations:
+          summary: "Agent latency degradation detected"
+          description: "Agent latency exceeded enterprise observability threshold."
+
+      - alert: RAGHitRateDrop
+        expr: dfir_rag_hit_rate < 0.80
+        for: 1m
+        labels:
+          severity: warning
+          service: dfir-rag
+        annotations:
+          summary: "RAG hit rate dropped"
+          description: "Retrieval quality may be degraded."
+
+      - alert: ContainmentNotReady
+        expr: dfir_sli_containment_readiness < 1
+        for: 1m
+        labels:
+          severity: critical
+          service: dfir-response
+        annotations:
+          summary: "Containment readiness is not complete"
+          description: "Response flow is not ready for containment execution."
+
+      - alert: HumanApprovalLatencyHigh
+        expr: dfir_human_approval_latency_seconds > 60
+        for: 1m
+        labels:
+          severity: warning
+          service: dfir-human-approval
+        annotations:
+          summary: "Human approval latency is high"
+          description: "Human-in-the-loop approval latency exceeded target."
+
+      - alert: BigQueryReadinessMissing
+        expr: dfir_bigquery_readiness < 1
+        for: 1m
+        labels:
+          severity: info
+          service: dfir-analytics
+        annotations:
+          summary: "BigQuery forensic analytics readiness is missing"
+          description: "BigQuery readiness contract is not available."

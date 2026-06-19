@@ -1,10 +1,8 @@
 from fastapi import APIRouter
+from fastapi.responses import HTMLResponse
 
 
-router = APIRouter(
-    prefix="/api",
-    tags=["ui"],
-)
+router = APIRouter(tags=["ui"])
 
 
 STREAMLIT_TABS = [
@@ -111,7 +109,88 @@ STREAMLIT_TABS = [
 ]
 
 
-@router.get("/tabs")
+def _home_html() -> str:
+    return """
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Mercado Livre · DFIR Platform</title>
+</head>
+<body style="margin:0;background:#0f1117;color:#f0f6fc;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;">
+<main style="max-width:1480px;margin:0 auto;padding:56px 48px 80px;">
+    <section style="background:linear-gradient(135deg,#fff159,#ffe600);color:#2d3277;border-radius:22px;padding:42px;">
+        <h1 style="margin:0;font-size:44px;">Mercado Livre · DFIR Platform</h1>
+        <p style="font-size:18px;color:#111827;">Digital Forensics and Incident Response · IDOR Investigation Case</p>
+        <p><strong>Release 1.3.0 · Sprint 5.0 · Enterprise Observability</strong></p>
+        <p>
+            <a href="http://localhost:8501">Streamlit UI</a> |
+            <a href="/docs">API Docs</a> |
+            <a href="/health">Health</a> |
+            <a href="/metrics">Metrics</a> |
+            <a href="http://localhost:9090">Prometheus</a> |
+            <a href="http://localhost:3000">Grafana</a> |
+            <a href="http://localhost:9093">Alertmanager</a>
+        </p>
+    </section>
+
+    <section>
+        <h2>Runtime Access</h2>
+        <ul>
+            <li>Streamlit UI</li>
+            <li>FastAPI Docs</li>
+            <li>Prometheus</li>
+            <li>Grafana</li>
+            <li>Alertmanager</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>API Contracts</h2>
+        <ul>
+            <li><code>/api/dashboard</code> — Executive Metrics and SOC dashboard contract.</li>
+            <li><code>/api/evidence</code> — Forensic evidence and incident summary contract.</li>
+            <li><code>/api/agents</code> — Agent orchestration, RAG, MCP and human approval contract.</li>
+            <li><code>/api/metrics</code> — Operational and enterprise metrics JSON contract.</li>
+            <li><code>/api/observability</code> — Enterprise observability readiness and dashboard contract.</li>
+            <li><code>/api/tabs</code> — Streamlit functional tab mapping.</li>
+            <li><code>/metrics</code> — Prometheus text exposition endpoint.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Enterprise Observability</h2>
+        <ul>
+            <li><a href="/api/observability/sli-slo">SLI / SLO</a></li>
+            <li><a href="/api/observability/promql">PromQL Catalog</a></li>
+            <li><a href="/api/observability/alerts">Alert Rules</a></li>
+            <li><a href="/api/observability/dashboards">Grafana Dashboards</a></li>
+            <li><a href="/api/observability/bigquery-readiness">BigQuery Readiness</a></li>
+            <li><a href="/api/observability/forensic-correlation">Forensic Correlation</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Forensic Use Cases</h2>
+        <p>Patient Zero · Timeline · Automation · IDOR Evidence · Business Impact · Containment · NIST · MITRE · IOC · Root Cause · Correlation</p>
+    </section>
+
+    <section>
+        <h2>Platform Flow</h2>
+        <p>Streamlit UI → FastAPI Contracts → Evidence / Agents / Metrics → Prometheus / PromQL → Alertmanager → Grafana Dashboards → SOC Decision Layer</p>
+    </section>
+</main>
+</body>
+</html>
+"""
+
+
+@router.get("/home", response_class=HTMLResponse)
+def get_home() -> HTMLResponse:
+    return HTMLResponse(content=_home_html())
+
+
+@router.get("/api/tabs")
 def get_tabs() -> dict:
     return {
         "service": "dfir-ui-contracts",
