@@ -2,26 +2,94 @@
   "title": "DFIR Investigation Dashboard",
   "uid": "dfir-investigation",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "refresh": "15s",
+  "tags": ["dfir", "investigation", "idor"],
+  "time": { "from": "now-6h", "to": "now" },
   "panels": [
     {
       "type": "stat",
-      "title": "Anomalous IPs",
+      "title": "IDOR Findings",
       "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_idor_findings" }]
+    },
+    {
+      "type": "stat",
+      "title": "Anomalous IPs",
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
       "targets": [{ "expr": "dfir_anomalous_ips" }]
     },
     {
       "type": "stat",
-      "title": "Containment Actions",
-      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_containment_actions" }]
+      "title": "Affected Objects",
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_affected_invoice_count" }]
     },
     {
       "type": "stat",
-      "title": "Mean Response Time",
-      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_mean_response_time_seconds" }]
+      "title": "Patient Zero Confidence",
+      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_patient_zero_confidence" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Investigation Signal Trend",
+      "gridPos": { "x": 0, "y": 4, "w": 12, "h": 7 },
+      "targets": [
+        { "expr": "dfir_idor_findings", "legendFormat": "IDOR Findings" },
+        { "expr": "dfir_anomalous_ips", "legendFormat": "Anomalous IPs" },
+        { "expr": "dfir_ioc_generation_count", "legendFormat": "IOCs" }
+      ]
+    },
+    {
+      "type": "bargauge",
+      "title": "Forensic Investigation Breakdown",
+      "gridPos": { "x": 12, "y": 4, "w": 12, "h": 7 },
+      "targets": [
+        { "expr": "dfir_scored_ips", "legendFormat": "Scored IPs" },
+        { "expr": "dfir_idor_findings", "legendFormat": "IDOR Findings" },
+        { "expr": "dfir_anomalous_ips", "legendFormat": "Anomalous IPs" },
+        { "expr": "dfir_ioc_generation_count", "legendFormat": "IOCs" }
+      ]
+    },
+    {
+      "type": "gauge",
+      "title": "Evidence Completeness",
+      "gridPos": { "x": 0, "y": 11, "w": 8, "h": 5 },
+      "targets": [{ "expr": "dfir_sli_evidence_completeness" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    {
+      "type": "gauge",
+      "title": "Forensic Correlation",
+      "gridPos": { "x": 8, "y": 11, "w": 8, "h": 5 },
+      "targets": [{ "expr": "dfir_forensic_correlation_score" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Containment Actions",
+      "gridPos": { "x": 16, "y": 11, "w": 8, "h": 5 },
+      "targets": [{ "expr": "dfir_containment_actions" }]
     }
   ]
 }

@@ -2,32 +2,134 @@
   "title": "DFIR Executive Dashboard",
   "uid": "dfir-executive",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "refresh": "15s",
+  "tags": ["dfir", "executive", "mercado-livre"],
+  "time": { "from": "now-6h", "to": "now" },
   "panels": [
     {
       "type": "stat",
-      "title": "Scored IPs",
+      "title": "Incident Severity",
       "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_scored_ips" }]
+      "targets": [{ "expr": "dfir_incident_critical", "legendFormat": "critical" }],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "red", "value": 1 }
+            ]
+          }
+        }
+      }
     },
     {
       "type": "stat",
-      "title": "IDOR Findings",
+      "title": "Affected Invoices",
       "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_idor_findings" }]
+      "targets": [{ "expr": "dfir_affected_invoice_count" }]
     },
     {
-      "type": "stat",
-      "title": "Platform Health",
+      "type": "gauge",
+      "title": "Detection SLI",
       "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_platform_health" }]
+      "targets": [{ "expr": "dfir_sli_detection_success_rate" }],
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "max": 1,
+          "unit": "percentunit",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 0.9 },
+              { "color": "green", "value": 0.95 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "gauge",
+      "title": "Containment Readiness",
+      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "dfir_sli_containment_readiness" }],
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "max": 1,
+          "unit": "percentunit",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 0.85 },
+              { "color": "green", "value": 0.95 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "bargauge",
+      "title": "Business Impact Indicators",
+      "gridPos": { "x": 0, "y": 4, "w": 12, "h": 7 },
+      "targets": [
+        { "expr": "dfir_idor_findings", "legendFormat": "IDOR Findings" },
+        { "expr": "dfir_anomalous_ips", "legendFormat": "Anomalous IPs" },
+        { "expr": "dfir_ioc_generation_count", "legendFormat": "IOCs Generated" },
+        { "expr": "dfir_containment_actions", "legendFormat": "Containment Actions" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "SLO Compliance Trend",
+      "gridPos": { "x": 12, "y": 4, "w": 12, "h": 7 },
+      "targets": [
+        { "expr": "dfir_sli_detection_success_rate", "legendFormat": "Detection SLI" },
+        { "expr": "dfir_slo_detection_target", "legendFormat": "Detection Target" },
+        { "expr": "dfir_sli_evidence_completeness", "legendFormat": "Evidence Completeness" },
+        { "expr": "dfir_slo_response_target", "legendFormat": "Response Target" }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "type": "stat",
-      "title": "Evaluation Score",
-      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
-      "targets": [{ "expr": "dfir_evaluation_score" }]
+      "title": "Forensic Correlation Score",
+      "gridPos": { "x": 0, "y": 11, "w": 8, "h": 4 },
+      "targets": [{ "expr": "dfir_forensic_correlation_score" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "BigQuery Readiness",
+      "gridPos": { "x": 8, "y": 11, "w": 8, "h": 4 },
+      "targets": [{ "expr": "dfir_bigquery_readiness" }]
+    },
+    {
+      "type": "stat",
+      "title": "Mean Response Time",
+      "gridPos": { "x": 16, "y": 11, "w": 8, "h": 4 },
+      "targets": [{ "expr": "dfir_mean_response_time_seconds" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
     }
   ]
 }

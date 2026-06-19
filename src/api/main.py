@@ -13,6 +13,8 @@ from src.api.routes.metrics import (
 from src.api.routes.observability import router as observability_router
 from src.api.routes.ui import router as ui_router
 
+from src.api.routes.status_pages import router as status_pages_router
+
 
 API_VERSION = "1.2.1"
 SPRINT = "4.4"
@@ -35,6 +37,7 @@ app.include_router(agents_router)
 app.include_router(metrics_router)
 app.include_router(observability_router)
 app.include_router(ui_router)
+app.include_router(status_pages_router)
 
 
 @app.get("/")

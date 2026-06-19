@@ -4,8 +4,8 @@ from src.observability.alert_rules import AlertRuleRegistry
 from src.observability.dashboard_registry import DashboardRegistry
 from src.observability.health_registry import HealthRegistry
 from src.observability.observability_service import ObservabilityService
-
 from src.observability.enterprise.enterprise_observability_service import (
+    EnterpriseObservabilityService,
     build_enterprise_observability_contract,
 )
 
@@ -15,59 +15,48 @@ router = APIRouter(
 )
 
 observability_service = ObservabilityService()
-
 dashboard_registry = DashboardRegistry()
 alert_registry = AlertRuleRegistry()
 health_registry = HealthRegistry()
+enterprise_service = EnterpriseObservabilityService()
 
-from src.observability.enterprise.enterprise_observability_service import (
-    EnterpriseObservabilityService,
-)
 
 @router.get("/observability")
 def get_observability() -> dict:
-
     return {
         **observability_service.build_observability_status(),
-
-        "health":
-            health_registry.build_health_contract(),
-
-        "dashboards":
-            dashboard_registry.list_dashboards(),
-
-        "alert_rules":
-            alert_registry.list_rules(),
-
-        "enterprise":
-            build_enterprise_observability_contract(),
+        "health": health_registry.build_health_contract(),
+        "dashboards": dashboard_registry.list_dashboards(),
+        "alert_rules": alert_registry.list_rules(),
+        "enterprise": build_enterprise_observability_contract(),
     }
 
-@router.get("/api/observability/sli-slo")
-def get_sli_slo():
-    return EnterpriseObservabilityService().get_sli_slo()
+
+@router.get("/observability/sli-slo")
+def get_sli_slo() -> dict:
+    return enterprise_service.get_sli_slo()
 
 
-@router.get("/api/observability/promql")
-def get_promql_catalog():
-    return EnterpriseObservabilityService().get_promql_catalog()
+@router.get("/observability/promql")
+def get_promql_catalog() -> list[dict]:
+    return enterprise_service.get_promql_catalog()
 
 
-@router.get("/api/observability/alerts")
-def get_alert_rules():
-    return EnterpriseObservabilityService().get_alert_rules()
+@router.get("/observability/alerts")
+def get_alert_rules() -> dict:
+    return enterprise_service.get_alert_rules()
 
 
-@router.get("/api/observability/dashboards")
-def get_enterprise_dashboards():
-    return EnterpriseObservabilityService().get_dashboards()
+@router.get("/observability/dashboards")
+def get_enterprise_dashboards() -> dict:
+    return enterprise_service.get_dashboards()
 
 
-@router.get("/api/observability/bigquery-readiness")
-def get_bigquery_readiness():
-    return EnterpriseObservabilityService().get_bigquery_readiness()
+@router.get("/observability/bigquery-readiness")
+def get_bigquery_readiness() -> dict:
+    return enterprise_service.get_bigquery_readiness()
 
 
-@router.get("/api/observability/forensic-correlation")
-def get_forensic_correlation():
-    return EnterpriseObservabilityService().get_forensic_correlation()
+@router.get("/observability/forensic-correlation")
+def get_forensic_correlation() -> dict:
+    return enterprise_service.get_forensic_correlation()
