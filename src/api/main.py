@@ -15,6 +15,10 @@ from src.api.routes.ui import router as ui_router
 
 from src.api.routes.status_pages import router as status_pages_router
 
+from src.api.routes import platform_pages
+
+from src.api.routes.enterprise_observability_ui import router as enterprise_observability_ui_router
+
 
 API_VERSION = "1.2.1"
 SPRINT = "4.4"
@@ -36,8 +40,10 @@ app.include_router(evidence_router)
 app.include_router(agents_router)
 app.include_router(metrics_router)
 app.include_router(observability_router)
-app.include_router(ui_router)
+# app.include_router(ui_router)
 app.include_router(status_pages_router)
+app.include_router(platform_pages.router)
+app.include_router(enterprise_observability_ui_router)
 
 
 @app.get("/")
@@ -273,10 +279,16 @@ def home() -> str:
                     </p>
 
                     <div class="actions">
-                        <a class="button" href="http://localhost:8501">Streamlit UI</a>
-                        <a class="button" href="http://localhost:8000/docs">API Docs</a>
-                        <a class="button" href="http://localhost:8000/health">Health</a>
-                        <a class="button secondary" href="http://localhost:8000/api/metrics">Metrics</a>
+                        <a class="button" href="http://127.0.0.1:8501/?platform_nav=1">Streamlit UI</a>
+                        <a class="button" href="http://127.0.0.1:8000/docs">API Docs</a>
+                        <a class="button" href="http://127.0.0.1:8000/health">Health API</a>
+                        <a class="button" href="http://127.0.0.1:8000/health/ui">Health Dashboard</a>
+                        <a class="button" href="http://127.0.0.1:8000/api/metrics">Metrics API</a>
+                        <a class="button" href="http://127.0.0.1:8000/metrics/ui">Metrics Dashboard</a>
+                        <a class="button" href="http://127.0.0.1:8000/observability/ui">Observability</a>
+                        <a class="button" href="http://127.0.0.1:8000/prometheus/ui">Prometheus</a>
+                        <a class="button" href="http://127.0.0.1:8000/grafana/ui">Grafana</a>
+                        <a class="button" href="http://127.0.0.1:8000/alertmanager/ui">Alertmanager</a>
                     </div>
 
                     <span class="badge">
@@ -286,6 +298,7 @@ def home() -> str:
 
                 <section class="section">
                     <h2>Executive Metrics</h2>
+
                     <div class="metric-grid">
                         <div class="metric-card">
                             <div class="metric-label">Scored IPs</div>
@@ -310,43 +323,169 @@ def home() -> str:
                 </section>
 
                 <section class="section">
-                    <h2>API Contracts</h2>
+                    <h2>Enterprise Observability</h2>
+
+                    <table class="contract-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="/grafana/ui">
+                                        Executive Dashboard
+                                    </a>
+                                </td>
+                                <td>
+                                    Executive KPIs, incident severity and business impact.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a href="/grafana/ui">
+                                        Investigation Dashboard
+                                    </a>
+                                </td>
+                                <td>
+                                    IDOR findings, anomalous IPs and investigation metrics.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a href="/grafana/ui">
+                                        SOC Agents Dashboard
+                                    </a>
+                                </td>
+                                <td>
+                                    LangGraph, RAG, MCP and agent execution metrics.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a href="/observability/slo/ui">
+                                        Detection SLO Dashboard
+                                    </a>
+                                </td>
+                                <td>
+                                    Detection quality, response objectives and evidence completeness.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a href="/observability/alerts/ui">
+                                        Alert Operations Dashboard
+                                    </a>
+                                </td>
+                                <td>
+                                    Alert lifecycle, priorities and operational readiness.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a href="/observability/promql/ui">
+                                        Prometheus Metrics Explorer
+                                    </a>
+                                </td>
+                                <td>
+                                    Human-friendly Prometheus observability catalog.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a href="/observability/data-platform/ui">
+                                        Data Platform Dashboard
+                                    </a>
+                                </td>
+                                <td>
+                                    Data pipeline readiness and processing health.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a href="/observability/correlation/ui">
+                                        Forensic Correlation Dashboard
+                                    </a>
+                                </td>
+                                <td>
+                                    IOC quality, timeline coverage and chain of custody integrity.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="section">
+                    <h2>Developer Center · API Contracts</h2>
+
                     <table class="contract-table">
                         <thead>
                             <tr>
                                 <th>Endpoint</th>
-                                <th>Contract</th>
+                                <th>Description</th>
                             </tr>
                         </thead>
+
                         <tbody>
+
                             <tr>
                                 <td><code>/api/dashboard</code></td>
-                                <td>Executive SOC dashboard contract.</td>
+                                <td>Executive dashboard contract.</td>
                             </tr>
+
                             <tr>
                                 <td><code>/api/evidence</code></td>
                                 <td>Forensic evidence contract.</td>
                             </tr>
+
                             <tr>
                                 <td><code>/api/agents</code></td>
-                                <td>Agent orchestration and human approval contract.</td>
+                                <td>Agent orchestration contract.</td>
                             </tr>
+
                             <tr>
                                 <td><code>/api/metrics</code></td>
-                                <td>Operational metrics JSON contract.</td>
+                                <td>Operational metrics contract.</td>
                             </tr>
+
                             <tr>
-                                <td><code>/api/observability</code></td>
-                                <td>Observability readiness contract.</td>
+                                <td><code>/api/observability/sli-slo</code></td>
+                                <td>SLI/SLO contract.</td>
                             </tr>
+
                             <tr>
-                                <td><code>/api/tabs</code></td>
-                                <td>Streamlit tabs functional mapping.</td>
+                                <td><code>/api/observability/promql</code></td>
+                                <td>PromQL catalog contract.</td>
                             </tr>
+
+                            <tr>
+                                <td><code>/api/observability/alerts</code></td>
+                                <td>Alert rules contract.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>/api/observability/dashboards</code></td>
+                                <td>Grafana dashboard registry.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>/api/observability/bigquery-readiness</code></td>
+                                <td>Data platform readiness contract.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>/api/observability/forensic-correlation</code></td>
+                                <td>Forensic correlation contract.</td>
+                            </tr>
+
                             <tr>
                                 <td><code>/metrics</code></td>
-                                <td>Prometheus text exposition endpoint.</td>
+                                <td>Prometheus exposition endpoint.</td>
                             </tr>
+
                         </tbody>
                     </table>
                 </section>
@@ -379,6 +518,7 @@ def home() -> str:
     </html>
     """
 
+app.include_router(ui_router)
 
 @app.get("/health")
 def health() -> dict:

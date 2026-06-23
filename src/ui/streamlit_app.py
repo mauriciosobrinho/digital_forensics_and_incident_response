@@ -1,5 +1,6 @@
 import json
 import sys
+import os
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +46,51 @@ MELI_BORDER = "#30363d"
 MELI_GREEN = "#22c55e"
 MELI_RED = "#ff4b5c"
 MELI_ORANGE = "#ff9f1c"
+
+
+
+# def platform_nav_enabled() -> bool:
+#     return os.getenv("DFIR_ENABLE_PLATFORM_NAV", "").lower() == "true"
+
+# def platform_nav_enabled() -> bool:
+#     query_value = st.query_params.get("platform_nav")
+#     env_value = os.getenv("DFIR_ENABLE_PLATFORM_NAV", "").lower()
+
+#     if query_value in {"1", "true", "yes"}:
+#         return True
+
+#     if env_value == "true":
+#         return True
+
+#     return False
+
+def platform_nav_enabled() -> bool:
+    query_enabled = st.query_params.get("platform_nav") == "1"
+    env_enabled = os.getenv("DFIR_ENABLE_PLATFORM_NAV", "").lower() == "true"
+
+    return query_enabled or env_enabled
+
+
+# <a href="http://127.0.0.1:8501" target="_self">Streamlit UI</a>
+def render_platform_nav() -> None:
+    if not platform_nav_enabled():
+        return
+
+    st.markdown(
+        """
+        <div class="platform-nav">
+            <a href="http://127.0.0.1:8000/home" target="_self">Home</a>
+            <a href="http://127.0.0.1:8501/?platform_nav=1" target="_self">Streamlit UI</a>
+            <a href="http://127.0.0.1:8000/docs" target="_self">API Docs</a>
+            <a href="http://127.0.0.1:8000/health/ui" target="_self">Health</a>
+            <a href="http://127.0.0.1:8000/metrics/ui" target="_self">Metrics</a>
+            <a href="http://127.0.0.1:8000/prometheus/ui" target="_self">Prometheus</a>
+            <a href="http://127.0.0.1:8000/grafana/ui" target="_self">Grafana</a>
+            <a href="http://127.0.0.1:8000/alertmanager/ui" target="_self">Alertmanager</a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def load_json(path: Path, default: Any = None) -> Any:
@@ -253,6 +299,25 @@ def render_global_header() -> None:
         .block-container {
             padding-top: 2rem;
             padding-bottom: 4rem;
+        }
+
+        .platform-nav {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+
+            margin: 32px 0 28px 0;
+
+            font-weight: 800;
+        }
+
+        .platform-nav a {
+            color: #fff159 !important;
+            text-decoration: none;
+        }
+
+        .platform-nav a:hover {
+            text-decoration: underline;
         }
 
         .meli-header {
@@ -900,12 +965,65 @@ def render_observability() -> None:
     render_json_debug("SOC Dashboard Data", dashboard_data)
 
 
+# def main() -> None:
+#     st.set_page_config(
+#         page_title="DFIR SOC Platform · Mercado Livre Case",
+#         layout="wide",
+#     )
+
+#     render_global_header()
+#     render_top_metrics()
+
+#     tabs = st.tabs(
+#         [
+#             "SOC Chat",
+#             "Investigation",
+#             "Human Approval",
+#             "Forensic Evidence",
+#             "RAG / MCP Logs",
+#             "Agent Workflow",
+#             "Agent Evaluation",
+#             "NIST IR Metrics",
+#             "Observability",
+#         ]
+#     )
+
+#     with tabs[0]:
+#         render_chat()
+
+#     with tabs[1]:
+#         render_investigation()
+
+#     with tabs[2]:
+#         render_human_approval()
+
+#     with tabs[3]:
+#         render_forensic_evidence()
+
+#     with tabs[4]:
+#         render_rag_mcp_logs()
+
+#     with tabs[5]:
+#         render_agent_workflow()
+
+#     with tabs[6]:
+#         render_agent_evaluation()
+
+#     with tabs[7]:
+#         render_nist_metrics()
+
+#     with tabs[8]:
+#         render_observability()
+
+
 def main() -> None:
     st.set_page_config(
         page_title="DFIR SOC Platform · Mercado Livre Case",
+        page_icon="🛡️",
         layout="wide",
     )
 
+    render_platform_nav()
     render_global_header()
     render_top_metrics()
 
@@ -949,7 +1067,6 @@ def main() -> None:
 
     with tabs[8]:
         render_observability()
-
 
 if __name__ == "__main__":
     main()
