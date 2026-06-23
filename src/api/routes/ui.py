@@ -124,15 +124,15 @@ def _home_html() -> str:
         <p style="font-size:18px;color:#111827;">Digital Forensics and Incident Response · IDOR Investigation Case</p>
         <p><strong>Release 1.3.0 · Sprint 5.0 · Enterprise Observability</strong></p>
         <p>
-            <a href="http://localhost:8501">Streamlit UI</a> |
+            <a href="http://127.0.0.1:8501/?platform_nav=1">Streamlit UI</a> |
             <a href="/docs">API Docs</a> |
             <a href="/health">Health API</a> |
             <a href="/health/ui">Health Dashboard</a> |
             <a href="/metrics">Metrics API</a> |
             <a href="/metrics/ui">Metrics Dashboard</a> |
-            <a href="http://localhost:9090">Prometheus</a> |
-            <a href="http://localhost:3000">Grafana</a> |
-            <a href="http://localhost:9093">Alertmanager</a>
+            <a href="/prometheus/ui">Prometheus</a> |
+            <a href="/grafana/ui">Grafana</a> |
+            <a href="/alertmanager/ui">Alertmanager</a>
         </p>
     </section>
 

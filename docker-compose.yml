@@ -2,6 +2,8 @@ name: dfir-platform
 
 services:
   dfir-streamlit:
+    environment:
+      DFIR_ENABLE_PLATFORM_NAV: "true"
     build:
       context: .
       dockerfile: docker/streamlit.Dockerfile
